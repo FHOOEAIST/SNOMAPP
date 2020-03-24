@@ -11,6 +11,10 @@ public class APPCTree {
 
     private Importer importer;
 
+    public String getLanguage() {
+        return language;
+    }
+
     public void setModality(AxisEntry modality) {
         this.modality = modality;
     }
