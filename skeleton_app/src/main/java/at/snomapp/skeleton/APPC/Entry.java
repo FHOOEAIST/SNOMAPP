@@ -15,7 +15,7 @@ public abstract class Entry {
 
     // bydirectional 1..n relationship between children and parent entries
     @Relationship(type = "child")
-    protected Set<Entry> children;
+    protected Set<APPCEntry> children;
 
     @Relationship(type = "child", direction = "INCOMING")
     protected Entry parent;
@@ -26,7 +26,7 @@ public abstract class Entry {
         parent = null;
     }
 
-    public void addChild(Entry child){
+    public void addChild(APPCEntry child) {
         children.add(child);
         child.parent = this;
     }
@@ -35,17 +35,17 @@ public abstract class Entry {
         return description;
     }
 
-    public Set<Entry> getChildren(){
+    public Set<APPCEntry> getChildren() {
         return children;
     }
 
     // returns a set containing all exact matches
-    public Set<Entry> search(String query){
+    public Set<Entry> search(String query) {
         Set<Entry> result = new HashSet<>();
-        if(description.equals(query)){
+        if (description.equals(query)) {
             result.add(this);
         }
-        children.forEach(e->{
+        children.forEach(e -> {
             result.addAll(e.search(query));
         });
 
