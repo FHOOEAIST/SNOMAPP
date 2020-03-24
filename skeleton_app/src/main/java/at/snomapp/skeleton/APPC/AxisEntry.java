@@ -7,7 +7,7 @@ import java.util.Set;
 
 @NodeEntity
 public class AxisEntry extends Entry{
-    AxisEntry(String description) {
+    public AxisEntry(String description) {
         super(description);
     }
 }

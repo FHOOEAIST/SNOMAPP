@@ -7,7 +7,7 @@ public class APPCEntry extends Entry {
 
     private int layerCode;
 
-    APPCEntry(String description, int layerCode) {
+    public APPCEntry(String description, int layerCode) {
         super(description);
         this.layerCode = layerCode;
     }

@@ -20,7 +20,7 @@ public abstract class Entry {
     @Relationship(type = "child", direction = "INCOMING")
     protected Entry parent;
 
-    Entry(String description) {
+    public Entry(String description) {
         this.description = description;
         children = new HashSet<>();
         parent = null;
@@ -37,6 +37,10 @@ public abstract class Entry {
 
     public Set<APPCEntry> getChildren() {
         return children;
+    }
+
+    public Entry getParent(){
+        return parent;
     }
 
     // returns a set containing all exact matches
