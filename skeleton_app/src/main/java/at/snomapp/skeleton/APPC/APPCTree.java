@@ -41,13 +41,7 @@ public class APPCTree {
         importer = new CSVImporter();
     }
 
-    void buildTree(String filename){
-        try {
-            importer.importTree(filename, this);
-        }catch(Exception e){
-            System.out.println("error building tree");
-        }
-    }
+
 
     // primitve search functionality, returns exact matches only
     Set<Entry> serach(String query){

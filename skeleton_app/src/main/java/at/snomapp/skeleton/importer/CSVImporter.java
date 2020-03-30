@@ -15,8 +15,9 @@ import java.util.Arrays;
 @Component("CSVImporter")
 public class CSVImporter implements Importer{
 
-    public void importTree(String fileName, APPCTree tree) throws Exception {
+    public APPCTree importTree(String fileName) throws Exception {
         BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+        APPCTree tree = new APPCTree("englisch");
         String s;
         String BranchName;
         String Description;
@@ -82,12 +83,13 @@ public class CSVImporter implements Importer{
             prevLayer = layer ;
         }
         bReader.close();
-
+        return tree;
     }
  //for testing
     public static void main(String[] args) throws Exception {
         APPCTree tree = new APPCTree("englisch");
         Importer importer = new CSVImporter();
-        importer.importTree("src/main/resources/APPC_machinereadable.csv", tree);
+        tree = importer.importTree("src/main/resources/APPC_machinereadable.csv");
+        System.out.println();
     }
 }
