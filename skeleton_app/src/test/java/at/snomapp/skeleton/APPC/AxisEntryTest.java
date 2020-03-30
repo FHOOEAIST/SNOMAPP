@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-class APPCEntryTest {
+import static org.junit.jupiter.api.Assertions.*;
+
+class AxisEntryTest {
 
     @Test
     void addChildSetsChildAndParent() {
-        Entry e0 = new APPCEntry("some description", 1);
+        Entry e0 = new AxisEntry("some description");
         APPCEntry e1 = new APPCEntry("another description", 1);
 
         e0.addChild(e1);
@@ -20,7 +22,7 @@ class APPCEntryTest {
 
     @Test
     void getDescriptionReturnsTheDescription() {
-        Entry e0 = new APPCEntry("desc", 1);
+        Entry e0 = new AxisEntry("desc");
 
         String description = e0.getDescription();
 
@@ -29,10 +31,10 @@ class APPCEntryTest {
 
     @Test
     void getChildrenReturnsTheCorrectContainerOfChildren() {
-        Entry e0 = new APPCEntry("root", 1);
-        APPCEntry e1 = new APPCEntry("child", 2);
-        APPCEntry e2 = new APPCEntry("child", 2);
-        APPCEntry e3 = new APPCEntry("child", 2);
+        Entry e0 = new AxisEntry("root");
+        APPCEntry e1 = new APPCEntry("child", 1);
+        APPCEntry e2 = new APPCEntry("child", 1);
+        APPCEntry e3 = new APPCEntry("child", 1);
         e0.addChild(e1);
         e0.addChild(e2);
         e0.addChild(e3);
@@ -45,19 +47,8 @@ class APPCEntryTest {
     }
 
     @Test
-    void getParentReturnsCorrectAPPCParent() {
-        APPCEntry e0 = new APPCEntry("child", 2);
-        Entry e1 = new APPCEntry("parent", 1);
-        e1.addChild(e0);
-
-        Entry e2 = e0.getParent();
-
-        Assertions.assertEquals(e1, e2);
-    }
-
-    @Test
-    void getParentReturnsNullIfNotSet() {
-        Entry e0 = new APPCEntry("parent", 1);
+    void getParentReturnsNull() {
+        Entry e0 = new AxisEntry("root");
 
         Entry e1 = e0.getParent();
 
@@ -65,25 +56,14 @@ class APPCEntryTest {
     }
 
     @Test
-    void getParentReturnsCorrectAxisParent() {
-        APPCEntry e0 = new APPCEntry("child", 2);
-        Entry e1 = new AxisEntry("parent");
-        e1.addChild(e0);
-
-        Entry e2 = e0.getParent();
-
-        Assertions.assertEquals(e1, e2);
-    }
-
-    @Test
     void searchReturnsAllEntriesThatMatchExactly() {
-        Entry e0 = new APPCEntry("root", 1);
-        APPCEntry e1 = new APPCEntry("match", 2);
-        APPCEntry e2 = new APPCEntry("missmatch", 2);
-        APPCEntry e3 = new APPCEntry("match", 3);
-        APPCEntry e4 = new APPCEntry("match", 3);
-        APPCEntry e5 = new APPCEntry("missmatch", 4);
-        APPCEntry e6 = new APPCEntry("match", 4);
+        Entry e0 = new AxisEntry("root");
+        APPCEntry e1 = new APPCEntry("match", 1);
+        APPCEntry e2 = new APPCEntry("missmatch", 1);
+        APPCEntry e3 = new APPCEntry("match", 2);
+        APPCEntry e4 = new APPCEntry("match", 2);
+        APPCEntry e5 = new APPCEntry("missmatch", 3);
+        APPCEntry e6 = new APPCEntry("match", 3);
         e4.addChild(e5);
         e4.addChild(e6);
         e2.addChild(e4);
@@ -99,15 +79,5 @@ class APPCEntryTest {
         Assertions.assertTrue(result.contains(e6));
         Assertions.assertFalse(result.contains(e2));
         Assertions.assertFalse(result.contains(e5));
-    }
-
-    @Test
-    void getLayerCodeReturnsCorrectLayerCode() {
-        int layer = 1;
-        APPCEntry e0 = new APPCEntry("desc", layer);
-
-        int code = e0.getLayerCode();
-
-        Assertions.assertEquals(layer, code);
     }
 }

@@ -1,15 +1,10 @@
 package at.snomapp.skeleton.APPC;
 
-import at.snomapp.skeleton.importer.CSVImporter;
-import at.snomapp.skeleton.importer.Importer;
-
 import java.util.HashSet;
 import java.util.Set;
 
 public class APPCTree {
     private String language;
-
-    private Importer importer;
 
     public String getLanguage() {
         return language;
@@ -42,19 +37,10 @@ public class APPCTree {
         laterality = null;
         procedure = null;
         anatomy = null;
-        importer = new CSVImporter();
-    }
-
-    void buildTree(String filename){
-        try {
-            importer.importTree(filename, this);
-        }catch(Exception e){
-            System.out.println("error building tree");
-        }
     }
 
     // primitve search functionality, returns exact matches only
-    Set<Entry> serach(String query){
+    public Set<Entry> serach(String query){
         Set<Entry> result = new HashSet<>();
         result.addAll(modality.search(query));
         result.addAll(laterality.search(query));
