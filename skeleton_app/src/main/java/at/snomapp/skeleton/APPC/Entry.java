@@ -56,4 +56,13 @@ public abstract class Entry {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Entry{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                "\n\t children=" + children +
+                "\n\t parent=" + parent +
+                '}';
+    }
 }

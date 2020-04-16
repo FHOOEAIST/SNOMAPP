@@ -44,7 +44,7 @@ public class APPCTree {
 
 
     // primitve search functionality, returns exact matches only
-    Set<Entry> serach(String query){
+    Set<Entry> search(String query){
         Set<Entry> result = new HashSet<>();
         result.addAll(modality.search(query));
         result.addAll(laterality.search(query));
@@ -54,4 +54,15 @@ public class APPCTree {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "APPCTree{" +
+                "language='" + language + '\'' +
+                ", importer=" + importer +
+                "\n modality=" + modality +
+                "\n laterality=" + laterality +
+                "\n procedure=" + procedure +
+                "\n anatomy=" + anatomy +
+                '}';
+    }
 }

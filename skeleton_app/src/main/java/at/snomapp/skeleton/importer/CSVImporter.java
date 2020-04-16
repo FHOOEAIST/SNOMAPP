@@ -90,6 +90,8 @@ public class CSVImporter implements Importer{
         APPCTree tree = new APPCTree("englisch");
         Importer importer = new CSVImporter();
         tree = importer.importTree("src/main/resources/APPC_machinereadable.csv");
+
+        System.out.println(tree.toString());
         System.out.println();
     }
 }
