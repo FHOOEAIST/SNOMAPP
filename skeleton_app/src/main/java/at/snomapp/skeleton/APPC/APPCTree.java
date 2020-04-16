@@ -54,7 +54,6 @@ public class APPCTree {
     public String toString() {
         return "APPCTree{" +
                 "language='" + language + '\'' +
-                ", importer=" + importer +
                 "\n modality=" + modality +
                 "\n laterality=" + laterality +
                 "\n procedure=" + procedure +

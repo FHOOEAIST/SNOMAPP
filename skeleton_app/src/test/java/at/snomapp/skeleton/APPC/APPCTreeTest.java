@@ -54,7 +54,7 @@ class APPCTreeTest {
         t0.setProcedure(procedure);
         t0.setLaterality(laterality);
 
-        Set<Entry> result = t0.serach("match");
+        Set<Entry> result = t0.search("match");
 
         Assertions.assertTrue(result.contains(e1));
         Assertions.assertTrue(result.contains(e3));
