@@ -1,5 +1,6 @@
 package at.snomapp.skeleton.APPC;
 
+import at.snomapp.skeleton.APPC.impl.APPCEntry;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.Relationship;

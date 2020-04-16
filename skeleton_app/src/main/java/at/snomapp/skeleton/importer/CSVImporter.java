@@ -1,8 +1,9 @@
 package at.snomapp.skeleton.importer;
 
-import at.snomapp.skeleton.APPC.APPCEntry;
-import at.snomapp.skeleton.APPC.APPCTree;
-import at.snomapp.skeleton.APPC.AxisEntry;
+import at.snomapp.skeleton.APPC.FourAxisTree;
+import at.snomapp.skeleton.APPC.impl.APPCEntry;
+import at.snomapp.skeleton.APPC.impl.APPCTree;
+import at.snomapp.skeleton.APPC.impl.AxisEntry;
 import at.snomapp.skeleton.APPC.Entry;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ import java.util.Arrays;
 @Component("CSVImporter")
 public class CSVImporter implements Importer{
 
-    public void importTree(String fileName, APPCTree tree) throws Exception {
+    public void importTree(String fileName, FourAxisTree tree) throws Exception {
         BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
         String s;
         String NameSparte;
@@ -82,7 +83,7 @@ public class CSVImporter implements Importer{
     }
 
     public static void main(String[] args) throws Exception {
-        APPCTree tree = new APPCTree("englisch");
+        FourAxisTree tree = new APPCTree("englisch");
         Importer importer = new CSVImporter();
         importer.importTree("src/main/resources/APPC_machinereadable.csv", tree);
     }

@@ -1,11 +1,11 @@
 package at.snomapp.skeleton.APPC;
 
+import at.snomapp.skeleton.APPC.impl.APPCEntry;
+import at.snomapp.skeleton.APPC.impl.AxisEntry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AxisEntryTest {
 

@@ -1,18 +1,19 @@
 package at.snomapp.skeleton.APPC;
 
+import at.snomapp.skeleton.APPC.impl.APPCEntry;
+import at.snomapp.skeleton.APPC.impl.APPCTree;
+import at.snomapp.skeleton.APPC.impl.AxisEntry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class APPCTreeTest {
 
     @Test
     void getLanguageReturnsSetLanguage() {
         String language = "DE";
-        APPCTree t0 = new APPCTree(language);
+        FourAxisTree t0 = new APPCTree(language);
 
         String result = t0.getLanguage();
 
@@ -21,7 +22,7 @@ class APPCTreeTest {
 
     @Test
     void SettersSetAxisAndSearchReturnsExactMatches() {
-        APPCTree t0 = new APPCTree("DE");
+        FourAxisTree t0 = new APPCTree("DE");
 
         AxisEntry modality = new AxisEntry("modality");
         APPCEntry e1 = new APPCEntry("match", 1);

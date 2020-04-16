@@ -1,5 +1,7 @@
 package at.snomapp.skeleton.APPC;
 
+import at.snomapp.skeleton.APPC.impl.APPCEntry;
+import at.snomapp.skeleton.APPC.impl.AxisEntry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
