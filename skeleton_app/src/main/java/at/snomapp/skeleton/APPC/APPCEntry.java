@@ -15,4 +15,10 @@ public class APPCEntry extends Entry {
     public int getLayerCode() {
         return layerCode;
     }
+
+    @Override
+    public String toString() {
+        return "\n\t\t APPCEntry{" +
+                "layerCode=" + layerCode + ", " + super.getDescription()  + ", Children= " + super.children  + "}";
+    }
 }
