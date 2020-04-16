@@ -1,6 +1,6 @@
 package at.snomapp.skeleton.restservice;
 
-import java.util.Iterator;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,14 +23,8 @@ public class EntryController {
 
     @GetMapping( "/entries" )
     List<Entry> all() {
-        return (List<Entry>) this.entryRepository.findAll(); //findAll returns Iterator??
+        return (List<Entry>) this.entryRepository.findAll();//findAll returns Iterator??
      }
-
-    @GetMapping("/entries/{id}")
-    Entry one( @PathVariable("id") Long id ) {
-        Entry entry = entryRepository.findById(id).orElseThrow( () -> new EntryNotFoundException(id) );
-        return entry;
-    }
 
     @PostMapping("/entries")
     Entry newEntry( @RequestBody Entry newEntry ) {

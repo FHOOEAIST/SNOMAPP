@@ -1,14 +1,14 @@
 package at.snomapp.skeleton.restservice;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 
 //resource representation class
 @NodeEntity
 public class Entry {
-    private @Id @GeneratedValue long id;
+    @Id @GeneratedValue long id;
     private String description;
     private String layerCode;
 
