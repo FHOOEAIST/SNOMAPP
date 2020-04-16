@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,7 +91,9 @@ public class CSVImporter implements Importer{
         APPCTree tree = new APPCTree("englisch");
         Importer importer = new CSVImporter();
         tree = importer.importTree("src/main/resources/APPC_machinereadable.csv");
-
+        //FileWriter writer = new FileWriter("importer_test_output.txt");
+        //writer.write(tree.toString());
+        //writer.close();
         System.out.println(tree.toString());
         System.out.println();
     }
