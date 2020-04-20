@@ -24,9 +24,6 @@ public class EntryController {
     @GetMapping( "/entries" )
     List<Entry> all() {
         return (List<Entry>) this.entryRepository.findAll();
-     }
+    }
 
-
-    //@PostMapping("/entries")
-    //Entry newEntry( @RequestBody Entry newEntry ) {return entryRepository.save( newEntry );}
 }
