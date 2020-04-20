@@ -1,8 +1,10 @@
 package at.snomapp.skeleton.APPC;
 
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
-@NodeEntity
+@NodeEntity(label = "APPCEntry")
 public class APPCEntry extends Entry {
 
     private int layerCode;
@@ -21,4 +23,5 @@ public class APPCEntry extends Entry {
         return "\n\t\t APPCEntry{" +
                 "layerCode=" + layerCode + ", " + super.getDescription()  + ", Children= " + super.children  + "}";
     }
+
 }

@@ -3,7 +3,7 @@ package at.snomapp.skeleton.APPC;
 import java.util.HashSet;
 import java.util.Set;
 
-public class APPCTree {
+public class APPCTree  {
     private String language;
 
     public String getLanguage() {
@@ -40,7 +40,7 @@ public class APPCTree {
     }
 
     // primitve search functionality, returns exact matches only
-    Set<Entry> search(String query){
+    public Set<Entry> search(String query){
         Set<Entry> result = new HashSet<>();
         result.addAll(modality.search(query));
         result.addAll(laterality.search(query));
@@ -59,5 +59,15 @@ public class APPCTree {
                 "\n procedure=" + procedure +
                 "\n anatomy=" + anatomy +
                 '}';
+    }
+
+    public Iterable<Entry> getRoots(){
+        Set<Entry> set = new HashSet<>();
+        set.add(laterality);
+        set.add(modality);
+        set.add(procedure);
+        set.add(anatomy);
+
+        return set;
     }
 }

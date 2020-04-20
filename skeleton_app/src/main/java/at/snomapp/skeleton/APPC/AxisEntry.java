@@ -2,8 +2,9 @@ package at.snomapp.skeleton.APPC;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
-@NodeEntity
+@NodeEntity(label = "AxisEntry")
 public class AxisEntry extends Entry{
+
     public AxisEntry(String description) {
         super(description);
     }
@@ -12,4 +13,5 @@ public class AxisEntry extends Entry{
     public String toString() {
         return "AxisEntry{" + super.toString() + "}";
     }
+
 }
