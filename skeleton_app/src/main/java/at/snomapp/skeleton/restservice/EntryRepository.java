@@ -1,14 +1,15 @@
 package at.snomapp.skeleton.restservice;
+import java.util.List;
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 
-import org.springframework.data.neo4j.repository.Neo4jRepository;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
+@RepositoryRestResource(collectionResourceRel = "entries", path = "entries")
+public interface EntryRepository extends PagingAndSortingRepository<Entry, Long>{
 
-
-public interface EntryRepository extends CrudRepository<Entry, Long>{
-
-    Entry findByDescription(String description);
+    List<Entry> findByDescription (@Param("description") String description);
 
 }

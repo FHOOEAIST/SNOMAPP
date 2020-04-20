@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EntryController {
 
-    //reference to EntryRespository
+    //reference to EntryRepository
     private EntryRepository entryRepository;
 
     @Autowired
@@ -23,11 +23,10 @@ public class EntryController {
 
     @GetMapping( "/entries" )
     List<Entry> all() {
-        return (List<Entry>) this.entryRepository.findAll();//findAll returns Iterator??
+        return (List<Entry>) this.entryRepository.findAll();
      }
 
-    @PostMapping("/entries")
-    Entry newEntry( @RequestBody Entry newEntry ) {
-        return entryRepository.save( newEntry );
-    }
+
+    //@PostMapping("/entries")
+    //Entry newEntry( @RequestBody Entry newEntry ) {return entryRepository.save( newEntry );}
 }
