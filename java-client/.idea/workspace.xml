@@ -18,7 +18,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SNOMAPP/skeleton_app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Repo/SNOMAPP/skeleton_app" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -74,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1587383595178</updated>
       <workItem from="1587383596732" duration="2337000" />
-      <workItem from="1587459381993" duration="76000" />
+      <workItem from="1587459184508" duration="182000" />
     </task>
     <servers />
   </component>
@@ -118,10 +118,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587390245044" />
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1587459381692">
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1587459185856">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1587459381692" />
+    <state x="465" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1587459185856" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
