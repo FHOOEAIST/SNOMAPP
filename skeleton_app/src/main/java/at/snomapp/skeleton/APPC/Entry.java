@@ -1,5 +1,6 @@
 package at.snomapp.skeleton.APPC;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -15,11 +16,15 @@ public abstract class Entry {
     private Long id;
     private String description;
 
+    public Entry() {
+    }
+
     // bidirectional 1..n relationship between children and parent entries
     @Relationship(type = "child")
-    protected Set<APPCEntry> children;
+    protected Set<Entry> children;
 
     @Relationship(type = "child", direction = "INCOMING")
+    @JsonIgnore
     protected Entry parent;
 
     public Entry(String description) {
@@ -37,7 +42,7 @@ public abstract class Entry {
         return description;
     }
 
-    public Set<APPCEntry> getChildren() {
+    public Set<Entry> getChildren() {
         return children;
     }
 

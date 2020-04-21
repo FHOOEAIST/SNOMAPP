@@ -37,7 +37,7 @@ class APPCEntryTest {
         e0.addChild(e2);
         e0.addChild(e3);
 
-        Set<APPCEntry> s = e0.getChildren();
+        Set<Entry> s = e0.getChildren();
 
         Assertions.assertTrue(s.contains(e1));
         Assertions.assertTrue(s.contains(e2));

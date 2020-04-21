@@ -6,9 +6,10 @@ import org.neo4j.ogm.annotation.NodeEntity;
 
 
 //resource representation class
-@NodeEntity
+//@NodeEntity
 public class Entry {
-    @Id @GeneratedValue long id;
+   // @Id @GeneratedValue
+   long id;
     private String description;
     private String layerCode;
 

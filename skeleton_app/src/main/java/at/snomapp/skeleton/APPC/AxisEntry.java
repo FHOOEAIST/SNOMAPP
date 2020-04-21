@@ -5,6 +5,9 @@ import org.neo4j.ogm.annotation.NodeEntity;
 @NodeEntity(label = "AxisEntry")
 public class AxisEntry extends Entry{
 
+    public AxisEntry() {
+    }
+
     public AxisEntry(String description) {
         super(description);
     }
