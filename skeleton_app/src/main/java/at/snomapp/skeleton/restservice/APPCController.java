@@ -25,7 +25,7 @@ public class APPCController {
         this.repo = readingrepo;
     }
 
-    @PutMapping("/clear")
+    @DeleteMapping("/")
     // flushes databank
     // to be used for debugging only
     // remove from release version
@@ -40,7 +40,7 @@ public class APPCController {
     }
 
     @PostMapping("/import")
-    // imports an appctree from a given filename into the neo4j databank.
+    // imports an APPCtree from a given filename into the neo4j databank.
     // clears databank first one ach call
     void importAPPC(@RequestBody String filename){
         repo.deleteAll();
@@ -58,7 +58,7 @@ public class APPCController {
     }
 
     // needs tweeking if multiple languages are supported
-    @GetMapping("/retrieve")
+    @GetMapping("/")
     // retruns whole tree saved in Data bank
     APPCTree getTree(){
         APPCTree tree = new APPCTree("en");
