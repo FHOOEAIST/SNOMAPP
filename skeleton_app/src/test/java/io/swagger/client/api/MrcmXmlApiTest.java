@@ -26,7 +26,6 @@ import java.util.Map;
 /**
  * API tests for MrcmXmlApi
  */
-@Ignore
 public class MrcmXmlApiTest {
 
     private final MrcmXmlApi api = new MrcmXmlApi();

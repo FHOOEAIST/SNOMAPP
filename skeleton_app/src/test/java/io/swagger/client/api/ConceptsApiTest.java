@@ -37,7 +37,6 @@ import java.util.Map;
 /**
  * API tests for ConceptsApi
  */
-@Ignore
 public class ConceptsApiTest {
 
     private final ConceptsApi api = new ConceptsApi();

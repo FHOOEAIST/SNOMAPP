@@ -29,7 +29,6 @@ import java.util.Map;
 /**
  * API tests for DescriptionsApi
  */
-@Ignore
 public class DescriptionsApiTest {
 
     private final DescriptionsApi api = new DescriptionsApi();
