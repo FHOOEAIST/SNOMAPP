@@ -29,7 +29,6 @@ import java.util.Map;
 /**
  * API tests for CodeSystemsApi
  */
-@Ignore
 public class CodeSystemsApiTest {
 
     private final CodeSystemsApi api = new CodeSystemsApi();

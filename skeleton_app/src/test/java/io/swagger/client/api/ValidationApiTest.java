@@ -26,7 +26,6 @@ import java.util.Map;
 /**
  * API tests for ValidationApi
  */
-@Ignore
 public class ValidationApiTest {
 
     private final ValidationApi api = new ValidationApi();

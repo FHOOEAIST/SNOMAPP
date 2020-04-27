@@ -28,7 +28,6 @@ import java.util.Map;
 /**
  * API tests for RelationshipsApi
  */
-@Ignore
 public class RelationshipsApiTest {
 
     private final RelationshipsApi api = new RelationshipsApi();
