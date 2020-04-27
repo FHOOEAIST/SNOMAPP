@@ -15,6 +15,7 @@ package io.swagger.client.api;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.model.BuildVersion;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -43,8 +44,10 @@ public class VersionApiTest {
     @Test
     public void getBuildInformationUsingGETTest() throws ApiException {
         BuildVersion response = api.getBuildInformationUsingGET();
-        System.out.println(response);
-        // TODO: test validations
+
+        //US 4_6 Server response
+        System.out.println(response.toString());
+        Assert.assertNotEquals(null,response);
     }
     
 }

@@ -2,13 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fc9c244-1d80-49b8-adb8-83d1099a8c38" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/skeleton_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/skeleton_app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/APPCEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/APPCEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/APPCTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/APPCTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/AxisEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/AxisEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/APPC/Entry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/AccessingNeo4jDataRestApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/AccessingNeo4jDataRestApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/EntryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/EntryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/AuthoringStatsApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/AuthoringStatsApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/BranchingApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/BranchingApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/CodeSystemsApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/CodeSystemsApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/ConceptsApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/ConceptsApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/DescriptionsApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/DescriptionsApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/MrcmXmlApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/MrcmXmlApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/RefsetMembersApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/RefsetMembersApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/RelationshipsApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/RelationshipsApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/ValidationApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/ValidationApiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/VersionApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/io/swagger/client/api/VersionApiTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/META-INF/skeleton.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/META-INF/skeleton_app.kotlin_module" beforeDir="false" />
     </list>
@@ -61,7 +67,6 @@
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
@@ -90,78 +95,87 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="at.snomapp.skeleton.repo" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\SNOMAPP\repo\SNOMAPP\skeleton_app\src\main\resources\APPCCodes" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/java/io/swagger/client/api" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client/model" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client/auth" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client/api" />
+      <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AccessingNeo4jDataRestApplication">
-    <configuration name="CSVImporter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="at.snomapp.skeleton.importer.CSVImporter" />
+  <component name="RunManager" selected="JUnit.VersionApiTest">
+    <configuration name="MrcmXmlApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.snomapp.skeleton.importer.*" />
+          <option name="PATTERN" value="io.swagger.client.api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="APPCEntryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="skeleton_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.snomapp.skeleton.APPC.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.snomapp.skeleton.APPC" />
-      <option name="MAIN_CLASS_NAME" value="at.snomapp.skeleton.APPC.APPCEntryTest" />
+      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.MrcmXmlApiTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AxisEntryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RefsetMembersApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.snomapp.skeleton.APPC.impl.*" />
+          <option name="PATTERN" value="io.swagger.client.api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.snomapp.skeleton.APPC" />
-      <option name="MAIN_CLASS_NAME" value="at.snomapp.skeleton.APPC.AxisEntryTest" />
+      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.RefsetMembersApiTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RelationshipsApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="skeleton_app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.swagger.client.api.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.RelationshipsApiTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.snomapp.skeleton.APPC in skeleton_app" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ValidationApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.snomapp.skeleton.APPC.*" />
+          <option name="PATTERN" value="io.swagger.client.api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.snomapp.skeleton.APPC" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.ValidationApiTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AccessingNeo4jDataRestApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+    <configuration name="VersionApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.snomapp.skeleton.restservice.*" />
+          <option name="PATTERN" value="io.swagger.client.api.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="SPRING_BOOT_MAIN_CLASS" value="at.snomapp.skeleton.restservice.AccessingNeo4jDataRestApplication" />
+      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.VersionApiTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -174,20 +188,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.CSVImporter" />
-      <item itemvalue="JUnit.at.snomapp.skeleton.APPC in skeleton_app" />
-      <item itemvalue="JUnit.APPCEntryTest" />
-      <item itemvalue="JUnit.AxisEntryTest" />
+      <item itemvalue="JUnit.MrcmXmlApiTest" />
+      <item itemvalue="JUnit.RefsetMembersApiTest" />
+      <item itemvalue="JUnit.RelationshipsApiTest" />
+      <item itemvalue="JUnit.ValidationApiTest" />
+      <item itemvalue="JUnit.VersionApiTest" />
       <item itemvalue="Spring Boot.SkeletonApplication" />
       <item itemvalue="Spring Boot.AccessingNeo4jDataRestApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.AccessingNeo4jDataRestApplication" />
-        <item itemvalue="Application.CSVImporter" />
-        <item itemvalue="JUnit.at.snomapp.skeleton.APPC in skeleton_app" />
-        <item itemvalue="JUnit.APPCEntryTest" />
-        <item itemvalue="JUnit.AxisEntryTest" />
+        <item itemvalue="JUnit.VersionApiTest" />
+        <item itemvalue="JUnit.ValidationApiTest" />
+        <item itemvalue="JUnit.RelationshipsApiTest" />
+        <item itemvalue="JUnit.RefsetMembersApiTest" />
+        <item itemvalue="JUnit.MrcmXmlApiTest" />
       </list>
     </recent_temporary>
   </component>
@@ -219,12 +234,13 @@
       <workItem from="1585815099323" duration="1850000" />
       <workItem from="1587036500331" duration="1362000" />
       <workItem from="1587038577447" duration="1108000" />
-      <workItem from="1587381559144" duration="8267000" />
+      <workItem from="1587461603483" duration="8255000" />
+      <workItem from="1587990758073" duration="251000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -256,11 +272,12 @@
     </state>
     <state x="-1179" y="192" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389769330" />
     <state x="659" y="170" key="#com.intellij.ide.util.MemberChooser/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585821630438" />
-    <state x="-1129" y="301" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587042203315">
-      <screen x="-1920" y="-101" width="1920" height="1057" />
+    <state x="593" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587461607019">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="-1129" y="301" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042203315" />
     <state x="703" y="350" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585577661639" />
+    <state x="593" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.877@0.23.1440.877" timestamp="1587461607019" />
     <state x="534" y="189" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585570218403">
       <screen x="0" y="0" width="1707" height="920" />
     </state>
@@ -282,57 +299,57 @@
       <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state x="634" y="187" key="FileChooserDialogImpl/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585588817520" />
-    <state width="1875" height="374" key="GridCell.Tab.0.bottom" timestamp="1587389409412">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.0.bottom" timestamp="1587471650242">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.bottom/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323501" />
-    <state width="1875" height="374" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409412" />
+    <state width="699" height="313" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587471650242" />
     <state width="1490" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
     <state width="1662" height="242" key="GridCell.Tab.0.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="1875" height="374" key="GridCell.Tab.0.center" timestamp="1587389409412">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.0.center" timestamp="1587471650241">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.center/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323500" />
-    <state width="1875" height="374" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409412" />
+    <state width="699" height="313" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587471650241" />
     <state width="1490" height="209" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
     <state width="1662" height="242" key="GridCell.Tab.0.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="1875" height="374" key="GridCell.Tab.0.left" timestamp="1587389409412">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.0.left" timestamp="1587471650240">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.left/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323500" />
-    <state width="1875" height="374" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409412" />
+    <state width="699" height="313" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587471650240" />
     <state width="1490" height="209" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
     <state width="1662" height="242" key="GridCell.Tab.0.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="1875" height="374" key="GridCell.Tab.0.right" timestamp="1587389409412">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.0.right" timestamp="1587471650242">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.right/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323501" />
-    <state width="1875" height="374" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409412" />
+    <state width="699" height="313" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587471650242" />
     <state width="1490" height="209" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
     <state width="1662" height="242" key="GridCell.Tab.0.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="1875" height="374" key="GridCell.Tab.1.bottom" timestamp="1587389409413">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.1.bottom" timestamp="1587464008915">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.bottom/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323497" />
-    <state width="1875" height="374" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409413" />
+    <state width="699" height="313" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587464008915" />
     <state width="1662" height="225" key="GridCell.Tab.1.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
-    <state width="1875" height="374" key="GridCell.Tab.1.center" timestamp="1587389409413">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.1.center" timestamp="1587464008913">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.center/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323496" />
-    <state width="1875" height="374" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409413" />
+    <state width="699" height="313" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1587464008913" />
     <state width="1662" height="225" key="GridCell.Tab.1.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
-    <state width="1875" height="374" key="GridCell.Tab.1.left" timestamp="1587389409412">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.1.left" timestamp="1587464008912">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.left/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323496" />
-    <state width="1875" height="374" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409412" />
+    <state width="699" height="313" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1587464008912" />
     <state width="1662" height="225" key="GridCell.Tab.1.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
-    <state width="1875" height="374" key="GridCell.Tab.1.right" timestamp="1587389409413">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state width="699" height="313" key="GridCell.Tab.1.right" timestamp="1587464008914">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.right/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323497" />
-    <state width="1875" height="374" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389409413" />
+    <state width="699" height="313" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1587464008914" />
     <state width="1662" height="225" key="GridCell.Tab.1.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
     <state width="1875" height="223" key="GridCell.Tab.2.bottom" timestamp="1587388459188">
       <screen x="-1920" y="0" width="1920" height="1040" />
@@ -376,6 +393,20 @@
     <state x="516" y="195" width="672" height="678" key="search.everywhere.popup/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585577678453" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/io/swagger/client/api/DescriptionsApiTest.java</url>
+          <line>32</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/io/swagger/client/api/MrcmXmlApiTest.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="SpringBootApplicationConfigurationType">
         <watch expression="repo.findAll()" language="JAVA" />

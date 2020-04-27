@@ -16,6 +16,7 @@ package io.swagger.client.api;
 import io.swagger.client.ApiException;
 import io.swagger.client.model.Branch;
 import io.swagger.client.model.BranchPojo;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Ignore;
 
@@ -46,6 +47,9 @@ public class BranchingApiTest {
         List<Branch> response = api.retrieveAllBranchesUsingGET();
 
         // TODO: test validations
+        //US 4_6 Server response
+        System.out.println(response.toString());
+        Assert.assertNotEquals(null,response);
     }
     
     /**
@@ -58,11 +62,14 @@ public class BranchingApiTest {
      */
     @Test
     public void retrieveBranchDescendantsUsingGETTest() throws ApiException {
-        String path = null;
+        String path = "MAIN";
         Boolean immediateChildren = null;
         List<Branch> response = api.retrieveBranchDescendantsUsingGET(path, immediateChildren);
 
         // TODO: test validations
+        //US 4_6 Server response
+        System.out.println(response.toString());
+        Assert.assertNotEquals(null,response);
     }
     
     /**
@@ -75,11 +82,14 @@ public class BranchingApiTest {
      */
     @Test
     public void retrieveBranchUsingGETTest() throws ApiException {
-        String path = null;
+        String path = "MAIN";
         Boolean includeInheritedMetadata = null;
         BranchPojo response = api.retrieveBranchUsingGET(path, includeInheritedMetadata);
 
         // TODO: test validations
+        //US 4_6 Server response
+        System.out.println(response.toString());
+        Assert.assertNotEquals(null,response);
     }
     
 }
