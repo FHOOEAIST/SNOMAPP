@@ -29,7 +29,6 @@ import java.util.Map;
 /**
  * API tests for RefsetMembersApi
  */
-@Ignore
 public class RefsetMembersApiTest {
 
     private final RefsetMembersApi api = new RefsetMembersApi();

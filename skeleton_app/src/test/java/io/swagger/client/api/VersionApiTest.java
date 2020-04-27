@@ -27,7 +27,6 @@ import java.util.Map;
 /**
  * API tests for VersionApi
  */
-@Ignore
 public class VersionApiTest {
 
     private final VersionApi api = new VersionApi();

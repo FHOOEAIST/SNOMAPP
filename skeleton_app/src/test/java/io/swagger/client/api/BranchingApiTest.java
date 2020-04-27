@@ -28,7 +28,6 @@ import java.util.Map;
 /**
  * API tests for BranchingApi
  */
-@Ignore
 public class BranchingApiTest {
 
     private final BranchingApi api = new BranchingApi();

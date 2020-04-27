@@ -28,7 +28,6 @@ import java.util.Map;
 /**
  * API tests for AuthoringStatsApi
  */
-@Ignore
 public class AuthoringStatsApiTest {
 
     private final AuthoringStatsApi api = new AuthoringStatsApi();
