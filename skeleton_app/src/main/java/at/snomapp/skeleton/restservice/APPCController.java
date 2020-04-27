@@ -25,7 +25,7 @@ public class APPCController {
         this.repo = readingrepo;
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping
     // flushes databank
     // to be used for debugging only
     // remove from release version
@@ -58,7 +58,7 @@ public class APPCController {
     }
 
     // needs tweeking if multiple languages are supported
-    @GetMapping("/")
+    @GetMapping
     // retruns whole tree saved in Data bank
     APPCTree getTree(){
         APPCTree tree = new APPCTree("en");
