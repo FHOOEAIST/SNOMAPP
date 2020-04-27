@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SNOMAPP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body onload="startInterval()">
+
+<div class="align-content-center w-50 h-50">
+    <img src="../src/logo.png" class="img-fluid align-items-center">
+</div>
+
+<div class="container">
+    <div class="input-group pt-3">
+       <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
+    </div>
+</div>
+
+<script>
+    var timer;
+    var tree = true;
+
+    function startInterval(){
+        timer = setInterval(checkSearchbar, 100);
+    }
+
+    function checkSearchbar() {
+        if(document.getElementById("searchbar").value != ""){
+            search();
+            tree = false;
+        }
+        else{
+            clearInterval(timer);
+            if(tree != true){
+                showTree();
+                tree = true;
+            }
+            timer = setInterval(checkSearchbar, 100);
+        }
+    }
+
+    function showTree() {
+        document.getElementById("tabs").innerHTML = '<div class="container pt-3">\n' +
+            '        <div class="row">\n' +
+            '            <div class="col-md-12">\n' +
+            '                <nav>\n' +
+            '                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">\n' +
+            '                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true">Modality</a>\n' +
+            '                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false">Laterality</a>\n' +
+            '                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false">Procedures</a>\n' +
+            '                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false">Anatomy</a>\n' +
+            '                    </div>\n' +
+            '                </nav>\n' +
+            '                <div class="tab-content" id="nav-tabContent">\n' +
+            '                    <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">\n' +
+            '                        <div class="treeview">\n' +
+            '                            <ul class="mb-1 pl-3 pb-2">\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - undefined</button></span>\n' +
+            '                                </li>\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>1 - X-Ray</button></span>\n' +
+            '                                </li>\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>2 - CT</button></span>\n' +
+            '                                </li>\n' +
+            '                            </ul>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="tab-pane fade" id="lat" role="tabpanel" aria-labelledby="laterality">\n' +
+            '                        <div class="treeview">\n' +
+            '                            <ul class="mb-1 pl-3 pb-2">\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - undefined</button></span>\n' +
+            '                                </li>\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>1 - right</button></span>\n' +
+            '                                </li>\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>2 - left</button></span>\n' +
+            '                                </li>\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>3 - bilateral</button></span>\n' +
+            '                                </li>\n' +
+            '                            </ul>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="tab-pane fade" id="ana" role="tabpanel" aria-labelledby="anatomy">\n' +
+            '                        <div class="treeview">\n' +
+            '                            <ul class="mb-1 pl-3 pb-2">\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - imaging without regional anatomic definiton</button></span>\n' +
+            '                                    <ul class="nested">\n' +
+            '                                        <li><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-bell ic-w mr-1"></i>0-1 whole body</button></li>\n' +
+            '                                        <li><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-bell ic-w mr-1"></i>0-2 trunk</button></li>\n' +
+            '                                        <li><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-bell ic-w mr-1"></i>0-3 partial body</button></li>\n' +
+            '                                    </ul>\n' +
+            '                                </li>\n' +
+            '                            </ul>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                    <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="procedures">\n' +
+            '                        <div class="treeview">\n' +
+            '                            <ul class="mb-1 pl-3 pb-2">\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - undefined</button></span>\n' +
+            '                                    <ul class="nested">\n' +
+            '                                        <li><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-bell ic-w mr-1"></i>0-1 conventional tomography</button></li>\n' +
+            '                                    </ul>\n' +
+            '                                </li>\n' +
+            '                                <li><i class="fas fa-angle-right rotate"></i>\n' +
+            '                                    <span><button class="btn btn-default" onclick="window.location.href=\'chooseSnomed.html\'"><i class="far fa-envelope-open ic-w mx-1"></i>1 - imaging of preformed ductal structures</button></span>\n' +
+            '                                </li>\n' +
+            '                            </ul>\n' +
+            '                        </div>\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '            </div>\n' +
+            '        </div>\n' +
+            '    </div>';
+    }
+
+    function search() {
+        document.getElementById("tabs").innerHTML = '<div class="container pt-3"> No search results. </div>';
+
+    }
+</script>
+
+<section id="tabs" class="project-tab">
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true">Modality</a>
+                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false">Laterality</a>
+                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false">Procedures</a>
+                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false">Anatomy</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
+                        <div class="treeview">
+                            <ul class="mb-1 pl-3 pb-2">
+                                <li><i class="fas fa-angle-right rotate"></i>
+                                    <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - undefined</button></span>
+                                </li>
+                                <li><i class="fas fa-angle-right rotate"></i>
+                                    <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>1 - X-Ray</button></span>
+                                </li>
+                                <li><i class="fas fa-angle-right rotate"></i>
+                                    <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>2 - CT</button></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="lat" role="tabpanel" aria-labelledby="laterality">
+                    <div class="treeview">
+                        <ul class="mb-1 pl-3 pb-2">
+                            <li><i class="fas fa-angle-right rotate"></i>
+                                <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - undefined</button></span>
+                            </li>
+                            <li><i class="fas fa-angle-right rotate"></i>
+                                <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>1 - right</button></span>
+                            </li>
+                            <li><i class="fas fa-angle-right rotate"></i>
+                                <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>2 - left</button></span>
+                            </li>
+                            <li><i class="fas fa-angle-right rotate"></i>
+                                <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>3 - bilateral</button></span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                    <div class="tab-pane fade" id="ana" role="tabpanel" aria-labelledby="anatomy">
+                        <div class="treeview">
+                            <ul class="mb-1 pl-3 pb-2">
+                                <li><i class="fas fa-angle-right rotate"></i>
+                                <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>0 imaging without regional anatomic definition</button></span>
+                                <ul class="nested">
+                                    <li><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-bell ic-w mr-1"></i>0-1 whole body</button></li>
+                                    <li><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-bell ic-w mr-1"></i>0-2 trunk</button></li>
+                                    <li><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-bell ic-w mr-1"></i>0-3 partial body</button></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                    <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="procedures">
+                        <div class="treeview">
+                            <ul class="mb-1 pl-3 pb-2">
+                                <li><i class="fas fa-angle-right rotate"></i>
+                                    <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>0 - undefined</button></span>
+                                    <ul class="nested">
+                                        <li><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-bell ic-w mr-1"></i>0 - 1 conventional tomography</button></li>
+                                    </ul>
+                                </li>
+                                <li><i class="fas fa-angle-right rotate"></i>
+                                    <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1"></i>1 - imaging of performed ductal structures</button></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

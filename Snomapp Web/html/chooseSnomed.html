@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SNOMAPP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="text-center w-50">
+    <img src="../src/logo.png" class="img-fluid">
+</div>
+
+<div class="container">
+    <div class="border-top border-dark">
+        <p style="font-size: x-large" >Selected: 0-2 trunk</p>
+    </div>
+</div>
+
+
+<div class="container pt-3">
+    <table class="table" style="border-collapse: collapse">
+        <thead>
+            <tr>
+                <th scope="col">Code</th>
+                <th scope="col">Description</th>
+                <th scope="col">Info</th>
+                <th scope="col">Scale</th>
+                <th scope="col"> </th>
+           </tr>
+        </thead>
+        <tbody>
+            <tr data-toggle="collapse" data-target="#row1" class="accordion-toggle">
+                <td>22943007</td>
+                <td>Trunk structure (body structure)</td>
+                <td><button class="btn" data-toggle="modal" data-target="#basicModal"><i class="fa fa-info-circle"></i> </button> </td>
+                <td>
+                    <select class="form-control form-control-sm">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </td>
+                <td><button class="btn" onclick="safeMapping()"><i class="fa fa-check-circle"></i> </button></td>
+            </tr>
+            <tr>
+                <td>67734004</td>
+                <td>Upper trunk</td>
+                <td><button class="btn" data-toggle="modal" data-target="#basicModal"><i class="fa fa-info-circle"></i> </button> </td>
+                <td>
+                    <select class="form-control form-control-sm">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </td>
+                <td><button class="btn" onclick="safeMapping()"><i class="fa fa-check-circle"></i> </button></td>
+            </tr>
+            <tr>
+                <td>229757002</td>
+                <td>Lower trunk</td>
+                <td><button class="btn" data-toggle="modal" data-target="#basicModal"><i class="fa fa-info-circle"></i> </button> </td>
+                <td>
+                    <select class="form-control form-control-sm">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10</option>
+                    </select>
+                </td>
+                <td><button class="btn" onclick="safeMapping()"><i class="fa fa-check-circle"></i> </button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModal">Code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Information about the Code
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function safeMapping() {
+        location.href = "start-page.html";
+    }
+</script>
+
+<div class="container">
+    <div >
+        <button class="btn btn-dark" style="float: right" onclick="window.location.href='start-page.html'">Back</button>
+    </div>
+</div>
+</body>
+</html>
