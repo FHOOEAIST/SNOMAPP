@@ -1,10 +1,10 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.appc;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class APPCTree  {
-    private String language;
+    private final String language;
 
     public String getLanguage() {
         return language;
@@ -39,7 +39,7 @@ public class APPCTree  {
         anatomy = null;
     }
 
-    // primitve search functionality, returns exact matches only
+    // primitive search functionality, returns exact matches only
     public Set<Entry> search(String query){
         Set<Entry> result = new HashSet<>();
         result.addAll(modality.search(query));

@@ -1,14 +1,13 @@
 package at.snomapp.skeleton.importer;
 
-import at.snomapp.skeleton.APPC.APPCEntry;
-import at.snomapp.skeleton.APPC.APPCTree;
-import at.snomapp.skeleton.APPC.AxisEntry;
-import at.snomapp.skeleton.APPC.Entry;
+import at.snomapp.skeleton.appc.APPCEntry;
+import at.snomapp.skeleton.appc.APPCTree;
+import at.snomapp.skeleton.appc.AxisEntry;
+import at.snomapp.skeleton.appc.Entry;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,8 +19,8 @@ public class CSVImporter implements Importer{
         BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
         APPCTree tree = new APPCTree("englisch");
         String s;
-        String BranchName;
-        String Description;
+        String branchName;
+        String displayName;
         //empty entry, prevLayer to help with finding parent
         Entry current = null;
         int prevLayer = 0;
@@ -30,12 +29,13 @@ public class CSVImporter implements Importer{
 
         //reading csvfile per line
         while ((s = bReader.readLine()) != null) {
-            BranchName = s.split(";")[0];
+            branchName = s.split(";")[0];
 
             //fills list with codes from this line
             codes.addAll(Arrays.asList(s.split(";")).subList(1, 7));
+            String fullCode = codes.get(0);
 
-            Description = s.split(";")[7];
+            displayName = s.split(";")[7];
             //current layer
             int layer = 0;
             for (int i = 1; i < 6; i++) {
@@ -52,9 +52,9 @@ public class CSVImporter implements Importer{
                 }
             }
             //create a new branch in tree
-            if (!BranchName.isEmpty()) {
-                AxisEntry next = new AxisEntry(BranchName);
-                switch (BranchName.toLowerCase()) {
+            if (!branchName.isEmpty()) {
+                AxisEntry next = new AxisEntry(branchName);
+                switch (branchName.toLowerCase()) {
                     case ("modality"):
                         tree.setModality(next);
                         break;
@@ -74,11 +74,11 @@ public class CSVImporter implements Importer{
                 current = next;
             }
             //make new node and add it to tree
-            APPCEntry next = new APPCEntry(Description, Integer.parseInt(codes.get(layer)));
+            APPCEntry next = new APPCEntry(displayName, fullCode);
             assert current != null;
             current.addChild(next);
             current = next;
-            //clears codelist so it's ready for new line
+            //clears code list so it's ready for new line
             codes.clear();
             //so we know on which layer the previous node was
             prevLayer = layer ;
@@ -86,6 +86,7 @@ public class CSVImporter implements Importer{
         bReader.close();
         return tree;
     }
+
  //for testing
     public static void main(String[] args) throws Exception {
         APPCTree tree = new APPCTree("englisch");

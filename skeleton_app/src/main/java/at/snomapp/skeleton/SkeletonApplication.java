@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 @SpringBootApplication
 @EnableSwagger2WebMvc
-@EntityScan(basePackages = {"at.snomapp.skeleton.APPC"})
+@EntityScan(basePackages = {"at.snomapp.skeleton.appc"})
 @EnableNeo4jRepositories(basePackages = "at.snomapp.skeleton.repo")
 public class SkeletonApplication {
 

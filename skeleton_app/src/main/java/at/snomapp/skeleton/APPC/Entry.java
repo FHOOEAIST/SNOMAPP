@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.appc;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
@@ -11,10 +11,13 @@ import java.util.Set;
 
 @NodeEntity
 public abstract class Entry {
+
     @Id
     @GeneratedValue
     private Long id;
-    private String description;
+    protected String displayName;
+    protected int layerCode;
+    protected String code;
 
     public Entry() {
     }
@@ -27,38 +30,59 @@ public abstract class Entry {
     @JsonIgnore
     protected Entry parent;
 
-    public Entry(String description) {
-        this.description = description;
-        children = new HashSet<>();
-        parent = null;
+    public Entry(String description, String code) {
+        this.displayName = description;
+        this.children = new HashSet<>();
+        this.parent = null;
+        this.code = code;
+
+        if (code != null && !code.isEmpty()) {
+            // if code is given save last position separately as layerCode
+            String[] codes = code.split("-");
+            try {
+                this.layerCode = Integer.parseInt(codes[codes.length-1]);
+            } catch (NumberFormatException e) {
+                // no parsable integer found
+                this.layerCode = -1;
+            }
+        }else{
+            // no code given
+            this.layerCode = -1;
+        }
     }
 
-    public void addChild(APPCEntry child) {
+    public void addChild(Entry child) {
         children.add(child);
         child.parent = this;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public int getLayerCode() {
+        return layerCode;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public Set<Entry> getChildren() {
         return children;
     }
 
-    public Entry getParent(){
+    public Entry getParent() {
         return parent;
     }
 
     // returns a set containing all exact matches
     public Set<Entry> search(String query) {
         Set<Entry> result = new HashSet<>();
-        if (description.equals(query)) {
+        if (displayName.equals(query)) {
             result.add(this);
         }
-        children.forEach(e -> {
-            result.addAll(e.search(query));
-        });
+        children.forEach(e -> result.addAll(e.search(query)));
 
         return result;
     }
@@ -67,7 +91,7 @@ public abstract class Entry {
     public String toString() {
         return "Entry{" +
                 "id=" + id +
-                ", description='" + description + '\'' +
+                ", description='" + displayName + '\'' +
                 "\n\t children=" + children +
                 "\n\t parent=" + parent +
                 '}';

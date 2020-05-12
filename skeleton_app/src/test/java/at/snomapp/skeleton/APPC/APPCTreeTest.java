@@ -1,6 +1,5 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.appc;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;
@@ -16,7 +15,7 @@ class APPCTreeTest {
 
         String result = t0.getLanguage();
 
-        Assertions.assertEquals("DE", result);
+        assertEquals("DE", result);
     }
 
     @Test
@@ -24,12 +23,12 @@ class APPCTreeTest {
         APPCTree t0 = new APPCTree("DE");
 
         AxisEntry modality = new AxisEntry("modality");
-        APPCEntry e1 = new APPCEntry("match", 1);
-        APPCEntry e2 = new APPCEntry("missmatch", 1);
-        APPCEntry e3 = new APPCEntry("match", 2);
-        APPCEntry e4 = new APPCEntry("match", 2);
-        APPCEntry e5 = new APPCEntry("missmatch", 3);
-        APPCEntry e6 = new APPCEntry("match", 3);
+        APPCEntry e1 = new APPCEntry("match", "1");
+        APPCEntry e2 = new APPCEntry("missmatch", "2");
+        APPCEntry e3 = new APPCEntry("match", "1-1");
+        APPCEntry e4 = new APPCEntry("match", "2-1");
+        APPCEntry e5 = new APPCEntry("missmatch", "2-1-1");
+        APPCEntry e6 = new APPCEntry("match", "2-1-2");
         e4.addChild(e5);
         e4.addChild(e6);
         e2.addChild(e4);
@@ -38,13 +37,13 @@ class APPCTreeTest {
         modality.addChild(e2);
 
         AxisEntry laterality = new AxisEntry("laterality");
-        APPCEntry e7 = new APPCEntry("match", 1);
-        APPCEntry e8 = new APPCEntry("missmatch", 2);
+        APPCEntry e7 = new APPCEntry("match", "1");
+        APPCEntry e8 = new APPCEntry("missmatch", "1-1");
         e7.addChild(e8);
         laterality.addChild(e7);
 
         AxisEntry anatomy = new AxisEntry("Anatomy");
-        APPCEntry e9 = new APPCEntry("match", 1);
+        APPCEntry e9 = new APPCEntry("match", "1");
         anatomy.addChild(e9);
 
         AxisEntry procedure = new AxisEntry("Procedure");
@@ -56,14 +55,14 @@ class APPCTreeTest {
 
         Set<Entry> result = t0.search("match");
 
-        Assertions.assertTrue(result.contains(e1));
-        Assertions.assertTrue(result.contains(e3));
-        Assertions.assertTrue(result.contains(e4));
-        Assertions.assertTrue(result.contains(e6));
-        Assertions.assertTrue(result.contains(e7));
-        Assertions.assertTrue(result.contains(e9));
-        Assertions.assertFalse(result.contains(e2));
-        Assertions.assertFalse(result.contains(e5));
-        Assertions.assertFalse(result.contains(e8));
+        assertTrue(result.contains(e1));
+        assertTrue(result.contains(e3));
+        assertTrue(result.contains(e4));
+        assertTrue(result.contains(e6));
+        assertTrue(result.contains(e7));
+        assertTrue(result.contains(e9));
+        assertFalse(result.contains(e2));
+        assertFalse(result.contains(e5));
+        assertFalse(result.contains(e8));
     }
 }

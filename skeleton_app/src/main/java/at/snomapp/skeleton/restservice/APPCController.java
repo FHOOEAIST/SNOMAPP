@@ -1,9 +1,9 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.APPC.APPCEntry;
-import at.snomapp.skeleton.APPC.APPCTree;
-import at.snomapp.skeleton.APPC.AxisEntry;
-import at.snomapp.skeleton.APPC.Entry;
+import at.snomapp.skeleton.appc.APPCEntry;
+import at.snomapp.skeleton.appc.APPCTree;
+import at.snomapp.skeleton.appc.AxisEntry;
+import at.snomapp.skeleton.appc.Entry;
 import at.snomapp.skeleton.importer.CSVImporter;
 import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.repo.APPCRepo;
@@ -34,9 +34,9 @@ public class APPCController {
     }
 
     @GetMapping("/find")
-    // finds a node based on the description
-    Entry findEntry(@RequestParam String description){
-        return repo.findByDescription(description);
+    // finds a node based on the displayName
+    Entry findEntry(@RequestParam String displayName){
+        return repo.findByDisplayName(displayName);
     }
 
     @PostMapping("/import")
@@ -59,17 +59,17 @@ public class APPCController {
 
     // needs tweeking if multiple languages are supported
     @GetMapping
-    // retruns whole tree saved in Data bank
+    // returns whole tree saved in Data bank
     APPCTree getTree(){
         APPCTree tree = new APPCTree("en");
 
-        Entry anatomy = repo.findByDescription("Anatomy");
+        Entry anatomy = repo.findByDisplayName("Anatomy");
         reconstructTree(anatomy);
-        Entry laterality = repo.findByDescription("Laterality");
+        Entry laterality = repo.findByDisplayName("Laterality");
         reconstructTree(laterality);
-        Entry modality = repo.findByDescription("Modality");
+        Entry modality = repo.findByDisplayName("Modality");
         reconstructTree(modality);
-        Entry procedure = repo.findByDescription("Procedures");
+        Entry procedure = repo.findByDisplayName("Procedures");
         reconstructTree(procedure);
 
         tree.setAnatomy((AxisEntry) anatomy);
