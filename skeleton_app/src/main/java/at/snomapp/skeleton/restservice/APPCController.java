@@ -40,7 +40,7 @@ public class APPCController {
     }
 
     @PostMapping("/import")
-    // imports an APPCtree from a given filename into the neo4j databank.
+    // imports an APPCtree from a given filename into the neo4j database.
     // clears databank first one ach call
     void importAPPC(@RequestBody String filename){
         repo.deleteAll();
