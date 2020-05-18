@@ -4,6 +4,6 @@ public class SNOMEDElement extends AbstractElement{
 
     public SNOMEDElement(String code){
         this.code = code;
-        this.codesystem = "GET URI FOR APPC";
+        this.codesystem = "GET URI FOR SNOMED";
     }
 }

@@ -45,11 +45,11 @@ public class ConceptMapImpl implements ConceptMap {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("ConceptMap: {");
+        stringBuilder.append("ConceptMapping between ").append(source).append(" and ").append(destination).append(" : {\n");
         for (Equivalence entry : entries) {
-            stringBuilder.append(entry.getSource());
+            stringBuilder.append(entry.getSource().getCode());
             stringBuilder.append(" -> ");
-            stringBuilder.append(entry.getDestination());
+            stringBuilder.append(entry.getDestination().getCode());
             stringBuilder.append(": ");
             stringBuilder.append(entry.getEquivalence().toString());
             stringBuilder.append("\n");
