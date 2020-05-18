@@ -15,6 +15,7 @@ public class APPCEntry extends Entry {
     @Override
     public String toString() {
         return "\n\t\t APPCEntry{" +
+                "code=" + code +
                 "layerCode=" + layerCode + ", " + super.getDisplayName()  + ", Children= " + super.children  + "}";
     }
 

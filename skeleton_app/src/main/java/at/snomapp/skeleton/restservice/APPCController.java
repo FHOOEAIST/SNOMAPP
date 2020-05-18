@@ -4,7 +4,7 @@ import at.snomapp.skeleton.appc.APPCEntry;
 import at.snomapp.skeleton.appc.APPCTree;
 import at.snomapp.skeleton.appc.AxisEntry;
 import at.snomapp.skeleton.appc.Entry;
-import at.snomapp.skeleton.importer.CSVImporter;
+import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.repo.APPCRepo;
 import org.springframework.beans.factory.annotation.Autowired;

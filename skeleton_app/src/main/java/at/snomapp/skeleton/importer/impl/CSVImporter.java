@@ -1,9 +1,10 @@
-package at.snomapp.skeleton.importer;
+package at.snomapp.skeleton.importer.impl;
 
 import at.snomapp.skeleton.appc.APPCEntry;
 import at.snomapp.skeleton.appc.APPCTree;
 import at.snomapp.skeleton.appc.AxisEntry;
 import at.snomapp.skeleton.appc.Entry;
+import at.snomapp.skeleton.importer.Importer;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -13,37 +14,47 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 @Component("CSVImporter")
-public class CSVImporter implements Importer{
+public class CSVImporter implements Importer {
 
     public APPCTree importTree(String fileName) throws Exception {
         BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
         APPCTree tree = new APPCTree("englisch");
+
+        // whole line of csv file
         String s;
         String branchName;
         String displayName;
-        //empty entry, prevLayer to help with finding parent
         Entry current = null;
+
+        // prevLayer to help with finding parent
         int prevLayer = 0;
-        //List of Codes
+
+        // list of codes
         ArrayList<String> codes = new ArrayList<>();
 
-        //reading csvfile per line
+        // read file line by line
         while ((s = bReader.readLine()) != null) {
-            branchName = s.split(";")[0];
+            // get branchName and replace all occurrences of unwanted UTF-8 characters
+            branchName = s.split(";")[0].replaceAll("[\uFEFF-\uFFFF]", "");
 
-            //fills list with codes from this line
+            // fills list with codes from this line
             codes.addAll(Arrays.asList(s.split(";")).subList(1, 7));
             String fullCode = codes.get(0);
 
-            displayName = s.split(";")[7];
+            // get displayName and replace all occurrences of unwanted UTF-8 characters
+            displayName = s.split(";")[7].replaceAll("[\uFEFF-\uFFFF]", "");
+
             //current layer
             int layer = 0;
+
+            // get layer of current code (=depth in tree)
             for (int i = 1; i < 6; i++) {
                 if (!codes.get(i).isEmpty()) {
                     layer++;
                 }
             }
-            //find out how much steps you need to go back to parent
+
+            // find out how many steps you need to go back to parent
             if (layer <= prevLayer) {
                 int steps = prevLayer - layer;
                 for (int i = 0; i < steps + 1; i++) {
@@ -51,15 +62,16 @@ public class CSVImporter implements Importer{
                     current = current.getParent();
                 }
             }
-            //create a new branch in tree
+
+            // create a new branch in tree if branch-node reached
             if (!branchName.isEmpty()) {
                 AxisEntry next = new AxisEntry(branchName);
                 switch (branchName.toLowerCase()) {
-                    case ("modality"):
-                        tree.setModality(next);
-                        break;
                     case ("laterality"):
                         tree.setLaterality(next);
+                        break;
+                    case ("modality"):
+                        tree.setModality(next);
                         break;
                     case ("procedures"):
                         tree.setProcedure(next);
@@ -70,7 +82,8 @@ public class CSVImporter implements Importer{
                     default:
                         assert false;
                 }
-                //set branch to current node
+
+                // set branch to current node
                 current = next;
             }
             //make new node and add it to tree
