@@ -1,6 +1,10 @@
 package at.snomapp.skeleton.conceptMapping.impl;
 
 import at.snomapp.skeleton.conceptMapping.*;
+import org.neo4j.ogm.annotation.GeneratedValue;
+import org.neo4j.ogm.annotation.Id;
+import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,11 +12,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+@NodeEntity(label = "ConceptMap")
 public class ConceptMapImpl implements ConceptMap {
+
+    @Id
+    @GeneratedValue
+    private Long relationshipId;
 
     private String source;
     private String destination;
     private StatusType status = StatusType.DRAFT;
+
+    @Relationship(type = "has", direction = "OUTGOING")
     private List<Equivalence> entries = new ArrayList<>();
 
     public ConceptMapImpl(String source, String destination) {
