@@ -1,11 +1,10 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.appc.APPCEntry;
 import at.snomapp.skeleton.appc.APPCTree;
 import at.snomapp.skeleton.appc.AxisEntry;
 import at.snomapp.skeleton.appc.Entry;
-import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.importer.Importer;
+import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,11 +17,11 @@ import java.util.Set;
 // controller providing endpoints for importing and retreiving APPCData
 public class APPCController {
 
-    private APPCRepo repo;
+    private final APPCRepo repo;
 
     @Autowired
-    public APPCController(APPCRepo readingrepo) {
-        this.repo = readingrepo;
+    public APPCController(APPCRepo repo) {
+        this.repo = repo;
     }
 
     @DeleteMapping
@@ -91,7 +90,7 @@ public class APPCController {
                     Set<Entry> grandchildren = fullchild.get().getChildren();
                     if (grandchildren != null) {
                         for (Entry grandchild : grandchildren) {
-                            child.addChild((APPCEntry) grandchild);
+                            child.addChild(grandchild);
                         }
                     }
                 }

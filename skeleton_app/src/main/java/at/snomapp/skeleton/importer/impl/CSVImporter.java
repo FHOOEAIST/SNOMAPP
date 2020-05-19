@@ -7,96 +7,93 @@ import at.snomapp.skeleton.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
 import org.springframework.stereotype.Component;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Component("CSVImporter")
 public class CSVImporter implements Importer {
 
-    public APPCTree importTree(String fileName) throws Exception {
-        BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+    public APPCTree importTree(String fileName) throws IOException {
+
         APPCTree tree = new APPCTree("englisch");
 
-        // whole line of csv file
-        String s;
-        String branchName;
-        String displayName;
-        Entry current = null;
+        try (BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
 
-        // prevLayer to help with finding parent
-        int prevLayer = 0;
+            // whole line of csv file
+            String s;
+            Entry current = null;
 
-        // list of codes
-        ArrayList<String> codes = new ArrayList<>();
+            // prevLayer to help with finding parent
+            int prevLayer = 0;
 
-        // read file line by line
-        while ((s = bReader.readLine()) != null) {
-            // get branchName and replace all occurrences of unwanted UTF-8 characters
-            branchName = s.split(";")[0].replaceAll("[\uFEFF-\uFFFF]", "");
+            // read file line by line
+            while ((s = bReader.readLine()) != null) {
 
-            // fills list with codes from this line
-            codes.addAll(Arrays.asList(s.split(";")).subList(1, 7));
-            String fullCode = codes.get(0);
+                // split line in fields
+                List<String> fields = new ArrayList<>(Arrays.asList(s.split(";")));
 
-            // get displayName and replace all occurrences of unwanted UTF-8 characters
-            displayName = s.split(";")[7].replaceAll("[\uFEFF-\uFFFF]", "");
+                // separate codes
+                List<String> codes = fields.subList(2, 7);
 
-            //current layer
-            int layer = 0;
+                // get field values and replace all occurrences of unwanted UTF-8 characters
+                String branchName = fields.get(0).replaceAll("[\uFEFF-\uFFFF]", "");
+                String fullCode = fields.get(1).replaceAll("[\uFEFF-\uFFFF]", "");
+                String displayName = fields.get(7).replaceAll("[\uFEFF-\uFFFF]", "");
 
-            // get layer of current code (=depth in tree)
-            for (int i = 1; i < 6; i++) {
-                if (!codes.get(i).isEmpty()) {
-                    layer++;
-                }
-            }
-
-            // find out how many steps you need to go back to parent
-            if (layer <= prevLayer) {
-                int steps = prevLayer - layer;
-                for (int i = 0; i < steps + 1; i++) {
-                    assert current != null;
-                    current = current.getParent();
-                }
-            }
-
-            // create a new branch in tree if branch-node reached
-            if (!branchName.isEmpty()) {
-                AxisEntry next = new AxisEntry(branchName);
-                switch (branchName.toLowerCase()) {
-                    case ("laterality"):
-                        tree.setLaterality(next);
-                        break;
-                    case ("modality"):
-                        tree.setModality(next);
-                        break;
-                    case ("procedures"):
-                        tree.setProcedure(next);
-                        break;
-                    case ("anatomy"):
-                        tree.setAnatomy(next);
-                        break;
-                    default:
-                        assert false;
+                // get layer of code to determine position in tree structure
+                int layer = 0;
+                for (String code : codes) {
+                    if (!code.isEmpty()) {
+                        layer++;
+                    }
                 }
 
-                // set branch to current node
+                // find out how many steps you need to go back to parent
+                if (layer <= prevLayer) {
+                    int steps = prevLayer - layer;
+                    for (int i = 0; i < steps + 1; i++) {
+                        assert current != null;
+                        current = current.getParent();
+                    }
+                }
+
+                // create a new branch in tree if branch-node reached
+                if (!branchName.isEmpty()) {
+                    AxisEntry next = new AxisEntry(branchName);
+                    switch (branchName.toLowerCase()) {
+                        case ("laterality"):
+                            tree.setLaterality(next);
+                            break;
+                        case ("modality"):
+                            tree.setModality(next);
+                            break;
+                        case ("procedures"):
+                            tree.setProcedure(next);
+                            break;
+                        case ("anatomy"):
+                            tree.setAnatomy(next);
+                            break;
+                        default:
+                            assert false;
+                    }
+
+                    // set branch to current node
+                    current = next;
+                }
+
+                //make new node and add it to tree
+                APPCEntry next = new APPCEntry(displayName, fullCode);
+                assert current != null;
+                current.addChild(next);
                 current = next;
+
+                // so we know on which layer the previous node was
+                prevLayer = layer;
             }
-            //make new node and add it to tree
-            APPCEntry next = new APPCEntry(displayName, fullCode);
-            assert current != null;
-            current.addChild(next);
-            current = next;
-            //clears code list so it's ready for new line
-            codes.clear();
-            //so we know on which layer the previous node was
-            prevLayer = layer ;
         }
-        bReader.close();
+
         return tree;
     }
 
