@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.testapplication;
+/*package at.snomapp.skeleton.testapplication;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,4 +18,4 @@ public class SpringFoxConfig {
                 .paths(PathSelectors.any())
                 .build().pathMapping("/");
     }
-}
+}*/

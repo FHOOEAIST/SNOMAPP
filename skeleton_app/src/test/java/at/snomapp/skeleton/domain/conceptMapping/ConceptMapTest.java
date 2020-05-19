@@ -1,17 +1,10 @@
-package at.snomapp.skeleton.conceptMapping;
+package at.snomapp.skeleton.domain.conceptMapping;
 
-import at.snomapp.skeleton.SkeletonApplication;
-import at.snomapp.skeleton.conceptMapping.impl.APPCElement;
-import at.snomapp.skeleton.conceptMapping.impl.ConceptMapImpl;
-import at.snomapp.skeleton.conceptMapping.impl.SNOMEDElement;
+import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
+import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
+import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
-
 import java.io.IOException;
 
 public class ConceptMapTest {

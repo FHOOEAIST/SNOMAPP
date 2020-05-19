@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.domain.APPC;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,10 +1,7 @@
 package at.snomapp.skeleton.conceptMapping.impl;
 
 import at.snomapp.skeleton.conceptMapping.*;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -17,10 +14,13 @@ public class ConceptMapImpl implements ConceptMap {
 
     @Id
     @GeneratedValue
-    private Long relationshipId;
+    private Long id;
 
+    @Property
     private String source;
+    @Property
     private String destination;
+    @Property
     private StatusType status = StatusType.DRAFT;
 
     @Relationship(type = "has", direction = "OUTGOING")

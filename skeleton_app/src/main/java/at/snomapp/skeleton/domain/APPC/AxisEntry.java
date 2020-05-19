@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.domain.APPC;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 

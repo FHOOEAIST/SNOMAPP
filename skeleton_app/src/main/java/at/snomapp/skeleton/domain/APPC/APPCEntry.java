@@ -1,7 +1,5 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.domain.APPC;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
 
 @NodeEntity(label = "APPCEntry")

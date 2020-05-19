@@ -1,20 +1,17 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.APPC.APPCTree;
-import at.snomapp.skeleton.APPC.Entry;
-import at.snomapp.skeleton.conceptMapping.ConceptMap;
-import at.snomapp.skeleton.conceptMapping.Element;
-import at.snomapp.skeleton.conceptMapping.EquivalenceType;
-import at.snomapp.skeleton.conceptMapping.impl.APPCElement;
-import at.snomapp.skeleton.conceptMapping.impl.ConceptMapImpl;
-import at.snomapp.skeleton.conceptMapping.impl.SNOMEDElement;
-import at.snomapp.skeleton.importer.CSVImporter;
-import at.snomapp.skeleton.importer.Importer;
-import at.snomapp.skeleton.repo.APPCRepo;
+import at.snomapp.skeleton.domain.conceptMapping.ConceptMap;
+import at.snomapp.skeleton.domain.conceptMapping.Element;
+import at.snomapp.skeleton.domain.conceptMapping.EquivalenceType;
+import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
+import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
+import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@RestController
+@RequestMapping("/ConceptMap")
 public class ConceptMapController {
     private ConceptMapRepo repo;
 
@@ -31,18 +28,23 @@ public class ConceptMapController {
         repo.deleteAll();
     }
 
-    @PostMapping("/testMapping")
-    void importAPPC(@RequestBody String filename){
+    @PostMapping("/test")
+    void importAPPC(){
         repo.deleteAll();
-
         String appc = "1-2-1-2"; //APPC for eye
-        String snomed = "81745001"; //APPC for the eye "region"
+        String snomed = "81745001"; //SNOMED: Structure of eye proper
+        String snomed2 = "371398005"; //SNOMED for the eye "region"
+        String snomed3 = "314859006"; //SNOMED for the eyeball axis
+
         ConceptMap map = new ConceptMapImpl("APPC", "SNOMED");
         Element appcElement = new APPCElement(appc);
-        Element snomedElement = new SNOMEDElement(snomed);
-        map.addMapping(appcElement,snomedElement, EquivalenceType.WIDER);
+        Element snomedElementMatch = new SNOMEDElement(snomed);
+        Element snomedElementWider = new SNOMEDElement(snomed2);
+        Element snomedElementPartOf = new SNOMEDElement(snomed3);
+        map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
+        map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
+        map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);
         repo.save(map);
-
     }
 
 

@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.APPC;
+package at.snomapp.skeleton.domain.APPC;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

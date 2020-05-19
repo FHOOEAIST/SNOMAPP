@@ -1,14 +1,13 @@
 package at.snomapp.skeleton.importer;
 
-import at.snomapp.skeleton.APPC.APPCEntry;
-import at.snomapp.skeleton.APPC.APPCTree;
-import at.snomapp.skeleton.APPC.AxisEntry;
-import at.snomapp.skeleton.APPC.Entry;
+import at.snomapp.skeleton.domain.APPC.APPCEntry;
+import at.snomapp.skeleton.domain.APPC.APPCTree;
+import at.snomapp.skeleton.domain.APPC.AxisEntry;
+import at.snomapp.skeleton.domain.APPC.Entry;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;

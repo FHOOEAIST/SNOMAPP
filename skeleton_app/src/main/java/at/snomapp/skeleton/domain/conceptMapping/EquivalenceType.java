@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.conceptMapping;
+package at.snomapp.skeleton.domain.conceptMapping;
 
 public enum EquivalenceType {
     EQUIVALENT,
