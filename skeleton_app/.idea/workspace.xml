@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="9fc9c244-1d80-49b8-adb8-83d1099a8c38" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/SearchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/SearchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/skeleton_app.kotlin_module" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +91,20 @@
       <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in skeleton_app">
+  <component name="RunManager" selected="Application.SearchController">
+    <configuration name="SearchController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.snomapp.skeleton.restservice.SearchController" />
+      <module name="skeleton_app" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.snomapp.skeleton.restservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in skeleton_app" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <option name="PACKAGE_NAME" value="" />
@@ -98,7 +113,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RefsetMembersApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ConceptsApiTest.findConceptUsingGETTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
@@ -107,29 +122,15 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="io.swagger.client.api" />
-      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.RefsetMembersApiTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="RelationshipsApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="skeleton_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.swagger.client.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
-      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.RelationshipsApiTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.ConceptsApiTest" />
+      <option name="METHOD_NAME" value="findConceptUsingGETTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ValidationApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ConceptsApiTest.findConceptsUsingGETTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
@@ -138,13 +139,15 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="io.swagger.client.api" />
-      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.ValidationApiTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.ConceptsApiTest" />
+      <option name="METHOD_NAME" value="findConceptsUsingGETTest" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="VersionApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="DescriptionsApiTest.findBrowserDescriptionsUsingGETTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
       <extension name="coverage">
         <pattern>
@@ -153,10 +156,19 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="io.swagger.client.api" />
-      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.VersionApiTest" />
+      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.DescriptionsApiTest" />
+      <option name="METHOD_NAME" value="findBrowserDescriptionsUsingGETTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <configuration name="SkeletonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
@@ -167,20 +179,20 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.RefsetMembersApiTest" />
-      <item itemvalue="JUnit.RelationshipsApiTest" />
-      <item itemvalue="JUnit.ValidationApiTest" />
-      <item itemvalue="JUnit.VersionApiTest" />
       <item itemvalue="JUnit.All in skeleton_app" />
       <item itemvalue="Spring Boot.SkeletonApplication" />
+      <item itemvalue="JUnit.ConceptsApiTest.findConceptUsingGETTest" />
+      <item itemvalue="JUnit.ConceptsApiTest.findConceptsUsingGETTest" />
+      <item itemvalue="JUnit.DescriptionsApiTest.findBrowserDescriptionsUsingGETTest" />
+      <item itemvalue="Application.SearchController" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SearchController" />
+        <item itemvalue="JUnit.DescriptionsApiTest.findBrowserDescriptionsUsingGETTest" />
+        <item itemvalue="JUnit.ConceptsApiTest.findConceptsUsingGETTest" />
+        <item itemvalue="JUnit.ConceptsApiTest.findConceptUsingGETTest" />
         <item itemvalue="JUnit.All in skeleton_app" />
-        <item itemvalue="JUnit.VersionApiTest" />
-        <item itemvalue="JUnit.ValidationApiTest" />
-        <item itemvalue="JUnit.RelationshipsApiTest" />
-        <item itemvalue="JUnit.RefsetMembersApiTest" />
       </list>
     </recent_temporary>
   </component>
@@ -215,7 +227,8 @@
       <workItem from="1587461603483" duration="8255000" />
       <workItem from="1587990758073" duration="251000" />
       <workItem from="1589283959757" duration="328000" />
-      <workItem from="1589896095395" duration="1827000" />
+      <workItem from="1589896095395" duration="1902000" />
+      <workItem from="1590408281346" duration="2872000" />
     </task>
     <servers />
   </component>
@@ -247,11 +260,11 @@
       <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state x="309" y="116" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1584449982953" />
-    <state x="-1179" y="192" key="#com.intellij.ide.util.MemberChooser" timestamp="1587389769330">
-      <screen x="-1920" y="0" width="1920" height="1040" />
+    <state x="659" y="170" key="#com.intellij.ide.util.MemberChooser" timestamp="1590409824872">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state x="-1179" y="192" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389769330" />
-    <state x="659" y="170" key="#com.intellij.ide.util.MemberChooser/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585821630438" />
+    <state x="659" y="170" key="#com.intellij.ide.util.MemberChooser/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590409824872" />
     <state x="593" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587461607019">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -279,66 +292,66 @@
       <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state x="634" y="187" key="FileChooserDialogImpl/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585588817520" />
-    <state width="939" height="391" key="GridCell.Tab.0.bottom" timestamp="1589284302133">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.0.bottom" timestamp="1590410420508">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.bottom/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323501" />
     <state width="939" height="391" key="GridCell.Tab.0.bottom/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302133" />
     <state width="699" height="313" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587471650242" />
     <state width="1490" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
-    <state width="1662" height="242" key="GridCell.Tab.0.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.0.center" timestamp="1589284302128">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.0.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420508" />
+    <state width="1663" height="407" key="GridCell.Tab.0.center" timestamp="1590410420507">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.center/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323500" />
     <state width="939" height="391" key="GridCell.Tab.0.center/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302128" />
     <state width="699" height="313" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587471650241" />
     <state width="1490" height="209" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
-    <state width="1662" height="242" key="GridCell.Tab.0.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.0.left" timestamp="1589284302125">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.0.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420507" />
+    <state width="1663" height="407" key="GridCell.Tab.0.left" timestamp="1590410420507">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.left/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323500" />
     <state width="939" height="391" key="GridCell.Tab.0.left/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302125" />
     <state width="699" height="313" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587471650240" />
     <state width="1490" height="209" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
-    <state width="1662" height="242" key="GridCell.Tab.0.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.0.right" timestamp="1589284302131">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.0.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420507" />
+    <state width="1663" height="407" key="GridCell.Tab.0.right" timestamp="1590410420508">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.right/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323501" />
     <state width="939" height="391" key="GridCell.Tab.0.right/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302131" />
     <state width="699" height="313" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587471650242" />
     <state width="1490" height="209" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
-    <state width="1662" height="242" key="GridCell.Tab.0.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.1.bottom" timestamp="1589284302142">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.0.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420508" />
+    <state width="1663" height="407" key="GridCell.Tab.1.bottom" timestamp="1590410420509">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.bottom/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323497" />
     <state width="939" height="391" key="GridCell.Tab.1.bottom/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302142" />
     <state width="699" height="313" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587464008915" />
-    <state width="1662" height="225" key="GridCell.Tab.1.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
-    <state width="939" height="391" key="GridCell.Tab.1.center" timestamp="1589284302137">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.1.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420509" />
+    <state width="1663" height="407" key="GridCell.Tab.1.center" timestamp="1590410420509">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.center/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323496" />
     <state width="939" height="391" key="GridCell.Tab.1.center/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302137" />
     <state width="699" height="313" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1587464008913" />
-    <state width="1662" height="225" key="GridCell.Tab.1.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
-    <state width="939" height="391" key="GridCell.Tab.1.left" timestamp="1589284302135">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.1.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420509" />
+    <state width="1663" height="407" key="GridCell.Tab.1.left" timestamp="1590410420508">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.left/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323496" />
     <state width="939" height="391" key="GridCell.Tab.1.left/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302135" />
     <state width="699" height="313" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1587464008912" />
-    <state width="1662" height="225" key="GridCell.Tab.1.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
-    <state width="939" height="391" key="GridCell.Tab.1.right" timestamp="1589284302140">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1663" height="407" key="GridCell.Tab.1.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420508" />
+    <state width="1663" height="407" key="GridCell.Tab.1.right" timestamp="1590410420509">
+      <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.1.right/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323497" />
     <state width="939" height="391" key="GridCell.Tab.1.right/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302140" />
     <state width="699" height="313" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1587464008914" />
-    <state width="1662" height="225" key="GridCell.Tab.1.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585578569405" />
+    <state width="1663" height="407" key="GridCell.Tab.1.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410420509" />
     <state width="1875" height="223" key="GridCell.Tab.2.bottom" timestamp="1587388459188">
       <screen x="-1920" y="0" width="1920" height="1040" />
     </state>
@@ -364,6 +377,10 @@
     </state>
     <state x="299" y="68" key="SettingsEditor/-1920.-124.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1589284018699" />
     <state x="355" y="70" key="SettingsEditor/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585577760311" />
+    <state width="860" height="467" key="XDebugger.FullValuePopup" timestamp="1590410416419">
+      <screen x="0" y="0" width="1707" height="920" />
+    </state>
+    <state width="860" height="467" key="XDebugger.FullValuePopup/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1590410416419" />
     <state x="358" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1589283959690">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -397,6 +414,11 @@
           <url>file://$PROJECT_DIR$/src/test/java/io/swagger/client/api/MrcmXmlApiTest.java</url>
           <line>43</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/io/swagger/client/JSON.java</url>
+          <line>136</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
