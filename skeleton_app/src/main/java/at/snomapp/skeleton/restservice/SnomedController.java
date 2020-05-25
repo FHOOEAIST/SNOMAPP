@@ -14,12 +14,12 @@ import java.util.List;
 @RestController
 @RequestMapping("snomed")
 // provides endpoints for searching for snomed codes
-public class SearchController {
+public class SnomedController {
 
 
     private DescriptionsApi api = new DescriptionsApi();
 
-    public SearchController() {
+    public SnomedController() {
         // TODO: add our snowstorm URL here
         //  api.getApiClient().setBasePath();
     }

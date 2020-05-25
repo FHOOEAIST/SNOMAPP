@@ -7,12 +7,12 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SearchControllerTest {
+class SnomedControllerTest {
 
     @Test
         // should print results for tongue
     void SearchForTongue() {
-        SearchController controller = new SearchController();
+        SnomedController controller = new SnomedController();
         List<BrowserDescriptionSearchResult> res = controller.findByDisplayName("tongue");
         assertNotNull(res);
         System.out.println(res);
