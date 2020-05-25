@@ -20,13 +20,28 @@ public class APPCElement extends AbstractElement {
     @GeneratedValue
     private Long id;
 
-    @Property
     private String axis;
 
     public APPCElement(String code, String axis){
         this.code = code;
-        this.codesystem = "GET URI FOR APPC";
         this.axis = axis;
+        switch (axis){
+            case "anatomy":
+                this.codesystem = "1.2.40.0.34.5.38.4";
+                break;
+            case "laterality":
+                this.codesystem = "1.2.40.0.34.5.38.2";
+                break;
+            case "modality":
+                this.codesystem = "1.2.40.0.34.5.38.1";
+                break;
+            case "procedure":
+                this.codesystem = "1.2.40.0.34.5.38.3";
+                break;
+            default:
+                this.codesystem = "1.2.40.0.34.5.38";
+                break;
+        }
     }
 
     public void add(SNOMEDElement element, EquivalenceType e) {

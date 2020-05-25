@@ -14,8 +14,8 @@ public class ConceptMapTest {
         String appc = "1-2-1-2"; //APPC for eye
         String snomed = "81745001"; //APPC for the eye "region"
 
-        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED");
-        APPCElement appcElement = new APPCElement(appc,"anathomy");
+        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
+        APPCElement appcElement = new APPCElement(appc,"anatomy");
         SNOMEDElement snomedElement = new SNOMEDElement(snomed);
         map.addMapping(appcElement,snomedElement,EquivalenceType.WIDER);
 
@@ -29,8 +29,8 @@ public class ConceptMapTest {
         String snomed2 = "371398005"; //SNOMED for the eye "region"
         String snomed3 = "314859006"; //SNOMED for the eyeball axis
 
-        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED");
-        APPCElement appcElement = new APPCElement(appc,"anathomy");
+        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
+        APPCElement appcElement = new APPCElement(appc,"anatomy");
         SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed);
         SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2);
         SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3);

@@ -36,8 +36,8 @@ public class ConceptMapController {
         String snomed2 = "371398005"; //SNOMED for the eye "region"
         String snomed3 = "314859006"; //SNOMED for the eyeball axis
 
-        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED");
-        APPCElement appcElement = new APPCElement(appc,"anathomy");
+        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
+        APPCElement appcElement = new APPCElement(appc,"anatomy");
         SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed);
         SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2);
         SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3);
