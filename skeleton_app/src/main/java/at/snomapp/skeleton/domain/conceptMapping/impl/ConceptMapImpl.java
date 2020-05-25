@@ -1,13 +1,12 @@
-package at.snomapp.skeleton.conceptMapping.impl;
+package at.snomapp.skeleton.domain.conceptMapping.impl;
 
-import at.snomapp.skeleton.conceptMapping.*;
+import at.snomapp.skeleton.domain.conceptMapping.*;
 import org.neo4j.ogm.annotation.*;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @NodeEntity(label = "ConceptMap")
 public class ConceptMapImpl implements ConceptMap {
@@ -23,8 +22,8 @@ public class ConceptMapImpl implements ConceptMap {
     @Property
     private StatusType status = StatusType.DRAFT;
 
-    @Relationship(type = "has", direction = "OUTGOING")
-    private List<Equivalence> entries = new ArrayList<>();
+    @Relationship(type = "contains")
+    private Set<APPCElement> elements = new HashSet<>();
 
     public ConceptMapImpl(String source, String destination) {
         this.source = source;
@@ -57,22 +56,25 @@ public class ConceptMapImpl implements ConceptMap {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("ConceptMapping between ").append(source).append(" and ").append(destination).append(" : {\n");
-        for (Equivalence entry : entries) {
-            stringBuilder.append(entry.getSource().getCode());
-            stringBuilder.append(" -> ");
-            stringBuilder.append(entry.getDestination().getCode());
-            stringBuilder.append(": ");
-            stringBuilder.append(entry.getEquivalence().toString());
-            stringBuilder.append("\n");
+        for (APPCElement appc : elements) {
+            for (Equivalence equivalence : appc.getEquivalences()){
+                stringBuilder.append(equivalence.getSource().getCode());
+                stringBuilder.append(" from axis ").append(appc.getAxis());
+                stringBuilder.append(" -> ");
+                stringBuilder.append(equivalence.getDestination().getCode());
+                stringBuilder.append(": ");
+                stringBuilder.append(equivalence.getEquivalence().toString());
+                stringBuilder.append("\n");
+            }
         }
         stringBuilder.append("}");
         return stringBuilder.toString();
     }
 
     @Override
-    public void addMapping(Element source, Element destination, EquivalenceType equivalence) {
-        Equivalence eq = new EquivalenceImpl(source,destination,equivalence);
-        entries.add(eq);
+    public void addMapping(APPCElement source, SNOMEDElement destination, EquivalenceType equivalence) {
+        elements.add(source);
+        source.add(destination,equivalence);
     }
 
     @Override

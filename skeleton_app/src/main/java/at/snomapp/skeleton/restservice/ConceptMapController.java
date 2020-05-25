@@ -37,10 +37,10 @@ public class ConceptMapController {
         String snomed3 = "314859006"; //SNOMED for the eyeball axis
 
         ConceptMap map = new ConceptMapImpl("APPC", "SNOMED");
-        Element appcElement = new APPCElement(appc);
-        Element snomedElementMatch = new SNOMEDElement(snomed);
-        Element snomedElementWider = new SNOMEDElement(snomed2);
-        Element snomedElementPartOf = new SNOMEDElement(snomed3);
+        APPCElement appcElement = new APPCElement(appc,"anathomy");
+        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed);
+        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2);
+        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3);
         map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
         map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
         map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);

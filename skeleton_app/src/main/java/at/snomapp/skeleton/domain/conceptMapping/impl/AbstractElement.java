@@ -1,11 +1,9 @@
-package at.snomapp.skeleton.conceptMapping.impl;
+package at.snomapp.skeleton.domain.conceptMapping.impl;
 
-import at.snomapp.skeleton.conceptMapping.Element;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
+import at.snomapp.skeleton.domain.conceptMapping.Element;
 import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Relationship;
 
+@NodeEntity
 public abstract class AbstractElement implements Element {
 
     protected String codesystem;

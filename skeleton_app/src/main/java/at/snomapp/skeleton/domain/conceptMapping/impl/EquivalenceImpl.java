@@ -1,19 +1,19 @@
-package at.snomapp.skeleton.conceptMapping.impl;
+package at.snomapp.skeleton.domain.conceptMapping.impl;
 
-import at.snomapp.skeleton.conceptMapping.Element;
-import at.snomapp.skeleton.conceptMapping.Equivalence;
-import at.snomapp.skeleton.conceptMapping.EquivalenceType;
+import at.snomapp.skeleton.domain.conceptMapping.Element;
+import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
+import at.snomapp.skeleton.domain.conceptMapping.EquivalenceType;
 import org.neo4j.ogm.annotation.*;
 
 @RelationshipEntity(type = "maps")
 public class EquivalenceImpl implements Equivalence {
 
-    @Id @GeneratedValue   private Long relationshipId;
+    @Id @GeneratedValue private Long relationshipId;
 
-    @StartNode
-    private Element source;
-    @EndNode
-    private Element destination;
+    @StartNode private Element source;
+
+    @EndNode private Element destination;
+
     @Property(name = "equivalence")
     private EquivalenceType equivalence;
 
