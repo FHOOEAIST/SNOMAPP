@@ -2,29 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9fc9c244-1d80-49b8-adb8-83d1099a8c38" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/skeleton_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/skeleton_app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/SkeletonApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/SkeletonApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/appc/APPCEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/APPCEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/appc/APPCTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/APPCTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/appc/AxisEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/AxisEntry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/appc/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/Entry.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/APPC/APPCEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/APPC/APPCTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/APPC/AxisEntry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/APPC/Entry.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/importer/CSVImporter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/importer/Importer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/importer/Importer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/importer/impl/CSVImporter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/importer/impl/CSVImporter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/repo/APPCRepo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/repo/APPCRepo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/APPCController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/restservice/APPCController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/appc/APPCEntryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/domain/appc/APPCEntryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/appc/APPCTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/domain/appc/APPCTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/appc/AxisEntryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/domain/appc/AxisEntryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/domain/APPC/APPCEntryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/domain/APPC/APPCTreeTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/at/snomapp/skeleton/domain/APPC/AxisEntryTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/APPCEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/APPCEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/APPCTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/APPCTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/AxisEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/AxisEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/Entry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/snomapp/skeleton/domain/appc/Entry.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -265,7 +246,7 @@
       <workItem from="1587990758073" duration="251000" />
       <workItem from="1589283959757" duration="328000" />
       <workItem from="1590408349216" duration="3473000" />
-      <workItem from="1590493095979" duration="878000" />
+      <workItem from="1590493095979" duration="1322000" />
     </task>
     <servers />
   </component>

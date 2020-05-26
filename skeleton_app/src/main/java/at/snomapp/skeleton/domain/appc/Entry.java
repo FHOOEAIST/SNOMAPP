@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.appc;
+package at.snomapp.skeleton.domain.appc;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.neo4j.ogm.annotation.GeneratedValue;
