@@ -1,8 +1,8 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.appc.APPCTree;
-import at.snomapp.skeleton.appc.AxisEntry;
-import at.snomapp.skeleton.appc.Entry;
+import at.snomapp.skeleton.domain.appc.APPCTree;
+import at.snomapp.skeleton.domain.appc.AxisEntry;
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;

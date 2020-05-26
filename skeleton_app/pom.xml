@@ -231,7 +231,7 @@
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0-SNAPSHOT</version>
-        </dependency>
+        </dependency>-->
 
         <!-- conflicts with neo4j Classloader  -->
         <!-- removed until bug is fixed (see trello board) -->

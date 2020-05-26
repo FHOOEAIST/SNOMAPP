@@ -1,9 +1,9 @@
 package at.snomapp.skeleton.importer.impl;
 
-import at.snomapp.skeleton.appc.APPCEntry;
-import at.snomapp.skeleton.appc.APPCTree;
-import at.snomapp.skeleton.appc.AxisEntry;
-import at.snomapp.skeleton.appc.Entry;
+import at.snomapp.skeleton.domain.appc.APPCEntry;
+import at.snomapp.skeleton.domain.appc.APPCTree;
+import at.snomapp.skeleton.domain.appc.AxisEntry;
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
 import org.springframework.stereotype.Component;
 

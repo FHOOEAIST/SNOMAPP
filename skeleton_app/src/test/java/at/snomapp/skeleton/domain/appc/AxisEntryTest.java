@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.appc;
+package at.snomapp.skeleton.domain.appc;
 
 
 import org.junit.jupiter.api.Test;
