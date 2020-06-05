@@ -1,23 +1,20 @@
-package at.snomapp.skeleton.testapplication.controller;
+package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.appc.APPCEntry;
+
 import at.snomapp.skeleton.repo.APPCRepo;
-import at.snomapp.skeleton.restservice.APPCController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
-public class ControllerView {
+public class ViewController {
 
     private APPCRepo repo;
 
     @Autowired
-    public ControllerView(APPCRepo readingrepo) {this.repo = readingrepo;}
+    public ViewController(APPCRepo readingrepo) {this.repo = readingrepo;}
 
     @GetMapping("/startPage")
     public String startPage(Model model){
