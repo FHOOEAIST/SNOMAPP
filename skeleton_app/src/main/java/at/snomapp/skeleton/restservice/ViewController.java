@@ -22,4 +22,11 @@ public class ViewController {
         model.addAttribute("roots", appcController.getTree().getRoots());
         return "startPage";
     }
+
+    @GetMapping("/index")
+    public String index(Model model){
+        APPCController appcController = new APPCController(repo);
+        model.addAttribute("roots", appcController.getTree().getRoots());
+        return "index";
+    }
 }

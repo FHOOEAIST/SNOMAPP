@@ -7,18 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="skeleton" />
-        <module name="skeleton_app" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="skeleton" target="11" />
-      <module name="skeleton_app" target="11" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="skeleton" options="-parameters" />
-      <module name="skeleton_app" options="-parameters" />
     </option>
   </component>
 </project>

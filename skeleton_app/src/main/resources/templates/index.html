@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SNOMAPP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="templates/css/bstreeview.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="templates/js/bstreeview.js"></script>
+
+</head>
+
+<body onload="startInterval()">
+
+    <div class="align-content-center w-50 h-50">
+        <img src="src/logo.png" class="img-fluid align-items-center">
+    </div>
+
+    <div class="container">
+        <div class="input-group pt-3">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
+        </div>
+    </div>
+
+    <script>
+        var timer;
+        var tree = true;
+
+        function startInterval(){
+            timer = setInterval(checkSearchbar, 100);
+        }
+
+        function checkSearchbar() {
+            if(document.getElementById("searchbar").value != ""){
+                search();
+                tree = false;
+            }
+            else{
+                clearInterval(timer);
+                if(tree != true){
+                    showTree();
+                    tree = true;
+                }
+                timer = setInterval(checkSearchbar, 100);
+            }
+        }
+
+        function search() {
+            document.getElementById("tabs").innerHTML = '<div class="container pt-3"> No search results. </div>';
+
+        }
+    </script>
+
+    <script>
+        $(function () {
+
+            var json = '[' +
+                '{' +
+                '"text": "Node 1",' +
+                '"nodes": [' +
+                '{' +
+                '"text": "Sub Node 1",' +
+                '"nodes": [' +
+                '{' +
+                '"text": "Sub Child Node 1"' +
+                '},' +
+                '{' +
+                '"text": "Sub Child Node 2"' +
+                '}' +
+                ']' +
+                '},' +
+                '{' +
+                '"text": "Sub Node 2"' +
+                '}' +
+                ']' +
+                '},' +
+                '{' +
+                '"text": "Node 2"' +
+                '},' +
+                '{' +
+                '"text": "Node 3"' +
+                '}' +
+                ']';
+
+
+            $('#treeModality').bstreeview({
+                data: json
+            });
+
+            $('#treeLaterality').bstreeview({
+                data: json
+            });
+
+            $('#treeProcedures').bstreeview({
+                data: json
+            });
+
+            $('#treeAnatomy').bstreeview({
+                data: json
+            });
+
+        });
+
+    </script>
+
+
+    <section id="tabs" class="project-tab">
+        <div class="container pt-3">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true">Modality</a>
+                            <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false">Laterality</a>
+                            <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false">Procedures</a>
+                            <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false">Anatomy</a>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-6 pt-5">
+                                            <div id="treeModality"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="lat" role="tabpanel" aria-labelledby="laterality">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-6 pt-5">
+                                            <div id="treeLaterality"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="ana" role="tabpanel" aria-labelledby="anatomy">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-6 pt-5">
+                                            <div id="treeAnatomy"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="procedures">
+                            <div class="container">
+                                <div class="content">
+                                    <div class="row">
+                                        <div class="col-md-6 pt-5">
+                                            <div id="treeProcedures"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</body>
+</html>
