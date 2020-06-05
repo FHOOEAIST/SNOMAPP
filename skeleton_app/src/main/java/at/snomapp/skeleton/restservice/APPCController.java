@@ -7,11 +7,13 @@ import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
+
 
 @RestController
 @RequestMapping("/APPC")
@@ -19,6 +21,7 @@ import java.util.Set;
 public class APPCController {
 
     private final APPCRepo repo;
+
 
     @Autowired
     public APPCController(APPCRepo repo) {
@@ -82,7 +85,7 @@ public class APPCController {
     // needs tweaking if multiple languages are supported
     @GetMapping
     // returns whole tree saved in Data bank
-    APPCTree getTree(){
+    public APPCTree getTree(){
         APPCTree tree = new APPCTree("en");
 
         Entry anatomy = repo.findByDisplayName("Anatomy");
@@ -121,5 +124,8 @@ public class APPCController {
             }
         }
     }
+
+
+
 
 }
