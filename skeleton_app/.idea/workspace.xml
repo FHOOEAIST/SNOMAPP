@@ -44,12 +44,19 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="skeleton_app/invalid/Spring" />
+      <facet id="skeleton_app/invalid/Web" />
+    </ignored-facets>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -61,6 +68,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -71,11 +79,11 @@
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/src" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -94,34 +102,37 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="at.snomapp.skeleton.repo" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\DenisePachler\Desktop\FH\Projekt\SNOMAPP\skeleton_app\src\main\resources\src" />
+      <recent name="C:\Users\DenisePachler\Desktop\FH\Projekt\SNOMAPP\skeleton_app\src\main\java\at\snomapp\skeleton" />
+      <recent name="C:\Users\DenisePachler\Desktop\FH\Projekt\SNOMAPP\skeleton_app\src\main\resources\templates" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DenisePachler\Desktop\FH\Projekt\SNOMAPP\skeleton_app\src\main\resources\templates\APPC" />
       <recent name="$PROJECT_DIR$/src/test/java/io/swagger/client/api" />
       <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client/model" />
       <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client/auth" />
       <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client/api" />
-      <recent name="$PROJECT_DIR$/src/main/java/io/swagger/client" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in skeleton_app">
-    <configuration name="All in skeleton_app" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.SkeletonApplication">
+    <configuration name="SkeletonApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.snomapp.skeleton.SkeletonApplication" />
       <module name="skeleton_app" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.snomapp.skeleton.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RefsetMembersApiTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="All in skeleton_app" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="skeleton_app" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.swagger.client.api.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="io.swagger.client.api" />
-      <option name="MAIN_CLASS_NAME" value="io.swagger.client.api.RefsetMembersApiTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -180,20 +191,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="JUnit.RefsetMembersApiTest" />
+      <item itemvalue="Application.SkeletonApplication" />
       <item itemvalue="JUnit.RelationshipsApiTest" />
       <item itemvalue="JUnit.ValidationApiTest" />
       <item itemvalue="JUnit.VersionApiTest" />
-      <item itemvalue="Spring Boot.SkeletonApplication" />
       <item itemvalue="JUnit.All in skeleton_app" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SkeletonApplication" />
         <item itemvalue="JUnit.All in skeleton_app" />
         <item itemvalue="JUnit.VersionApiTest" />
         <item itemvalue="JUnit.ValidationApiTest" />
         <item itemvalue="JUnit.RelationshipsApiTest" />
-        <item itemvalue="JUnit.RefsetMembersApiTest" />
       </list>
     </recent_temporary>
   </component>
@@ -247,6 +257,11 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/.." />
+    </ignored-roots>
+  </component>
   <component name="WindowStateProjectService">
     <state x="446" y="119" key="#Project_Structure" timestamp="1585575330202">
       <screen x="0" y="0" width="1707" height="920" />
@@ -265,10 +280,11 @@
     </state>
     <state x="-1179" y="192" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1587389769330" />
     <state x="659" y="170" key="#com.intellij.ide.util.MemberChooser/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585821630438" />
-    <state x="593" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587461607019">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="633" y="314" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1589808847423">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="-1129" y="301" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042203315" />
+    <state x="633" y="314" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1536.824@0.0.1536.824" timestamp="1589808847423" />
     <state x="703" y="350" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585577661639" />
     <state x="593" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.877@0.23.1440.877" timestamp="1587461607019" />
     <state x="534" y="189" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585570218403">
@@ -288,41 +304,46 @@
       <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state x="520" y="44" key="Diagram.Print.Preview.Dialog/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585575913507" />
-    <state x="634" y="187" key="FileChooserDialogImpl" timestamp="1585588817520">
-      <screen x="0" y="0" width="1707" height="920" />
+    <state x="570" y="24" width="762" height="627" key="FileChooserDialogImpl" timestamp="1590418652847">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="570" y="24" width="762" height="627" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1590418652847" />
     <state x="634" y="187" key="FileChooserDialogImpl/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585588817520" />
-    <state width="939" height="391" key="GridCell.Tab.0.bottom" timestamp="1589284302133">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1493" height="205" key="GridCell.Tab.0.bottom" timestamp="1590496616110">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.bottom/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323501" />
     <state width="939" height="391" key="GridCell.Tab.0.bottom/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302133" />
     <state width="699" height="313" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1587471650242" />
     <state width="1490" height="209" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
+    <state width="1493" height="205" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1590496616110" />
     <state width="1662" height="242" key="GridCell.Tab.0.bottom/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.0.center" timestamp="1589284302128">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1493" height="205" key="GridCell.Tab.0.center" timestamp="1590496616110">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.center/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323500" />
     <state width="939" height="391" key="GridCell.Tab.0.center/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302128" />
     <state width="699" height="313" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1587471650241" />
     <state width="1490" height="209" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
+    <state width="1493" height="205" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1590496616110" />
     <state width="1662" height="242" key="GridCell.Tab.0.center/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.0.left" timestamp="1589284302125">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1493" height="205" key="GridCell.Tab.0.left" timestamp="1590496616109">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.left/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323500" />
     <state width="939" height="391" key="GridCell.Tab.0.left/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302125" />
     <state width="699" height="313" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1587471650240" />
     <state width="1490" height="209" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
+    <state width="1493" height="205" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1590496616109" />
     <state width="1662" height="242" key="GridCell.Tab.0.left/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
-    <state width="939" height="391" key="GridCell.Tab.0.right" timestamp="1589284302131">
-      <screen x="-1920" y="-124" width="1920" height="1080" />
+    <state width="1493" height="205" key="GridCell.Tab.0.right" timestamp="1590496616110">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="939" height="271" key="GridCell.Tab.0.right/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042323501" />
     <state width="939" height="391" key="GridCell.Tab.0.right/-1920.-124.1920.1080/0.0.1440.900@-1920.-124.1920.1080" timestamp="1589284302131" />
     <state width="699" height="313" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1587471650242" />
     <state width="1490" height="209" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1587039785684" />
+    <state width="1493" height="205" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1590496616110" />
     <state width="1662" height="242" key="GridCell.Tab.0.right/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585581291286" />
     <state width="939" height="391" key="GridCell.Tab.1.bottom" timestamp="1589284302142">
       <screen x="-1920" y="-124" width="1920" height="1080" />
@@ -372,15 +393,17 @@
       <screen x="-1920" y="-101" width="1920" height="1057" />
     </state>
     <state x="-1422" y="89" key="Maven.ArtifactSearchDialog/-1920.-101.1920.1057/0.23.1440.877@-1920.-101.1920.1057" timestamp="1587042369007" />
-    <state x="299" y="68" key="SettingsEditor" timestamp="1589284018699">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="433" y="0" width="922" height="824" key="SettingsEditor" timestamp="1590584409264">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="299" y="68" key="SettingsEditor/-1920.-124.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1589284018699" />
+    <state x="433" y="0" width="922" height="824" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1590584409264" />
     <state x="355" y="70" key="SettingsEditor/0.0.1707.920/-1920.0.1920.1040@0.0.1707.920" timestamp="1585577760311" />
-    <state x="358" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1589283959690">
-      <screen x="0" y="0" width="1440" height="900" />
+    <state x="382" y="258" key="com.intellij.ide.util.TipDialog" timestamp="1591354577159">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="358" y="282" key="com.intellij.ide.util.TipDialog/-1920.-124.1920.1080/0.0.1440.900@0.0.1440.900" timestamp="1589283959690" />
+    <state x="382" y="258" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1591354577159" />
     <state x="625" y="179" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1585572972183">
       <screen x="0" y="0" width="1707" height="920" />
     </state>
@@ -423,5 +446,55 @@
         <watch expression="tree.modality" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="simpleUML.UMLToolWindowPlugin">
+    <General>
+      <option name="birdViewUpdateDelay" value="2000" />
+      <option name="defaultFileLocation" value="file://$PROJECT_DIR$/.." />
+    </General>
+    <Classdiagram>
+      <option name="diagramTitleFont" value="SansSerif,1,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="defaultFieldsExpanded" value="false" />
+      <option name="defaultContructorsExpanded" value="false" />
+      <option name="defaultMethodsExpanded" value="false" />
+      <option name="showParameters" value="true" />
+      <option name="showTooltip" value="true" />
+      <option name="showReturnValues" value="true" />
+      <option name="longModifier" value="true" />
+      <option name="implementsBehaviour" value="1" />
+      <option name="extendsBehaviour" value="1" />
+      <option name="compartmentBehaviour" value="1" />
+      <option name="interfaceBackgroundColor" value="-6494306" />
+      <option name="abstractClassBackgroundColor" value="-1580132" />
+      <option name="classBackgroundColor" value="-6508057" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="quickSourceLinkColor" value="-16776961" />
+      <option name="quickDiagramLinkColor" value="-8454144" />
+      <option name="drawDecorations" value="false" />
+      <option name="hideFieldList" value="" />
+      <option name="showFieldList" value="" />
+      <option name="hideConstructorList" value="" />
+      <option name="showConstructorList" value="" />
+      <option name="hideMethodList" value="" />
+      <option name="showMethodList" value="" />
+      <option name="minimumFigureSize" value="0,0" />
+    </Classdiagram>
+    <Dependencydiagram>
+      <option name="diagramTitleFont" value="SansSerif,1,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="packageNameCompressionLevel" value="0" />
+    </Dependencydiagram>
+    <Packagediagram>
+      <option name="diagramTitleFont" value="SansSerif,0,12" />
+      <option name="diagramFont" value="SansSerif,0,10" />
+      <option name="packageBackgroundColor" value="-4144960" />
+      <option name="diagramBackgroundColor" value="-1" />
+      <option name="useAntialiasedConnectors" value="true" />
+      <option name="packageNameCompressionLevel" value="2" />
+    </Packagediagram>
   </component>
 </project>

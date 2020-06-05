@@ -227,19 +227,20 @@
 <!--            <version>3.0.0-SNAPSHOT</version>-->
 <!--        </dependency>-->
 
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>3.0.0-SNAPSHOT</version>
-        </dependency>
+        <!--      <dependency>-->
+         <!--         <groupId>io.springfox</groupId>-->
+        <!--          <artifactId>springfox-swagger-ui</artifactId>-->
+        <!--          <version>3.0.0-SNAPSHOT</version>-->
+        <!--      </dependency>-->
 
-        <!-- conflicts with neo4j Classloader  -->
+              <!-- conflicts with neo4j Classloader  -->
         <!-- removed until bug is fixed (see trello board) -->
 <!--        <dependency>-->
 <!--            <groupId>io.springfox</groupId>-->
 <!--            <artifactId>springfox-data-rest</artifactId>-->
 <!--            <version>3.0.0-SNAPSHOT</version>-->
 <!--        </dependency>-->
+
         <!--Dependencies for Swagger Client -->
         <dependency>
             <groupId>io.swagger</groupId>

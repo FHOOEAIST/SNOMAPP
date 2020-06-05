@@ -91,7 +91,7 @@ public class CSVImporter implements Importer{
     public static void main(String[] args) throws Exception {
         APPCTree tree = new APPCTree("englisch");
         Importer importer = new CSVImporter();
-        tree = importer.importTree("src/main/resources/APPC_machinereadable.csv");
+        tree = importer.importTree("images/main/resources/APPC_machinereadable.csv");
         //FileWriter writer = new FileWriter("importer_test_output.txt");
         //writer.write(tree.toString());
         //writer.close();
