@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
@@ -57,17 +60,26 @@ public class APPCController {
     // imports an APPCtree from a given filename into the neo4j database.
     // clears data bank first on each call
     void importAPPC(@RequestBody String filename){
+
+        String decodedPath = null;
+        try {
+            decodedPath = URLDecoder.decode(filename, StandardCharsets.UTF_8.name());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         repo.deleteAll();
         Importer importer = new CSVImporter();
 
-        try {
-            APPCTree tree = importer.importTree(filename);
-            Iterable<Entry> roots = tree.getRoots();
-            for (Entry root : roots) {
-                repo.save(root);
+        if(decodedPath != null) {
+            try {
+                APPCTree tree = importer.importTree(decodedPath);
+                Iterable<Entry> roots = tree.getRoots();
+                for (Entry root : roots) {
+                    repo.save(root);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

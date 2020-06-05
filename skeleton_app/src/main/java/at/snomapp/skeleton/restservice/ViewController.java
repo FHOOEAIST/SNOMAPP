@@ -18,8 +18,8 @@ public class ViewController {
 
     @GetMapping("/startPage")
     public String startPage(Model model){
-        APPCController appcController = new APPCController(repo);
-        model.addAttribute("roots", appcController.getTree().getRoots());
+        //APPCController appcController = new APPCController(repo);
+        //model.addAttribute("roots", appcController.getTree().getRoots());
         return "startPage";
     }
 }

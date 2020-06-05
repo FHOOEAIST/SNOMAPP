@@ -11,34 +11,103 @@
 </head>
 <body onload="startInterval()">
 
-<div class="align-content-center w-50 h-50">
-    <img th:src="@{../images/logo.png}" />
+<div class="container pt-3">
+    <img alt="SNOMAPP" class="img-fluid" src="../static/images/logo.png" th:src="@{images/logo.png}" >
 </div>
 
 <div class="container">
     <div class="input-group pt-3">
-       <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
+    </div>
+</div>
+
+<div class="container">
+    <h4>Import APPC</h4>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="btnUpload">Import</span>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                   aria-describedby="inputGroupFileAddon01">
+            <label id="lblImport" class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
     </div>
 </div>
 
 <script>
+
+    $(document).ready( function() {
+        $('.custom-file :file').on('fileselect', function (event, numFiles, path) {
+
+            if (numFiles === 1) {
+                // only one file can be specified
+                // lavbel to display the filename
+                let display = $('#lblImport'),
+                    // the path
+                    log = path;
+
+                if (display.length) {
+                    display.text(log);
+                } else {
+                    if (log) alert(log);
+                }
+            }
+
+        });
+    });
+
+    $(document).on('change', '.custom-file :file', function() {
+        // when file is selected raise th file select event using the number of files selected and the filepath
+        let input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            path = input.val();
+        input.trigger('fileselect', [numFiles, path]);
+    });
+
+    $(document).on('click', '#btnUpload', function(){
+       let filenameLabel = $('#lblImport');
+
+       if(filenameLabel.text() === "Choose file" || filenameLabel.text() === ""){
+           // user has not yet tried to specify a file
+           alert("please select a file to import from");
+       }else{
+          // file specified
+           let filepath = encodeURI(filenameLabel.text());
+           $.ajax(
+               {
+                   method: "POST",
+                   url: "APPC/import",
+                   contentType: "text/plain",
+                   data: filepath,
+                   success: function(){
+                        $('#lblImport').style.color = "green";
+                        alert("yeet");
+                   },
+                   error: function (xhr) {
+                       alert("import failed: " + xhr.statusText);
+                   },
+               }
+            );
+       }
+    });
+
     var timer;
     var tree = true;
     var tabsHtml = document.getElementById("tabs").innerHTML;
 
-    function startInterval(){
+    function startInterval() {
         tabsHtml = document.getElementById("tabs").innerHTML;
         timer = setInterval(checkSearchbar, 100);
     }
 
     function checkSearchbar() {
-        if(document.getElementById("searchbar").value != ""){
+        if (document.getElementById("searchbar").value != "") {
             search();
             tree = false;
-        }
-        else{
+        } else {
             clearInterval(timer);
-            if(tree != true){
+            if (tree != true) {
                 showTree();
                 tree = true;
             }
@@ -59,19 +128,25 @@
 <section id="tabs" class="project-tab">
     <div class="container pt-3" id="showTree">
         <div class="row" th:each="root : ${roots}">
-            <div class="col-md-12" >
-                <nav >
-                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist" >
-                        <a class="nav-item nav-link" id="${root.displayName}" data-toggle="tab" href="${root.displayName}" aria-selected="false" aria-controls="${root.displayName}" role="tab"  th:utext="${root.displayName}">  </a>
+            <div class="col-md-12">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link" id="${root.displayName}" data-toggle="tab"
+                           href="${root.displayName}" aria-selected="false" aria-controls="${root.displayName}"
+                           role="tab" th:utext="${root.displayName}"> </a>
                     </div>
                 </nav>
             </div>
-            <div class="tab-content" id="nav-tabContent" >
-                <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality" >
-                    <div class="treeview" >
-                        <ul class="mb-1 pl-3 pb-2" th:each="appc : ${root.getChildren()}"> <!-- controller liste anlegen -->
-                            <li ><i class="fas fa-angle-right rotate"></i>
-                                <span><button class="btn btn-default" onclick="window.location.href='chooseSnomed.html'"><i class="far fa-envelope-open ic-w mx-1" th:utext="${appc.layerCode + ': ' + appc.displayName}"/></button></span>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
+                    <div class="treeview">
+                        <ul class="mb-1 pl-3 pb-2" th:each="appc : ${root.getChildren()}">
+                            <!-- controller liste anlegen -->
+                            <li><i class="fas fa-angle-right rotate"></i>
+                                <span><button class="btn btn-default"
+                                              onclick="window.location.href='chooseSnomed.html'"><i
+                                        class="far fa-envelope-open ic-w mx-1"
+                                        th:utext="${appc.layerCode + ': ' + appc.displayName}"/></button></span>
                             </li>
                         </ul>
                     </div>
