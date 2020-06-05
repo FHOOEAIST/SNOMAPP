@@ -1,52 +1,61 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.appc.APPCEntry;
-import at.snomapp.skeleton.appc.APPCTree;
-import at.snomapp.skeleton.appc.AxisEntry;
-import at.snomapp.skeleton.appc.Entry;
-import at.snomapp.skeleton.importer.CSVImporter;
+import at.snomapp.skeleton.domain.appc.APPCTree;
+import at.snomapp.skeleton.domain.appc.AxisEntry;
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
+import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 
 
 @RestController
 @RequestMapping("/APPC")
-// controller providing endpoints for importing and retreiving APPCData
+// controller providing endpoints for importing and retrieving APPCData
 public class APPCController {
 
-    private APPCRepo repo;
+    private final APPCRepo repo;
 
 
     @Autowired
-    public APPCController(APPCRepo readingrepo) {
-        this.repo = readingrepo;
+    public APPCController(APPCRepo repo) {
+        this.repo = repo;
     }
 
     @DeleteMapping
-    // flushes databank
+    // flushes data bank
     // to be used for debugging only
     // remove from release version
     void clearDB(){
         repo.deleteAll();
     }
 
+    @GetMapping("entry/{id}")
+    Entry readByIdentity(@PathVariable Long id){
+        Optional<Entry> byId = repo.findById(id);
+        return byId.orElse(null);
+    }
 
-    @GetMapping("/find")
-    // finds a node based on the displayName
-    Entry findEntry(@RequestParam String displayName){
-        System.out.println("Mep");
-        return repo.findByDisplayName(displayName);
+    @GetMapping("entry")
+    Iterable<Entry> readByDisplayName(@RequestParam(required = false) String displayName){
+        if(displayName == null){
+            // all entries
+            return repo.findAll();
+        }else{
+            // return exact name match
+            return repo.findAllByDisplayNameContainingIgnoreCase(displayName);
+        }
     }
 
     @PostMapping("/import")
     // imports an APPCtree from a given filename into the neo4j database.
-    // clears databank first one ach call
+    // clears data bank first on each call
     void importAPPC(@RequestBody String filename){
         repo.deleteAll();
         Importer importer = new CSVImporter();
@@ -62,7 +71,18 @@ public class APPCController {
         }
     }
 
-    // needs tweeking if multiple languages are supported
+    @GetMapping("roots")
+    // return just the tree roots
+    Iterable<Entry> readRoots(){
+        Entry anatomy = repo.findByDisplayName("Anatomy");
+        Entry laterality = repo.findByDisplayName("Laterality");
+        Entry modality = repo.findByDisplayName("Modality");
+        Entry procedure = repo.findByDisplayName("Procedures");
+
+        return Arrays.asList(anatomy, laterality, modality, procedure);
+    }
+
+    // needs tweaking if multiple languages are supported
     @GetMapping
     // returns whole tree saved in Data bank
     public APPCTree getTree(){
@@ -96,7 +116,7 @@ public class APPCController {
                     Set<Entry> grandchildren = fullchild.get().getChildren();
                     if (grandchildren != null) {
                         for (Entry grandchild : grandchildren) {
-                            child.addChild((APPCEntry) grandchild);
+                            child.addChild(grandchild);
                         }
                     }
                 }

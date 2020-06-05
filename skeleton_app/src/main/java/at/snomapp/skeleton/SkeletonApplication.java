@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 // ! conflicts with neo4j
 // ! removed until bug is fixed (see trello board)
 //@EnableSwagger2WebMvc
-@EntityScan(basePackages = "at.snomapp.skeleton.appc")
+@EntityScan(basePackages = "at.snomapp.skeleton.domain")
 @EnableNeo4jRepositories(basePackages = "at.snomapp.skeleton.repo")
 public class SkeletonApplication {
 

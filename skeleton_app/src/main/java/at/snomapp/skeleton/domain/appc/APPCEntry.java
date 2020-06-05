@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.appc;
+package at.snomapp.skeleton.domain.appc;
 
 import org.neo4j.ogm.annotation.NodeEntity;
 
@@ -15,6 +15,7 @@ public class APPCEntry extends Entry {
     @Override
     public String toString() {
         return "\n\t\t APPCEntry{" +
+                "code=" + code +
                 "layerCode=" + layerCode + ", " + super.getDisplayName()  + ", Children= " + super.children  + "}";
     }
 
