@@ -30,8 +30,8 @@
     };
     /**
      * BsTreeview Plugin constructor.
-     * @param {*} element 
-     * @param {*} options 
+     * @param {*} element
+     * @param {*} options
      */
     function bstreeView(element, options) {
         this.element = element;
@@ -70,7 +70,7 @@
         },
         /**
          * Initialize treeview Data.
-         * @param {*} node 
+         * @param {*} node
          */
         initData: function (node) {
             if (!node.nodes) return;
@@ -89,9 +89,9 @@
         },
         /**
          * Build treeview.
-         * @param {*} parentElement 
-         * @param {*} nodes 
-         * @param {*} depth 
+         * @param {*} parentElement
+         * @param {*} nodes
+         * @param {*} depth
          */
         build: function (parentElement, nodes, depth) {
             var _this = this;

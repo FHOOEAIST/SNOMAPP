@@ -1,0 +1,15 @@
+at.snomapp.skeleton
+at.snomapp.skeleton.domain.appc
+at.snomapp.skeleton.domain.conceptMapping
+at.snomapp.skeleton.domain.conceptMapping.impl
+at.snomapp.skeleton.importer
+at.snomapp.skeleton.importer.impl
+at.snomapp.skeleton.repo
+at.snomapp.skeleton.restservice
+at.snomapp.skeleton.testapplication
+at.snomapp.skeleton.testapplication.controller
+at.snomapp.skeleton.testapplication.repo
+io.swagger.client
+io.swagger.client.api
+io.swagger.client.auth
+io.swagger.client.model

@@ -1,0 +1,16 @@
+io\swagger\client\api\RefsetMembersApiTest.class
+io\swagger\client\api\CodeSystemsApiTest.class
+at\snomapp\skeleton\domain\appc\APPCTreeTest.class
+at\snomapp\skeleton\domain\conceptMapping\ConceptMapTest.class
+at\snomapp\skeleton\restservice\SnomedControllerTest.class
+at\snomapp\skeleton\domain\appc\AxisEntryTest.class
+io\swagger\client\api\RelationshipsApiTest.class
+io\swagger\client\api\MrcmXmlApiTest.class
+at\snomapp\skeleton\domain\appc\APPCEntryTest.class
+io\swagger\client\api\VersionApiTest.class
+io\swagger\client\api\ValidationApiTest.class
+at\snomapp\skeleton\SkeletonApplicationTests.class
+io\swagger\client\api\AuthoringStatsApiTest.class
+io\swagger\client\api\ConceptsApiTest.class
+io\swagger\client\api\DescriptionsApiTest.class
+io\swagger\client\api\BranchingApiTest.class
