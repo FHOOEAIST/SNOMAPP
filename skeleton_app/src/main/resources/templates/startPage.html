@@ -25,7 +25,7 @@
     <h4>Import APPC</h4>
     <div class="input-group">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="btnUpload">Import</span>
+            <button class="btn btn-primary" type="button" id="btnUpload">Import</button>
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile01"
@@ -52,6 +52,8 @@
                 } else {
                     if (log) alert(log);
                 }
+            } else {
+                alert("only one file may be specified as an import source");
             }
 
         });
@@ -66,6 +68,7 @@
     });
 
     $(document).on('click', '#btnUpload', function(){
+        $('#btnUpload').addClass('btn-light');
        let filenameLabel = $('#lblImport');
 
        if(filenameLabel.text() === "Choose file" || filenameLabel.text() === ""){
@@ -79,13 +82,23 @@
                    method: "POST",
                    url: "APPC/import",
                    contentType: "text/plain",
+                   dataType: "json",
                    data: filepath,
-                   success: function(){
-                        $('#lblImport').style.color = "green";
-                        alert("yeet");
+                   success: function(response, textStatus, xhr){
+                       if(response.worked){
+                           $('#btnUpload').removeClass('btn-light').addClass('btn-success');
+                       }else{
+                           alert("import failed: " + response.errorMessage);
+                           $('#btnUpload').removeClass('btn-light')
+                               .removeClass('btn-success')
+                               .addClass('btn-primary');
+                       }
                    },
                    error: function (xhr) {
                        alert("import failed: " + xhr.statusText);
+                       $('#btnUpload').removeClass('btn-light')
+                           .removeClass('btn-success')
+                           .addClass('btn-primary');
                    },
                }
             );
