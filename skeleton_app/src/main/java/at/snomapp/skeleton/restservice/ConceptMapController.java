@@ -47,7 +47,19 @@ public class ConceptMapController {
         repo.save(map);
     }
 
-
+    @GetMapping
+    Iterable<ConceptMap> readByAPPC(@RequestParam(required = false) String code,
+                                    @RequestParam(required = false) String axis){
+        if(code == null && axis == null) {
+            return repo.findAll();
+        }else if(code != null && axis == null) {
+            return repo.findAllByAPPCCode(code);
+        }else if (code == null){
+            return repo.findAllByAPPCAxis(axis);
+        }else {
+            return repo.findAllByAPPCAxisAndCode(axis, code);
+        }
+    }
 
 
 }
