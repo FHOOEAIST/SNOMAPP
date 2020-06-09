@@ -17,14 +17,17 @@
 
 <div class="container">
     <div class="input-group pt-3">
-       <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="" >
+        <button onclick="search()" value="search">Suchen</button>
     </div>
 </div>
+
+
 
 <script>
     var timer;
     var tree = true;
-    var tabsHtml = document.getElementById("tabs").innerHTML;
+    //var tabsHtml = document.getElementById("tabs").innerHTML;
 
     function startInterval(){
         tabsHtml = document.getElementById("tabs").innerHTML;
@@ -33,7 +36,7 @@
 
     function checkSearchbar() {
         if(document.getElementById("searchbar").value != ""){
-            search();
+            //search();
             tree = false;
         }
         else{
@@ -51,9 +54,31 @@
     }
 
     function search() {
+        //clearInterval(timer);
+
         var searchText = document.getElementById("searchbar").value;
-        document.getElementById("tabs").innerHTML = '<div class="container pt-3">' + searchText + '</div>';
+
+        searchForEntries(searchText);
+        sleepFunc();
+
+
+
     }
+
+    async function sleepFunc() {
+        await sleep(1000*10);
+    }
+
+    const searchForEntries = async(searchText) => {
+        console.log("Started");
+        const response = await fetch("APPC/entry?displayName=" + searchText);
+        const json = await response.json();
+        sleepFunc();
+        var parsedJson = JSON.stringify(json);
+        //console.log(json);
+        document.getElementById("tabs").innerHTML = parsedJson;
+    }
+
 
 </script>
 
