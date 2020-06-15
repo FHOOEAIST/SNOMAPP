@@ -10,9 +10,12 @@ import at.snomapp.skeleton.repo.ConceptMapRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ConceptMap")
 public class ConceptMapController {
+
     private ConceptMapRepo repo;
 
     @Autowired
@@ -47,7 +50,42 @@ public class ConceptMapController {
         repo.save(map);
     }
 
-
-
+    @PostMapping("/add")
+    void addMapping(String axis, String appc, String snmomed, String equivalence){
+        List<ConceptMap> maps = (List<ConceptMap>) repo.findAll();
+        ConceptMap map = maps!=null?maps.get(0):new ConceptMapImpl("APPC","SNOMED CT");
+        APPCElement appcElement = new APPCElement(appc,axis);
+        SNOMEDElement snomedElement = new SNOMEDElement(snmomed);
+        switch (equivalence.toUpperCase()){
+            case "EQUIVALENT":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.EQUIVALENT);
+                break;
+            case "WIDER":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.WIDER);
+                break;
+            case "EQUAL":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.EQUAL);
+                break;
+            case "SUBSUMES":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.SUBSUMES);
+                break;
+            case "NARROWER":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.NARROWER);
+                break;
+            case "SPECIALIZES":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.SPECIALIZES);
+                break;
+            case "INEXACT":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.INEXACT);
+                break;
+            case "UNMATCH":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.UNMATCH);
+                break;
+            case "DISJOINT":
+                map.addMapping(appcElement,snomedElement,EquivalenceType.DISJOINT);
+                break;
+        }
+        repo.save(map);
+    }
 
 }

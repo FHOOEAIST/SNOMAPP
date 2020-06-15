@@ -1,0 +1,37 @@
+.list-group{
+    max-height: 425px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    overflow:scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-hover{
+    width: 100%;
+}
+
+.fa-times-circle{
+    margin-top: 8px;
+    margin-left: 5px;
+    color: red;
+}
+
+.fa-check-circle{
+    margin-top: 8px;
+    margin-left: 5px;
+    color: green;
+}
+
+.btn-info{
+    background-color: #70a8e3;
+    border-color: #70a8e3;
+}
+
+.btn-primary{
+    background-color: #70a8e3;
+    border-color: #70a8e3;
+}
+
+.badge-info{
+    background-color: #70a8e3;
+}
