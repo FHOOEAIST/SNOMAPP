@@ -1,7 +1,10 @@
 package at.snomapp.skeleton.domain.appc;
 
-import java.util.HashSet;
-import java.util.Set;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import netscape.javascript.JSObject;
+
+import java.util.*;
 
 public class APPCTree  {
     private final String language;
@@ -69,5 +72,67 @@ public class APPCTree  {
         set.add(anatomy);
 
         return set;
+    }
+
+    public AxisEntry getAnatomy() {
+        return anatomy;
+    }
+
+    public AxisEntry getModality() {
+        return modality;
+    }
+
+    public AxisEntry getProcedure (){
+        return procedure;
+    }
+
+    public AxisEntry getLaterality(){
+        return laterality;
+    }
+
+
+
+    //build json tree out of entry
+    public JSONObject entryToJsonString (Entry entry){
+
+        if (entry == null) return null;
+        LinkedHashMap<String, Object> map = new LinkedHashMap();
+
+        JSONArray array = new JSONArray();
+        for (Entry children : entry.getChildren()) {
+            JSONObject subChildren = entryToJsonString(children);
+            if (subChildren != null) {
+                array.add(subChildren);
+            }
+        }
+        map.put("text", entry.getDisplayName());
+        map.put("nodes", array);
+        return new JSONObject(map);
+    }
+
+    //build json tree out of axis
+    private JSONArray axisToJsonString(Set<Entry> axis){
+        JSONArray jsonArray = new JSONArray();
+        for (Entry entry : axis){
+            jsonArray.add(entryToJsonString(entry));
+        }
+        return jsonArray;
+    }
+
+
+    public String getAnatomyJsonString (APPCTree appcTree) {
+        return axisToJsonString(appcTree.getAnatomy().getChildren()).toJSONString();
+    }
+
+    public String getModalityJsonString (APPCTree appcTree) {
+        return axisToJsonString(appcTree.getModality().getChildren()).toJSONString();
+    }
+
+    public String getProcedureJsonString (APPCTree appcTree) {
+        return axisToJsonString(appcTree.getProcedure().getChildren()).toJSONString();
+    }
+
+    public String getLateralityJsonString (APPCTree appcTree) {
+        return axisToJsonString(appcTree.getLaterality().getChildren()).toJSONString();
     }
 }

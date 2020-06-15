@@ -1,25 +1,10 @@
 package at.snomapp.skeleton.domain.appc;
 
-import org.junit.jupiter.api.Test;
+public class TestJsonTree {
 
-import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+    public static void main(String[] args) {
 
-class APPCTreeTest {
-
-    @Test
-    void getLanguageReturnsSetLanguage() {
-        String language = "DE";
-        APPCTree t0 = new APPCTree(language);
-
-        String result = t0.getLanguage();
-
-        assertEquals("DE", result);
-    }
-
-    @Test
-    void SettersSetAxisAndSearchReturnsExactMatches() {
         APPCTree t0 = new APPCTree("DE");
 
         AxisEntry modality = new AxisEntry("modality");
@@ -33,6 +18,7 @@ class APPCTreeTest {
         e4.addChild(e6);
         e2.addChild(e4);
         e1.addChild(e3);
+        e6.addChild(e3);
         modality.addChild(e1);
         modality.addChild(e2);
 
@@ -54,17 +40,19 @@ class APPCTreeTest {
         t0.setLaterality(laterality);
 
 
+        System.out.println("------Test Modality--------- ");
+        System.out.println(t0.getModalityJsonString(t0));
 
-        Set<Entry> result = t0.search("match");
+        System.out.println("------Test Laterality--------- ");
+        System.out.println(t0.getLateralityJsonString(t0));
 
-        assertTrue(result.contains(e1));
-        assertTrue(result.contains(e3));
-        assertTrue(result.contains(e4));
-        assertTrue(result.contains(e6));
-        assertTrue(result.contains(e7));
-        assertTrue(result.contains(e9));
-        assertFalse(result.contains(e2));
-        assertFalse(result.contains(e5));
-        assertFalse(result.contains(e8));
+        System.out.println("------Test Anatomy--------- ");
+        System.out.println(t0.getAnatomyJsonString(t0));
+
+        System.out.println("------Test Procedure --------- ");
+        System.out.println(t0.getProcedureJsonString(t0));
+
+
     }
+
 }
