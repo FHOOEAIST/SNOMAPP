@@ -1,12 +1,12 @@
 package at.snomapp.skeleton.restservice;
 
 import at.snomapp.skeleton.domain.conceptMapping.ConceptMap;
-import at.snomapp.skeleton.domain.conceptMapping.Element;
 import at.snomapp.skeleton.domain.conceptMapping.EquivalenceType;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
+import at.snomapp.skeleton.repo.MappingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +15,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/ConceptMap")
 public class ConceptMapController {
-
-    private ConceptMapRepo repo;
+    private final ConceptMapRepo conceptMapRepo;
+    private final MappingRepo mappingRepo;
 
     @Autowired
-    public ConceptMapController(ConceptMapRepo readingrepo) {
-        this.repo = readingrepo;
+    public ConceptMapController(ConceptMapRepo readingrepo, MappingRepo mappingRepo) {
+        this.conceptMapRepo = readingrepo;
+        this.mappingRepo = mappingRepo;
     }
 
     @DeleteMapping
@@ -28,12 +29,12 @@ public class ConceptMapController {
         // to be used for debugging only
         // remove from release version
     void clearDB(){
-        repo.deleteAll();
+        conceptMapRepo.deleteAll();
     }
 
     @PostMapping("/test")
     void importAPPC(){
-        repo.deleteAll();
+        conceptMapRepo.deleteAll();
         String appc = "1-2-1-2"; //APPC for eye
         String snomed = "81745001"; //SNOMED: Structure of eye proper
         String snomed2 = "371398005"; //SNOMED for the eye "region"
@@ -47,45 +48,37 @@ public class ConceptMapController {
         map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
         map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
         map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);
-        repo.save(map);
+        conceptMapRepo.save(map);
     }
 
-    @PostMapping("/add")
-    void addMapping(String axis, String appc, String snmomed, String equivalence){
-        List<ConceptMap> maps = (List<ConceptMap>) repo.findAll();
-        ConceptMap map = maps!=null?maps.get(0):new ConceptMapImpl("APPC","SNOMED CT");
-        APPCElement appcElement = new APPCElement(appc,axis);
-        SNOMEDElement snomedElement = new SNOMEDElement(snmomed);
-        switch (equivalence.toUpperCase()){
-            case "EQUIVALENT":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.EQUIVALENT);
-                break;
-            case "WIDER":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.WIDER);
-                break;
-            case "EQUAL":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.EQUAL);
-                break;
-            case "SUBSUMES":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.SUBSUMES);
-                break;
-            case "NARROWER":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.NARROWER);
-                break;
-            case "SPECIALIZES":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.SPECIALIZES);
-                break;
-            case "INEXACT":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.INEXACT);
-                break;
-            case "UNMATCH":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.UNMATCH);
-                break;
-            case "DISJOINT":
-                map.addMapping(appcElement,snomedElement,EquivalenceType.DISJOINT);
-                break;
+    // for searching for map-elements
+    @GetMapping
+    Iterable<ConceptMap> readByAPPC(@RequestParam(required = false) String code,
+                                    @RequestParam(required = false) String axis){
+        if(code == null && axis == null) {
+            return conceptMapRepo.findAll();
+        }else if(code != null && axis == null) {
+            return conceptMapRepo.findAllByAPPCCode(code);
+        }else if (code == null){
+            return conceptMapRepo.findAllByAPPCAxis(axis);
+        }else {
+            return conceptMapRepo.findAllByAPPCAxisAndCode(axis, code);
         }
-        repo.save(map);
+    }
+
+    // for searching for mapping information (elements + equivalence)
+    @GetMapping("mapping")
+    APPCElement readMappingByAPPC(@RequestParam(required = false) String code,
+                                  @RequestParam(required = false) String axis){
+        if(code == null && axis == null) {
+            return null;
+        }else if(code != null && axis == null) {
+           return mappingRepo.findByCode(code);
+        }else if (code == null){
+            return mappingRepo.findByAxis(axis);
+        }else {
+            return mappingRepo.findByAxisAndCode(axis, code);
+        }
     }
 
 }

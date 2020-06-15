@@ -7,9 +7,14 @@ import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
@@ -53,21 +58,60 @@ public class APPCController {
         }
     }
 
-    @PostMapping("/import")
-    // imports an APPCtree from a given filename into the neo4j database.
-    // clears data bank first on each call
-    void importAPPC(@RequestBody String filename){
-        repo.deleteAll();
-        Importer importer = new CSVImporter();
+    private static class ImportResults{
+        private boolean worked;
+        private String errorMessage;
 
+        public ImportResults(boolean worked, String errorMessage) {
+            this.worked = worked;
+            this.errorMessage = errorMessage;
+        }
+
+        public boolean isWorked() {
+            return worked;
+        }
+
+        public void setWorked(boolean worked) {
+            this.worked = worked;
+        }
+
+        public String getErrorMessage() {
+            return errorMessage;
+        }
+
+        public void setErrorMessage(String errorMessage) {
+            this.errorMessage = errorMessage;
+        }
+    }
+
+    @PostMapping("/import")
+    @ResponseStatus(HttpStatus.CREATED)
+    // imports an APPCtree from a given filename into the neo4j database.
+    // clears data bank if valid file given
+    ImportResults importAPPC(@RequestBody String filename){
         try {
-            APPCTree tree = importer.importTree(filename);
-            Iterable<Entry> roots = tree.getRoots();
-            for (Entry root : roots) {
-                repo.save(root);
+            String decodedPath = URLDecoder.decode(filename, StandardCharsets.UTF_8.name());
+            File importFile = new File(decodedPath);
+            if(importFile.isFile()){
+                // file found on device
+                repo.deleteAll();
+                Importer importer = new CSVImporter();
+                APPCTree tree = importer.importTree(decodedPath);
+                Iterable<Entry> roots = tree.getRoots();
+                for (Entry root : roots) {
+                    repo.save(root);
+                }
+
+                return new ImportResults(true, null);
+            }else{
+                return new ImportResults(false, "File not found");
             }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new ImportResults(false, "Encoding of given filepath invalid");
         } catch (Exception e) {
             e.printStackTrace();
+            return new ImportResults(false, "Something went wrong during import, DB cleared");
         }
     }
 

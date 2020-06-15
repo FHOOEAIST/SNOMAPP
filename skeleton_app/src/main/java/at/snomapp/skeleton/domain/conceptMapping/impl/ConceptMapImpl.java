@@ -45,6 +45,10 @@ public class ConceptMapImpl implements ConceptMap {
         return status;
     }
 
+    public Set<APPCElement> getElements() {
+        return elements;
+    }
+
     @Override
     public void printMap(String filename) throws IOException {
         FileWriter writer = new FileWriter(new File(filename));
