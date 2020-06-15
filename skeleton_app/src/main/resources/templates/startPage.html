@@ -17,8 +17,8 @@
 
 <div class="container">
     <div class="input-group pt-3">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="" >
-        <button onclick="search()" value="search">Suchen</button>
+        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
+        <button class="btn btn-primary" onclick="search()" value="search">Suchen</button>
     </div>
 </div>
 
@@ -28,6 +28,12 @@
     var timer;
     var tree = true;
     //var tabsHtml = document.getElementById("tabs").innerHTML;
+
+    $("#searchbar").keyup(function(event){
+        if(event.keyCode === 13){
+            search();
+        }
+    });
 
     function startInterval(){
         tabsHtml = document.getElementById("tabs").innerHTML;
