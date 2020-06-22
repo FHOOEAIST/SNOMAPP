@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SNOMAPP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/list.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+</head>
+<body onload="startInterval()">
+
+    <!-- HeaderImage -->
+<div class="container pt-3" style="background-color: lightpink">
+    <img alt="SNOMAPP" class="img-fluid" src="../static/images/logo.png" th:src="@{images/logo.png}" >
+</div>
+
+
+    <!-- Content including Result List -->
+    <div class="container p-3" style="background-color: lavender">
+        TODO: Number of Results
+        <!-- Button to Open the Modal -->
+        <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings">
+            Open Mappings
+        </button>
+        <ul class="list-group">
+            <li class="list-group-item">Displayname of SNOMED Code 1
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" ><span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">12</span></span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 2
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">5</span>
+                </span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 3
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">3</span>
+                </span>
+            </li>
+
+            <li class="list-group-item">Displayname of SNOMED Code 1
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" ><span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">12</span></span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 2
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">5</span>
+                </span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 3
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">3</span>
+                </span>
+            <li class="list-group-item">Displayname of SNOMED Code 1
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" ><span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">12</span></span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 2
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">5</span>
+                </span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 3
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">3</span>
+                </span>
+            </li><li class="list-group-item">Displayname of SNOMED Code 1
+            <!--mapping exists YES / NO-->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped">
+                    <i class="fas fa-check-circle"></i>
+                </span>
+            <!--Info-->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+            <!-- Plus -->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+            <!--Ranking-->
+            <span class="content float-right pr-3" ><span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">12</span></span>
+        </li>
+            <li class="list-group-item">Displayname of SNOMED Code 2
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">5</span>
+                </span>
+            </li>
+            <li class="list-group-item">Displayname of SNOMED Code 3
+                <!--mapping exists YES / NO-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="not mapped">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+                <!--Info-->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="Description">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!-- Plus -->
+                <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--Ranking-->
+                <span class="content float-right pr-3" >
+                    <span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints">3</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- Buttons bottom right -->
+    <div class="container fixed-bottom p-3" style="background-color: antiquewhite">
+        <div class="float-right">
+            <button type="button" class="btn btn-primary" >Back to Startpage</button>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="description">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Description</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <h5>Code:</h5> ...
+                    <br>
+                    <h5>Alias:</h5> ...
+                    <br>
+                    <h5>Descriprion:</h5>
+                    <br>.....
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addMapping">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Mapping</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                        APPC: XXXXXXXX
+                    </br>
+                        SNOMED: YYYYYYYY
+
+                    <!--Dropdown-->
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            Select Mapping
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#">EQUIVALENT</a>
+                            <a class="dropdown-item" href="#">EQUAL</a>
+                            <a class="dropdown-item" href="#">WIDER</a>
+                            <a class="dropdown-item" href="#">SUBSUMES</a>
+                            <a class="dropdown-item" href="#">NARROWER</a>
+                            <a class="dropdown-item" href="#">SPECIALIZES</a>
+                            <a class="dropdown-item" href="#">INEXACT</a>
+                            <a class="dropdown-item" href="#">UNMATCH</a>
+                            <a class="dropdown-item" href="#">DISJOINT</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <!--ToDo save mapping-->
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- The existing mappings Modal -->
+    <div class="modal" id="mappings">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Mappings for --APPC-- </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    Displayname: XXXXXXXX
+                    <table class="table-hover table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">SNOMED Code</th>
+                            <th scope="col">Displayname</th>
+                            <th scope="col">Mapping</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                10234596934
+                            </td>
+                            <td>Example</td>
+                            <td>WIDER</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                10234596934
+                            </td>
+                            <td>Example</td>
+                            <td>WIDER</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                10234596934
+                            </td>
+                            <td>Example</td>
+                            <td>WIDER</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //Datatoggle function
+        $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
+
+</body>
+</html>
