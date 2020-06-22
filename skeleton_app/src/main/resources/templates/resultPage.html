@@ -34,12 +34,12 @@
         <li class="list-group-item">
             <span th:text="${result.getTerm()}">Result</span>
             <!--mapping exists YES
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings}.contains(${result.getTerm()})">
+            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(${result.getConcept().getConceptId()})}">
                     <i class="fas fa-check-circle"></i>
-                </span>-->
+            </span>-->
             <!--mapping exists NO-->
             <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="true">
-                    <i class="fas fa-check-circle"></i>
+                    <i class="fas fa-times-circle"></i>
                 </span>
 
             <!--Info-->
@@ -137,8 +137,6 @@
                 </div>
             </div>
         </div>
-
-
     </ul>
     </div>
 </div>
@@ -147,7 +145,7 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
     <div class="float-right" >
-        <button type="button" class="btn btn-primary" >Back to Startpage</button>
+        <a href="startPage"><button type="button" class="btn btn-primary" >Back to Startpage</button></a>
     </div>
 </div>
 
@@ -176,25 +174,10 @@
                     </thead>
                     <tbody th:each="mapping : ${mappings}">
                     <tr >
-                        <td>
-                            10234596934
+                        <td th:text="${mapping.getDestination().getCode()}">Code
                         </td>
                         <td>Example</td>
-                        <td>WIDER</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            10234596934
-                        </td>
-                        <td>Example</td>
-                        <td>WIDER</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            10234596934
-                        </td>
-                        <td>Example</td>
-                        <td>WIDER</td>
+                        <td th:text="${mapping.getEquivalence().toString()}">equivalence</td>
                     </tr>
                     </tbody>
                 </table>
@@ -202,7 +185,8 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+
             </div>
 
         </div>

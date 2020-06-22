@@ -6,6 +6,7 @@ import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
+import at.snomapp.skeleton.repo.MappingRepo;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class ViewController {
 
     private APPCRepo repo;
     private ConceptMapRepo Conceptmaprepo;
+    private MappingRepo mappingRepo;
 
     @Autowired
     public ViewController(APPCRepo readingrepo) {this.repo = readingrepo;}
@@ -35,7 +37,7 @@ public class ViewController {
 
     @GetMapping("/resultPage")
     public String resultPage(Model model, APPCEntry element){
-        ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo);
+        ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
         List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye");
         List<EquivalenceImpl> mappings = new ArrayList<>();
