@@ -1,15 +1,15 @@
 package at.snomapp.skeleton.domain.conceptMapping;
 
 public enum EquivalenceType {
-    EQUIVALENT("equivalent"),
-    EQUAL("equal"),
-    WIDER("wider"),
-    SUBSUMES("subsumes"),
-    NARROWER("narrower"),
-    SPECIALIZES("specializes"),
-    INEXACT("inexact"),
-    UNMATCH("unmatch"),
-    DISJOINT("disjoint");
+    EQUIVALENT("EQUIVALENT"),
+    EQUAL("EQUAL"),
+    WIDER("WIDER"),
+    SUBSUMES("SUBSUMES"),
+    NARROWER("NARROWER"),
+    SPECIALIZES("SPECIALIZES"),
+    INEXACT("INEXACT"),
+    UNMATCH("UNMATCH"),
+    DISJOINT("DISJOINT");
 
     private final String equivalenceType;
 
