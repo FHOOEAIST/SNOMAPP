@@ -61,6 +61,17 @@ public class APPCController {
             return repo.findAllByDisplayNameContainingIgnoreCase(displayName);
         }
     }
+    
+    @GetMapping("/getEntriesByName")
+    public String entryToJsonString (@RequestParam(required = false) String displayName){
+        Iterable<Entry> entries = readByDisplayName(displayName);
+        APPCTree tree = new APPCTree(null);
+        JSONArray jsonArray = new JSONArray();
+        for(Entry entry : entries){
+            jsonArray.add(tree.entryToJsonString(entry));
+        }
+        return jsonArray.toJSONString();
+    }
 
     private static class ImportResults{
         private boolean worked;
