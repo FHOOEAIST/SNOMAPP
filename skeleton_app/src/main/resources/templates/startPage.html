@@ -21,6 +21,11 @@
     <script type="text/javascript" src="/js/bstreeview.js"></script>
 
 </head>
+
+<div class="container pt-3">
+    <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}">
+</div>
+
 <body onload="startInterval()">
 <div class="container">
     <div class="input-group pt-3">
@@ -117,6 +122,13 @@
     var timer;
     var tree = true;
     //var tabsHtml = document.getElementById("tabs").innerHTML;
+
+
+    $("#searchbar").keyup(function(event){
+        if(event.keyCode === 13){
+            search();
+        }
+    });
 
     function startInterval() {
         tabsHtml = document.getElementById("tabs").innerHTML;
