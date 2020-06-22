@@ -7,7 +7,6 @@ import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;

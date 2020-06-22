@@ -1,12 +1,13 @@
 package at.snomapp.skeleton.domain.appc;
 
-public class TestJsonTree {
+public class JsonTreeTest {
 
 
     public static void main(String[] args) {
 
         APPCTree t0 = new APPCTree("DE");
 
+        //modality
         AxisEntry modality = new AxisEntry("modality");
         APPCEntry e1 = new APPCEntry("match", "1");
         APPCEntry e2 = new APPCEntry("missmatch", "2");
@@ -22,35 +23,41 @@ public class TestJsonTree {
         modality.addChild(e1);
         modality.addChild(e2);
 
+        //laterality
         AxisEntry laterality = new AxisEntry("laterality");
         APPCEntry e7 = new APPCEntry("match", "1");
         APPCEntry e8 = new APPCEntry("missmatch", "1-1");
         e7.addChild(e8);
         laterality.addChild(e7);
 
+        //anatomy
         AxisEntry anatomy = new AxisEntry("Anatomy");
         APPCEntry e9 = new APPCEntry("match", "1");
         anatomy.addChild(e9);
 
+        //procedure
         AxisEntry procedure = new AxisEntry("Procedure");
 
+
+        //put all axis to tree
         t0.setModality(modality);
         t0.setAnatomy(anatomy);
         t0.setProcedure(procedure);
         t0.setLaterality(laterality);
 
 
+        //print json string of all axis
         System.out.println("------Test Modality--------- ");
-        System.out.println(t0.getModalityJsonString(t0));
+        System.out.println(t0.getModalityJsonString());
 
         System.out.println("------Test Laterality--------- ");
-        System.out.println(t0.getLateralityJsonString(t0));
+        System.out.println(t0.getLateralityJsonString());
 
         System.out.println("------Test Anatomy--------- ");
-        System.out.println(t0.getAnatomyJsonString(t0));
+        System.out.println(t0.getAnatomyJsonString());
 
         System.out.println("------Test Procedure --------- ");
-        System.out.println(t0.getProcedureJsonString(t0));
+        System.out.println(t0.getProcedureJsonString());
 
 
     }

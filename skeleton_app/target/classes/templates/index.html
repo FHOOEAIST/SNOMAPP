@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>SNOMAPP</title>
     <meta charset="UTF-8">
@@ -36,57 +35,30 @@
 </div>
 
 
-
-
-
-<script>
+<script th:inline="javascript">
     $(function () {
 
-        //test data
-        var json = '[' +
-            '{' +
-            '"text": "Node 1",' +
-            '"nodes": [' +
-            '{' +
-            '"text": "Sub Node 1",' +
-            '"nodes": [' +
-            '{' +
-            '"text": "Sub Child Node 1"' +
-            '},' +
-            '{' +
-            '"text": "Sub Child Node 2"' +
-            '}' +
-            ']' +
-            '},' +
-            '{' +
-            '"text": "Sub Node 2"' +
-            '}' +
-            ']' +
-            '},' +
-            '{' +
-            '"text": "Node 2"' +
-            '},' +
-            '{' +
-            '"text": "Node 3"' +
-            '}' +
-            ']';
-
+        //get json String from model
+        var anatomy = [[${anatomy}]];
+        var laterality = [[${laterality}]];
+        var modality = [[${modality}]];
+        var procedure = [[${procedure}]];
 
         //create trees out of json data
         $('#treeModality').bstreeview({
-            data: json
+            data: anatomy
         });
 
         $('#treeLaterality').bstreeview({
-            data: json
+            data: laterality
         });
 
         $('#treeProcedures').bstreeview({
-            data: json
+            data: modality
         });
 
         $('#treeAnatomy').bstreeview({
-            data: json
+            data: procedure
         });
 
     });
@@ -161,7 +133,8 @@
     </div>
 </section>
 
-
+<br>
+<br>
 
 
 </body>

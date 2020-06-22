@@ -94,25 +94,37 @@ public class APPCTree  {
 
     //build json tree out of entry
     public JSONObject entryToJsonString (Entry entry){
+        if (entry == null) {
+            return null;
+        }
 
-        if (entry == null) return null;
         LinkedHashMap<String, Object> map = new LinkedHashMap();
 
+        //array which contains all children of a node
         JSONArray array = new JSONArray();
-        for (Entry children : entry.getChildren()) {
-            JSONObject subChildren = entryToJsonString(children);
-            if (subChildren != null) {
-                array.add(subChildren);
+        if (entry.getChildren() != null) {
+            for (Entry children : entry.getChildren()) {
+                JSONObject subChildren = entryToJsonString(children);
+                if (subChildren != null) {
+                    array.add(subChildren);
+                }
             }
         }
+
+        //text element in each node
         map.put("text", entry.getDisplayName());
-        map.put("nodes", array);
+
+        //nodes element in nodes which have children
+        if (array.size() > 0){
+            map.put("nodes", array);
+        }
         return new JSONObject(map);
     }
 
     //build json tree out of axis
     private JSONArray axisToJsonString(Set<Entry> axis){
         JSONArray jsonArray = new JSONArray();
+        //iterate over all axis and build json tree for all axis
         for (Entry entry : axis){
             jsonArray.add(entryToJsonString(entry));
         }
@@ -120,19 +132,19 @@ public class APPCTree  {
     }
 
 
-    public String getAnatomyJsonString (APPCTree appcTree) {
-        return axisToJsonString(appcTree.getAnatomy().getChildren()).toJSONString();
+    public String getAnatomyJsonString () {
+        return axisToJsonString(this.getAnatomy().getChildren()).toJSONString();
     }
 
-    public String getModalityJsonString (APPCTree appcTree) {
-        return axisToJsonString(appcTree.getModality().getChildren()).toJSONString();
+    public String getModalityJsonString () {
+        return axisToJsonString(this.getModality().getChildren()).toJSONString();
     }
 
-    public String getProcedureJsonString (APPCTree appcTree) {
-        return axisToJsonString(appcTree.getProcedure().getChildren()).toJSONString();
+    public String getProcedureJsonString () {
+        return axisToJsonString(this.getProcedure().getChildren()).toJSONString();
     }
 
-    public String getLateralityJsonString (APPCTree appcTree) {
-        return axisToJsonString(appcTree.getLaterality().getChildren()).toJSONString();
+    public String getLateralityJsonString () {
+        return axisToJsonString(this.getLaterality().getChildren()).toJSONString();
     }
 }
