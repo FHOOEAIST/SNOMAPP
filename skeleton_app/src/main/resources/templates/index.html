@@ -46,7 +46,7 @@
 
         //create trees out of json data
         $('#treeModality').bstreeview({
-            data: anatomy
+            data: modality
         });
 
         $('#treeLaterality').bstreeview({
@@ -54,11 +54,11 @@
         });
 
         $('#treeProcedures').bstreeview({
-            data: modality
+            data: procedure
         });
 
         $('#treeAnatomy').bstreeview({
-            data: procedure
+            data: anatomy
         });
 
     });
