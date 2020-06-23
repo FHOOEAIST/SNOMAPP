@@ -32,7 +32,11 @@ public class ViewController {
     @GetMapping("/startPage")
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
-        model.addAttribute("roots", appcController.getTree().getRoots());
+        //model.addAttribute("roots", appcController.getTree().getRoots());
+        model.addAttribute("anatomy", appcController.getTree().getAnatomyJsonString());
+        model.addAttribute("laterality", appcController.getTree().getLateralityJsonString());
+        model.addAttribute("modality", appcController.getTree().getModalityJsonString());
+        model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
         return "startPage";
     }
 

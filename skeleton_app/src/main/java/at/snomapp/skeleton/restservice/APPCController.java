@@ -61,7 +61,7 @@ public class APPCController {
             return repo.findAllByDisplayNameContainingIgnoreCase(displayName);
         }
     }
-    
+
     @GetMapping("/getEntriesByName")
     public String entryToJsonString (@RequestParam(required = false) String displayName){
         Iterable<Entry> entries = readByDisplayName(displayName);

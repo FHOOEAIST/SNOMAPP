@@ -21,30 +21,20 @@
     <script type="text/javascript" src="/js/bstreeview.js"></script>
 
 </head>
+
+<div class="container pt-3">
+    <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}">
+</div>
+
+<body onload="startInterval()">
 <div class="container">
     <div class="input-group pt-3">
         <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
-    </div>
-
-<body onload="startInterval()">
-
-<div class="container pt-3">
-    <img alt="SNOMAPP" class="img-fluid" src="../images/logo.png">
-</div>
-
-<div class="container">
-    <h4>Import APPC</h4>
-    <div class="input-group">
-        <div class="input-group-prepend">
-            <button class="btn btn-primary" type="button" id="btnUpload">Import</button>
-        </div>
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01"
-                   aria-describedby="inputGroupFileAddon01">
-            <label id="lblImport" class="custom-file-label" for="inputGroupFile01">Choose file</label>
-        </div>
+        <button class="btn btn-primary" onclick="search()" value="search">Suchen</button>
     </div>
 </div>
+
+
 
 
 
@@ -122,21 +112,32 @@
     var tree = true;
     //var tabsHtml = document.getElementById("tabs").innerHTML;
 
+
+    $("#searchbar").keyup(function(event){
+        if(event.keyCode === 13){
+            search();
+        }
+    });
+
     function startInterval() {
         tabsHtml = document.getElementById("tabs").innerHTML;
         timer = setInterval(checkSearchbar, 100);
     }
 
     function checkSearchbar() {
-        if(document.getElementById("searchbar").value != ""){
+        if(document.getElementById("searchbar").value !== ""){
             //search();
             tree = false;
+            console.log("search full");
         } else {
+            console.log("search empty");
             clearInterval(timer);
-            if (tree != true) {
-                showTree();
-                tree = true;
+            $("#tabs").show();
+            $('#tabsSearch').hide();
+            if($('#showTree').length) {
+                $("#showTree").remove();
             }
+            // $("#showTree").removeClass('bstreeview');
             timer = setInterval(checkSearchbar, 100);
         }
     }
@@ -153,8 +154,6 @@
         searchForEntries(searchText);
         sleepFunc();
 
-
-
     }
 
     async function sleepFunc() {
@@ -163,13 +162,15 @@
 
     function searchForEntries (searchText){
         console.log("Started");
-
-        document.getElementById("showTree").innerHTML = "";
+        
         fetch("/APPC/getEntriesByName?displayName=" + searchText)
             //.then(json => json.json())
             .then(response => response.json())
             .then(data => {
+                $("#tabs").hide();
                 console.log(JSON.stringify(data));
+                $('#tabsSearch').append(' <div id="showTree"></div>')
+                $("#tabsSearch").show();
                 $('#showTree').bstreeview({
                     data: JSON.stringify(data)
                 });
@@ -180,36 +181,129 @@
 
 </script>
 
+<script th:inline="javascript">
+    $(function () {
+
+        //get json String from model
+        var anatomy = [[${anatomy}]];
+        var laterality = [[${laterality}]];
+        var modality = [[${modality}]];
+        var procedure = [[${procedure}]];
+
+        //create trees out of json data
+        $('#treeModality').bstreeview({
+            data: modality
+        });
+
+        $('#treeLaterality').bstreeview({
+            data: laterality
+        });
+
+        $('#treeProcedures').bstreeview({
+            data: procedure
+        });
+
+        $('#treeAnatomy').bstreeview({
+            data: anatomy
+        });
+
+    });
+
+</script>
+
+
 <section id="tabs" class="project-tab">
-    <div class="container pt-3" id="showTree">
-        <div class="row" th:each="root : ${roots}">
+    <div class="container pt-3">
+        <div class="row">
             <div class="col-md-12">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link" id="${root.displayName}" data-toggle="tab"
-                           href="${root.displayName}" aria-selected="false" aria-controls="${root.displayName}"
-                           role="tab" th:utext="${root.displayName}"> </a>
+                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true">Modality</a>
+                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false">Laterality</a>
+                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false">Procedures</a>
+                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false">Anatomy</a>
                     </div>
                 </nav>
-            </div>
-            <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
-                    <div class="treeview">
-                        <ul class="mb-1 pl-3 pb-2" th:each="appc : ${root.getChildren()}">
-                            <!-- controller liste anlegen -->
-                            <li><i class="fas fa-angle-right rotate"></i>
-                                <span><button class="btn btn-default"
-                                              onclick="window.location.href='chooseSnomed.html'"><i
-                                        class="far fa-envelope-open ic-w mx-1"
-                                        th:utext="${appc.layerCode + ': ' + appc.displayName}"/></button></span>
-                            </li>
-                        </ul>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-6 pt-5">
+                                        <!--show tree Modality-->
+                                        <div id="treeModality"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="lat" role="tabpanel" aria-labelledby="laterality">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-6 pt-5">
+                                        <!--show tree Laterality-->
+                                        <div id="treeLaterality"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ana" role="tabpanel" aria-labelledby="anatomy">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-6 pt-5">
+                                        <!--show tree Anatomy-->
+                                        <div id="treeAnatomy"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="procedures">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-6 pt-5">
+                                        <!--show tree Procedures-->
+                                        <div id="treeProcedures"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<section id="tabsSearch" class="project-tab">
+    <br>
+</section>
+
+<div class="container">
+    <h4>Import APPC</h4>
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <button class="btn btn-primary" type="button" id="btnUpload">Import</button>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01"
+                   aria-describedby="inputGroupFileAddon01">
+            <label id="lblImport" class="custom-file-label" for="inputGroupFile01">Choose file</label>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="container">
+<a href="/resultPage" class="btn-primary">Result Page Preview</a>
+</div>
+
 
 </body>
 </html>
