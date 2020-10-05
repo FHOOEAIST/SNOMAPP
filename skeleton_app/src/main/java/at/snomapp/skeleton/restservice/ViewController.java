@@ -40,7 +40,6 @@ public class ViewController {
         return "startPage";
     }
 
-
     @GetMapping("/index")
     public String index(Model model){
         APPCController appcController = new APPCController(repo);
@@ -52,14 +51,6 @@ public class ViewController {
         model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
         return "index";
     }
-
-
-
-
-
-
-
-
 
     @GetMapping("/resultPage")
     public String resultPage(Model model, APPCEntry element){
