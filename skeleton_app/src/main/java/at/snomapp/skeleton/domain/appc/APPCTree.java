@@ -1,7 +1,10 @@
 package at.snomapp.skeleton.domain.appc;
 
-import java.util.HashSet;
-import java.util.Set;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import netscape.javascript.JSObject;
+
+import java.util.*;
 
 public class APPCTree  {
     private final String language;
@@ -69,5 +72,79 @@ public class APPCTree  {
         set.add(anatomy);
 
         return set;
+    }
+
+    public AxisEntry getAnatomy() {
+        return anatomy;
+    }
+
+    public AxisEntry getModality() {
+        return modality;
+    }
+
+    public AxisEntry getProcedure (){
+        return procedure;
+    }
+
+    public AxisEntry getLaterality(){
+        return laterality;
+    }
+
+
+
+    //build json tree out of entry
+    public JSONObject entryToJsonString (Entry entry){
+        if (entry == null) {
+            return null;
+        }
+
+        LinkedHashMap<String, Object> map = new LinkedHashMap();
+
+        //array which contains all children of a node
+        JSONArray array = new JSONArray();
+        if (entry.getChildren() != null) {
+            for (Entry children : entry.getChildren()) {
+                JSONObject subChildren = entryToJsonString(children);
+                if (subChildren != null) {
+                    array.add(subChildren);
+                }
+            }
+        }
+
+        //text element in each node
+        map.put("text", entry.getDisplayName());
+
+        //nodes element in nodes which have children
+        if (array.size() > 0){
+            map.put("nodes", array);
+        }
+        return new JSONObject(map);
+    }
+
+    //build json tree out of axis
+    private JSONArray axisToJsonString(Set<Entry> axis){
+        JSONArray jsonArray = new JSONArray();
+        //iterate over all axis and build json tree for all axis
+        for (Entry entry : axis){
+            jsonArray.add(entryToJsonString(entry));
+        }
+        return jsonArray;
+    }
+
+
+    public String getAnatomyJsonString () {
+        return axisToJsonString(this.getAnatomy().getChildren()).toJSONString();
+    }
+
+    public String getModalityJsonString () {
+        return axisToJsonString(this.getModality().getChildren()).toJSONString();
+    }
+
+    public String getProcedureJsonString () {
+        return axisToJsonString(this.getProcedure().getChildren()).toJSONString();
+    }
+
+    public String getLateralityJsonString () {
+        return axisToJsonString(this.getLaterality().getChildren()).toJSONString();
     }
 }

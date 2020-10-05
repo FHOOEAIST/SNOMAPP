@@ -1,5 +1,5 @@
-ConceptMapping between APPC and SNOMED : {
-1-2-1-2 -> 371398005: WIDER
-1-2-1-2 -> 81745001: EQUAL
-1-2-1-2 -> 314859006: SUBSUMES
+ConceptMapping between APPC and SNOMED CT : {
+1-2-1-2 from axis anatomy -> 81745001: EQUAL
+1-2-1-2 from axis anatomy -> 371398005: WIDER
+1-2-1-2 from axis anatomy -> 314859006: SUBSUMES
 }

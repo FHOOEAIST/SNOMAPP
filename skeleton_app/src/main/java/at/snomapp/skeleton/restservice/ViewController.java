@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,24 @@ public class ViewController {
     @GetMapping("/startPage")
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
-        model.addAttribute("roots", appcController.getTree().getRoots());
+        //model.addAttribute("roots", appcController.getTree().getRoots());
+        model.addAttribute("anatomy", appcController.getTree().getAnatomyJsonString());
+        model.addAttribute("laterality", appcController.getTree().getLateralityJsonString());
+        model.addAttribute("modality", appcController.getTree().getModalityJsonString());
+        model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
         return "startPage";
+    }
+
+    @GetMapping("/index")
+    public String index(Model model){
+        APPCController appcController = new APPCController(repo);
+
+        //store in model the json string of nodes for each axis
+        model.addAttribute("anatomy", appcController.getTree().getAnatomyJsonString());
+        model.addAttribute("laterality", appcController.getTree().getLateralityJsonString());
+        model.addAttribute("modality", appcController.getTree().getModalityJsonString());
+        model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
+        return "index";
     }
 
     @GetMapping("/resultPage")

@@ -6,6 +6,9 @@ import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
+import io.swagger.client.JSON;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -16,6 +19,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.Set;
 
@@ -48,14 +52,25 @@ public class APPCController {
     }
 
     @GetMapping("entry")
-    Iterable<Entry> readByDisplayName(@RequestParam(required = false) String displayName){
-        if(displayName == null){
+    Iterable<Entry> readByDisplayName(@RequestParam(required = false) String displayName) {
+        if (displayName == null) {
             // all entries
             return repo.findAll();
-        }else{
+        } else {
             // return exact name match
             return repo.findAllByDisplayNameContainingIgnoreCase(displayName);
         }
+    }
+
+    @GetMapping("/getEntriesByName")
+    public String entryToJsonString (@RequestParam(required = false) String displayName){
+        Iterable<Entry> entries = readByDisplayName(displayName);
+        APPCTree tree = new APPCTree(null);
+        JSONArray jsonArray = new JSONArray();
+        for(Entry entry : entries){
+            jsonArray.add(tree.entryToJsonString(entry));
+        }
+        return jsonArray.toJSONString();
     }
 
     private static class ImportResults{
