@@ -1,6 +1,7 @@
 package at.snomapp.skeleton.restservice;
 
 
+import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
