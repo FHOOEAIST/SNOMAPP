@@ -3,13 +3,18 @@ package at.snomapp.skeleton.restservice;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
+import io.swagger.client.model.CollectionDescription;
+import io.swagger.client.model.ItemsPageDescription;
 import io.swagger.client.model.PageBrowserDescriptionSearchResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("snomed")
@@ -55,5 +60,27 @@ public class SnomedController {
         // might want to replace with wrapped PageBrowserDescriptionSearchResult depending on if we need the
         // meta information (e.g. size of returned array) aor not
         return response != null ? response.getItems() : null;
+    }
+
+    Map<BrowserDescriptionSearchResult, CollectionDescription> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
+        Map<BrowserDescriptionSearchResult, CollectionDescription> descriptionMap = new HashMap<>();
+        List<CollectionDescription> response = new ArrayList<>();
+        for (BrowserDescriptionSearchResult concept : concepts) {
+            String branch = "MAIN";
+            String conceptId = concept.getConcept().getConceptId();
+            Integer offset=0;
+            Integer limit = null;
+
+            ItemsPageDescription response_item = null;
+            try {
+                response_item = api.findDescriptionsUsingGET(branch, conceptId, offset, limit);
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
+
+            descriptionMap.put( concept, response_item != null ? response_item.getItems() : null);
+        }
+
+        return descriptionMap;
     }
 }
