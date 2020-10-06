@@ -92,7 +92,7 @@ public class APPCTree  {
 
 
 
-    //build json tree out of entry
+    // build json tree out of entry
     public JSONObject entryToJsonString (Entry entry){
         if (entry == null) {
             return null;
@@ -100,7 +100,7 @@ public class APPCTree  {
 
         LinkedHashMap<String, Object> map = new LinkedHashMap();
 
-        //array which contains all children of a node
+        // array which contains all children of a node
         JSONArray array = new JSONArray();
         if (entry.getChildren() != null) {
             for (Entry children : entry.getChildren()) {
@@ -111,20 +111,20 @@ public class APPCTree  {
             }
         }
 
-        //text element in each node
-        map.put("text", entry.getDisplayName());
+        // text element in each node
+        map.put("text", "APPC " + entry.getCode() + " " + entry.getDisplayName());
 
-        //nodes element in nodes which have children
+        // nodes element in nodes which have children
         if (array.size() > 0){
             map.put("nodes", array);
         }
         return new JSONObject(map);
     }
 
-    //build json tree out of axis
+    // build json tree out of axis
     private JSONArray axisToJsonString(Set<Entry> axis){
         JSONArray jsonArray = new JSONArray();
-        //iterate over all axis and build json tree for all axis
+        // iterate over all axis and build json tree for all axis
         for (Entry entry : axis){
             jsonArray.add(entryToJsonString(entry));
         }
