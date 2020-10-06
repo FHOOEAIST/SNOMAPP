@@ -57,12 +57,13 @@ public class ViewController {
     }
 
     @GetMapping("/resultPage")
-    public String resultPage(@RequestParam String code, Model model){
+    public String resultPage(@RequestParam Long id, Model model){
         ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
 
-        Entry entry = repo.findByCode(code);
-        if(entry != null){
+        Optional<Entry> byId = repo.findById(id);
+        if(byId.isPresent()){
+            Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
             List<EquivalenceImpl> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);

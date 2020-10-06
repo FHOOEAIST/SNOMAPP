@@ -112,7 +112,9 @@ public class APPCTree  {
         }
 
         // text element in each node
-        map.put("text", "APPC " + entry.getCode() + " " + entry.getDisplayName());
+        // TODO: 06.10.2020 hacky way of getting the id of a code to frontend: consider alternatives
+        map.put("text", "APPC " + entry.getCode() + " " + entry.getDisplayName()
+                + "<div style=\"display:none\">" + entry.getId() + "</div>");
 
         // nodes element in nodes which have children
         if (array.size() > 0){
