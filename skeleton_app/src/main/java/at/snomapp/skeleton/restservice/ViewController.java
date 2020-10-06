@@ -3,6 +3,7 @@ package at.snomapp.skeleton.restservice;
 
 import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.Entry;
+import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.APPCRepo;
@@ -35,10 +36,11 @@ public class ViewController {
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
         //model.addAttribute("roots", appcController.getTree().getRoots());
-        model.addAttribute("anatomy", appcController.getTree().getAnatomyJsonString());
-        model.addAttribute("laterality", appcController.getTree().getLateralityJsonString());
-        model.addAttribute("modality", appcController.getTree().getModalityJsonString());
-        model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
+        APPCTree tree = appcController.getTree();
+        model.addAttribute("anatomy", tree.getAnatomyJsonString());
+        model.addAttribute("laterality", tree.getLateralityJsonString());
+        model.addAttribute("modality", tree.getModalityJsonString());
+        model.addAttribute("procedure", tree.getProcedureJsonString());
         return "startPage";
     }
 
