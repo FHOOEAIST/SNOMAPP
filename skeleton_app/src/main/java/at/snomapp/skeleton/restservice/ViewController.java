@@ -2,6 +2,7 @@ package at.snomapp.skeleton.restservice;
 
 
 import at.snomapp.skeleton.domain.appc.APPCEntry;
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.APPCRepo;
@@ -17,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Controller
 public class ViewController {
 
-    private APPCRepo repo;
+    private final APPCRepo repo;
     private ConceptMapRepo Conceptmaprepo;
     private MappingRepo mappingRepo;
 
@@ -53,17 +55,21 @@ public class ViewController {
     }
 
     @GetMapping("/resultPage")
-    public String resultPage(Model model, APPCEntry element){
+    public String resultPage(@RequestParam String code, Model model){
         ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
-        List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye");
-        List<EquivalenceImpl> mappings = new ArrayList<>();
 
-        model.addAttribute("results",resultList);
-        model.addAttribute("appc", element);
-        //ToDo
-        model.addAttribute("mappings", mappings);
+        Entry entry = repo.findByCode(code);
+        if(entry != null){
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
+            List<EquivalenceImpl> mappings = new ArrayList<>();
+            model.addAttribute("results",resultList);
+            model.addAttribute("appc", entry);
+            //ToDo
+            model.addAttribute("mappings", mappings);
+        }
 
+        // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
     }
 

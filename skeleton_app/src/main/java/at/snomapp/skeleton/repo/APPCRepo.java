@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 // repository used for storing and retrieving APPC Entries
 public interface APPCRepo extends Neo4jRepository<Entry, Long> {
     Entry findByDisplayName(String displayName);
+    Entry findByCode(String code);
     Iterable<Entry> findAllByDisplayNameContainingIgnoreCase(String displayName);
 }

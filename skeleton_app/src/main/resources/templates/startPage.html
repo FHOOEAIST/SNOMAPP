@@ -63,7 +63,7 @@
     });
 
     $(document).on('change', '.custom-file :file', function() {
-        // when file is selected raise th file select event using the number of files selected and the filepath
+        // when file is selected raise the file select event using the number of files selected and the filepath
         let input = $(this),
             numFiles = input.get(0).files ? input.get(0).files.length : 1,
             path = input.val();
@@ -137,7 +137,6 @@
             if($('#showTree').length) {
                 $("#showTree").remove();
             }
-            // $("#showTree").removeClass('bstreeview');
             timer = setInterval(checkSearchbar, 100);
         }
     }
@@ -174,8 +173,16 @@
                 $('#showTree').bstreeview({
                     data: JSON.stringify(data)
                 });
+                addMappingButtons();
             });
 
+    }
+
+    function addMappingButtons(){
+        $("div.list-group-item").each(function () {
+            let btn = $(`<a href="/resultPage?code=${$(this).text().split(" ")[0]}" class="btn btn-primary" type="button">map</a>`);
+            $(this).append(btn);
+        });
     }
 
 
@@ -207,6 +214,7 @@
             data: anatomy
         });
 
+        addMappingButtons();
     });
 
 </script>
