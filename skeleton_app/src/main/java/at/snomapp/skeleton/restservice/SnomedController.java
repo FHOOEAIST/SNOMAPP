@@ -30,11 +30,11 @@ public class SnomedController {
         String branch = "MAIN";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         String term = displayName;
-        Boolean active = false;
+        Boolean active = true;
         String module = null;
         List<String> language = null;
         String semanticTag = null;
-        Boolean conceptActive = false;
+        Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
         // this could be set to REGEX in order to do a regex search but standard should satisfy the US 9-1 requirements
