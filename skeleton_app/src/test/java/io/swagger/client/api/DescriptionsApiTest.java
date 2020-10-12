@@ -61,17 +61,17 @@ public class DescriptionsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because SocketTimeOut
+    //@Ignore //because SocketTimeOut
     @Test
     public void findBrowserDescriptionsUsingGETTest() throws ApiException {
         String branch = "MAIN";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
-        String term = null;
-        Boolean active = false;
+        String term = "eye";
+        Boolean active = true;
         String module = null;
         List<String> language = null;
         String semanticTag = null;
-        Boolean conceptActive = false;
+        Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
         String searchMode = "STANDARD";
