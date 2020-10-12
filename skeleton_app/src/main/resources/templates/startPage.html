@@ -63,7 +63,7 @@
     });
 
     $(document).on('change', '.custom-file :file', function() {
-        // when file is selected raise th file select event using the number of files selected and the filepath
+        // when file is selected raise the file select event using the number of files selected and the filepath
         let input = $(this),
             numFiles = input.get(0).files ? input.get(0).files.length : 1,
             path = input.val();
@@ -137,7 +137,6 @@
             if($('#showTree').length) {
                 $("#showTree").remove();
             }
-            // $("#showTree").removeClass('bstreeview');
             timer = setInterval(checkSearchbar, 100);
         }
     }
@@ -174,8 +173,19 @@
                 $('#showTree').bstreeview({
                     data: JSON.stringify(data)
                 });
+                addMappingButtons();
             });
 
+    }
+
+    function addMappingButtons(){
+        $("div.list-group-item").each(function () {
+            // get hidden div containing id (see APPCTree.java for where it is added) and use it to query the backend
+            // this is kind of hacky -> maybe change in the future when there is time.
+            //Todo add icon for this instead of text
+            let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button" style="float:right">map</a>`);
+            $(this).append(btn);
+        });
     }
 
 
@@ -207,6 +217,7 @@
             data: anatomy
         });
 
+        addMappingButtons();
     });
 
 </script>
@@ -299,11 +310,6 @@
 
 <br>
 <br>
-
-<div class="container">
-<a href="/resultPage" class="btn-primary">Result Page Preview</a>
-</div>
-
 
 </body>
 </html>
