@@ -6,6 +6,7 @@ import at.snomapp.skeleton.domain.appc.AxisEntry;
 import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
+import at.snomapp.skeleton.importer.impl.StringCSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import io.swagger.client.JSON;
 import net.minidev.json.JSONArray;
@@ -137,6 +138,42 @@ public class APPCController {
         }
     }
 
+    @PostMapping("/importString")
+    @ResponseStatus(HttpStatus.CREATED)
+    // imports an APPCTree from given string containing the entire code
+    // clears database if contents are not empty
+    ImportResults importAPPCString(@RequestBody String contents){
+        try {
+            String decodedContents = URLDecoder.decode(contents, StandardCharsets.UTF_8.name());
+            if(! (decodedContents == null) && !decodedContents.isEmpty() ){
+                // contents sent
+                repo.deleteAll();
+                Importer importer = new StringCSVImporter();
+                APPCTree tree = importer.importTree(decodedContents);
+
+                // save version
+                if (tree.getVersion() != null){
+                    repo.save(new APPCEntry("Version", tree.getVersion()));
+                }
+
+                Iterable<Entry> roots = tree.getRoots();
+                for (Entry root : roots) {
+                    repo.save(root);
+                }
+
+                return new ImportResults(true, null);
+            }else{
+                return new ImportResults(false, "File not found");
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return new ImportResults(false, "Encoding of given filepath invalid");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ImportResults(false, "Something went wrong during import, DB cleared");
+        }
+    }
+
     @GetMapping("roots")
     // return just the tree roots
     Iterable<Entry> readRoots(){
@@ -172,7 +209,6 @@ public class APPCController {
         Entry version = repo.findByDisplayName("Version");
         tree.setVersion( version.getCode() );
 
-
         return tree;
     }
 
@@ -195,8 +231,5 @@ public class APPCController {
             }
         }
     }
-
-
-
 
 }
