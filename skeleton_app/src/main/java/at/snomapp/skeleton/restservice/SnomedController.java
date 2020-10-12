@@ -62,6 +62,10 @@ public class SnomedController {
         return response != null ? response.getItems() : null;
     }
 
+
+/*
+TODO doesn't work with the current test server - fix when client is adapted.
+
     Map<BrowserDescriptionSearchResult, CollectionDescription> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
         Map<BrowserDescriptionSearchResult, CollectionDescription> descriptionMap = new HashMap<>();
         List<CollectionDescription> response = new ArrayList<>();
@@ -69,7 +73,7 @@ public class SnomedController {
             String branch = "MAIN";
             String conceptId = concept.getConcept().getConceptId();
             Integer offset=0;
-            Integer limit = null;
+            Integer limit = 100;
 
             ItemsPageDescription response_item = null;
             try {
@@ -83,4 +87,5 @@ public class SnomedController {
 
         return descriptionMap;
     }
+ */
 }
