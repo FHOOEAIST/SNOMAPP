@@ -116,8 +116,10 @@
             // get hidden div containing id (see APPCTree.java for where it is added) and use it to query the backend
             // this is kind of hacky -> maybe change in the future when there is time.
             //Todo add icon for this instead of text
-            let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button" style="float:right">map</a>`);
-            $(this).append(btn);
+            if(! $(this).find('a').length > 0) {
+                let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button" style="float:right">map</a>`);
+                $(this).append(btn);
+            }
         });
     }
 

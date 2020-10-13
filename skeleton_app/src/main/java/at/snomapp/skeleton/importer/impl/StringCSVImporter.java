@@ -19,7 +19,7 @@ public class StringCSVImporter implements Importer {
     @Override
     public APPCTree importTree(String from) {
 
-        APPCTree tree = new APPCTree("englisch");
+        APPCTree tree = new APPCTree("english");
 
         String[] lines = from.split("\r\n");
 

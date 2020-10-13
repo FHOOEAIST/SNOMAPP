@@ -151,21 +151,29 @@ public class APPCController {
             String decodedContents = URLDecoder.decode(contents, StandardCharsets.UTF_8.name());
             if(! (decodedContents == null) && !decodedContents.isEmpty() ){
                 // contents sent
-                repo.deleteAll();
                 Importer importer = new StringCSVImporter();
                 APPCTree tree = importer.importTree(decodedContents);
 
-                // save version
-                if (tree.getVersion() != null){
-                    repo.save(new APPCEntry("Version", tree.getVersion()));
-                }
+                if(tree.getAnatomy() == null
+                        || tree.getModality() == null
+                        || tree.getLaterality() == null
+                        || tree.getProcedure() == null){
+                    mv.addObject(new ImportResults(false, "one or more axis of the given code were not constructed"));
+                }else {
+                    // valid tree
+                    repo.deleteAll();
+                    // save version
+                    if (tree.getVersion() != null) {
+                        repo.save(new APPCEntry("Version", tree.getVersion()));
+                    }
 
-                Iterable<Entry> roots = tree.getRoots();
-                for (Entry root : roots) {
-                    repo.save(root);
-                }
+                    Iterable<Entry> roots = tree.getRoots();
+                    for (Entry root : roots) {
+                        repo.save(root);
+                    }
 
-                mv.addObject("result", new ImportResults(true, null));
+                    mv.addObject("result", new ImportResults(true, null));
+                }
 
             }else{
                 mv.addObject("result", new ImportResults(false, "File not found"));
