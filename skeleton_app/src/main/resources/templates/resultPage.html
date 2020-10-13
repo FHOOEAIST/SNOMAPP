@@ -32,7 +32,7 @@
     <div class="containerList" >
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
-            <span th:text="'Display Name: ' + ${result.getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
+            <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
             <!--mapping exists YES
             <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(${result.getConcept().getConceptId()})}">
                     <i class="fas fa-check-circle"></i>
@@ -73,8 +73,12 @@
                         <span th:text="${result.getConcept().getConceptId()}">Code</span>
                         </br>
                         </br>
+                        <h5>Prefered Term: </h5>
+                        <span th:text="${result.getConcept().getFsn().getTerm()}">Code</span>
+                        </br>
+                        </br>
                         <h5>Alias: </h5>
-                        <span th:text="${result.getConcept().getFsn().getTerm()}">Name</span>
+                        <span>TODO Name</span>
                         </br>
                         </br>
                         <h5>Descriprion:</h5>
