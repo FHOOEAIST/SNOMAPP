@@ -92,7 +92,7 @@ public class DescriptionsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    //@Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findDescriptionsUsingGETTest() throws ApiException {
         String branch = "MAIN";
