@@ -17,13 +17,13 @@
 
 <!-- HeaderImage -->
 <div class="container fixed-top pt-3" style="background-color: white">
-    <img alt="SNOMAPP" class="img-fluid" src="../static/images/logo.png" th:src="@{/images/logo.png}" >
+    <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}"  height="100px" width="300px" >
 </div>
 
 
 <!-- Content including Result List -->
 <div class="container p-3">
-<div class="contentContainer" >
+<div class="contentContainer" style="margin-top: 110px" >
     <span th:text="'Number of results: ' + ${results.size()}">Number of results</span>
     <!-- Button to Open the Modal -->
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" >
