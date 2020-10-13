@@ -13,8 +13,10 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -101,6 +103,7 @@ public class APPCController {
         }
     }
 
+    // obsolete because of new import mechanism, but left in because it makes manual imports via e.g. postman simpler
     @PostMapping("/import")
     @ResponseStatus(HttpStatus.CREATED)
     // imports an APPCtree from a given filename into the neo4j database.
@@ -142,7 +145,8 @@ public class APPCController {
     @ResponseStatus(HttpStatus.CREATED)
     // imports an APPCTree from given string containing the entire code
     // clears database if contents are not empty
-    ImportResults importAPPCString(@RequestBody String contents){
+    ModelAndView importAPPCString(@RequestBody String contents){
+        ModelAndView mv = new ModelAndView("startPage");
         try {
             String decodedContents = URLDecoder.decode(contents, StandardCharsets.UTF_8.name());
             if(! (decodedContents == null) && !decodedContents.isEmpty() ){
@@ -161,17 +165,19 @@ public class APPCController {
                     repo.save(root);
                 }
 
-                return new ImportResults(true, null);
+                mv.addObject("result", new ImportResults(true, null));
+
             }else{
-                return new ImportResults(false, "File not found");
+                mv.addObject("result", new ImportResults(false, "File not found"));
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            return new ImportResults(false, "Encoding of given filepath invalid");
+            mv.addObject("result", new ImportResults(false, "Encoding of given filepath invalid"));
         } catch (Exception e) {
             e.printStackTrace();
-            return new ImportResults(false, "Something went wrong during import, DB cleared");
+            mv.addObject("result", new ImportResults(false, "Something went wrong during import, DB cleared"));
         }
+        return mv;
     }
 
     @GetMapping("roots")

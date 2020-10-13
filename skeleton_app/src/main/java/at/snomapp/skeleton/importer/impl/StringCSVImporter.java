@@ -21,7 +21,7 @@ public class StringCSVImporter implements Importer {
 
         APPCTree tree = new APPCTree("englisch");
 
-        String[] lines = from.split("\n");
+        String[] lines = from.split("\r\n");
 
         if (lines.length >= 1) {
             tree.setVersion(lines[0]);
@@ -34,6 +34,10 @@ public class StringCSVImporter implements Importer {
 
         for (int i = 1; i < lines.length; i++) {
             String s = lines[i];
+
+            if(!s.contains(";")){
+                break;
+            }
 
             // split line in fields
             List<String> fields = new ArrayList<>(Arrays.asList(s.split(";")));
