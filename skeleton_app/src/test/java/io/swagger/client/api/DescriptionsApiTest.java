@@ -61,12 +61,10 @@ public class DescriptionsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    //@Ignore //because SocketTimeOut
     @Test
     public void findBrowserDescriptionsUsingGETTest() throws ApiException {
         String branch = "MAIN";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
-        //String acceptLanguage = "en-US;q=0.8,en-GB;q=0.6"; // for AIST Server
         String term = "eye";
         Boolean active = true;
         String module = null;
@@ -93,7 +91,6 @@ public class DescriptionsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    //@Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findDescriptionsUsingGETTest() throws ApiException {
         String branch = "MAIN";

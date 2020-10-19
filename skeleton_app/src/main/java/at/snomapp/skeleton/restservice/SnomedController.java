@@ -19,11 +19,10 @@ import java.util.Map;
 public class SnomedController {
 
 
-    private DescriptionsApi api = new DescriptionsApi();
+    private final DescriptionsApi api = new DescriptionsApi();
 
     public SnomedController() {
-        // TODO: add our snowstorm URL here
-        //  api.getApiClient().setBasePath();
+        api.getApiClient().setBasePath("http://193.170.192.200:8080");
     }
 
     @GetMapping
@@ -31,7 +30,6 @@ public class SnomedController {
     List<BrowserDescriptionSearchResult> findByDisplayName(@RequestParam String displayName){
         String branch = "MAIN";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
-        //String acceptLanguage = "en-US;q=0.8,en-GB;q=0.6"; // for AIST Server
         String term = displayName;
         Boolean active = true;
         String module = null;
@@ -60,10 +58,6 @@ public class SnomedController {
         return response != null ? response.getItems() : null;
     }
 
-
-
-// TODO doesn't work with the current test server - fix when client is adapted.
-
     Map<String, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
         Map<String, List<Description>> descriptionMap = new HashMap<>();
         for (BrowserDescriptionSearchResult concept : concepts) {
@@ -81,7 +75,6 @@ public class SnomedController {
 
             descriptionMap.put( conceptId, response_item != null ? response_item.getItems() : null);
         }
-
         return descriptionMap;
     }
 }

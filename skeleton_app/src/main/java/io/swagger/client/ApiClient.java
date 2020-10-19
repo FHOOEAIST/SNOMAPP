@@ -51,10 +51,7 @@ import io.swagger.client.auth.ApiKeyAuth;
 import io.swagger.client.auth.OAuth;
 
 public class ApiClient {
-    //ToDo ServerURL ändern
-    // private String basePath = "https://snowstorm.test-nictiz.nl";
     private String basePath = "http://193.170.192.200:8080";
-    // private String basePath = "http://aist-intern.fh-hagenberg.at:42077";
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
