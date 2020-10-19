@@ -14,17 +14,10 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
+
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.CodeSystemVersion;
-import io.swagger.client.model.CollectionConceptMini;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +53,7 @@ public class CodeSystem {
   private CodeSystemVersion latestVersion = null;
 
   @SerializedName("modules")
-  private CollectionConceptMini modules = null;
+  private List<ConceptMini> modules = null;
 
   @SerializedName("name")
   private String name = null;
@@ -228,7 +221,7 @@ public class CodeSystem {
     this.latestVersion = latestVersion;
   }
 
-  public CodeSystem modules(CollectionConceptMini modules) {
+  public CodeSystem modules(List<ConceptMini> modules) {
     this.modules = modules;
     return this;
   }
@@ -238,11 +231,11 @@ public class CodeSystem {
    * @return modules
   **/
   @ApiModelProperty(value = "")
-  public CollectionConceptMini getModules() {
+  public List<ConceptMini> getModules() {
     return modules;
   }
 
-  public void setModules(CollectionConceptMini modules) {
+  public void setModules(List<ConceptMini> modules) {
     this.modules = modules;
   }
 

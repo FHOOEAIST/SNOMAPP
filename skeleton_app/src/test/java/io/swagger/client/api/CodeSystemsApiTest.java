@@ -33,7 +33,7 @@ public class CodeSystemsApiTest {
 
     private final CodeSystemsApi api = new CodeSystemsApi();
 
-    
+
     /**
      * Retrieve all code systems
      *
@@ -42,7 +42,6 @@ public class CodeSystemsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findAllUsingGETTest() throws ApiException {
         ItemsPageCodeSystem response = api.findAllUsingGET();
@@ -60,7 +59,6 @@ public class CodeSystemsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findAllVersionsUsingGETTest() throws ApiException {
         String shortName = "SNOMEDCT";
@@ -79,7 +77,6 @@ public class CodeSystemsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findCodeSystemUsingGETTest() throws ApiException {
         String shortName = "SNOMEDCT";
