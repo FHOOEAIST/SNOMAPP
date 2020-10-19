@@ -1,5 +1,6 @@
 package at.snomapp.skeleton.restservice;
 
+import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.AxisEntry;
 import at.snomapp.skeleton.domain.appc.Entry;
@@ -112,6 +113,12 @@ public class APPCController {
                 repo.deleteAll();
                 Importer importer = new CSVImporter();
                 APPCTree tree = importer.importTree(decodedPath);
+
+                // save version
+                if (tree.getVersion() != null){
+                    repo.save(new APPCEntry("Version", tree.getVersion()));
+                }
+
                 Iterable<Entry> roots = tree.getRoots();
                 for (Entry root : roots) {
                     repo.save(root);
@@ -160,6 +167,11 @@ public class APPCController {
         tree.setLaterality((AxisEntry) laterality);
         tree.setModality((AxisEntry) modality);
         tree.setProcedure((AxisEntry) procedure);
+
+        // get version
+        Entry version = repo.findByDisplayName("Version");
+        tree.setVersion( version.getCode() );
+
 
         return tree;
     }

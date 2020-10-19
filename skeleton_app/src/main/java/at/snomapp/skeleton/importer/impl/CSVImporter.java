@@ -21,6 +21,10 @@ public class CSVImporter implements Importer {
 
         try (BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
 
+            // first line of csv file is the version of the tree
+            String version = bReader.readLine();
+            if (version != null){tree.setVersion(version);}
+
             // whole line of csv file
             String s;
             Entry current = null;

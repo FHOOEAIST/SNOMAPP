@@ -1,6 +1,7 @@
 package at.snomapp.skeleton.restservice;
 
 
+import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
@@ -38,6 +39,7 @@ public class ViewController {
         model.addAttribute("laterality", tree.getLateralityJsonString());
         model.addAttribute("modality", tree.getModalityJsonString());
         model.addAttribute("procedure", tree.getProcedureJsonString());
+        model.addAttribute("version", tree.getVersion());
         return "startPage";
     }
 
