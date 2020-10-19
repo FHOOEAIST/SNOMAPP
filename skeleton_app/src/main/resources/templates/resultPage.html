@@ -78,7 +78,9 @@
                         </br>
                         </br>
                         <h5>Alias: </h5>
-                        <span>TODO Name</span>
+                        <ul class="list" th:each="alias : ${resMap.get(result)}">
+                        <li th:text="${alias.getTerm()}"></li>
+                        </ul>
                         </br>
                         </br>
                         <h5>Descriprion:</h5>

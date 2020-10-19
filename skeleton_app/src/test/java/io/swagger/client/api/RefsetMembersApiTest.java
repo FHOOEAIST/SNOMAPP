@@ -86,7 +86,7 @@ public class RefsetMembersApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findRefsetMembersUsingGETTest() throws ApiException {
         String branch = "MAIN";

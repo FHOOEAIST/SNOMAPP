@@ -8,6 +8,7 @@ import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
+import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -62,10 +64,10 @@ public class ViewController {
         if(byId.isPresent()){
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
-            //Map<BrowserDescriptionSearchResult, CollectionDescription> resultMap = snomedController.findSynonyms(resultList);
+            Map<BrowserDescriptionSearchResult, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             List<EquivalenceImpl> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);
-            //model.addAttribute("resMap", resultMap);
+            model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
             //ToDo
             model.addAttribute("mappings", mappings);

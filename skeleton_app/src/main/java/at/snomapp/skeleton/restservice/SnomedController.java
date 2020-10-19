@@ -2,10 +2,7 @@ package at.snomapp.skeleton.restservice;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
-import io.swagger.client.model.BrowserDescriptionSearchResult;
-import io.swagger.client.model.CollectionDescription;
-import io.swagger.client.model.ItemsPageDescription;
-import io.swagger.client.model.PageBrowserDescriptionSearchResult;
+import io.swagger.client.model.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,12 +61,12 @@ public class SnomedController {
     }
 
 
-/*
-TODO doesn't work with the current test server - fix when client is adapted.
 
-    Map<BrowserDescriptionSearchResult, CollectionDescription> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
-        Map<BrowserDescriptionSearchResult, CollectionDescription> descriptionMap = new HashMap<>();
-        List<CollectionDescription> response = new ArrayList<>();
+// TODO doesn't work with the current test server - fix when client is adapted.
+
+    Map<BrowserDescriptionSearchResult, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
+        Map<BrowserDescriptionSearchResult, List<Description>> descriptionMap = new HashMap<>();
+        List<List<Description>> response = new ArrayList<>();
         for (BrowserDescriptionSearchResult concept : concepts) {
             String branch = "MAIN";
             String conceptId = concept.getConcept().getConceptId();
@@ -88,5 +85,4 @@ TODO doesn't work with the current test server - fix when client is adapted.
 
         return descriptionMap;
     }
- */
 }

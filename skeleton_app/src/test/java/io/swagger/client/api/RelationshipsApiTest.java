@@ -61,7 +61,7 @@ public class RelationshipsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    //@Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findRelationshipsUsingGETTest() throws ApiException {
         String branch = "MAIN";

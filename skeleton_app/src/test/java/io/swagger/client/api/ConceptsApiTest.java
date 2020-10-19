@@ -70,7 +70,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    //@Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptAncestorsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -92,7 +92,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    //@Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptChildrenUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -114,7 +114,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptDescendantsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -178,7 +178,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptParentsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -200,7 +200,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptReferencesUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -244,7 +244,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -274,7 +274,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void getBrowserConceptsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -297,7 +297,7 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
+    // @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void getConceptAuthoringFormUsingGETTest() throws ApiException {
         String branch = "MAIN";
