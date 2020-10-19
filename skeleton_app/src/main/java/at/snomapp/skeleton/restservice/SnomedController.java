@@ -30,8 +30,8 @@ public class SnomedController {
     // displayName passed in as query parameter
     List<BrowserDescriptionSearchResult> findByDisplayName(@RequestParam String displayName){
         String branch = "MAIN";
-        //String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
-        String acceptLanguage = "en-US;q=0.8,en-GB;q=0.6"; // for AIST Server
+        String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
+        //String acceptLanguage = "en-US;q=0.8,en-GB;q=0.6"; // for AIST Server
         String term = displayName;
         Boolean active = true;
         String module = null;
