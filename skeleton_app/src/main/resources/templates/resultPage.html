@@ -78,7 +78,7 @@
                         </br>
                         </br>
                         <h5>Alias: </h5>
-                        <ul class="list" th:each="alias : ${resMap.get(result)}">
+                        <ul class="list" th:each="alias : ${resMap.get(result.getConcept().getConceptId())}">
                         <li th:text="${alias.getTerm()}"></li>
                         </ul>
                         </br>

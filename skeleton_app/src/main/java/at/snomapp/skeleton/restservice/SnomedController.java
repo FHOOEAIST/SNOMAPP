@@ -30,7 +30,7 @@ public class SnomedController {
     // displayName passed in as query parameter
     List<BrowserDescriptionSearchResult> findByDisplayName(@RequestParam String displayName){
         String branch = "MAIN";
-        // String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
+        //String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         String acceptLanguage = "en-US;q=0.8,en-GB;q=0.6"; // for AIST Server
         String term = displayName;
         Boolean active = true;
@@ -64,14 +64,13 @@ public class SnomedController {
 
 // TODO doesn't work with the current test server - fix when client is adapted.
 
-    Map<BrowserDescriptionSearchResult, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
-        Map<BrowserDescriptionSearchResult, List<Description>> descriptionMap = new HashMap<>();
-        List<List<Description>> response = new ArrayList<>();
+    Map<String, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
+        Map<String, List<Description>> descriptionMap = new HashMap<>();
         for (BrowserDescriptionSearchResult concept : concepts) {
             String branch = "MAIN";
             String conceptId = concept.getConcept().getConceptId();
             Integer offset=0;
-            Integer limit = 100;
+            Integer limit = null;
 
             ItemsPageDescription response_item = null;
             try {
@@ -80,7 +79,7 @@ public class SnomedController {
                 e.printStackTrace();
             }
 
-            descriptionMap.put( concept, response_item != null ? response_item.getItems() : null);
+            descriptionMap.put( conceptId, response_item != null ? response_item.getItems() : null);
         }
 
         return descriptionMap;

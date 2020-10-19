@@ -64,7 +64,7 @@ public class ViewController {
         if(byId.isPresent()){
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
-            Map<BrowserDescriptionSearchResult, List<Description>> resultMap = snomedController.findSynonyms(resultList);
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             List<EquivalenceImpl> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);
             model.addAttribute("resMap", resultMap);
