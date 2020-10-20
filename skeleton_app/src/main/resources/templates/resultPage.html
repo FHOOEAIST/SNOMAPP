@@ -24,7 +24,7 @@
 <!-- Content including Result List -->
 <div class="container p-3">
 <div class="contentContainer" style="margin-top: 110px" >
-    <span th:text="'Number of results: ' + ${results.size()}">Number of results</span>
+    <span th:text="#{snomed.no_results} + ': ' + ${results.size()}">Number of results</span>
     <!-- Button to Open the Modal -->
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" >
         Open Mappings
@@ -32,7 +32,7 @@
     <div class="containerList" >
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
-            <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
+            <span th:text="#{snomed.display_name}': ' + ${result.getConcept().getFsn().getTerm()} + #{snomed.code} + ': ' + ${result.getConcept().getId()}">Result</span>
             <!--mapping exists YES
             <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(${result.getConcept().getConceptId()})}">
                     <i class="fas fa-check-circle"></i>
