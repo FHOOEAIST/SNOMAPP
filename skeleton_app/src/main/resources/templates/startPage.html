@@ -24,6 +24,24 @@
 
 <div class="container pt-3">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
+    <span th:text="#{lang.change}"></span>:
+    <select id="locales">
+        <option value=""></option>
+        <option value="en" th:text="#{lang.en}"></option>
+        <option value="de" th:text="#{lang.de}"></option>
+    </select>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#locales").change(function () {
+                const selectedOption = $('#locales').val();
+                if (selectedOption !== ''){
+                    window.location.replace('startPage?lang=' + selectedOption);
+                }
+            });
+        });
+    </script>
 </div>
 
 <body onload="startInterval()">
