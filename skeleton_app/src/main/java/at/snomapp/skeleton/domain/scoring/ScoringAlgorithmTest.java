@@ -1,10 +1,15 @@
 package at.snomapp.skeleton.domain.scoring;
 
+import java.util.HashMap;
+
 public class ScoringAlgorithmTest {
 
 
     public static void main(String[] args) {
-        ScoringAlgorithm scoringAlgorithm = new ScoringAlgorithmImpl();
+
+        ScoringModel scoringModel = new ScoringModel();
+        HashMap<ScoringAlgorithm, Integer> ratingCriteria = new HashMap<>();
+
 
         String seq1 = "test";
         String seq2 = "Kräutertee";
