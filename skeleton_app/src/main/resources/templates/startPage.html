@@ -22,40 +22,32 @@
 
 </head>
 
+<body onload="startInterval()">
+
 <div class="container pt-3">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
     <span th:text="#{lang.change}"></span>:
-    <select id="locales">
-        <option value=""></option>
-        <option value="en" th:text="#{lang.en}"></option>
-        <option value="de" th:text="#{lang.de}"></option>
-    </select>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#locales").change(function () {
-                const selectedOption = $('#locales').val();
-                if (selectedOption !== ''){
-                    window.location.replace('startPage?lang=' + selectedOption);
-                }
-            });
-        });
-    </script>
+    <ul class="language-menu">
+        <li>
+            <a class="dropdown-item" th:href="@{/(lang=de)}" th:text="#{lang.de}">German</a>
+        </li>
+        <li>
+            <a class="dropdown-item" th:href="@{/(lang=en)}" th:text="#{lang.en}">English</a>
+        </li>
+    </ul>
 </div>
 
-<body onload="startInterval()">
 <div class="container">
     <div class="input-group pt-3">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
-        <button class="btn btn-primary" onclick="search()" value="search">Suchen</button>
+        <input class="form-control" type="text" th:placeholder="#{appc.search}" aria-label="Search" id="searchbar" value="">
+        <button class="btn btn-primary" onclick="search()" value="search" th:text="#{appc.search}">Suchen</button>
     </div>
 </div>
 
 
 <div class="container" >
     <br>
-    <h5><span th:text="'APPC Version: ' + ${version}"></span></h5>
+    <h5><span th:text="#{appc.version} + ' ' + ${version}"></span></h5>
 </div>
 
 
@@ -250,10 +242,10 @@
             <div class="col-md-12">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true">Modality</a>
-                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false">Laterality</a>
-                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false">Procedures</a>
-                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false">Anatomy</a>
+                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true" th:text="#{appc.modality}">Modality</a>
+                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false" th:text="#{appc.laterality}">Laterality</a>
+                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false" th:text="#{appc.procedures}">Procedures</a>
+                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false" th:text="#{appc.anatomy}">Anatomy</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -316,15 +308,15 @@
 </section>
 
 <div class="container">
-    <h4>Import APPC</h4>
+    <h4 th:text="#{appc.import_csv}">Import APPC</h4>
     <div class="input-group">
         <div class="input-group-prepend">
-            <button class="btn btn-primary" type="button" id="btnUpload">Import</button>
+            <button class="btn btn-primary" type="button" id="btnUpload" th:text="#{appc.import}">Import</button>
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="inputGroupFile01"
                    aria-describedby="inputGroupFileAddon01">
-            <label id="lblImport" class="custom-file-label" for="inputGroupFile01">Choose file</label>
+            <label id="lblImport" class="custom-file-label" for="inputGroupFile01" th:text="#{appc.choose}">Choose file</label>
         </div>
     </div>
 </div>
