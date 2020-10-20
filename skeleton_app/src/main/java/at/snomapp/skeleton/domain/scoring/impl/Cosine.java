@@ -5,10 +5,22 @@ import org.apache.commons.text.similarity.CosineDistance;
 
 public class Cosine implements ScoringAlgorithm {
 
-    CosineDistance cosineDistance = new CosineDistance();
+    private CosineDistance cosineDistance = new CosineDistance();
+    private double weight;
+
+    public Cosine(double weight) {
+        this.weight = weight;
+    }
 
     @Override
-    public double calculateScore(String sequenceA, String sequenceB) {
+    public double getScore(String sequenceA, String sequenceB) {
         return cosineDistance.apply(sequenceA, sequenceB);
     }
+
+    @Override
+    public double getWeight() {
+        return weight;
+    }
+
+
 }

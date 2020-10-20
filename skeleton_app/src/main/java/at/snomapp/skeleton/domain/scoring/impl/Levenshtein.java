@@ -5,10 +5,21 @@ import org.apache.commons.text.similarity.LevenshteinDistance;
 
 public class Levenshtein implements ScoringAlgorithm {
 
-    LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+    private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
+    private double weight;
+
+    public Levenshtein(double weight) {
+        this.weight = weight;
+    }
 
     @Override
-    public double calculateScore(String sequenceA, String sequenceB) {
+    public double getScore(String sequenceA, String sequenceB) {
         return levenshteinDistance.apply(sequenceA, sequenceB);
     }
+
+    @Override
+    public double getWeight() {
+        return weight;
+    }
+
 }

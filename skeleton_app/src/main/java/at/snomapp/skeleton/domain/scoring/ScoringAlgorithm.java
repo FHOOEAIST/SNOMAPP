@@ -3,11 +3,12 @@ package at.snomapp.skeleton.domain.scoring;
 public interface ScoringAlgorithm {
 
     // a higher score indicates a greater distance
-    // 0 = total similarity e.g. Str1 = "foo" and Str2 = "foo"
-    // both string must not be null or empty
+    // 0 = total similarity e.g. Str1 = "foo" and Str2 = "foo" --> best score
+    // both string MUST NOT BE NULL or EMPTY
 
-    // levenshteinDistance and longestCommonSubsequenceDistance [0 ; infinite]
-    // jaccardDistance and cosineDistance  [0 ; 1]
+    // range of numbers levenshteinDistance and longestCommonSubsequenceDistance [0 ; infinite]
+    // range of numbers jaccardDistance and cosineDistance  [0 ; 1]
 
-    double calculateScore(String sequenceA, String sequenceB);
+    double getScore(String sequenceA, String sequenceB);
+    double getWeight();
 }

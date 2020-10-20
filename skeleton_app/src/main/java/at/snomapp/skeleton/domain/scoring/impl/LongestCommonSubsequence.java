@@ -5,11 +5,21 @@ import org.apache.commons.text.similarity.LongestCommonSubsequenceDistance;
 
 public class LongestCommonSubsequence implements ScoringAlgorithm {
 
-    LongestCommonSubsequenceDistance longestCommonSubsequenceDistance = new LongestCommonSubsequenceDistance();
+    private LongestCommonSubsequenceDistance longestCommonSubsequenceDistance = new LongestCommonSubsequenceDistance();
+    private double weight;
+
+    public LongestCommonSubsequence(double weight) {
+        this.weight = weight;
+    }
 
     @Override
-    public double calculateScore(String sequenceA, String sequenceB) {
+    public double getScore(String sequenceA, String sequenceB) {
         return longestCommonSubsequenceDistance.apply(sequenceA, sequenceB);
+    }
+
+    @Override
+    public double getWeight() {
+        return weight;
     }
 }
 
