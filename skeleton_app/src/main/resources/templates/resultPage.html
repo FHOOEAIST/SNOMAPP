@@ -30,6 +30,7 @@
         Open Mappings
     </button>
     <div class="containerList" >
+        <span th:text="#{snomed}">SNOMED</span>
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="#{snomed.display_name} + ': ' + ${result.getConcept().getFsn().getTerm()} + #{snomed.code} + ': ' + ${result.getConcept().getId()}">Result</span>
