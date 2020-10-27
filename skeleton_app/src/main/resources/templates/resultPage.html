@@ -72,14 +72,13 @@
                         <h5>Code: </h5>
                         <span th:text="${result.getConcept().getConceptId()}">Code</span>
                         </br>
-                        </br>
                         <h5>Prefered Term: </h5>
                         <span th:text="${result.getConcept().getFsn().getTerm()}">Code</span>
                         </br>
-                        </br>
                         <h5>Alias: </h5>
-                        <span>TODO Name</span>
-                        </br>
+                        <ul class="list" th:each="alias : ${resMap.get(result.getConcept().getConceptId())}">
+                        <li th:text="${alias.getTerm()}"></li>
+                        </ul>
                         </br>
                         <h5>Descriprion:</h5>
                         <p th:text="'Definition status: ' + ${result.getConcept().getDefinitionStatus()}">Definition status</p>

@@ -2,10 +2,7 @@ package at.snomapp.skeleton.restservice;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
-import io.swagger.client.model.BrowserDescriptionSearchResult;
-import io.swagger.client.model.CollectionDescription;
-import io.swagger.client.model.ItemsPageDescription;
-import io.swagger.client.model.PageBrowserDescriptionSearchResult;
+import io.swagger.client.model.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,11 +19,10 @@ import java.util.Map;
 public class SnomedController {
 
 
-    private DescriptionsApi api = new DescriptionsApi();
+    private final DescriptionsApi api = new DescriptionsApi();
 
     public SnomedController() {
-        // TODO: add our snowstorm URL here
-        //  api.getApiClient().setBasePath();
+        api.getApiClient().setBasePath("http://193.170.192.200:8080");
     }
 
     @GetMapping
@@ -62,18 +58,13 @@ public class SnomedController {
         return response != null ? response.getItems() : null;
     }
 
-
-/*
-TODO doesn't work with the current test server - fix when client is adapted.
-
-    Map<BrowserDescriptionSearchResult, CollectionDescription> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
-        Map<BrowserDescriptionSearchResult, CollectionDescription> descriptionMap = new HashMap<>();
-        List<CollectionDescription> response = new ArrayList<>();
+    Map<String, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
+        Map<String, List<Description>> descriptionMap = new HashMap<>();
         for (BrowserDescriptionSearchResult concept : concepts) {
             String branch = "MAIN";
             String conceptId = concept.getConcept().getConceptId();
             Integer offset=0;
-            Integer limit = 100;
+            Integer limit = null;
 
             ItemsPageDescription response_item = null;
             try {
@@ -82,10 +73,8 @@ TODO doesn't work with the current test server - fix when client is adapted.
                 e.printStackTrace();
             }
 
-            descriptionMap.put( concept, response_item != null ? response_item.getItems() : null);
+            descriptionMap.put( conceptId, response_item != null ? response_item.getItems() : null);
         }
-
         return descriptionMap;
     }
- */
 }

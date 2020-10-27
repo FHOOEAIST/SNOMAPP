@@ -58,6 +58,5 @@ public class CollectionDescription {
     }
     return o.toString().replace("\n", "\n    ");
   }
-
 }
 
