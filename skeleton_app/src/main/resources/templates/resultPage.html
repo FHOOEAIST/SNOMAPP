@@ -110,25 +110,24 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <span th:text="'APPC: ' + ${appc.getCode()} + ' - ' + ${appc.getDisplayName()}">APPC Element</span>
+                        <span id="appc" th:text="'APPC: ' + ${appc.getCode()} + ' - ' + ${appc.getDisplayName()}">APPC Element</span>
                         </br>
-                        <span th:text="'SNOMED: ' + ${result.getConcept().getConceptId()} + ' - ' + ${result.getConcept().getFsn().getTerm()}">SNOMED Element</span>
+                        <span id="snomed" th:text="'SNOMED: ' + ${result.getConcept().getConceptId()} + ' - ' + ${result.getConcept().getFsn().getTerm()}">SNOMED Element</span>
 
                         <!--Dropdown-->
                         <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Select Mapping
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">EQUIVALENT</a>
-                                <a class="dropdown-item" href="#">EQUAL</a>
-                                <a class="dropdown-item" href="#">WIDER</a>
-                                <a class="dropdown-item" href="#">SUBSUMES</a>
-                                <a class="dropdown-item" href="#">NARROWER</a>
-                                <a class="dropdown-item" href="#">SPECIALIZES</a>
-                                <a class="dropdown-item" href="#">INEXACT</a>
-                                <a class="dropdown-item" href="#">UNMATCH</a>
-                                <a class="dropdown-item" href="#">DISJOINT</a>
+                            <div>
+                                <select id="selectMap">
+                                    <option value="equivalent">EQUIVALENT</option>
+                                    <option value="equal">EQUAL</option>
+                                    <option value="wider">WIDER</option>
+                                    <option value="subsumes">SUBSUMES</option>
+                                    <option value="narrower">NARROWER</option>
+                                    <option value="specializes">SPECIALIZES</option>
+                                    <option value="inexact">INEXACT</option>
+                                    <option value="unmatch">UNMATCH</option>
+                                    <option value="disjoint">DISJOINT</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -138,7 +137,8 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                             <!--ToDo save mapping-->
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+                            <!-- IntellJ shows error, but it works -->
+                            <button type="button" th:attr="onclick=|submitMapping('${result.getConcept().getConceptId()}','${result.getConcept().getFsn().getTerm()}')|" class="btn btn-success" data-dismiss="modal">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -148,6 +148,28 @@
     </div>
 </div>
 </div>
+
+<script th:inline="javascript">
+    function submitMapping(snomedCode, snomedDisplayName) {
+        let mapElement = document.getElementById("selectMap");
+        let map = mapElement.options[mapElement.selectedIndex].value;
+        let appcCode = [[${appc.getCode()}]];
+        let appcAxis = [[${appc.getAxis()}]];
+
+        $.ajax(
+            {
+                method: "POST",
+                url: "ConceptMap/submit",
+                contentType: "application/json",
+                data: JSON.stringify({appcCode, appcAxis, snomedCode, map }),
+                success: function(response, textStatus, xhr){
+                        alert("Map successfully saved.");
+                },
+            }
+        );
+    }
+</script>
+
 
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">

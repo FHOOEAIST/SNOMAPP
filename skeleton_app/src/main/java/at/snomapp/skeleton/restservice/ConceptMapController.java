@@ -7,9 +7,16 @@ import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
+import io.swagger.client.model.Concept;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 @RestController
@@ -81,4 +88,84 @@ public class ConceptMapController {
         }
     }
 
+    @PostMapping("/submit")
+    @ResponseStatus(HttpStatus.CREATED)
+    ResponseEntity<HttpStatus> submitMapping(@RequestBody ConceptMapRequest object){
+        Iterator<ConceptMap> iterator = conceptMapRepo.findAll().iterator();
+        ConceptMap conceptMap;
+        if(!iterator.hasNext()){
+            conceptMap = new ConceptMapImpl("APPC", "SNOMED CT");
+        }
+        else {
+            conceptMap = iterator.next();
+        }
+        APPCElement appcElement = new APPCElement(object.appcCode, object.appcAxis);
+        SNOMEDElement snomedElement = new SNOMEDElement(object.snomedCode);
+        switch (object.map){
+            case "equivalent":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.EQUIVALENT);
+                break;
+            case "subsumes":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.SUBSUMES);
+                break;
+            case "wider":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.WIDER);
+                break;
+            case "equal":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.EQUAL);
+                break;
+            case "narrower":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.NARROWER);
+                break;
+            case "inexact":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.INEXACT);
+                break;
+            case "unmatch":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.UNMATCH);
+                break;
+            case "disjoint":
+                conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.DISJOINT);
+                break;
+        }
+        conceptMapRepo.save(conceptMap);
+        return ResponseEntity.ok(HttpStatus.OK);
+    }
+
+    private static class ConceptMapRequest {
+
+        String appcCode;
+        String snomedCode;
+        String map;
+        String appcAxis;
+
+        public String getAppcCode() {
+            return appcCode;
+        }
+
+        public String getSnomedCode() {
+            return snomedCode;
+        }
+
+        public String getMap() {
+            return map;
+        }
+
+        public String getAppcAxis() {
+            return appcAxis;
+        }
+
+        public void setAppcCode(String appcCode){
+            this.appcCode = appcCode;
+        }
+
+        public void setSnomedCode(String snomedCode){
+            this.snomedCode = snomedCode;
+        }
+
+        public void setMap(String map){
+            this.map = map;
+        }
+    }
 }
+
+
