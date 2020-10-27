@@ -72,7 +72,7 @@
                         <h5>Code: </h5>
                         <span th:text="${result.getConcept().getConceptId()}">Code</span>
                         </br>
-                        <h5>Prefered Term: </h5>
+                        <h5 th:text="#{prefered_term}">Prefered Term: </h5>
                         <span th:text="${result.getConcept().getFsn().getTerm()}">Code</span>
                         </br>
                         <h5>Alias: </h5>
@@ -80,11 +80,11 @@
                         <li th:text="${alias.getTerm()}"></li>
                         </ul>
                         </br>
-                        <h5>Descriprion:</h5>
+                        <h5 th:text="#{description}">Description:</h5>
                         <p th:text="'Definition status: ' + ${result.getConcept().getDefinitionStatus()}">Definition status</p>
                         <p th:text="'Module ID: ' + ${result.getConcept().getModuleId()}">Module ID</p>
-                        <p th:text="'Language code: ' + ${result.getLanguageCode()}">Language code</p>
-                        <a th:href="'https://browser.ihtsdotools.org/?perspective=full&conceptId1=' + ${result.getConcept().getConceptId()} + '&edition=MAIN/2020-07-31&release=&languages=en'">Link to Code</a>
+                        <p th:text="#{lang} +': ' + ${result.getLanguageCode()}">Language code</p>
+                        <a th:href="'https://browser.ihtsdotools.org/?perspective=full&conceptId1=' + ${result.getConcept().getConceptId()} + '&edition=MAIN/2020-07-31&release=&languages=en'" th:text="#{link}">Link to Code</a>
                     </div>
 
                     <!-- Modal footer -->
