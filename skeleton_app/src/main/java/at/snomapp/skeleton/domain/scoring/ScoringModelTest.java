@@ -12,9 +12,9 @@ public class ScoringModelTest {
 
     public static void test (ScoringModel model, String str1, String str2){
         // calculate weightedScore
-        Double weightedScore = model.calculateWeightedScore(str1, str2);
+        int weightedScore = model.calculateWeightedScore(str1, str2);
         // calculate unweightedScore
-        Double unweightedScore = model.calculateUnweightedScore(str1, str2);
+        int unweightedScore = model.calculateUnweightedScore(str1, str2);
 
         System.out.println("Str1: " + str1 + " Str2: " + str2);
         System.out.println("Weighted Score: " + weightedScore);
@@ -32,10 +32,9 @@ public class ScoringModelTest {
         algorithms.add(new LongestCommonSubsequence(0.7));
 
         ScoringModel scoringModel = new ScoringModel(algorithms);
-
         test(scoringModel, "foo", "foo");
         test(scoringModel, "test", "blablabla");
-        test(scoringModel, "hallo", "hello");
+        test(scoringModel, "", null);
 
     }
 }

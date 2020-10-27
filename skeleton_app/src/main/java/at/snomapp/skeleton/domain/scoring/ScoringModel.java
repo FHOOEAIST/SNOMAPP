@@ -12,24 +12,30 @@ public class ScoringModel {
     }
 
     // calculates sum of scores of all applied algorithms
-    double calculateWeightedScore(String sequenceA, String sequenceB){
+    public int calculateWeightedScore(String sequenceA, String sequenceB){
+        if (sequenceA == null || sequenceB == null || sequenceA == "" || sequenceB == ""){
+            return 0;
+        }
+
         double result = 0;
         for (ScoringAlgorithm algorithm : algorithms){
             // calculate weighted points
             result += algorithm.getScore(sequenceA, sequenceB) * algorithm.getWeight();
-            //System.out.println(algorithm.getClass().getName() + " " + algorithm.getScore(sequenceA, sequenceB) * algorithm.getWeight());
         }
-        return result;
+        return (int) result;
     }
 
-    double calculateUnweightedScore(String sequenceA, String sequenceB){
+    public int calculateUnweightedScore(String sequenceA, String sequenceB){
+        if (sequenceA == null || sequenceB == null || sequenceA == "" || sequenceB == ""){
+            return 0;
+        }
+
         double result = 0;
-        for (ScoringAlgorithm algorithm : algorithms){
+        for (ScoringAlgorithm algorithm : algorithms) {
             // calculate unweighted points
             result += algorithm.getScore(sequenceA, sequenceB);
-            //System.out.println(algorithm.getClass().getName() + " " + algorithm.getScore(sequenceA, sequenceB));
         }
-        return result;
+        return (int) result;
     }
 
 
