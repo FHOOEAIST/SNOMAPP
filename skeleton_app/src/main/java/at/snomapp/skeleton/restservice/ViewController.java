@@ -35,13 +35,17 @@ public class ViewController {
     @GetMapping("/startPage")
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
-        //model.addAttribute("roots", appcController.getTree().getRoots());
-        APPCTree tree = appcController.getTree();
-        model.addAttribute("anatomy", tree.getAnatomyJsonString());
-        model.addAttribute("laterality", tree.getLateralityJsonString());
-        model.addAttribute("modality", tree.getModalityJsonString());
-        model.addAttribute("procedure", tree.getProcedureJsonString());
-        model.addAttribute("version", tree.getVersion());
+
+        try {
+            APPCTree tree = appcController.getTree();
+            model.addAttribute("anatomy", tree.getAnatomyJsonString());
+            model.addAttribute("laterality", tree.getLateralityJsonString());
+            model.addAttribute("modality", tree.getModalityJsonString());
+            model.addAttribute("procedure", tree.getProcedureJsonString());
+            model.addAttribute("version", tree.getVersion());
+        }catch (Exception e){
+            model.addAttribute("version", "not loaded");
+        }
         return "startPage";
     }
 
