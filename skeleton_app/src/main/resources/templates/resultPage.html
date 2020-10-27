@@ -18,24 +18,6 @@
 <!-- HeaderImage -->
 <div class="container fixed-top pt-3" style="background-color: white">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}"  height="100px" width="300px" >
-    <span th:text="#{lang.change}"></span>:
-    <select id="locales">
-        <option value=""></option>
-        <option value="en" th:text="#{lang.en}"></option>
-        <option value="de" th:text="#{lang.de}"></option>
-    </select>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-    </script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#locales").change(function () {
-                const selectedOption = $('#locales').val();
-                if (selectedOption !== ''){
-                    window.location.replace('startPage?lang=' + selectedOption);
-                }
-            });
-        });
-    </script>
 </div>
 
 
@@ -44,13 +26,13 @@
 <div class="contentContainer" style="margin-top: 110px" >
     <span th:text="#{snomed.no_results} + ': ' + ${results.size()}">Number of results</span>
     <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" >
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
         Open Mappings
     </button>
     <div class="containerList" >
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
-            <span th:text="#{snomed.display_name}': ' + ${result.getConcept().getFsn().getTerm()} + #{snomed.code} + ': ' + ${result.getConcept().getId()}">Result</span>
+            <span th:text="#{snomed.display_name} + ': ' + ${result.getConcept().getFsn().getTerm()} + #{snomed.code} + ': ' + ${result.getConcept().getId()}">Result</span>
             <!--mapping exists YES
             <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(${result.getConcept().getConceptId()})}">
                     <i class="fas fa-check-circle"></i>
@@ -81,7 +63,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Description</h4>
+                        <h4 class="modal-title" th:text="#{description}">Description</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -134,7 +116,7 @@
 
                         <!--Dropdown-->
                         <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" th:text="#{mapping.select}">
                                 Select Mapping
                             </button>
                             <div class="dropdown-menu">
@@ -154,9 +136,9 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
                             <!--ToDo save mapping-->
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Submit</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -170,7 +152,7 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
     <div class="float-right" >
-        <a href="startPage"><button type="button" class="btn btn-primary" >Back to Startpage</button></a>
+        <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
 
@@ -188,13 +170,13 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <span th:text="'Displayname: ' + ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
+                <span th:text="#{snomed.display_name} + ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
                 <table class="table-hover table-bordered">
                     <thead >
                     <tr>
                         <th scope="col">SNOMED Code</th>
-                        <th scope="col">Displayname</th>
-                        <th scope="col">Mapping</th>
+                        <th scope="col" th:text="#{snomed.display_name}">Displayname</th>
+                        <th scope="col" th:text="#{mapping}">Mapping</th>
                     </tr>
                     </thead>
                     <tbody th:each="mapping : ${mappings}">
@@ -210,7 +192,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-               <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
 
             </div>
 

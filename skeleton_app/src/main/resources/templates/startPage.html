@@ -12,6 +12,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="/css/bstreeview.css" rel="stylesheet">
+    <link href="/styles/list.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -24,17 +25,17 @@
 
 <body onload="startInterval()">
 
-<div class="container pt-3">
+<div class="container pt-3" id="header">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
-    <span th:text="#{lang.change}"></span>:
-    <ul class="language-menu">
-        <li>
-            <a class="dropdown-item" th:href="@{/(lang=de)}" th:text="#{lang.de}">German</a>
-        </li>
-        <li>
-            <a class="dropdown-item" th:href="@{/(lang=en)}" th:text="#{lang.en}">English</a>
-        </li>
-    </ul>
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{lang.change}">
+            Change Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" th:href="'?lang=de'" th:text="#{lang.de}">German</a>
+            <a class="dropdown-item" th:href="'?lang=en'" th:text="#{lang.en}">English</a>
+        </div>
+    </div>
 </div>
 
 <div class="container">
