@@ -16,7 +16,7 @@ public class ConceptMapTest {
 
         ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
         APPCElement appcElement = new APPCElement(appc,"anatomy");
-        SNOMEDElement snomedElement = new SNOMEDElement(snomed);
+        SNOMEDElement snomedElement = new SNOMEDElement(snomed, "displayName");
         map.addMapping(appcElement,snomedElement,EquivalenceType.WIDER);
 
         System.out.println(map);
@@ -31,9 +31,9 @@ public class ConceptMapTest {
 
         ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
         APPCElement appcElement = new APPCElement(appc,"anatomy");
-        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed);
-        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2);
-        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3);
+        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed, "displayName");
+        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2, "displayName");
+        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3, "displayName");
         map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
         map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
         map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);

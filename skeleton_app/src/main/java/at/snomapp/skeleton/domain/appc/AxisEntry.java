@@ -9,7 +9,7 @@ public class AxisEntry extends Entry{
     }
 
     public AxisEntry(String displayName) {
-        super(displayName, null);
+        super(displayName, null, null);
     }
 
     @Override

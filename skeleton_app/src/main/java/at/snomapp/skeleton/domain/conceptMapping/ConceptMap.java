@@ -6,6 +6,7 @@ import org.neo4j.ogm.annotation.NodeEntity;
 
 import java.io.IOException;
 
+@NodeEntity
 public interface ConceptMap {
     String getSource();
     String getDestination();

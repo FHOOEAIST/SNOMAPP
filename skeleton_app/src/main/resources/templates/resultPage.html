@@ -34,17 +34,17 @@
     <div class="containerList" >
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
-            <span th:text="#{snomed.display_name} + ': ' + ${result.getConcept().getFsn().getTerm()} + #{snomed.code} + ': ' + ${result.getConcept().getId()}">Result</span>
-            <!--mapping exists YES
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(${result.getConcept().getConceptId()})}">
+            <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
+            <!--mapping exists YES-->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-check-circle"></i>
-            </span>-->
-            <!--mapping exists NO-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="true">
+            </span>
+            <!--mapping exists NO -->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-times-circle"></i>
                 </span>
 
-            <!--Info-->
+            <!-- Info-->
             <span class="content float-right pr-3" data-toggle="tooltip" title="Description" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description" th:attr="data-target='#description'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-info-circle" ></i></button>
@@ -111,25 +111,24 @@
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                        <span th:text="'APPC: ' + ${appc.getCode()} + ' - ' + ${appc.getDisplayName()}">APPC Element</span>
+                        <span id="appc" th:text="'APPC: ' + ${appc.getCode()} + ' - ' + ${appc.getDisplayName()}">APPC Element</span>
                         </br>
-                        <span th:text="'SNOMED: ' + ${result.getConcept().getConceptId()} + ' - ' + ${result.getConcept().getFsn().getTerm()}">SNOMED Element</span>
+                        <span id="snomed" th:text="'SNOMED: ' + ${result.getConcept().getConceptId()} + ' - ' + ${result.getConcept().getFsn().getTerm()}">SNOMED Element</span>
 
                         <!--Dropdown-->
                         <div class="dropdown">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" th:text="#{mapping.select}">
-                                Select Mapping
-                            </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">EQUIVALENT</a>
-                                <a class="dropdown-item" href="#">EQUAL</a>
-                                <a class="dropdown-item" href="#">WIDER</a>
-                                <a class="dropdown-item" href="#">SUBSUMES</a>
-                                <a class="dropdown-item" href="#">NARROWER</a>
-                                <a class="dropdown-item" href="#">SPECIALIZES</a>
-                                <a class="dropdown-item" href="#">INEXACT</a>
-                                <a class="dropdown-item" href="#">UNMATCH</a>
-                                <a class="dropdown-item" href="#">DISJOINT</a>
+                            <div>
+                                <select id="selectMap">
+                                    <option value="equivalent">EQUIVALENT</option>
+                                    <option value="equal">EQUAL</option>
+                                    <option value="wider">WIDER</option>
+                                    <option value="subsumes">SUBSUMES</option>
+                                    <option value="narrower">NARROWER</option>
+                                    <option value="specializes">SPECIALIZES</option>
+                                    <option value="inexact">INEXACT</option>
+                                    <option value="unmatch">UNMATCH</option>
+                                    <option value="disjoint">DISJOINT</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -139,7 +138,8 @@
                         <div class="btn-group">
                             <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
                             <!--ToDo save mapping-->
-                            <button type="button" class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
+                            <!-- IntellJ shows error, but it works -->
+                            <button type="button" th:attr="onclick=|submitMapping('${result.getConcept().getConceptId()}','${result.getConcept().getFsn().getTerm()}')|" class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -149,6 +149,28 @@
     </div>
 </div>
 </div>
+
+<script th:inline="javascript">
+    function submitMapping(snomedCode, snomedDisplayName) {
+        let mapElement = document.getElementById("selectMap");
+        let map = mapElement.options[mapElement.selectedIndex].value;
+        let appcCode = [[${appc.getCode()}]];
+        let appcAxis = [[${appc.getAxis()}]];
+
+        $.ajax(
+            {
+                method: "POST",
+                url: "ConceptMap/submit",
+                contentType: "application/json",
+                data: JSON.stringify({appcCode, appcAxis, snomedCode, snomedDisplayName, map }),
+                success: function(response, textStatus, xhr){
+                        alert("Map successfully saved.");
+                },
+            }
+        );
+    }
+</script>
+
 
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
@@ -180,12 +202,11 @@
                         <th scope="col" th:text="#{mapping}">Mapping</th>
                     </tr>
                     </thead>
-                    <tbody th:each="mapping : ${mappings}">
+                    <tbody th:each="map : ${mapps}">
                     <tr >
-                        <td th:text="${mapping.getDestination().getCode()}">Code
-                        </td>
-                        <td>Example</td>
-                        <td th:text="${mapping.getEquivalence().toString()}">equivalence</td>
+                        <td th:text="${map.values().toArray()[2]}">Code</td>
+                        <td th:text="${map.values().toArray()[0]}"></td>
+                        <td th:text="${map.values().toArray()[1]}">equivalence</td>
                     </tr>
                     </tbody>
                 </table>
