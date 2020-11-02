@@ -33,7 +33,7 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-02T10:22:15.067Z")
 public class ItemsPageConceptMini {
   @SerializedName("items")
-  private CollectionConceptMini items = null;
+  private List<ConceptMini> items = null;
 
   @SerializedName("limit")
   private Long limit = null;
@@ -50,7 +50,7 @@ public class ItemsPageConceptMini {
   @SerializedName("total")
   private Long total = null;
 
-  public ItemsPageConceptMini items(CollectionConceptMini items) {
+  public ItemsPageConceptMini items(List<ConceptMini> items) {
     this.items = items;
     return this;
   }
@@ -60,11 +60,11 @@ public class ItemsPageConceptMini {
    * @return items
   **/
   @ApiModelProperty(value = "")
-  public CollectionConceptMini getItems() {
+  public List<ConceptMini> getItems() {
     return items;
   }
 
-  public void setItems(CollectionConceptMini items) {
+  public void setItems(List<ConceptMini> items) {
     this.items = items;
   }
 

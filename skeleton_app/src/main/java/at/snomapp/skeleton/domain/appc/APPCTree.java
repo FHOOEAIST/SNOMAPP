@@ -2,16 +2,21 @@ package at.snomapp.skeleton.domain.appc;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
-import netscape.javascript.JSObject;
 
 import java.util.*;
 
 public class APPCTree  {
     private final String language;
 
+    private String version;
+
     public String getLanguage() {
         return language;
     }
+
+    public void setVersion(String version) { this.version = version; }
+
+    public String getVersion() { return version; }
 
     public void setModality(AxisEntry modality) {
         this.modality = modality;
@@ -92,7 +97,7 @@ public class APPCTree  {
 
 
 
-    //build json tree out of entry
+    // build json tree out of entry
     public JSONObject entryToJsonString (Entry entry){
         if (entry == null) {
             return null;
@@ -100,7 +105,7 @@ public class APPCTree  {
 
         LinkedHashMap<String, Object> map = new LinkedHashMap();
 
-        //array which contains all children of a node
+        // array which contains all children of a node
         JSONArray array = new JSONArray();
         if (entry.getChildren() != null) {
             for (Entry children : entry.getChildren()) {
@@ -111,20 +116,22 @@ public class APPCTree  {
             }
         }
 
-        //text element in each node
-        map.put("text", entry.getDisplayName());
+        // text element in each node
+        // TODO: 06.10.2020 hacky way of getting the id of a code to frontend: consider alternatives
+        map.put("text", "APPC " + entry.getCode() + " " + entry.getDisplayName()
+                + "<div style=\"display:none\">" + entry.getId() + "</div>");
 
-        //nodes element in nodes which have children
+        // nodes element in nodes which have children
         if (array.size() > 0){
             map.put("nodes", array);
         }
         return new JSONObject(map);
     }
 
-    //build json tree out of axis
+    // build json tree out of axis
     private JSONArray axisToJsonString(Set<Entry> axis){
         JSONArray jsonArray = new JSONArray();
-        //iterate over all axis and build json tree for all axis
+        // iterate over all axis and build json tree for all axis
         for (Entry entry : axis){
             jsonArray.add(entryToJsonString(entry));
         }

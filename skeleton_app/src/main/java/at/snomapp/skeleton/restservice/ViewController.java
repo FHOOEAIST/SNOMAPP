@@ -2,12 +2,14 @@ package at.snomapp.skeleton.restservice;
 
 
 import at.snomapp.skeleton.domain.appc.APPCEntry;
+import at.snomapp.skeleton.domain.appc.APPCTree;
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
-import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
+import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,12 +19,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 @Controller
 public class ViewController {
 
-    private APPCRepo repo;
+    private final APPCRepo repo;
     private ConceptMapRepo Conceptmaprepo;
     private MappingRepo mappingRepo;
 
@@ -32,11 +35,17 @@ public class ViewController {
     @GetMapping("/startPage")
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
-        //model.addAttribute("roots", appcController.getTree().getRoots());
-        model.addAttribute("anatomy", appcController.getTree().getAnatomyJsonString());
-        model.addAttribute("laterality", appcController.getTree().getLateralityJsonString());
-        model.addAttribute("modality", appcController.getTree().getModalityJsonString());
-        model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
+
+        try {
+            APPCTree tree = appcController.getTree();
+            model.addAttribute("anatomy", tree.getAnatomyJsonString());
+            model.addAttribute("laterality", tree.getLateralityJsonString());
+            model.addAttribute("modality", tree.getModalityJsonString());
+            model.addAttribute("procedure", tree.getProcedureJsonString());
+            model.addAttribute("version", tree.getVersion());
+        }catch (Exception e){
+            model.addAttribute("version", "not loaded");
+        }
         return "startPage";
     }
 
@@ -53,17 +62,24 @@ public class ViewController {
     }
 
     @GetMapping("/resultPage")
-    public String resultPage(Model model, APPCEntry element){
+    public String resultPage(@RequestParam Long id, Model model){
         ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
-        List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye");
-        List<EquivalenceImpl> mappings = new ArrayList<>();
 
-        model.addAttribute("results",resultList);
-        model.addAttribute("appc", element);
-        //ToDo
-        model.addAttribute("mappings", mappings);
+        Optional<Entry> byId = repo.findById(id);
+        if(byId.isPresent()){
+            Entry entry = byId.get();
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
+            List<EquivalenceImpl> mappings = new ArrayList<>();
+            model.addAttribute("results",resultList);
+            model.addAttribute("resMap", resultMap);
+            model.addAttribute("appc", entry);
+            //ToDo
+            model.addAttribute("mappings", mappings);
+        }
 
+        // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
     }
 

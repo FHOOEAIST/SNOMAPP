@@ -1,285 +1,286 @@
-Modality;0;0;;;;;undefined;;;;;;;;;;;;;;;
-;1;1;;;;;X-Ray;;;;;;;;;;;;;;;
-;2;2;;;;;CT;;;;;;;;;;;;;;;
-;3;3;;;;;MRI;;;;;;;;;;;;;;;
-;4;4;;;;;ultrasound;;;;;;;;;;;;;;;
-;5;5;;;;;nuclear medicine;;;;;;;;;;;;;;;
-;6;6;;;;;PET;;;;;;;;;;;;;;;
-Laterality;0;0;;;;;undefined;;;;;;;;;;;;;;;
-;1;1;;;;;right;;;;;;;;;;;;;;;
-;2;2;;;;;left;;;;;;;;;;;;;;;
-;3;3;;;;;biliteral;;;;;;;;;;;;;;;
-;4;4;;;;;unpaired organ;;;;;;;;;;;;;;;
-;5;5;;;;;atypical situation (e.g. transplant );;;;;;;;;;;;;;;
-Procedures;0;0;;;;;undefined;;;;;;;;;;;;;;;
-;0-1;0;1;;;;conventional tomography;;;;;;;;;;;;;;;
-;1;1;;;;;imaging of preformed ductal structures;;;;;;;;;;;;;;;
-; 1-1;1;1;;;;enteroklysis;;;;;;;;;;;;;;;
-; 1-2;1;2;;;;imaging of vessels;;;;;;;;;;;;;;;
-; 1-2-1;1;2;1;;;imaging of arteries;;;;;;;;;;;;;;;
-;1-2-1-1;1;2;1;1;;without contrast (color coded Doppler, phase contrast MRI etc);;;;;;;;;;;;;;;
-;1-2-1-2;1;2;1;2;;with contrast material (i.v. MR angio, iv. DSA etc.);;;;;;;;;;;;;;;
-;1-2-1-3;1;2;1;3;;catheter (invasiv, selective etc.);;;;;;;;;;;;;;;
-; 1-2-2;1;2;2;;;imaging of veins;;;;;;;;;;;;;;;
-; 1-2-2-1;1;2;2;1;;without contrast (color coded Doppler, phase contrast MRI etc.) ;;;;;;;;;;;;;;;
-; 1-2-2-2;1;2;2;2;;with contrast material (phlebography etc.);;;;;;;;;;;;;;;
-; 1-2-2-3;1;2;2;3;;catheter (invasiv, selective etc.);;;;;;;;;;;;;;;
-; 1-2-3;1;2;3;;;imaging of lymphatic vessels;;;;;;;;;;;;;;;
-; 1-2-3-1;1;2;3;1;;without contrast;;;;;;;;;;;;;;;
-; 1-2-3-2;1;2;3;2;;with contrast material;;;;;;;;;;;;;;;
-; 1-2-3-3;1;2;3;3;;catheter;;;;;;;;;;;;;;;
-; 1-3;1;3;;;;fistulography;;;;;;;;;;;;;;;
-; 1-4;1;4;;;;myelography;;;;;;;;;;;;;;;
-; 1-5;1;5;;;;arthrography;;;;;;;;;;;;;;;
+1.0.8
+Modality;0;0;;;;;undefined;;;;;;;;;;;;;;;,,,
+;1;1;;;;;X-Ray;;;;;;;;;;;;;;;,,,
+;2;2;;;;;CT;;;;;;;;;;;;;;;,,,
+;3;3;;;;;MRI;;;;;;;;;;;;;;;,,,
+;4;4;;;;;ultrasound;;;;;;;;;;;;;;;,,,
+;5;5;;;;;nuclear medicine;;;;;;;;;;;;;;;,,,
+;6;6;;;;;PET;;;;;;;;;;;;;;;,,,
+Laterality;0;0;;;;;undefined;;;;;;;;;;;;;;;,,,
+;1;1;;;;;right;;;;;;;;;;;;;;;,,,
+;2;2;;;;;left;;;;;;;;;;;;;;;,,,
+;3;3;;;;;biliteral;;;;;;;;;;;;;;;,,,
+;4;4;;;;;unpaired organ;;;;;;;;;;;;;;;,,,
+;5;5;;;;;atypical situation (e.g. transplant );;;;;;;;;;;;;;;,,,
+Procedures;0;0;;;;;undefined;;;;;;;;;;;;;;;,,,
+;0-1;0;1;;;;conventional tomography;;;;;;;;;;;;;;;,,,
+;1;1;;;;;imaging of preformed ductal structures;;;;;;;;;;;;;;;,,,
+; 1-1;1;1;;;;enteroklysis;;;;;;;;;;;;;;;,,,
+; 1-2;1;2;;;;imaging of vessels;;;;;;;;;;;;;;;,,,
+; 1-2-1;1;2;1;;;imaging of arteries;;;;;;;;;;;;;;;,,,
+;1-2-1-1;1;2;1;1;;without contrast (color coded Doppler, phase contrast MRI etc);;;;;;;;;;;;;;;,,
+;1-2-1-2;1;2;1;2;;with contrast material (i.v. MR angio, iv. DSA etc.);;;;;;;;;;;;;;;,,
+;1-2-1-3;1;2;1;3;;catheter (invasiv, selective etc.);;;;;;;;;;;;;;;,,
+; 1-2-2;1;2;2;;;imaging of veins;;;;;;;;;;;;;;;,,,
+; 1-2-2-1;1;2;2;1;;without contrast (color coded Doppler, phase contrast MRI etc.) ;;;;;;;;;;;;;;;,,
+; 1-2-2-2;1;2;2;2;;with contrast material (phlebography etc.);;;;;;;;;;;;;;;,,,
+; 1-2-2-3;1;2;2;3;;catheter (invasiv, selective etc.);;;;;;;;;;;;;;;,,
+; 1-2-3;1;2;3;;;imaging of lymphatic vessels;;;;;;;;;;;;;;;,,,
+; 1-2-3-1;1;2;3;1;;without contrast;;;;;;;;;;;;;;;,,,
+; 1-2-3-2;1;2;3;2;;with contrast material;;;;;;;;;;;;;;;,,,
+; 1-2-3-3;1;2;3;3;;catheter;;;;;;;;;;;;;;;,,,
+; 1-3;1;3;;;;fistulography;;;;;;;;;;;;;;;,,,
+; 1-4;1;4;;;;myelography;;;;;;;;;;;;;;;,,,
+; 1-5;1;5;;;;arthrography;;;;;;;;;;;;;;;,,,
 ; 1-6;1;6;;;;retrograde contrast application (e.g. pyelography, urethrography, vesicography, ureterography);;;;;;;;;;;;;;;
-; 1-7;1;7;;;;endocavitary application;;;;;;;;;;;;;;;
-;2;2;;;;;quantitative analyses / secondary reconstructions from imaging data;;;;;;;;;;;;;;;
-; 2-1;2;1;;;;osteodensitometry;;;;;;;;;;;;;;;
-; 2-2;2;2;;;;dental CT;;;;;;;;;;;;;;;
-; 2-3;2;3;;;;recalculations from datasets;;;;;;;;;;;;;;;
-; 2-3-1;2;3;1;;;volumetry;;;;;;;;;;;;;;;
+; 1-7;1;7;;;;endocavitary application;;;;;;;;;;;;;;;,,,
+;2;2;;;;;quantitative analyses / secondary reconstructions from imaging data;;;;;;;;;;;;;;;,,,
+; 2-1;2;1;;;;osteodensitometry;;;;;;;;;;;;;;;,,,
+; 2-2;2;2;;;;dental CT;;;;;;;;;;;;;;;,,,
+; 2-3;2;3;;;;recalculations from datasets;;;;;;;;;;;;;;;,,,
+; 2-3-1;2;3;1;;;volumetry;;;;;;;;;;;;;;;,,,
 ; 2-3-2;2;3;2;;;color coding, flow measurements, intensity profiles, perfusion time-density profiles;;;;;;;;;;;;;;;
-; 2-3-3;2;3;3;;;MPR;;;;;;;;;;;;;;;
-; 2-3-4;2;3;4;;;3D / 4D;;;;;;;;;;;;;;;
-; 2-3-5;2;3;5;;;HR;;;;;;;;;;;;;;;
-; 2-3-6;2;3;6;;;recalculated images of vessels and ducts;;;;;;;;;;;;;;;
-; 2-3-7;2;3;7;;;virtual endoskopy;;;;;;;;;;;;;;;
-; 2-3-8;2;3;8;;;measurements of angles and axes;;;;;;;;;;;;;;;
-; 2-4;2;4;;;;spectroscopy;;;;;;;;;;;;;;;
-; 2-5;2;5;;;;videographic assessment of movement studies;;;;;;;;;;;;;;;
-; 2-6;2;6;;;;image fusion;;;;;;;;;;;;;;;
-; 2-7;2;7;;;;navigation;;;;;;;;;;;;;;;
-;3;3;;;;;documentation of interventions via artificial access;;;;;;;;;;;;;;;
-; 3-1;3;1;;;;needle biopsy / puncture;;;;;;;;;;;;;;;
-; 3-2;3;2;;;;vacuum assisted needle biopsy;;;;;;;;;;;;;;;
-; 3-3;3;3;;;;(long term-) catheter / placement / stomach;;;;;;;;;;;;;;;
-; 3-3-1;3;3;1;;;permcath;;;;;;;;;;;;;;;
-; 3-3-2;3;3;2;;;portacath;;;;;;;;;;;;;;;
-; 3-3-3;3;3;3;;;catheter - drainage;;;;;;;;;;;;;;;
-; 3-3-4;3;3;4;;;TIPPS;;;;;;;;;;;;;;;
-; 3-3-5;3;3;5;;;percutaneous gastrostomy;;;;;;;;;;;;;;;
-; 3-3-6;3;3;6;;;nephrostomy;;;;;;;;;;;;;;;
-; 3-3-7;3;3;7;;;pacemaker;;;;;;;;;;;;;;;
-; 3-3-8;3;3;8;;;endovascular ultrasound;;;;;;;;;;;;;;;
-; 3-4;3;4;;;;bougienage;;;;;;;;;;;;;;;
-; 3-5;3;5;;;;dilatation / recanalisation / removement of calculi / foreign bodies;;;;;;;;;;;;;;;
-; 3-5-1;3;5;1;;;thrombo-fibrinolysis;;;;;;;;;;;;;;;
-; 3-5-2;3;5;2;;;embolektomy / thrombektomy / recanalisation;;;;;;;;;;;;;;;
-; 3-5-3;3;5;3;;;balloon dilatation;;;;;;;;;;;;;;;
-; 3-5-4;3;5;4;;;stent;;;;;;;;;;;;;;;
-; 3-5-5;3;5;5;;;stentgraft;;;;;;;;;;;;;;;
-; 3-5-6;3;5;6;;;filter (vena cava filter);;;;;;;;;;;;;;;
-; 3-5-7;3;5;7;;;removement of calculi or foreign bodies;;;;;;;;;;;;;;;
-; 3-6;3;6;;;;embolisation;;;;;;;;;;;;;;;
-; 3-6-1;3;6;1;;;organ;;;;;;;;;;;;;;;
-; 3-6-2;3;6;2;;;aneurysm;;;;;;;;;;;;;;;
-; 3-6-3;3;6;3;;;arterio-venos malformation;;;;;;;;;;;;;;;
-; 3-7;3;7;;;;local application of drugs / energy / local sampling;;;;;;;;;;;;;;;
-; 3-7-1;3;7;1;;;nukleolysis;;;;;;;;;;;;;;;
-; 3-7-2;3;7;2;;;blockade of ganglia (ganglia block);;;;;;;;;;;;;;;
-; 3-7-3;3;7;3;;;facet joints (facet joint intervention(infiltration));;;;;;;;;;;;;;;
-; 3-7-4;3;7;4;;;radiofrequency ablation / thermoablation;;;;;;;;;;;;;;;
-; 3-7-5;3;7;5;;;cryoablation;;;;;;;;;;;;;;;
-; 3-7-6;3;7;6;;;laserablation;;;;;;;;;;;;;;;
-; 3-7-7;3;7;7;;;alcoholablation;;;;;;;;;;;;;;;
-; 3-7-8;3;7;8;;;venous sampling;;;;;;;;;;;;;;;
-; 3-8;3;8;;;;vertebroplasty, kyphoplasty;;;;;;;;;;;;;;;
-; 3-9;3;9;;;;markers;;;;;;;;;;;;;;;
-; 3-9-1;3;9;1;;;wire;;;;;;;;;;;;;;;
-; 3-9-2;3;9;2;;;colored particles (dye);;;;;;;;;;;;;;;
-; 3-9-3;3;9;3;;;radioactive substances (radiopharmaceutical particles);;;;;;;;;;;;;;;
-;4;4;;;;;nuclear medicine / imaging witch radioactive tracers;;;;;;;;;;;;;;;
-; 4-1;4;1;;;;perfusion;;;;;;;;;;;;;;;
-; 4-2;4;2;;;;metabolism / organ function;;;;;;;;;;;;;;;
-; 4-3;4;3;;;;bone scan;;;;;;;;;;;;;;;
-; 4-3-1;4;3;1;;;multiple phase;;;;;;;;;;;;;;;
-; 4-3-2;4;3;2;;;static;;;;;;;;;;;;;;;
-; 4-4;4;4;;;;receptor scintigraphy;;;;;;;;;;;;;;;
-; 4-5;4;5;;;;renal scintigraphy;;;;;;;;;;;;;;;
-; 4-5-1;4;5;1;;;dynamic (ING, CNG, DNG);;;;;;;;;;;;;;;
-; 4-5-2;4;5;2;;;static (DMSA);;;;;;;;;;;;;;;
-; 4-5-3;4;5;3;;;indirect radionuclide cystography;;;;;;;;;;;;;;;
-; 4-6;4;6;;;;ventilation;;;;;;;;;;;;;;;
-; 4-7;4;7;;;;GI transit;;;;;;;;;;;;;;;
-; 4-8;4;8;;;;bone marrow scintigraphy;;;;;;;;;;;;;;;
-; 4-9;4;9;;;;lymph scintigraphy;;;;;;;;;;;;;;;
-; 4-10;4;10;;;;CSF radionuclide scintigraphy;;;;;;;;;;;;;;;
-; 4-11;4;11;;;;gallium scan;;;;;;;;;;;;;;;
-; 4-12;4;12;;;;Meckel's diverticulum scintigraphy;;;;;;;;;;;;;;;
-; 4-13;4;13;;;;labelled blood cells (GI tract bleeding scintigraphy, leukocyt scintigraphy, Platelet scintigraphy);;;;;;;;;;;;;;;
-; 4-14;4;14;;;;direct radionuclide cystography;;;;;;;;;;;;;;;
-; 4-15;4;15;;;;iodine whole body scan;;;;;;;; 6-1-1;6;1;1;;;intracarnial;
-; 4-16;4;16;;;;myocardial scintigraphy;;;;;;;; 6-1-1-1;6;1;1;1;;anterior cerebral artery;
-; 4-16-1;4;16;1;;;myocardial perfusion scintigraphy;;;;;;;; 6-1-1-2;6;1;1;2;;middle cerebral artery;
-; 4-16-2;4;16;2;;;radionuclide ventriculography;;;;;;;; 6-1-1-3;6;1;1;3;;posteroir cerebral artery;
-; 4-16-3;4;16;3;;;gated myocardial SPECT;;;;;;;; 6-1-1-4;6;1;1;4;;basilar artery;
-Anatomy;0;0;;;;;imaging without regional anatomic definition;;;;;;;; 6-1-1-5;6;1;1;5;;cerebral arterial circle;
-; 0-1;0;1;;;;whole body;;;;;;;; 6-1-2;6;1;2;;;aorta;
-; 0-2;0;2;;;;trunk;;;;;;;; 6-1-2-1;6;1;2;1;;thoracic aorta;
-; 0-3;0;3;;;;partial body;;;;;;;; 6-1-2-2;6;1;2;2;;abdominal aorta;
-; 0-4;0;4;;;;fetus;;;;;;;; 6-1-3;6;1;3;;;aortic branches;
-;1;1;;;;;head;;;;;;;; 6-1-3-1;6;1;3;1;;neck (carotid artery / vertebral artery);
-; 1-1;1;1;;;;brain;;;;;;;; 6-1-3-1-1;6;1;3;1;1;common carotid artery;
-; 1-1-1;1;1;1;;;cerebellum;;;;;;;; 6-1-3-1-2;6;1;3;1;2;external carotid artery;
-; 1-1-2;1;1;2;;;sella turcica;;;;;;;; 6-1-3-1-3;6;1;3;1;3;internal carotid artery;
-; 1-2;1;2;;;;face;;;;;;;; 6-1-3-1-4;6;1;3;1;4;vertebral artery;
-; 1-2-1;1;2;1;;;orbit;;;;;;;; 6-1-3-2;6;1;3;2;;coronary arteries;
-; 1-2-1-1;1;2;1;1;;lacrimal canaliculus;;;;;;;; 6-1-3-3;6;1;3;3;;pulmonary arteries;
-; 1-2-2;1;2;2;;;jaws;;;;;;;; 6-1-3-4;6;1;3;4;;viscerial arteries;
-; 1-2-2-1;1;2;2;1;;maxilla;;;;;;;; 6-1-3-4-1;6;1;3;4;1;celiac artery;
-; 1-2-2-2;1;2;2;2;;mandible;;;;;;;; 6-1-3-4-2;6;1;3;4;2;superior mesenteric artery;
-; 1-2-2-3;1;2;2;3;;temporomandibular join;;;;;;;; 6-1-3-4-3;6;1;3;4;3;inferior mesenteric artery;
-; 1-2-2-4;1;2;2;4;;tooth;;;;;;;; 6-1-3-4-4;6;1;3;4;4;spinal artery;
-; 1-2-3;1;2;3;;;paranasal sinuses;;;;;;;; 6-1-3-5;6;1;3;5;;renal arteries;
-; 1-2-4;1;2;4;;;temporal bone;;;;;;;; 6-1-3-6;6;1;3;6;;arteries of upper extremity;Correction of extremitiy
-; 1-2-5;1;2;5;;;base of skull;;;;;;;; 6-1-3-6-1;6;1;3;6;1;subclavian artery;
-; 1-2-6;1;2;6;;;nasal bone;;;;;;;; 6-1-3-6-2;6;1;3;6;2;arm;
-; 1-2-7;1;2;7;;;salivary glands;;;;;;;; 6-1-3-6-3;6;1;3;6;3;forearm;
-; 1-2-7-1;1;2;7;1;;duct of salivary gland;;;;;;;; 6-1-3-6-4;6;1;3;6;4;hand;
-;2;2;;;;;neck;;;;;;;; 6-1-3-7;6;1;3;7;;arteries of lower extremity;
-; 2-1;2;1;;;;trachea;;;;;;;; 6-1-3-7-1;6;1;3;7;1;iliac artery;
-; 2-2;2;2;;;;throid gland;;;;;;;; 6-1-3-7-2;6;1;3;7;2;thigh;
-; 2-3;2;3;;;;parathyroid gland;;;;;;;; 6-1-3-7-3;6;1;3;7;3;leg;
-; 2-4;2;4;;;;pharynx;;;;;;;; 6-1-3-7-4;6;1;3;7;4;foot;
-; 2-5;2;5;;;;escophagus (cervical);;;;;;;; 6-1-4;6;1;4;;;dialysis shunt;
-; 2-6;2;6;;;;larynx;;;;;;;; 6-2;6;2;;;;veins;
-;3;3;;;;;thorax;;;;;;;; 6-2-1;6;2;1;;;cerebral sinus;
-; 3-1;3;1;;;;lung;;;;;;;; 6-2-2;6;2;2;;;veins of upper extremity;
-; 3-1-1;3;1;1;;;bronchi;;;;;;;; 6-2-2-1;6;2;2;1;;subclavian vein;
-; 3-2;3;2;;;;mediastinum;;;;;;;; 6-2-2-2;6;2;2;2;;arm;
-; 3-3;3;3;;;;heart;;;;;;;; 6-2-2-3;6;2;2;3;;forearm;
-; 3-3-1;3;3;1;;;myocardium;;;;;;;; 6-2-2-4;6;2;2;4;;hand;
-; 3-3-2;3;3;2;;;valves;;;;;;;; 6-2-3;6;2;3;;;superior vena cava;
-; 3-3-3;3;3;3;;;conduction system;;;;;;;; 6-2-4;6;2;4;;;inferior vena cava;
-; 3-4;3;4;;;;esophagus;;;;;;;; 6-2-5;6;2;5;;;hepatic vein;
-; 3-5;3;5;;;;chest wall;;;;;;;; 6-2-6;6;2;6;;;renal vein;
-; 3-5-1;3;5;1;;;bony thorax;;;;;;;; 6-2-6-1;6;2;6;1;;spermatic / ovaric vein;
-; 3-5-2;3;5;2;;;sternum;;;;;;;; 6-2-7;6;2;7;;;veins of lower extremity;
-; 3-5-3;3;5;3;;;ribs;;;;;;;; 6-2-7-1;6;2;7;1;;iliac vein / veins of leg;
-;4;4;;;;;abdomen;;;;;;;; 6-2-7-2;6;2;7;2;;thigh;
-; 4-1;4;1;;;;upper abdomen;;;;;;;; 6-2-7-3;6;2;7;3;;leg;
-; 4-1-1;4;1;1;;;liver / spleen;;;;;;;; 6-2-7-4;6;2;7;4;;foot;
-; 4-1-1-1;4;1;1;1;;gallbladder / bile duct;;;;;;;; 6-3;6;3;;;;lyphatic vessels;
-; 4-1-2;4;1;2;;;pancreas;;;;;;;; 6-3-1;6;3;1;;;whole body;
-; 4-1-2-1;4;1;2;1;;pancreatic duct;;;;;;;; 6-3-2;6;3;2;;;head;
-; 4-2;4;2;;;;intestinal tract;;;;;;;; 6-3-3;6;3;3;;;neck;
-; 4-2-1;4;2;1;;;stomach / duodenum;;;;;;;; 6-3-4;6;3;4;;;thorax;
-; 4-2-2;4;2;2;;;small intestine;;;;;;;; 6-3-5;6;3;5;;;abdomen;
-; 4-2-3;4;2;3;;;bowel;;;;;;;; 6-3-6;6;3;6;;;upper extremity;
-; 4-2-3-1;4;2;3;1;;appendix;;;;;;;; 6-3-7;6;3;7;;;lower extremity;
-; 4-2-3-2;4;2;3;2;;rectum;;;;;;;;7;7;;;;;breast;
-; 4-3;4;3;;;;ardrenal glands;;;;;;;; 7-1;7;1;;;;mammary duct;Correction of ducl
-; 4-4;4;4;;;;urinary tract;;;;;;;; 7-2;7;2;;;;radiograph of specimen;
-; 4-4-1;4;4;1;;;kidney;;;;;;;;;;;;;;;
-; 4-4-1-1;4;4;1;1;;renal pelvis;;;;;;;;;;;;;;;
-; 4-4-2;4;4;2;;;ureter;;;;;;;;;;;;;;;
-; 4-4-3;4;4;3;;;urinary bladder;;;;;;;;;;;;;;;
-; 4-4-4;4;4;4;;;urethra;;;;;;;;;;;;;;;
-; 4-4-5;4;4;5;;;NTX (renal transplant);;;;;;;;;;;;;;;
-; 4-5;4;5;;;;lower abdomen /pelvis;;;;;;;;;;;;;;;
-; 4-5-1;4;5;1;;;uterus;;;;;;;;;;;;;;;
-; 4-5-2;4;5;2;;;fallopian tubes;;;;;;;;;;;;;;;
-; 4-5-3;4;5;3;;;ovary;;;;;;;;;;;;;;;
-; 4-5-4;4;5;4;;;pregnancy;;;;;;;;;;;;;;;
-; 4-5-5;4;5;5;;;prostate;;;;;;;;;;;;;;;
-; 4-5-6;4;5;6;;;scrotum /testis;;;;;;;;;;;;;;;
-; 4-5-7;4;5;7;;;penis;;;;;;;;;;;;;;;
-; 4-6;4;6;;;;abdominal wal;;;;;;;;;;;;;;;
-;5;5;;;;;musculoskeletal;;;;;;;;;;;;;;;
-; 5-1;5;1;;;;upper extremity;;;;;;;;;;;;;;;
-; 5-1-1;5;1;1;;;shoulder;;;;;;;;;;;;;;;
-; 5-1-1-1;5;1;1;1;;scapula;;;;;;;;;;;;;;;
-; 5-1-1-2;5;1;1;2;;clavicle;;;;;;;;;;;;;;;
-; 5-1-1-3;5;1;1;3;;sternoclavicular joint;;;;;;;;;;;;;;;
-; 5-1-1-4;5;1;1;4;;acromio-clavicular joint;;;;;;;;;;;;;;;
-; 5-1-2;5;1;2;;;axilla;;;;;;;;;;;;;;;
-; 5-1-3;5;1;3;;;arm;;;;;;;;;;;;;;;
-; 5-1-4;5;1;4;;;ellbow;;;;;;;;;;;;;;;
-; 5-1-5;5;1;5;;;forearm;;;;;;;;;;;;;;;
-; 5-1-6;5;1;6;;;wrist;;;;;;;;;;;;;;;
-; 5-1-7;5;1;7;;;hand;;;;;;;;;;;;;;;
-; 5-1-7-1;5;1;7;1;;finger;;;;;;;;;;;;;;;
-; 5-2;5;2;;;;lower extremity;;;;;;;;;;;;;;;
-; 5-2-1;5;2;1;;;hip;;;;;;;;;;;;;;;
-; 5-2-2;5;2;2;;;inguinal region;;;;;;;;;;;;;;;
-; 5-2-3;5;2;3;;;thigh;;;;;;;;;;;;;;;
-; 5-2-4;5;2;4;;;knee;;;;;;;;;;;;;;;
-; 5-2-4-1;5;2;4;1;;patella;;;;;;;;;;;;;;;
-; 5-2-5;5;2;5;;;leg;;;;;;;;;;;;;;;
-; 5-2-6;5;2;6;;;ankle;;;;;;;;;;;;;;;
-; 5-2-7;5;2;7;;;foot;;;;;;;;;;;;;;;
-; 5-2-7-1;5;2;7;1;;toe;;;;;;;;;;;;;;;
-; 5-2-7-2;5;2;7;2;;heel;;;;;;;;;;;;;;;
-; 5-2-7-3;5;2;7;3;;metatarsal;;;;;;;;;;;;;;;
-; 5-2-7-4;5;2;7;4;;tarsal;;;;;;;;;;;;;;;
-; 5-2-7-5;5;2;7;5;;Achilles tendon;;;;;;;;;;;;;;;
-; 5-3;5;3;;;;spine;;;;;;;;;;;;;;;
-; 5-3-1;5;3;1;;;cervical spine;;;;;;;;;;;;;;;
-; 5-3-2;5;3;2;;;thoracic spine;;;;;;;;;;;;;;;
-; 5-3-3;5;3;3;;;lumbar spine;;;;;;;;;;;;;;;
-; 5-3-4;5;3;4;;;sacrum / coccyx / sacroiliac joint;;;;;;;;;;;;;;;
-; 5-3-5;5;3;5;;;total spine;;;;;;;;;;;;;;;
-;6;6;;;;;blood vessel;;;;;;;;;;;;;;;
-; 6-1;6;1;;;;arteries;;;;;;;;;;;;;;;
-; 6-1-1;6;1;1;;;intracarnial;;;;;;;;;;;;;;;
-; 6-1-1-1;6;1;1;1;;anterior cerebral artery;;;;;;;;;;;;;;;
-; 6-1-1-2;6;1;1;2;;middle cerebral artery;;;;;;;;;;;;;;;
-; 6-1-1-3;6;1;1;3;;posteroir cerebral artery;;;;;;;;;;;;;;;
-; 6-1-1-4;6;1;1;4;;basilar artery;;;;;;;;;;;;;;;
-; 6-1-1-5;6;1;1;5;;cerebral arterial circle;;;;;;;;;;;;;;;
-; 6-1-2;6;1;2;;;aorta;;;;;;;;;;;;;;;
-; 6-1-2-1;6;1;2;1;;thoracic aorta;;;;;;;;;;;;;;;
-; 6-1-2-2;6;1;2;2;;abdominal aorta;;;;;;;;;;;;;;;
-; 6-1-3;6;1;3;;;aortic branches;;;;;;;;;;;;;;;
-; 6-1-3-1;6;1;3;1;;neck (carotid artery / vertebral artery);;;;;;;;;;;;;;;
-; 6-1-3-1-1;6;1;3;1;1;common carotid artery;;;;;;;;;;;;;;;
-; 6-1-3-1-2;6;1;3;1;2;external carotid artery;;;;;;;;;;;;;;;
-; 6-1-3-1-3;6;1;3;1;3;internal carotid artery;;;;;;;;;;;;;;;
-; 6-1-3-1-4;6;1;3;1;4;vertebral artery;;;;;;;;;;;;;;;
-; 6-1-3-2;6;1;3;2;;coronary arteries;;;;;;;;;;;;;;;
-; 6-1-3-3;6;1;3;3;;pulmonary arteries;;;;;;;;;;;;;;;
-; 6-1-3-4;6;1;3;4;;viscerial arteries;;;;;;;;;;;;;;;
-; 6-1-3-4-1;6;1;3;4;1;celiac artery;;;;;;;;;;;;;;;
-; 6-1-3-4-2;6;1;3;4;2;superior mesenteric artery;;;;;;;;;;;;;;;
-; 6-1-3-4-3;6;1;3;4;3;inferior mesenteric artery;;;;;;;;;;;;;;;
-; 6-1-3-4-4;6;1;3;4;4;spinal artery;;;;;;;;;;;;;;;
-; 6-1-3-5;6;1;3;5;;renal arteries;;;;;;;;;;;;;;;
-; 6-1-3-6;6;1;3;6;;arteries of upper extremity;;;;;;;;;;;;;;;
-; 6-1-3-6-1;6;1;3;6;1;subclavian artery;;;;;;;;;;;;;;;
-; 6-1-3-6-2;6;1;3;6;2;arm;;;;;;;;;;;;;;;
-; 6-1-3-6-3;6;1;3;6;3;forearm;;;;;;;;;;;;;;;
-; 6-1-3-6-4;6;1;3;6;4;hand;;;;;;;;;;;;;;;
-; 6-1-3-7;6;1;3;7;;arteries of lower extremity;;;;;;;;;;;;;;;
-; 6-1-3-7-1;6;1;3;7;1;iliac artery;;;;;;;;;;;;;;;
-; 6-1-3-7-2;6;1;3;7;2;thigh;;;;;;;;;;;;;;;
-; 6-1-3-7-3;6;1;3;7;3;leg;;;;;;;;;;;;;;;
-; 6-1-3-7-4;6;1;3;7;4;foot;;;;;;;;;;;;;;;
-; 6-1-4;6;1;4;;;dialysis shunt;;;;;;;;;;;;;;;
-; 6-2;6;2;;;;veins;;;;;;;;;;;;;;;
-; 6-2-1;6;2;1;;;cerebral sinus;;;;;;;;;;;;;;;
-; 6-2-2;6;2;2;;;veins of upper extremity;;;;;;;;;;;;;;;
-; 6-2-2-1;6;2;2;1;;subclavian vein;;;;;;;;;;;;;;;
-; 6-2-2-2;6;2;2;2;;arm;;;;;;;;;;;;;;;
-; 6-2-2-3;6;2;2;3;;forearm;;;;;;;;;;;;;;;
-; 6-2-2-4;6;2;2;4;;hand;;;;;;;;;;;;;;;
-; 6-2-3;6;2;3;;;superior vena cava;;;;;;;;;;;;;;;
-; 6-2-4;6;2;4;;;inferior vena cava;;;;;;;;;;;;;;;
-; 6-2-5;6;2;5;;;hepatic vein;;;;;;;;;;;;;;;
-; 6-2-6;6;2;6;;;renal vein;;;;;;;;;;;;;;;
-; 6-2-6-1;6;2;6;1;;spermatic / ovaric vein;;;;;;;;;;;;;;;
-; 6-2-7;6;2;7;;;veins of lower extremity;;;;;;;;;;;;;;;
-; 6-2-7-1;6;2;7;1;;iliac vein / veins of leg;;;;;;;;;;;;;;;
-; 6-2-7-2;6;2;7;2;;thigh;;;;;;;;;;;;;;;
-; 6-2-7-3;6;2;7;3;;leg;;;;;;;;;;;;;;;
-; 6-2-7-4;6;2;7;4;;foot;;;;;;;;;;;;;;;
-; 6-3;6;3;;;;lyphatic vessels;;;;;;;;;;;;;;;
-; 6-3-1;6;3;1;;;whole body;;;;;;;;;;;;;;;
-; 6-3-2;6;3;2;;;head;;;;;;;;;;;;;;;
-; 6-3-3;6;3;3;;;neck;;;;;;;;;;;;;;;
-; 6-3-4;6;3;4;;;thorax;;;;;;;;;;;;;;;
-; 6-3-5;6;3;5;;;abdomen;;;;;;;;;;;;;;;
-; 6-3-6;6;3;6;;;upper extremity;;;;;;;;;;;;;;;
-; 6-3-7;6;3;7;;;lower extremity;;;;;;;;;;;;;;;
-;7;7;;;;;breast;;;;;;;;;;;;;;;
-; 7-1;7;1;;;;mammary duct;;;;;;;;;;;;;;;
-; 7-2;7;2;;;;radiograph of specimen;;;;;;;;;;;;;;;
+; 2-3-3;2;3;3;;;MPR;;;;;;;;;;;;;;;,,,
+; 2-3-4;2;3;4;;;3D / 4D;;;;;;;;;;;;;;;,,,
+; 2-3-5;2;3;5;;;HR;;;;;;;;;;;;;;;,,,
+; 2-3-6;2;3;6;;;recalculated images of vessels and ducts;;;;;;;;;;;;;;;,,,
+; 2-3-7;2;3;7;;;virtual endoskopy;;;;;;;;;;;;;;;,,,
+; 2-3-8;2;3;8;;;measurements of angles and axes;;;;;;;;;;;;;;;,,,
+; 2-4;2;4;;;;spectroscopy;;;;;;;;;;;;;;;,,,
+; 2-5;2;5;;;;videographic assessment of movement studies;;;;;;;;;;;;;;;,,,
+; 2-6;2;6;;;;image fusion;;;;;;;;;;;;;;;,,,
+; 2-7;2;7;;;;navigation;;;;;;;;;;;;;;;,,,
+;3;3;;;;;documentation of interventions via artificial access;;;;;;;;;;;;;;;,,,
+; 3-1;3;1;;;;needle biopsy / puncture;;;;;;;;;;;;;;;,,,
+; 3-2;3;2;;;;vacuum assisted needle biopsy;;;;;;;;;;;;;;;,,,
+; 3-3;3;3;;;;(long term-) catheter / placement / stomach;;;;;;;;;;;;;;;,,,
+; 3-3-1;3;3;1;;;permcath;;;;;;;;;;;;;;;,,,
+; 3-3-2;3;3;2;;;portacath;;;;;;;;;;;;;;;,,,
+; 3-3-3;3;3;3;;;catheter - drainage;;;;;;;;;;;;;;;,,,
+; 3-3-4;3;3;4;;;TIPPS;;;;;;;;;;;;;;;,,,
+; 3-3-5;3;3;5;;;percutaneous gastrostomy;;;;;;;;;;;;;;;,,,
+; 3-3-6;3;3;6;;;nephrostomy;;;;;;;;;;;;;;;,,,
+; 3-3-7;3;3;7;;;pacemaker;;;;;;;;;;;;;;;,,,
+; 3-3-8;3;3;8;;;endovascular ultrasound;;;;;;;;;;;;;;;,,,
+; 3-4;3;4;;;;bougienage;;;;;;;;;;;;;;;,,,
+; 3-5;3;5;;;;dilatation / recanalisation / removement of calculi / foreign bodies;;;;;;;;;;;;;;;,,,
+; 3-5-1;3;5;1;;;thrombo-fibrinolysis;;;;;;;;;;;;;;;,,,
+; 3-5-2;3;5;2;;;embolektomy / thrombektomy / recanalisation;;;;;;;;;;;;;;;,,,
+; 3-5-3;3;5;3;;;balloon dilatation;;;;;;;;;;;;;;;,,,
+; 3-5-4;3;5;4;;;stent;;;;;;;;;;;;;;;,,,
+; 3-5-5;3;5;5;;;stentgraft;;;;;;;;;;;;;;;,,,
+; 3-5-6;3;5;6;;;filter (vena cava filter);;;;;;;;;;;;;;;,,,
+; 3-5-7;3;5;7;;;removement of calculi or foreign bodies;;;;;;;;;;;;;;;,,,
+; 3-6;3;6;;;;embolisation;;;;;;;;;;;;;;;,,,
+; 3-6-1;3;6;1;;;organ;;;;;;;;;;;;;;;,,,
+; 3-6-2;3;6;2;;;aneurysm;;;;;;;;;;;;;;;,,,
+; 3-6-3;3;6;3;;;arterio-venos malformation;;;;;;;;;;;;;;;,,,
+; 3-7;3;7;;;;local application of drugs / energy / local sampling;;;;;;;;;;;;;;;,,,
+; 3-7-1;3;7;1;;;nukleolysis;;;;;;;;;;;;;;;,,,
+; 3-7-2;3;7;2;;;blockade of ganglia (ganglia block);;;;;;;;;;;;;;;,,,
+; 3-7-3;3;7;3;;;facet joints (facet joint intervention(infiltration));;;;;;;;;;;;;;;,,,
+; 3-7-4;3;7;4;;;radiofrequency ablation / thermoablation;;;;;;;;;;;;;;;,,,
+; 3-7-5;3;7;5;;;cryoablation;;;;;;;;;;;;;;;,,,
+; 3-7-6;3;7;6;;;laserablation;;;;;;;;;;;;;;;,,,
+; 3-7-7;3;7;7;;;alcoholablation;;;;;;;;;;;;;;;,,,
+; 3-7-8;3;7;8;;;venous sampling;;;;;;;;;;;;;;;,,,
+; 3-8;3;8;;;;vertebroplasty, kyphoplasty;;;;;;;;;;;;;;;,,
+; 3-9;3;9;;;;markers;;;;;;;;;;;;;;;,,,
+; 3-9-1;3;9;1;;;wire;;;;;;;;;;;;;;;,,,
+; 3-9-2;3;9;2;;;colored particles (dye);;;;;;;;;;;;;;;,,,
+; 3-9-3;3;9;3;;;radioactive substances (radiopharmaceutical particles);;;;;;;;;;;;;;;,,,
+;4;4;;;;;nuclear medicine / imaging witch radioactive tracers;;;;;;;;;;;;;;;,,,
+; 4-1;4;1;;;;perfusion;;;;;;;;;;;;;;;,,,
+; 4-2;4;2;;;;metabolism / organ function;;;;;;;;;;;;;;;,,,
+; 4-3;4;3;;;;bone scan;;;;;;;;;;;;;;;,,,
+; 4-3-1;4;3;1;;;multiple phase;;;;;;;;;;;;;;;,,,
+; 4-3-2;4;3;2;;;static;;;;;;;;;;;;;;;,,,
+; 4-4;4;4;;;;receptor scintigraphy;;;;;;;;;;;;;;;,,,
+; 4-5;4;5;;;;renal scintigraphy;;;;;;;;;;;;;;;,,,
+; 4-5-1;4;5;1;;;dynamic (ING, CNG, DNG);;;;;;;;;;;;;;;,
+; 4-5-2;4;5;2;;;static (DMSA);;;;;;;;;;;;;;;,,,
+; 4-5-3;4;5;3;;;indirect radionuclide cystography;;;;;;;;;;;;;;;,,,
+; 4-6;4;6;;;;ventilation;;;;;;;;;;;;;;;,,,
+; 4-7;4;7;;;;GI transit;;;;;;;;;;;;;;;,,,
+; 4-8;4;8;;;;bone marrow scintigraphy;;;;;;;;;;;;;;;,,,
+; 4-9;4;9;;;;lymph scintigraphy;;;;;;;;;;;;;;;,,,
+; 4-10;4;10;;;;CSF radionuclide scintigraphy;;;;;;;;;;;;;;;,,,
+; 4-11;4;11;;;;gallium scan;;;;;;;;;;;;;;;,,,
+; 4-12;4;12;;;;Meckel's diverticulum scintigraphy;;;;;;;;;;;;;;;,,,
+; 4-13;4;13;;;;labelled blood cells (GI tract bleeding scintigraphy, leukocyt scintigraphy, Platelet scintigraphy);;;;;;;;;;;;;;;,
+; 4-14;4;14;;;;direct radionuclide cystography;;;;;;;;;;;;;;;,,,
+; 4-15;4;15;;;;iodine whole body scan;;;;;;;; 6-1-1;6;1;1;;;intracarnial;,,,
+; 4-16;4;16;;;;myocardial scintigraphy;;;;;;;; 6-1-1-1;6;1;1;1;;anterior cerebral artery;,,,
+; 4-16-1;4;16;1;;;myocardial perfusion scintigraphy;;;;;;;; 6-1-1-2;6;1;1;2;;middle cerebral artery;,,,
+; 4-16-2;4;16;2;;;radionuclide ventriculography;;;;;;;; 6-1-1-3;6;1;1;3;;posteroir cerebral artery;,,,
+; 4-16-3;4;16;3;;;gated myocardial SPECT;;;;;;;; 6-1-1-4;6;1;1;4;;basilar artery;,,,
+Anatomy;0;0;;;;;imaging without regional anatomic definition;;;;;;;; 6-1-1-5;6;1;1;5;;cerebral arterial circle;,,,
+; 0-1;0;1;;;;whole body;;;;;;;; 6-1-2;6;1;2;;;aorta;,,,
+; 0-2;0;2;;;;trunk;;;;;;;; 6-1-2-1;6;1;2;1;;thoracic aorta;,,,
+; 0-3;0;3;;;;partial body;;;;;;;; 6-1-2-2;6;1;2;2;;abdominal aorta;,,,
+; 0-4;0;4;;;;fetus;;;;;;;; 6-1-3;6;1;3;;;aortic branches;,,,
+;1;1;;;;;head;;;;;;;; 6-1-3-1;6;1;3;1;;neck (carotid artery / vertebral artery);,,,
+; 1-1;1;1;;;;brain;;;;;;;; 6-1-3-1-1;6;1;3;1;1;common carotid artery;,,,
+; 1-1-1;1;1;1;;;cerebellum;;;;;;;; 6-1-3-1-2;6;1;3;1;2;external carotid artery;,,,
+; 1-1-2;1;1;2;;;sella turcica;;;;;;;; 6-1-3-1-3;6;1;3;1;3;internal carotid artery;,,,
+; 1-2;1;2;;;;face;;;;;;;; 6-1-3-1-4;6;1;3;1;4;vertebral artery;,,,
+; 1-2-1;1;2;1;;;orbit;;;;;;;; 6-1-3-2;6;1;3;2;;coronary arteries;,,,
+; 1-2-1-1;1;2;1;1;;lacrimal canaliculus;;;;;;;; 6-1-3-3;6;1;3;3;;pulmonary arteries;,,,
+; 1-2-2;1;2;2;;;jaws;;;;;;;; 6-1-3-4;6;1;3;4;;viscerial arteries;,,,
+; 1-2-2-1;1;2;2;1;;maxilla;;;;;;;; 6-1-3-4-1;6;1;3;4;1;celiac artery;,,,
+; 1-2-2-2;1;2;2;2;;mandible;;;;;;;; 6-1-3-4-2;6;1;3;4;2;superior mesenteric artery;,,,
+; 1-2-2-3;1;2;2;3;;temporomandibular join;;;;;;;; 6-1-3-4-3;6;1;3;4;3;inferior mesenteric artery;,,,
+; 1-2-2-4;1;2;2;4;;tooth;;;;;;;; 6-1-3-4-4;6;1;3;4;4;spinal artery;,,,
+; 1-2-3;1;2;3;;;paranasal sinuses;;;;;;;; 6-1-3-5;6;1;3;5;;renal arteries;,,,
+; 1-2-4;1;2;4;;;temporal bone;;;;;;;; 6-1-3-6;6;1;3;6;;arteries of upper extremity;Correction of extremitiy,,,
+; 1-2-5;1;2;5;;;base of skull;;;;;;;; 6-1-3-6-1;6;1;3;6;1;subclavian artery;,,,
+; 1-2-6;1;2;6;;;nasal bone;;;;;;;; 6-1-3-6-2;6;1;3;6;2;arm;,,,
+; 1-2-7;1;2;7;;;salivary glands;;;;;;;; 6-1-3-6-3;6;1;3;6;3;forearm;,,,
+; 1-2-7-1;1;2;7;1;;duct of salivary gland;;;;;;;; 6-1-3-6-4;6;1;3;6;4;hand;,,,
+;2;2;;;;;neck;;;;;;;; 6-1-3-7;6;1;3;7;;arteries of lower extremity;,,,
+; 2-1;2;1;;;;trachea;;;;;;;; 6-1-3-7-1;6;1;3;7;1;iliac artery;,,,
+; 2-2;2;2;;;;throid gland;;;;;;;; 6-1-3-7-2;6;1;3;7;2;thigh;,,,
+; 2-3;2;3;;;;parathyroid gland;;;;;;;; 6-1-3-7-3;6;1;3;7;3;leg;,,,
+; 2-4;2;4;;;;pharynx;;;;;;;; 6-1-3-7-4;6;1;3;7;4;foot;,,,
+; 2-5;2;5;;;;escophagus (cervical);;;;;;;; 6-1-4;6;1;4;;;dialysis shunt;,,,
+; 2-6;2;6;;;;larynx;;;;;;;; 6-2;6;2;;;;veins;,,,
+;3;3;;;;;thorax;;;;;;;; 6-2-1;6;2;1;;;cerebral sinus;,,,
+; 3-1;3;1;;;;lung;;;;;;;; 6-2-2;6;2;2;;;veins of upper extremity;,,,
+; 3-1-1;3;1;1;;;bronchi;;;;;;;; 6-2-2-1;6;2;2;1;;subclavian vein;,,,
+; 3-2;3;2;;;;mediastinum;;;;;;;; 6-2-2-2;6;2;2;2;;arm;,,,
+; 3-3;3;3;;;;heart;;;;;;;; 6-2-2-3;6;2;2;3;;forearm;,,,
+; 3-3-1;3;3;1;;;myocardium;;;;;;;; 6-2-2-4;6;2;2;4;;hand;,,,
+; 3-3-2;3;3;2;;;valves;;;;;;;; 6-2-3;6;2;3;;;superior vena cava;,,,
+; 3-3-3;3;3;3;;;conduction system;;;;;;;; 6-2-4;6;2;4;;;inferior vena cava;,,,
+; 3-4;3;4;;;;esophagus;;;;;;;; 6-2-5;6;2;5;;;hepatic vein;,,,
+; 3-5;3;5;;;;chest wall;;;;;;;; 6-2-6;6;2;6;;;renal vein;,,,
+; 3-5-1;3;5;1;;;bony thorax;;;;;;;; 6-2-6-1;6;2;6;1;;spermatic / ovaric vein;,,,
+; 3-5-2;3;5;2;;;sternum;;;;;;;; 6-2-7;6;2;7;;;veins of lower extremity;,,,
+; 3-5-3;3;5;3;;;ribs;;;;;;;; 6-2-7-1;6;2;7;1;;iliac vein / veins of leg;,,,
+;4;4;;;;;abdomen;;;;;;;; 6-2-7-2;6;2;7;2;;thigh;,,,
+; 4-1;4;1;;;;upper abdomen;;;;;;;; 6-2-7-3;6;2;7;3;;leg;,,,
+; 4-1-1;4;1;1;;;liver / spleen;;;;;;;; 6-2-7-4;6;2;7;4;;foot;,,,
+; 4-1-1-1;4;1;1;1;;gallbladder / bile duct;;;;;;;; 6-3;6;3;;;;lyphatic vessels;,,,
+; 4-1-2;4;1;2;;;pancreas;;;;;;;; 6-3-1;6;3;1;;;whole body;,,,
+; 4-1-2-1;4;1;2;1;;pancreatic duct;;;;;;;; 6-3-2;6;3;2;;;head;,,,
+; 4-2;4;2;;;;intestinal tract;;;;;;;; 6-3-3;6;3;3;;;neck;,,,
+; 4-2-1;4;2;1;;;stomach / duodenum;;;;;;;; 6-3-4;6;3;4;;;thorax;,,,
+; 4-2-2;4;2;2;;;small intestine;;;;;;;; 6-3-5;6;3;5;;;abdomen;,,,
+; 4-2-3;4;2;3;;;bowel;;;;;;;; 6-3-6;6;3;6;;;upper extremity;,,,
+; 4-2-3-1;4;2;3;1;;appendix;;;;;;;; 6-3-7;6;3;7;;;lower extremity;,,,
+; 4-2-3-2;4;2;3;2;;rectum;;;;;;;;7;7;;;;;breast;,,,
+; 4-3;4;3;;;;ardrenal glands;;;;;;;; 7-1;7;1;;;;mammary duct;Correction of ducl,,,
+; 4-4;4;4;;;;urinary tract;;;;;;;; 7-2;7;2;;;;radiograph of specimen;,,,
+; 4-4-1;4;4;1;;;kidney;;;;;;;;;;;;;;;,,,
+; 4-4-1-1;4;4;1;1;;renal pelvis;;;;;;;;;;;;;;;,,,
+; 4-4-2;4;4;2;;;ureter;;;;;;;;;;;;;;;,,,
+; 4-4-3;4;4;3;;;urinary bladder;;;;;;;;;;;;;;;,,,
+; 4-4-4;4;4;4;;;urethra;;;;;;;;;;;;;;;,,,
+; 4-4-5;4;4;5;;;NTX (renal transplant);;;;;;;;;;;;;;;,,,
+; 4-5;4;5;;;;lower abdomen /pelvis;;;;;;;;;;;;;;;,,,
+; 4-5-1;4;5;1;;;uterus;;;;;;;;;;;;;;;,,,
+; 4-5-2;4;5;2;;;fallopian tubes;;;;;;;;;;;;;;;,,,
+; 4-5-3;4;5;3;;;ovary;;;;;;;;;;;;;;;,,,
+; 4-5-4;4;5;4;;;pregnancy;;;;;;;;;;;;;;;,,,
+; 4-5-5;4;5;5;;;prostate;;;;;;;;;;;;;;;,,,
+; 4-5-6;4;5;6;;;scrotum /testis;;;;;;;;;;;;;;;,,,
+; 4-5-7;4;5;7;;;penis;;;;;;;;;;;;;;;,,,
+; 4-6;4;6;;;;abdominal wal;;;;;;;;;;;;;;;,,,
+;5;5;;;;;musculoskeletal;;;;;;;;;;;;;;;,,,
+; 5-1;5;1;;;;upper extremity;;;;;;;;;;;;;;;,,,
+; 5-1-1;5;1;1;;;shoulder;;;;;;;;;;;;;;;,,,
+; 5-1-1-1;5;1;1;1;;scapula;;;;;;;;;;;;;;;,,,
+; 5-1-1-2;5;1;1;2;;clavicle;;;;;;;;;;;;;;;,,,
+; 5-1-1-3;5;1;1;3;;sternoclavicular joint;;;;;;;;;;;;;;;,,,
+; 5-1-1-4;5;1;1;4;;acromio-clavicular joint;;;;;;;;;;;;;;;,,,
+; 5-1-2;5;1;2;;;axilla;;;;;;;;;;;;;;;,,,
+; 5-1-3;5;1;3;;;arm;;;;;;;;;;;;;;;,,,
+; 5-1-4;5;1;4;;;ellbow;;;;;;;;;;;;;;;,,,
+; 5-1-5;5;1;5;;;forearm;;;;;;;;;;;;;;;,,,
+; 5-1-6;5;1;6;;;wrist;;;;;;;;;;;;;;;,,,
+; 5-1-7;5;1;7;;;hand;;;;;;;;;;;;;;;,,,
+; 5-1-7-1;5;1;7;1;;finger;;;;;;;;;;;;;;;,,,
+; 5-2;5;2;;;;lower extremity;;;;;;;;;;;;;;;,,,
+; 5-2-1;5;2;1;;;hip;;;;;;;;;;;;;;;,,,
+; 5-2-2;5;2;2;;;inguinal region;;;;;;;;;;;;;;;,,,
+; 5-2-3;5;2;3;;;thigh;;;;;;;;;;;;;;;,,,
+; 5-2-4;5;2;4;;;knee;;;;;;;;;;;;;;;,,,
+; 5-2-4-1;5;2;4;1;;patella;;;;;;;;;;;;;;;,,,
+; 5-2-5;5;2;5;;;leg;;;;;;;;;;;;;;;,,,
+; 5-2-6;5;2;6;;;ankle;;;;;;;;;;;;;;;,,,
+; 5-2-7;5;2;7;;;foot;;;;;;;;;;;;;;;,,,
+; 5-2-7-1;5;2;7;1;;toe;;;;;;;;;;;;;;;,,,
+; 5-2-7-2;5;2;7;2;;heel;;;;;;;;;;;;;;;,,,
+; 5-2-7-3;5;2;7;3;;metatarsal;;;;;;;;;;;;;;;,,,
+; 5-2-7-4;5;2;7;4;;tarsal;;;;;;;;;;;;;;;,,,
+; 5-2-7-5;5;2;7;5;;Achilles tendon;;;;;;;;;;;;;;;,,,
+; 5-3;5;3;;;;spine;;;;;;;;;;;;;;;,,,
+; 5-3-1;5;3;1;;;cervical spine;;;;;;;;;;;;;;;,,,
+; 5-3-2;5;3;2;;;thoracic spine;;;;;;;;;;;;;;;,,,
+; 5-3-3;5;3;3;;;lumbar spine;;;;;;;;;;;;;;;,,,
+; 5-3-4;5;3;4;;;sacrum / coccyx / sacroiliac joint;;;;;;;;;;;;;;;,,,
+; 5-3-5;5;3;5;;;total spine;;;;;;;;;;;;;;;,,,
+;6;6;;;;;blood vessel;;;;;;;;;;;;;;;,,,
+; 6-1;6;1;;;;arteries;;;;;;;;;;;;;;;,,,
+; 6-1-1;6;1;1;;;intracarnial;;;;;;;;;;;;;;;,,,
+; 6-1-1-1;6;1;1;1;;anterior cerebral artery;;;;;;;;;;;;;;;,,,
+; 6-1-1-2;6;1;1;2;;middle cerebral artery;;;;;;;;;;;;;;;,,,
+; 6-1-1-3;6;1;1;3;;posteroir cerebral artery;;;;;;;;;;;;;;;,,,
+; 6-1-1-4;6;1;1;4;;basilar artery;;;;;;;;;;;;;;;,,,
+; 6-1-1-5;6;1;1;5;;cerebral arterial circle;;;;;;;;;;;;;;;,,,
+; 6-1-2;6;1;2;;;aorta;;;;;;;;;;;;;;;,,,
+; 6-1-2-1;6;1;2;1;;thoracic aorta;;;;;;;;;;;;;;;,,,
+; 6-1-2-2;6;1;2;2;;abdominal aorta;;;;;;;;;;;;;;;,,,
+; 6-1-3;6;1;3;;;aortic branches;;;;;;;;;;;;;;;,,,
+; 6-1-3-1;6;1;3;1;;neck (carotid artery / vertebral artery);;;;;;;;;;;;;;;,,,
+; 6-1-3-1-1;6;1;3;1;1;common carotid artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-1-2;6;1;3;1;2;external carotid artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-1-3;6;1;3;1;3;internal carotid artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-1-4;6;1;3;1;4;vertebral artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-2;6;1;3;2;;coronary arteries;;;;;;;;;;;;;;;,,,
+; 6-1-3-3;6;1;3;3;;pulmonary arteries;;;;;;;;;;;;;;;,,,
+; 6-1-3-4;6;1;3;4;;viscerial arteries;;;;;;;;;;;;;;;,,,
+; 6-1-3-4-1;6;1;3;4;1;celiac artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-4-2;6;1;3;4;2;superior mesenteric artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-4-3;6;1;3;4;3;inferior mesenteric artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-4-4;6;1;3;4;4;spinal artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-5;6;1;3;5;;renal arteries;;;;;;;;;;;;;;;,,,
+; 6-1-3-6;6;1;3;6;;arteries of upper extremity;;;;;;;;;;;;;;;,,,
+; 6-1-3-6-1;6;1;3;6;1;subclavian artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-6-2;6;1;3;6;2;arm;;;;;;;;;;;;;;;,,,
+; 6-1-3-6-3;6;1;3;6;3;forearm;;;;;;;;;;;;;;;,,,
+; 6-1-3-6-4;6;1;3;6;4;hand;;;;;;;;;;;;;;;,,,
+; 6-1-3-7;6;1;3;7;;arteries of lower extremity;;;;;;;;;;;;;;;,,,
+; 6-1-3-7-1;6;1;3;7;1;iliac artery;;;;;;;;;;;;;;;,,,
+; 6-1-3-7-2;6;1;3;7;2;thigh;;;;;;;;;;;;;;;,,,
+; 6-1-3-7-3;6;1;3;7;3;leg;;;;;;;;;;;;;;;,,,
+; 6-1-3-7-4;6;1;3;7;4;foot;;;;;;;;;;;;;;;,,,
+; 6-1-4;6;1;4;;;dialysis shunt;;;;;;;;;;;;;;;,,,
+; 6-2;6;2;;;;veins;;;;;;;;;;;;;;;,,,
+; 6-2-1;6;2;1;;;cerebral sinus;;;;;;;;;;;;;;;,,,
+; 6-2-2;6;2;2;;;veins of upper extremity;;;;;;;;;;;;;;;,,,
+; 6-2-2-1;6;2;2;1;;subclavian vein;;;;;;;;;;;;;;;,,,
+; 6-2-2-2;6;2;2;2;;arm;;;;;;;;;;;;;;;,,,
+; 6-2-2-3;6;2;2;3;;forearm;;;;;;;;;;;;;;;,,,
+; 6-2-2-4;6;2;2;4;;hand;;;;;;;;;;;;;;;,,,
+; 6-2-3;6;2;3;;;superior vena cava;;;;;;;;;;;;;;;,,,
+; 6-2-4;6;2;4;;;inferior vena cava;;;;;;;;;;;;;;;,,,
+; 6-2-5;6;2;5;;;hepatic vein;;;;;;;;;;;;;;;,,,
+; 6-2-6;6;2;6;;;renal vein;;;;;;;;;;;;;;;,,,
+; 6-2-6-1;6;2;6;1;;spermatic / ovaric vein;;;;;;;;;;;;;;;,,,
+; 6-2-7;6;2;7;;;veins of lower extremity;;;;;;;;;;;;;;;,,,
+; 6-2-7-1;6;2;7;1;;iliac vein / veins of leg;;;;;;;;;;;;;;;,,,
+; 6-2-7-2;6;2;7;2;;thigh;;;;;;;;;;;;;;;,,,
+; 6-2-7-3;6;2;7;3;;leg;;;;;;;;;;;;;;;,,,
+; 6-2-7-4;6;2;7;4;;foot;;;;;;;;;;;;;;;,,,
+; 6-3;6;3;;;;lyphatic vessels;;;;;;;;;;;;;;;,,,
+; 6-3-1;6;3;1;;;whole body;;;;;;;;;;;;;;;,,,
+; 6-3-2;6;3;2;;;head;;;;;;;;;;;;;;;,,,
+; 6-3-3;6;3;3;;;neck;;;;;;;;;;;;;;;,,,
+; 6-3-4;6;3;4;;;thorax;;;;;;;;;;;;;;;,,,
+; 6-3-5;6;3;5;;;abdomen;;;;;;;;;;;;;;;,,,
+; 6-3-6;6;3;6;;;upper extremity;;;;;;;;;;;;;;;,,,
+; 6-3-7;6;3;7;;;lower extremity;;;;;;;;;;;;;;;,,,
+;7;7;;;;;breast;;;;;;;;;;;;;;;,,,
+; 7-1;7;1;;;;mammary duct;;;;;;;;;;;;;;;,,,
+; 7-2;7;2;;;;radiograph of specimen;;;;;;;;;;;;;;;,,,

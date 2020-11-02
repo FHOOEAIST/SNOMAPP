@@ -2,14 +2,16 @@ package at.snomapp.skeleton.restservice;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
-import io.swagger.client.model.BrowserDescriptionSearchResult;
-import io.swagger.client.model.PageBrowserDescriptionSearchResult;
+import io.swagger.client.model.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("snomed")
@@ -17,11 +19,10 @@ import java.util.List;
 public class SnomedController {
 
 
-    private DescriptionsApi api = new DescriptionsApi();
+    private final DescriptionsApi api = new DescriptionsApi();
 
     public SnomedController() {
-        // TODO: add our snowstorm URL here
-        //  api.getApiClient().setBasePath();
+        api.getApiClient().setBasePath("http://193.170.192.200:8080");
     }
 
     @GetMapping
@@ -30,11 +31,11 @@ public class SnomedController {
         String branch = "MAIN";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         String term = displayName;
-        Boolean active = false;
+        Boolean active = true;
         String module = null;
         List<String> language = null;
         String semanticTag = null;
-        Boolean conceptActive = false;
+        Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
         // this could be set to REGEX in order to do a regex search but standard should satisfy the US 9-1 requirements
@@ -55,5 +56,25 @@ public class SnomedController {
         // might want to replace with wrapped PageBrowserDescriptionSearchResult depending on if we need the
         // meta information (e.g. size of returned array) aor not
         return response != null ? response.getItems() : null;
+    }
+
+    Map<String, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts){
+        Map<String, List<Description>> descriptionMap = new HashMap<>();
+        for (BrowserDescriptionSearchResult concept : concepts) {
+            String branch = "MAIN";
+            String conceptId = concept.getConcept().getConceptId();
+            Integer offset=0;
+            Integer limit = null;
+
+            ItemsPageDescription response_item = null;
+            try {
+                response_item = api.findDescriptionsUsingGET(branch, conceptId, offset, limit);
+            } catch (ApiException e) {
+                e.printStackTrace();
+            }
+
+            descriptionMap.put( conceptId, response_item != null ? response_item.getItems() : null);
+        }
+        return descriptionMap;
     }
 }

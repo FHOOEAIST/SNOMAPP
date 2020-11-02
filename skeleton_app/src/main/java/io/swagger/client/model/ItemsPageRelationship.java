@@ -33,7 +33,7 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-02T10:22:15.067Z")
 public class ItemsPageRelationship {
   @SerializedName("items")
-  private CollectionRelationship items = null;
+  private List<Relationship> items = null;
 
   @SerializedName("limit")
   private Long limit = null;
@@ -50,7 +50,7 @@ public class ItemsPageRelationship {
   @SerializedName("total")
   private Long total = null;
 
-  public ItemsPageRelationship items(CollectionRelationship items) {
+  public ItemsPageRelationship items(List<Relationship> items) {
     this.items = items;
     return this;
   }
@@ -60,11 +60,11 @@ public class ItemsPageRelationship {
    * @return items
   **/
   @ApiModelProperty(value = "")
-  public CollectionRelationship getItems() {
+  public List<Relationship> getItems() {
     return items;
   }
 
-  public void setItems(CollectionRelationship items) {
+  public void setItems(List<Relationship> items) {
     this.items = items;
   }
 
