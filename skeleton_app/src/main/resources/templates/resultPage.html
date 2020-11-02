@@ -18,7 +18,7 @@
 <!-- HeaderImage -->
 <div class="container fixed-top pt-3" style="background-color: white">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}"  height="100px" width="300px" >
-    <h4> Resultpage - Possible Snomed-Codes for chosen APPC</h4>
+    <h4 th:text="#{resultpage}"></h4>
 </div>
 
 
@@ -32,7 +32,6 @@
         Open Mappings
     </button>
     <div class="containerList" >
-        <span th:text="#{snomed}">SNOMED</span>
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="#{snomed.display_name} + ': ' + ${result.getConcept().getFsn().getTerm()} + #{snomed.code} + ': ' + ${result.getConcept().getId()}">Result</span>
