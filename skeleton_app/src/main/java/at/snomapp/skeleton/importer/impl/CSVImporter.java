@@ -15,11 +15,11 @@ import java.util.List;
 @Component("CSVImporter")
 public class CSVImporter implements Importer {
 
-    public APPCTree importTree(String fileName) throws IOException {
+    public APPCTree importTree(String from) throws IOException {
 
         APPCTree tree = new APPCTree("englisch");
 
-        try (BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+        try (BufferedReader bReader = new BufferedReader(new InputStreamReader(new FileInputStream(from)))) {
 
             // first line of csv file is the version of the tree
             String version = bReader.readLine();

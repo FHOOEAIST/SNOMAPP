@@ -6,14 +6,17 @@ import at.snomapp.skeleton.domain.appc.AxisEntry;
 import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
+import at.snomapp.skeleton.importer.impl.StringCSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
 import io.swagger.client.JSON;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.io.File;
 import java.io.UnsupportedEncodingException;
@@ -100,6 +103,7 @@ public class APPCController {
         }
     }
 
+    // obsolete because of new import mechanism, but left in because it makes manual imports via e.g. postman simpler
     @PostMapping("/import")
     @ResponseStatus(HttpStatus.CREATED)
     // imports an APPCtree from a given filename into the neo4j database.
@@ -137,6 +141,53 @@ public class APPCController {
         }
     }
 
+    @PostMapping("/importString")
+    @ResponseStatus(HttpStatus.CREATED)
+    // imports an APPCTree from given string containing the entire code
+    // clears database if contents are not empty
+    ModelAndView importAPPCString(@RequestBody String contents){
+        ModelAndView mv = new ModelAndView("startPage");
+        try {
+            String decodedContents = URLDecoder.decode(contents, StandardCharsets.UTF_8.name());
+            if(! (decodedContents == null) && !decodedContents.isEmpty() ){
+                // contents sent
+                Importer importer = new StringCSVImporter();
+                APPCTree tree = importer.importTree(decodedContents);
+
+                if(tree.getAnatomy() == null
+                        || tree.getModality() == null
+                        || tree.getLaterality() == null
+                        || tree.getProcedure() == null){
+                    mv.addObject(new ImportResults(false, "one or more axis of the given code were not constructed"));
+                }else {
+                    // valid tree
+                    repo.deleteAll();
+                    // save version
+                    if (tree.getVersion() != null) {
+                        repo.save(new APPCEntry("Version", tree.getVersion()));
+                    }
+
+                    Iterable<Entry> roots = tree.getRoots();
+                    for (Entry root : roots) {
+                        repo.save(root);
+                    }
+
+                    mv.addObject("result", new ImportResults(true, null));
+                }
+
+            }else{
+                mv.addObject("result", new ImportResults(false, "File not found"));
+            }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            mv.addObject("result", new ImportResults(false, "Encoding of given filepath invalid"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            mv.addObject("result", new ImportResults(false, "Something went wrong during import, DB cleared"));
+        }
+        return mv;
+    }
+
     @GetMapping("roots")
     // return just the tree roots
     Iterable<Entry> readRoots(){
@@ -172,7 +223,6 @@ public class APPCController {
         Entry version = repo.findByDisplayName("Version");
         tree.setVersion( version.getCode() );
 
-
         return tree;
     }
 
@@ -195,8 +245,5 @@ public class APPCController {
             }
         }
     }
-
-
-
 
 }
