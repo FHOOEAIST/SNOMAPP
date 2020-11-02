@@ -7,17 +7,12 @@ import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
-import io.swagger.client.model.Concept;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
 
 @RestController
 @RequestMapping("/ConceptMap")
@@ -39,6 +34,7 @@ public class ConceptMapController {
         conceptMapRepo.deleteAll();
     }
 
+    /*
     @PostMapping("/test")
     void importAPPC(){
         conceptMapRepo.deleteAll();
@@ -49,14 +45,16 @@ public class ConceptMapController {
 
         ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
         APPCElement appcElement = new APPCElement(appc,"anatomy");
-        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed);
-        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2);
-        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3);
+        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed, displayName);
+        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2, displayName);
+        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3, displayName);
         map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
         map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
         map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);
         conceptMapRepo.save(map);
     }
+
+     */
 
     // for searching for map-elements
     @GetMapping
@@ -104,7 +102,7 @@ public class ConceptMapController {
             appcElement = new APPCElement(object.appcCode, object.appcAxis);
         }
 
-        SNOMEDElement snomedElement = new SNOMEDElement(object.snomedCode);
+        SNOMEDElement snomedElement = new SNOMEDElement(object.snomedCode, object.snomedDisplayName);
         switch (object.map){
             case "equivalent":
                 conceptMap.addMapping(appcElement, snomedElement, EquivalenceType.EQUIVALENT);
@@ -137,10 +135,15 @@ public class ConceptMapController {
 
     private static class ConceptMapRequest {
 
+        String snomedDisplayName;
         String appcCode;
         String snomedCode;
         String map;
         String appcAxis;
+
+        public String getSnomedDisplayName() {
+            return snomedDisplayName;
+        }
 
         public String getAppcCode() {
             return appcCode;
@@ -156,6 +159,10 @@ public class ConceptMapController {
 
         public String getAppcAxis() {
             return appcAxis;
+        }
+
+        public void setSnomedDisplayName(String snomedDisplayName){
+            this.snomedDisplayName = snomedDisplayName;
         }
 
         public void setAppcCode(String appcCode){

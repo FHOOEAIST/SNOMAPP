@@ -1,6 +1,5 @@
 package at.snomapp.skeleton.domain.conceptMapping.impl;
 
-import at.snomapp.skeleton.domain.conceptMapping.EquivalenceType;
 import org.neo4j.ogm.annotation.GeneratedValue;
 import org.neo4j.ogm.annotation.Id;
 import org.neo4j.ogm.annotation.NodeEntity;
@@ -12,7 +11,10 @@ public class SNOMEDElement extends AbstractElement{
     @GeneratedValue
     private Long id;
 
-    public SNOMEDElement(String code){
+    private String displayName;
+
+    public SNOMEDElement(String code, String displayName){
+        this.displayName = displayName;
         this.code = code;
         this.codesystem = "GET URI FOR SNOMED";
     }

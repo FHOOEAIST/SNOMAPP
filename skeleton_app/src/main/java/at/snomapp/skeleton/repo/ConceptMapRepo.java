@@ -4,14 +4,15 @@ package at.snomapp.skeleton.repo;
 import at.snomapp.skeleton.domain.conceptMapping.ConceptMap;
 import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
-import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import org.springframework.data.neo4j.annotation.Query;
+import org.springframework.data.neo4j.annotation.QueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Repository
 public interface ConceptMapRepo extends Neo4jRepository<ConceptMap, Long> {
@@ -33,8 +34,9 @@ public interface ConceptMapRepo extends Neo4jRepository<ConceptMap, Long> {
     @Query("MATCH (:APPCElement{code: $0, axis: $1})-[m:maps]->(s:SnomedElement) return m")
     Iterable<Equivalence> findEquivalenceByAxisAndCode(String code, String axis);
 
-    @Query("MATCH (:APPCElement{code: $0, axis: '$1})-[m:maps]->(s:SnomedElement) \n" +
-            "return s.code,m.equivalence\n" +
+    @Query("MATCH (:APPCElement{code: $0, axis: $1})-[m:maps]->(s:SnomedElement) \n" +
+            "return s.code,m.equivalence,s.displayName\n" +
             "ORDER BY m.id")
-    Map<String, String> getSnomedCodeAndEquivalence(String code, String axis);
+    Iterable<Map<String, Object>> getSnomedCodeAndEquivalence(String code, String axis);
 }
+

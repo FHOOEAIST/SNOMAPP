@@ -161,7 +161,7 @@
                 method: "POST",
                 url: "ConceptMap/submit",
                 contentType: "application/json",
-                data: JSON.stringify({appcCode, appcAxis, snomedCode, map }),
+                data: JSON.stringify({appcCode, appcAxis, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
                         alert("Map successfully saved.");
                 },
@@ -201,11 +201,11 @@
                         <th scope="col">Mapping</th>
                     </tr>
                     </thead>
-                    <tbody th:each="mapping : ${mappings}">
+                    <tbody th:each="map : ${mapps}">
                     <tr >
-                        <td th:text="${mapping}">Code</td>
-                        <td>Example</td>
-                        <td th:text="${mapping}">equivalence</td>
+                        <td th:text="${map.values().toArray()[2]}">Code</td>
+                        <td th:text="${map.values().toArray()[0]}"></td>
+                        <td th:text="${map.values().toArray()[1]}">equivalence</td>
                     </tr>
                     </tbody>
                 </table>

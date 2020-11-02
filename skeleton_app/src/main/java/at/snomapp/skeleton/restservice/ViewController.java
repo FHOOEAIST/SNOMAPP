@@ -6,10 +6,7 @@ import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
-import at.snomapp.skeleton.repo.APPCRepo;
-import at.snomapp.skeleton.repo.ConceptMapRepo;
-import at.snomapp.skeleton.repo.ConceptRelationshipRepo;
-import at.snomapp.skeleton.repo.MappingRepo;
+import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +18,7 @@ import java.util.*;
 
 
 @Controller
-public class ViewController {
+public class ViewController<SnomedAPPCMapping> {
 
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
@@ -67,16 +64,13 @@ public class ViewController {
         if(byId.isPresent()){
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
-            //Map<BrowserDescriptionSearchResult, CollectionDescription> resultMap = snomedController.findSynonyms(resultList);
             List<String> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);
             //model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
-            // Map<String, String> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
-            //APPCElement appcElement = conceptMapRepo.findElementByCodeAndAxis(entry.getCode(), entry.getAxis());
-            //Set<Equivalence> equivalences = appcElement.getEquivalences();
-            //Iterable<Equivalence> equivalences = conceptMapRepo.findEquivalenceByAxisAndCode(entry.getCode(), entry.getAxis());
-            //Equivalence next = equivalences.iterator().next();
+            Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
+            model.addAttribute("mapps", mapps);
+            System.out.println(mapps.iterator().next().values().toArray()[0]);
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
             maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
