@@ -99,7 +99,11 @@ public class ConceptMapController {
         else {
             conceptMap = iterator.next();
         }
-        APPCElement appcElement = new APPCElement(object.appcCode, object.appcAxis);
+        APPCElement appcElement = conceptMapRepo.findElementByCodeAndAxis(object.appcCode, object.appcAxis);
+        if(appcElement == null){
+            appcElement = new APPCElement(object.appcCode, object.appcAxis);
+        }
+
         SNOMEDElement snomedElement = new SNOMEDElement(object.snomedCode);
         switch (object.map){
             case "equivalent":

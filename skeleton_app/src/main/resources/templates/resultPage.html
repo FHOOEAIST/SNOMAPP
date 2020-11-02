@@ -33,16 +33,16 @@
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
-            <!--mapping exists YES
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(${result.getConcept().getConceptId()})}">
+            <!--mapping exists YES-->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-check-circle"></i>
-            </span>-->
-            <!--mapping exists NO-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="true">
+            </span>
+            <!--mapping exists NO -->
+            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-times-circle"></i>
                 </span>
 
-            <!--Info-->
+            <!-- Info-->
             <span class="content float-right pr-3" data-toggle="tooltip" title="Description" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description" th:attr="data-target='#description'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-info-circle" ></i></button>
@@ -203,10 +203,9 @@
                     </thead>
                     <tbody th:each="mapping : ${mappings}">
                     <tr >
-                        <td th:text="${mapping.getDestination().getCode()}">Code
-                        </td>
+                        <td th:text="${mapping}">Code</td>
                         <td>Example</td>
-                        <td th:text="${mapping.getEquivalence().toString()}">equivalence</td>
+                        <td th:text="${mapping}">equivalence</td>
                     </tr>
                     </tbody>
                 </table>

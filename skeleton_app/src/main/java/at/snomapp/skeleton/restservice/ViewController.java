@@ -3,9 +3,12 @@ package at.snomapp.skeleton.restservice;
 
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
-import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
+import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
+import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
+import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
+import at.snomapp.skeleton.repo.ConceptRelationshipRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +17,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 
 @Controller
 public class ViewController {
 
     private final APPCRepo repo;
-    private ConceptMapRepo Conceptmaprepo;
+    private ConceptMapRepo conceptMapRepo;
     private MappingRepo mappingRepo;
+    private ConceptRelationshipRepo conceptRelationshipRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo) {this.repo = readingrepo;}
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo) {this.repo = readingrepo;
+        this.conceptMapRepo = conceptMapRepo;
+        this.conceptRelationshipRepo = conceptRelationshipRepo;
+    }
 
     @GetMapping("/startPage")
     public String startPage(Model model){
@@ -55,7 +60,7 @@ public class ViewController {
 
     @GetMapping("/resultPage")
     public String resultPage(@RequestParam Long id, Model model){
-        ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo,mappingRepo);
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
@@ -63,11 +68,17 @@ public class ViewController {
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
             //Map<BrowserDescriptionSearchResult, CollectionDescription> resultMap = snomedController.findSynonyms(resultList);
-            List<EquivalenceImpl> mappings = new ArrayList<>();
+            List<String> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);
             //model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
-            //ToDo
+            // Map<String, String> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
+            //APPCElement appcElement = conceptMapRepo.findElementByCodeAndAxis(entry.getCode(), entry.getAxis());
+            //Set<Equivalence> equivalences = appcElement.getEquivalences();
+            //Iterable<Equivalence> equivalences = conceptMapRepo.findEquivalenceByAxisAndCode(entry.getCode(), entry.getAxis());
+            //Equivalence next = equivalences.iterator().next();
+            Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
+            maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
         }
 
