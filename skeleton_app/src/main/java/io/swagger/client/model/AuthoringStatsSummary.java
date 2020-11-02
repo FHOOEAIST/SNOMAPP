@@ -14,16 +14,9 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
+
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
-import org.threeten.bp.OffsetDateTime;
 
 /**
  * AuthoringStatsSummary
@@ -34,7 +27,8 @@ public class AuthoringStatsSummary {
   private Long changedFsnCount = null;
 
   @SerializedName("executionTime")
-  private OffsetDateTime executionTime = null;
+  // manually changed from OffsetDateTime
+  private String executionTime = null;
 
   @SerializedName("inactivatedConceptsCount")
   private Long inactivatedConceptsCount = null;
@@ -75,7 +69,7 @@ public class AuthoringStatsSummary {
     this.changedFsnCount = changedFsnCount;
   }
 
-  public AuthoringStatsSummary executionTime(OffsetDateTime executionTime) {
+  public AuthoringStatsSummary executionTime(String executionTime) {
     this.executionTime = executionTime;
     return this;
   }
@@ -85,11 +79,11 @@ public class AuthoringStatsSummary {
    * @return executionTime
   **/
   @ApiModelProperty(value = "")
-  public OffsetDateTime getExecutionTime() {
+  public String getExecutionTime() {
     return executionTime;
   }
 
-  public void setExecutionTime(OffsetDateTime executionTime) {
+  public void setExecutionTime(String executionTime) {
     this.executionTime = executionTime;
   }
 

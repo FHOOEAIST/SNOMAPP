@@ -171,7 +171,6 @@ public class AuthoringStatsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because ParseException
     @Test
     public void getStatsUsingGETTest() throws ApiException {
         String branch = "MAIN";

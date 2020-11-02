@@ -2,16 +2,21 @@ package at.snomapp.skeleton.domain.appc;
 
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
-import netscape.javascript.JSObject;
 
 import java.util.*;
 
 public class APPCTree  {
     private final String language;
 
+    private String version;
+
     public String getLanguage() {
         return language;
     }
+
+    public void setVersion(String version) { this.version = version; }
+
+    public String getVersion() { return version; }
 
     public void setModality(AxisEntry modality) {
         this.modality = modality;

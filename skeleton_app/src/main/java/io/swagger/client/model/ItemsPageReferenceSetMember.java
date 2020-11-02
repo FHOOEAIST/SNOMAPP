@@ -33,7 +33,7 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-02T10:22:15.067Z")
 public class ItemsPageReferenceSetMember {
   @SerializedName("items")
-  private CollectionReferenceSetMember items = null;
+  private List<ReferenceSetMember> items = null;
 
   @SerializedName("limit")
   private Long limit = null;
@@ -50,7 +50,7 @@ public class ItemsPageReferenceSetMember {
   @SerializedName("total")
   private Long total = null;
 
-  public ItemsPageReferenceSetMember items(CollectionReferenceSetMember items) {
+  public ItemsPageReferenceSetMember items(List<ReferenceSetMember> items) {
     this.items = items;
     return this;
   }
@@ -60,11 +60,11 @@ public class ItemsPageReferenceSetMember {
    * @return items
   **/
   @ApiModelProperty(value = "")
-  public CollectionReferenceSetMember getItems() {
+  public List<ReferenceSetMember> getItems() {
     return items;
   }
 
-  public void setItems(CollectionReferenceSetMember items) {
+  public void setItems(List<ReferenceSetMember> items) {
     this.items = items;
   }
 

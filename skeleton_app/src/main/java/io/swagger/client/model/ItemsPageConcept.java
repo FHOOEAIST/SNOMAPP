@@ -14,16 +14,10 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
+
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.CollectionConcept;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +27,7 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-02T10:22:15.067Z")
 public class ItemsPageConcept {
   @SerializedName("items")
-  private CollectionConcept items = null;
+  private List<Concept> items = null;
 
   @SerializedName("limit")
   private Long limit = null;
@@ -50,7 +44,7 @@ public class ItemsPageConcept {
   @SerializedName("total")
   private Long total = null;
 
-  public ItemsPageConcept items(CollectionConcept items) {
+  public ItemsPageConcept items(List<Concept> items) {
     this.items = items;
     return this;
   }
@@ -60,11 +54,11 @@ public class ItemsPageConcept {
    * @return items
   **/
   @ApiModelProperty(value = "")
-  public CollectionConcept getItems() {
+  public List<Concept> getItems() {
     return items;
   }
 
-  public void setItems(CollectionConcept items) {
+  public void setItems(List<Concept> items) {
     this.items = items;
   }
 

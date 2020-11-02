@@ -300,8 +300,8 @@ public class ConceptsApi {
      * @return CollectionConceptMini
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CollectionConceptMini findConceptAncestorsUsingGET(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
-        ApiResponse<CollectionConceptMini> resp = findConceptAncestorsUsingGETWithHttpInfo(branch, conceptId, acceptLanguage, form);
+    public List<ConceptMini> findConceptAncestorsUsingGET(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
+        ApiResponse<List<ConceptMini>> resp = findConceptAncestorsUsingGETWithHttpInfo(branch, conceptId, acceptLanguage, form);
         return resp.getData();
     }
 
@@ -315,9 +315,9 @@ public class ConceptsApi {
      * @return ApiResponse&lt;CollectionConceptMini&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CollectionConceptMini> findConceptAncestorsUsingGETWithHttpInfo(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
+    public ApiResponse<List<ConceptMini>> findConceptAncestorsUsingGETWithHttpInfo(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
         com.squareup.okhttp.Call call = findConceptAncestorsUsingGETValidateBeforeCall(branch, conceptId, acceptLanguage, form, null, null);
-        Type localVarReturnType = new TypeToken<CollectionConceptMini>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ConceptMini>>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -450,8 +450,8 @@ public class ConceptsApi {
      * @return CollectionConceptMini
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CollectionConceptMini findConceptChildrenUsingGET(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
-        ApiResponse<CollectionConceptMini> resp = findConceptChildrenUsingGETWithHttpInfo(branch, conceptId, acceptLanguage, form);
+    public List<ConceptMini> findConceptChildrenUsingGET(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
+        ApiResponse<List<ConceptMini>> resp = findConceptChildrenUsingGETWithHttpInfo(branch, conceptId, acceptLanguage, form);
         return resp.getData();
     }
 
@@ -465,9 +465,9 @@ public class ConceptsApi {
      * @return ApiResponse&lt;CollectionConceptMini&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CollectionConceptMini> findConceptChildrenUsingGETWithHttpInfo(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
+    public ApiResponse<List<ConceptMini>> findConceptChildrenUsingGETWithHttpInfo(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
         com.squareup.okhttp.Call call = findConceptChildrenUsingGETValidateBeforeCall(branch, conceptId, acceptLanguage, form, null, null);
-        Type localVarReturnType = new TypeToken<CollectionConceptMini>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ConceptMini>>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
@@ -1039,8 +1039,8 @@ public class ConceptsApi {
      * @return CollectionConceptMini
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public CollectionConceptMini findConceptParentsUsingGET(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
-        ApiResponse<CollectionConceptMini> resp = findConceptParentsUsingGETWithHttpInfo(branch, conceptId, acceptLanguage, form);
+    public List<ConceptMini> findConceptParentsUsingGET(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
+        ApiResponse<List<ConceptMini>> resp = findConceptParentsUsingGETWithHttpInfo(branch, conceptId, acceptLanguage, form);
         return resp.getData();
     }
 
@@ -1054,9 +1054,9 @@ public class ConceptsApi {
      * @return ApiResponse&lt;CollectionConceptMini&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<CollectionConceptMini> findConceptParentsUsingGETWithHttpInfo(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
+    public ApiResponse<List<ConceptMini>> findConceptParentsUsingGETWithHttpInfo(String branch, String conceptId, String acceptLanguage, String form) throws ApiException {
         com.squareup.okhttp.Call call = findConceptParentsUsingGETValidateBeforeCall(branch, conceptId, acceptLanguage, form, null, null);
-        Type localVarReturnType = new TypeToken<CollectionConceptMini>(){}.getType();
+        Type localVarReturnType = new TypeToken<List<ConceptMini>>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
 
