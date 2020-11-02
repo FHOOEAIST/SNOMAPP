@@ -29,7 +29,7 @@ import java.io.IOException;
  * BrowserDescriptionSearchResult
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-02T10:22:15.067Z")
-public class BrowserDescriptionSearchResult {
+public class BrowserDescriptionSearchResult implements Comparable<BrowserDescriptionSearchResult>{
   @SerializedName("active")
   private Boolean active = null;
 
@@ -183,5 +183,23 @@ public class BrowserDescriptionSearchResult {
     return o.toString().replace("\n", "\n    ");
   }
 
+  // scoring
+  private int score = 0;
+
+  public int getScore() {
+    return score;
+  }
+
+  public void setScore(int score) {
+    this.score = score;
+  }
+
+  // to sort list of BrowserDescriptionSearchResult by score
+  @Override
+  public int compareTo(BrowserDescriptionSearchResult o) {
+    int score = ((BrowserDescriptionSearchResult) o).getScore();
+    // ascending order
+    return this.score - score;
+  }
 }
 

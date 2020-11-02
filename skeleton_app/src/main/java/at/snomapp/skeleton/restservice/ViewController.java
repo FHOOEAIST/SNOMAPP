@@ -4,6 +4,20 @@ package at.snomapp.skeleton.restservice;
 import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
+import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
+
+import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
+import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
+import at.snomapp.skeleton.domain.scoring.ScoringModel;
+import at.snomapp.skeleton.domain.scoring.impl.Cosine;
+import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
+import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
+import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
+
+import at.snomapp.skeleton.repo.APPCRepo;
+import at.snomapp.skeleton.repo.ConceptMapRepo;
+import at.snomapp.skeleton.repo.MappingRepo;
+
 import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
@@ -17,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
+
 
 @Controller
 public class ViewController<SnomedAPPCMapping> {
@@ -70,6 +85,30 @@ public class ViewController<SnomedAPPCMapping> {
         if(byId.isPresent()){
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
+
+
+            // create a new scoring model
+            // compare algorithms can be appended or removed randomly
+            // all algorithms which are included are applied on all strings
+            List<ScoringAlgorithm> algorithms = new ArrayList<>();
+            //algorithms.add(new Cosine(0.3));
+            //algorithms.add(new Jaccard(0.3));
+            algorithms.add(new Levenshtein(0.5));
+            algorithms.add(new LongestCommonSubsequence(0.5));
+            ScoringModel scoringModel = new ScoringModel(algorithms);
+
+            // calculate for each result his score
+            for (BrowserDescriptionSearchResult result : resultList){
+                int score = scoringModel.calculateWeightedScore(entry.getDisplayName(), result.getTerm());
+                result.setScore(score);
+            }
+            // sort resultList by property score
+            Collections.sort(resultList);
+
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
+
+            List<EquivalenceImpl> mappings = new ArrayList<>();
+
             List<String> mappings = new ArrayList<>();
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             model.addAttribute("results",resultList);
