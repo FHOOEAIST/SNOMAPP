@@ -18,15 +18,17 @@
 <!-- HeaderImage -->
 <div class="container fixed-top pt-3" style="background-color: white">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}"  height="100px" width="300px" >
+    <h4 th:text="#{resultpage}"></h4>
 </div>
 
 
 <!-- Content including Result List -->
 <div class="container p-3">
+
 <div class="contentContainer" style="margin-top: 110px" >
-    <span th:text="'Number of results: ' + ${results.size()}">Number of results</span>
+    <span th:text="#{snomed.no_results} + ': ' + ${results.size()}">Number of results</span>
     <!-- Button to Open the Modal -->
-    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" >
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
         Open Mappings
     </button>
     <div class="containerList" >
@@ -63,7 +65,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Description</h4>
+                        <h4 class="modal-title" th:text="#{description}">Description</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -72,20 +74,19 @@
                         <h5>Code: </h5>
                         <span th:text="${result.getConcept().getConceptId()}">Code</span>
                         </br>
-                        </br>
-                        <h5>Prefered Term: </h5>
+                        <h5 th:text="#{prefered_term}">Prefered Term: </h5>
                         <span th:text="${result.getConcept().getFsn().getTerm()}">Code</span>
                         </br>
-                        </br>
                         <h5>Alias: </h5>
-                        <span>TODO Name</span>
+                        <ul class="list" th:each="alias : ${resMap.get(result.getConcept().getConceptId())}">
+                        <li th:text="${alias.getTerm()}"></li>
+                        </ul>
                         </br>
-                        </br>
-                        <h5>Descriprion:</h5>
+                        <h5 th:text="#{description}">Description:</h5>
                         <p th:text="'Definition status: ' + ${result.getConcept().getDefinitionStatus()}">Definition status</p>
                         <p th:text="'Module ID: ' + ${result.getConcept().getModuleId()}">Module ID</p>
-                        <p th:text="'Language code: ' + ${result.getLanguageCode()}">Language code</p>
-                        <a th:href="'https://browser.ihtsdotools.org/?perspective=full&conceptId1=' + ${result.getConcept().getConceptId()} + '&edition=MAIN/2020-07-31&release=&languages=en'">Link to Code</a>
+                        <p th:text="#{lang} +': ' + ${result.getLanguageCode()}">Language code</p>
+                        <a th:href="'https://browser.ihtsdotools.org/?perspective=full&conceptId1=' + ${result.getConcept().getConceptId()} + '&edition=MAIN/2020-07-31&release=&languages=en'" th:text="#{link}">Link to Code</a>
                     </div>
 
                     <!-- Modal footer -->
@@ -135,10 +136,10 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
                             <!--ToDo save mapping-->
                             <!-- IntellJ shows error, but it works -->
-                            <button type="button" th:attr="onclick=|submitMapping('${result.getConcept().getConceptId()}','${result.getConcept().getFsn().getTerm()}')|" class="btn btn-success" data-dismiss="modal">Submit</button>
+                            <button type="button" th:attr="onclick=|submitMapping('${result.getConcept().getConceptId()}','${result.getConcept().getFsn().getTerm()}')|" class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -174,7 +175,7 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
     <div class="float-right" >
-        <a href="startPage"><button type="button" class="btn btn-primary" >Back to Startpage</button></a>
+        <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
 
@@ -192,13 +193,13 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <span th:text="'Displayname: ' + ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
+                <span th:text="#{snomed.display_name} + ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
                 <table class="table-hover table-bordered">
                     <thead >
                     <tr>
                         <th scope="col">SNOMED Code</th>
-                        <th scope="col">Displayname</th>
-                        <th scope="col">Mapping</th>
+                        <th scope="col" th:text="#{snomed.display_name}">Displayname</th>
+                        <th scope="col" th:text="#{mapping}">Mapping</th>
                     </tr>
                     </thead>
                     <tbody th:each="map : ${mapps}">
@@ -213,7 +214,7 @@
 
             <!-- Modal footer -->
             <div class="modal-footer">
-               <button type="button" class="btn btn-danger" data-dismiss="modal" >Close</button>
+               <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
 
             </div>
 

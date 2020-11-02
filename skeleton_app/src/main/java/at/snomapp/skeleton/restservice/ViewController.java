@@ -1,6 +1,7 @@
 package at.snomapp.skeleton.restservice;
 
 
+import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
@@ -8,6 +9,7 @@ import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
+import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
-
 
 @Controller
 public class ViewController<SnomedAPPCMapping> {
@@ -34,12 +35,17 @@ public class ViewController<SnomedAPPCMapping> {
     @GetMapping("/startPage")
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
-        //model.addAttribute("roots", appcController.getTree().getRoots());
-        APPCTree tree = appcController.getTree();
-        model.addAttribute("anatomy", tree.getAnatomyJsonString());
-        model.addAttribute("laterality", tree.getLateralityJsonString());
-        model.addAttribute("modality", tree.getModalityJsonString());
-        model.addAttribute("procedure", tree.getProcedureJsonString());
+
+        try {
+            APPCTree tree = appcController.getTree();
+            model.addAttribute("anatomy", tree.getAnatomyJsonString());
+            model.addAttribute("laterality", tree.getLateralityJsonString());
+            model.addAttribute("modality", tree.getModalityJsonString());
+            model.addAttribute("procedure", tree.getProcedureJsonString());
+            model.addAttribute("version", tree.getVersion());
+        }catch (Exception e){
+            model.addAttribute("version", "not loaded");
+        }
         return "startPage";
     }
 
@@ -65,7 +71,9 @@ public class ViewController<SnomedAPPCMapping> {
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
             List<String> mappings = new ArrayList<>();
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             model.addAttribute("results",resultList);
+            model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
             Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
             model.addAttribute("mapps", mapps);

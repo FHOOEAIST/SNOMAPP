@@ -39,7 +39,6 @@ public class MrcmXmlApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void retrieveAttributeValuesUsingGETTest() throws ApiException {
         String path = "MAIN";
@@ -61,7 +60,6 @@ public class MrcmXmlApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void retrieveDomainAttributesUsingGETTest() throws ApiException {
         String path = "MAIN";

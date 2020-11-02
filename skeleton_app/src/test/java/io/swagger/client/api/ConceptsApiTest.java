@@ -70,14 +70,13 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptAncestorsUsingGETTest() throws ApiException {
         String branch = "MAIN";
-        String conceptId = "100000000";
+        String conceptId = "900000000000455006";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         String form = "inferred";
-        CollectionConceptMini response = api.findConceptAncestorsUsingGET(branch, conceptId, acceptLanguage, form);
+        List<ConceptMini> response = api.findConceptAncestorsUsingGET(branch, conceptId, acceptLanguage, form);
 
         ///US 4_6 Server response
         System.out.println(response.toString());
@@ -92,14 +91,13 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptChildrenUsingGETTest() throws ApiException {
         String branch = "MAIN";
-        String conceptId = "100000000";
+        String conceptId = "900000000000455006";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         String form = "inferred";
-        CollectionConceptMini response = api.findConceptChildrenUsingGET(branch, conceptId, acceptLanguage, form);
+        List<ConceptMini> response = api.findConceptChildrenUsingGET(branch, conceptId, acceptLanguage, form);
 
         //US 4_6 Server response
         System.out.println(response.toString());
@@ -114,11 +112,10 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptDescendantsUsingGETTest() throws ApiException {
         String branch = "MAIN";
-        String conceptId = "100000000";
+        String conceptId = "900000000000455006";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         Boolean stated = false;
         Integer offset = 0;
@@ -178,14 +175,13 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptParentsUsingGETTest() throws ApiException {
         String branch = "MAIN";
-        String conceptId = "100000000";
+        String conceptId = "900000000000455006";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
         String form = "inferred";
-        CollectionConceptMini response = api.findConceptParentsUsingGET(branch, conceptId, acceptLanguage, form);
+        List<ConceptMini> response = api.findConceptParentsUsingGET(branch, conceptId, acceptLanguage, form);
 
         //US 4_6 Server response
         System.out.println(response.toString());
@@ -200,7 +196,6 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptReferencesUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -244,7 +239,6 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void findConceptsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -274,7 +268,6 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void getBrowserConceptsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -297,7 +290,6 @@ public class ConceptsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
-    @Ignore //because "Expected BEGIN_OBJECT but was BEGIN_ARRAY"
     @Test
     public void getConceptAuthoringFormUsingGETTest() throws ApiException {
         String branch = "MAIN";

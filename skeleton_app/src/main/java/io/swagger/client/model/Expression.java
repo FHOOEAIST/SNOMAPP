@@ -14,18 +14,10 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
+
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.CollectionExpressionGroup;
-import io.swagger.client.model.ConceptMicro;
-import io.swagger.client.model.ExpressionAttribute;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +33,7 @@ public class Expression {
   private List<ConceptMicro> concepts = null;
 
   @SerializedName("groups")
-  private CollectionExpressionGroup groups = null;
+  private List<ExpressionGroup> groups = null;
 
   public Expression attributes(List<ExpressionAttribute> attributes) {
     this.attributes = attributes;
@@ -95,7 +87,7 @@ public class Expression {
     this.concepts = concepts;
   }
 
-  public Expression groups(CollectionExpressionGroup groups) {
+  public Expression groups(List<ExpressionGroup> groups) {
     this.groups = groups;
     return this;
   }
@@ -105,11 +97,11 @@ public class Expression {
    * @return groups
   **/
   @ApiModelProperty(value = "")
-  public CollectionExpressionGroup getGroups() {
+  public List<ExpressionGroup> getGroups() {
     return groups;
   }
 
-  public void setGroups(CollectionExpressionGroup groups) {
+  public void setGroups(List<ExpressionGroup> groups) {
     this.groups = groups;
   }
 
