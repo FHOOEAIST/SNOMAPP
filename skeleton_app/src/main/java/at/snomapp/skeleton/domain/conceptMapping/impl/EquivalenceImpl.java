@@ -42,4 +42,14 @@ public class EquivalenceImpl implements Equivalence {
     public EquivalenceType getEquivalence() {
         return equivalence;
     }
+
+
+    // TODO: check if neccessary
+    public Long getRelationshipId() {
+        return relationshipId;
+    }
+
+    public void setRelationshipId(Long relationshipId) {
+        this.relationshipId = relationshipId;
+    }
 }

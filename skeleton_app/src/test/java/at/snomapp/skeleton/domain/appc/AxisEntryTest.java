@@ -12,7 +12,7 @@ class AxisEntryTest {
     @Test
     void addChildSetsChildAndParent() {
         Entry e0 = new AxisEntry("some description");
-        APPCEntry e1 = new APPCEntry("another description", "1");
+        APPCEntry e1 = new APPCEntry("another description", "1", null);
 
         e0.addChild(e1);
 
@@ -32,9 +32,9 @@ class AxisEntryTest {
     @Test
     void getChildrenReturnsTheCorrectContainerOfChildren() {
         Entry e0 = new AxisEntry("root");
-        APPCEntry e1 = new APPCEntry("child", "1");
-        APPCEntry e2 = new APPCEntry("child", "2");
-        APPCEntry e3 = new APPCEntry("child", "3");
+        APPCEntry e1 = new APPCEntry("child", "1", null);
+        APPCEntry e2 = new APPCEntry("child", "2", null);
+        APPCEntry e3 = new APPCEntry("child", "3", null);
         e0.addChild(e1);
         e0.addChild(e2);
         e0.addChild(e3);
@@ -58,12 +58,12 @@ class AxisEntryTest {
     @Test
     void searchReturnsAllEntriesThatMatchExactly() {
         Entry e0 = new AxisEntry("root");
-        APPCEntry e1 = new APPCEntry("match", "1");
-        APPCEntry e2 = new APPCEntry("missmatch", "2");
-        APPCEntry e3 = new APPCEntry("match", "1-1");
-        APPCEntry e4 = new APPCEntry("match", "2-1");
-        APPCEntry e5 = new APPCEntry("missmatch", "2-1-1");
-        APPCEntry e6 = new APPCEntry("match", "2-1-2");
+        APPCEntry e1 = new APPCEntry("match", "1", null);
+        APPCEntry e2 = new APPCEntry("missmatch", "2", null);
+        APPCEntry e3 = new APPCEntry("match", "1-1", null);
+        APPCEntry e4 = new APPCEntry("match", "2-1", null);
+        APPCEntry e5 = new APPCEntry("missmatch", "2-1-1", null);
+        APPCEntry e6 = new APPCEntry("match", "2-1-2", null);
         e4.addChild(e5);
         e4.addChild(e6);
         e2.addChild(e4);

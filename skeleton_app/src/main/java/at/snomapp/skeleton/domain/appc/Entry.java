@@ -18,6 +18,7 @@ public abstract class Entry {
     protected String displayName;
     protected int layerCode;
     protected String code;
+    protected String axis;
 
     public Entry() {
     }
@@ -30,11 +31,12 @@ public abstract class Entry {
     @JsonIgnore
     protected Entry parent;
 
-    public Entry(String description, String code) {
+    public Entry(String description, String code, String axis) {
         this.displayName = description;
         this.children = new HashSet<>();
         this.parent = null;
         this.code = code;
+        this.axis = (axis != null ? axis : description);
 
         if (code != null && !code.isEmpty()) {
             // if code is given save last position separately as layerCode
@@ -54,6 +56,7 @@ public abstract class Entry {
     public void addChild(Entry child) {
         children.add(child);
         child.parent = this;
+        child.axis = child.getParent().axis;
     }
 
     public String getDisplayName() {
@@ -75,6 +78,8 @@ public abstract class Entry {
     public Entry getParent() {
         return parent;
     }
+
+    public String getAxis() { return axis; }
 
     // returns a set containing all exact matches
     public Set<Entry> search(String query) {

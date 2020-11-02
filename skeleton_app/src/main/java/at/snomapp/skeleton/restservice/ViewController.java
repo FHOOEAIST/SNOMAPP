@@ -17,6 +17,11 @@ import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
 import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
+
+import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
+import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
+import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
+import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +34,18 @@ import java.util.*;
 
 
 @Controller
-public class ViewController {
+public class ViewController<SnomedAPPCMapping> {
 
     private final APPCRepo repo;
-    private ConceptMapRepo Conceptmaprepo;
+    private ConceptMapRepo conceptMapRepo;
     private MappingRepo mappingRepo;
+    private ConceptRelationshipRepo conceptRelationshipRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo) {this.repo = readingrepo;}
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo) {this.repo = readingrepo;
+        this.conceptMapRepo = conceptMapRepo;
+        this.conceptRelationshipRepo = conceptRelationshipRepo;
+    }
 
     @GetMapping("/startPage")
     public String startPage(Model model){
@@ -69,7 +78,7 @@ public class ViewController {
 
     @GetMapping("/resultPage")
     public String resultPage(@RequestParam Long id, Model model){
-        ConceptMapController conceptMapController = new ConceptMapController(Conceptmaprepo,mappingRepo);
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
@@ -99,10 +108,17 @@ public class ViewController {
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
             List<EquivalenceImpl> mappings = new ArrayList<>();
+
+            List<String> mappings = new ArrayList<>();
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             model.addAttribute("results",resultList);
             model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
-            //ToDo
+            Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
+            model.addAttribute("mapps", mapps);
+            System.out.println(mapps.iterator().next().values().toArray()[0]);
+            Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
+            maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
         }
 
