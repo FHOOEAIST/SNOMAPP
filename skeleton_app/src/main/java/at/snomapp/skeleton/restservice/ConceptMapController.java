@@ -102,6 +102,7 @@ public class ConceptMapController {
             appcElement = new APPCElement(object.appcCode, object.appcAxis);
         }
 
+        // TODO: convert strings to enum more efficiently
         SNOMEDElement snomedElement = new SNOMEDElement(object.snomedCode, object.snomedDisplayName);
         switch (object.map){
             case "equivalent":

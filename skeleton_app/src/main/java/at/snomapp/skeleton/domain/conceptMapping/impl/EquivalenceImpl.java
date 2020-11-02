@@ -43,6 +43,8 @@ public class EquivalenceImpl implements Equivalence {
         return equivalence;
     }
 
+
+    // TODO: check if neccessary
     public Long getRelationshipId() {
         return relationshipId;
     }

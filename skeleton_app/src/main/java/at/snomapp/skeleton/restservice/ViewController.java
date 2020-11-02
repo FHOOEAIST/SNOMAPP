@@ -66,7 +66,6 @@ public class ViewController<SnomedAPPCMapping> {
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
             List<String> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);
-            //model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
             Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
             model.addAttribute("mapps", mapps);

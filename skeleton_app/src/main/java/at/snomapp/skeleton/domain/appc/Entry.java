@@ -36,7 +36,7 @@ public abstract class Entry {
         this.children = new HashSet<>();
         this.parent = null;
         this.code = code;
-        this.axis = axis;
+        this.axis = (axis != null ? axis : description);
 
         if (code != null && !code.isEmpty()) {
             // if code is given save last position separately as layerCode
@@ -50,9 +50,6 @@ public abstract class Entry {
         }else{
             // no code given
             this.layerCode = -1;
-        }
-        if(axis == null){
-            this.axis = description;
         }
     }
 

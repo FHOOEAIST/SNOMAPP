@@ -1,17 +1,13 @@
 package at.snomapp.skeleton.repo;
 
-
 import at.snomapp.skeleton.domain.conceptMapping.ConceptMap;
 import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import org.springframework.data.neo4j.annotation.Query;
-import org.springframework.data.neo4j.annotation.QueryResult;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 @Repository
