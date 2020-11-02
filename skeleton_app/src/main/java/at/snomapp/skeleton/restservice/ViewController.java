@@ -2,9 +2,10 @@ package at.snomapp.skeleton.restservice;
 
 
 import at.snomapp.skeleton.domain.appc.APPCEntry;
-import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
+
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
 import at.snomapp.skeleton.domain.scoring.ScoringModel;
@@ -12,10 +13,12 @@ import at.snomapp.skeleton.domain.scoring.impl.Cosine;
 import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
 import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
 import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
+
 import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
+import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,12 +41,17 @@ public class ViewController {
     @GetMapping("/startPage")
     public String startPage(Model model){
         APPCController appcController = new APPCController(repo);
-        //model.addAttribute("roots", appcController.getTree().getRoots());
-        APPCTree tree = appcController.getTree();
-        model.addAttribute("anatomy", tree.getAnatomyJsonString());
-        model.addAttribute("laterality", tree.getLateralityJsonString());
-        model.addAttribute("modality", tree.getModalityJsonString());
-        model.addAttribute("procedure", tree.getProcedureJsonString());
+
+        try {
+            APPCTree tree = appcController.getTree();
+            model.addAttribute("anatomy", tree.getAnatomyJsonString());
+            model.addAttribute("laterality", tree.getLateralityJsonString());
+            model.addAttribute("modality", tree.getModalityJsonString());
+            model.addAttribute("procedure", tree.getProcedureJsonString());
+            model.addAttribute("version", tree.getVersion());
+        }catch (Exception e){
+            model.addAttribute("version", "not loaded");
+        }
         return "startPage";
     }
 
@@ -69,6 +77,7 @@ public class ViewController {
             Entry entry = byId.get();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
 
+
             // create a new scoring model
             // compare algorithms can be appended or removed randomly
             // all algorithms which are included are applied on all strings
@@ -87,9 +96,11 @@ public class ViewController {
             // sort resultList by property score
             Collections.sort(resultList);
 
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
             List<EquivalenceImpl> mappings = new ArrayList<>();
             model.addAttribute("results",resultList);
+            model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
             //ToDo
             model.addAttribute("mappings", mappings);

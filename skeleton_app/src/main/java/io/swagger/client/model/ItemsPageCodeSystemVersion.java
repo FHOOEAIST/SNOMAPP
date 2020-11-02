@@ -14,16 +14,10 @@
 package io.swagger.client.model;
 
 import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
+
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.client.model.CollectionCodeSystemVersion;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +27,7 @@ import java.util.List;
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-02T10:22:15.067Z")
 public class ItemsPageCodeSystemVersion {
   @SerializedName("items")
-  private CollectionCodeSystemVersion items = null;
+  private List<CodeSystemVersion> items = null;
 
   @SerializedName("limit")
   private Long limit = null;
@@ -50,7 +44,7 @@ public class ItemsPageCodeSystemVersion {
   @SerializedName("total")
   private Long total = null;
 
-  public ItemsPageCodeSystemVersion items(CollectionCodeSystemVersion items) {
+  public ItemsPageCodeSystemVersion items(List<CodeSystemVersion> items) {
     this.items = items;
     return this;
   }
@@ -60,11 +54,11 @@ public class ItemsPageCodeSystemVersion {
    * @return items
   **/
   @ApiModelProperty(value = "")
-  public CollectionCodeSystemVersion getItems() {
+  public List<CodeSystemVersion> getItems() {
     return items;
   }
 
-  public void setItems(CollectionCodeSystemVersion items) {
+  public void setItems(List<CodeSystemVersion> items) {
     this.items = items;
   }
 
