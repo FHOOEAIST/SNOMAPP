@@ -12,6 +12,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="/css/bstreeview.css" rel="stylesheet">
+    <link href="/styles/list.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -22,22 +23,32 @@
 
 </head>
 
-<div class="container pt-3">
+<body onload="startInterval()">
+
+<div class="container pt-3" id="header">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{lang.change}">
+            Change Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" th:href="'?lang=de'" th:text="#{lang.de}">German</a>
+            <a class="dropdown-item" th:href="'?lang=en'" th:text="#{lang.en}">English</a>
+        </div>
+    </div>
 </div>
 
-<body onload="startInterval()">
 <div class="container">
     <div class="input-group pt-3">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="searchbar" value="">
-        <button class="btn btn-primary" onclick="search()" value="search">Suchen</button>
+        <input class="form-control" type="text" th:placeholder="#{appc.search}" aria-label="Search" id="searchbar" value="">
+        <button class="btn btn-primary" onclick="search()" value="search" th:text="#{appc.search}">Suchen</button>
     </div>
 </div>
 
 
 <div class="container" >
     <br>
-    <h5><span th:text="'APPC Version: ' + ${version}"></span></h5>
+    <h5><span th:text="#{appc.version} + ' ' + ${version}"></span></h5>
 </div>
 
 
@@ -164,10 +175,10 @@
             <div class="col-md-12">
                 <nav>
                     <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true">Modality</a>
-                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false">Laterality</a>
-                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false">Procedures</a>
-                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false">Anatomy</a>
+                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true" th:text="#{appc.modality}">Modality</a>
+                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false" th:text="#{appc.laterality}">Laterality</a>
+                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false" th:text="#{appc.procedures}">Procedures</a>
+                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false" th:text="#{appc.anatomy}">Anatomy</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
@@ -230,14 +241,14 @@
 </section>
 
 <div class="container">
-    <h4>Import APPC</h4>
+    <h4 th:text="#{appc.import_csv}">Import APPC</h4>
     <div class="input-group">
         <div class="input-group-prepend">
             <input id="btnUpload" class="btn-primary" type="button" value="Upload" />
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="APPCFile">
-            <label id= "lblImport" class="custom-file-label" for="APPCFile">Choose file</label>
+            <label id= "lblImport" class="custom-file-label" for="APPCFile" th:text="#{appc.choose}">Choose file</label>
         </div>
     </div>
 </div>
