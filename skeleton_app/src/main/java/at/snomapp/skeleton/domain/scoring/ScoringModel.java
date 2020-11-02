@@ -22,7 +22,7 @@ public class ScoringModel {
             // calculate weighted points
             result += algorithm.getScore(sequenceA, sequenceB) * algorithm.getWeight();
         }
-        return (int) result;
+        return (int) Math.round(result);
     }
 
     public int calculateUnweightedScore(String sequenceA, String sequenceB){
@@ -35,7 +35,7 @@ public class ScoringModel {
             // calculate unweighted points
             result += algorithm.getScore(sequenceA, sequenceB);
         }
-        return (int) result;
+        return (int) Math.round(result);
     }
 
 
