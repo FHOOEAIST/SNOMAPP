@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,7 +38,7 @@ public class SnomedController {
         String module = null;
         List<String> language = null;
         String semanticTag = null;
-        String[] semanticTags = null;
+        List<String> semanticTags = null;
         Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
@@ -48,27 +49,31 @@ public class SnomedController {
         // if this leads to performance problems consider replacing with smaller page size
         Integer limit = null;
         //set semantic tag to reduce searchresults
+        System.out.println(APPCAxis.toLowerCase());
         switch (APPCAxis.toLowerCase()) {
             case "anatomy":
-                semanticTag = "body structure";
+                semanticTags.add("body structure");
                 break;
             case "laterality":
-                semanticTag = "qualifier value";
+                semanticTags.add("qualifier value");
                 break;
             case "modality":
-                semanticTag = "procedure";
+                semanticTags.add( "procedure");
                 break;
             case "procedure":
-                semanticTags = new String[]{"procedure", "physical object", "disorder", "qualifier value"};
+                semanticTags.add("procedure");
+                semanticTags.add("physical object");
+                semanticTags.add("disorder");
+                semanticTags.add("qualifier value");
+                break;
         }
 
+        System.out.println(semanticTag);
         PageBrowserDescriptionSearchResult response = null;
         try {
             response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language,
-                    semanticTag, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
-            Filter filter = new AxisFilter();
+                    semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
 
-            response.setItems(filter.filterResults(APPCAxis, response));
         } catch (ApiException e) {
             e.printStackTrace();
         }

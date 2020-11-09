@@ -197,7 +197,7 @@ public class DescriptionsApi {
      * @param active active (optional)
      * @param module module (optional)
      * @param language List of two character language codes to match. The English language code &#39;en&#39; will not be added automatically, in contrast to the Accept-Language header which always includes it. Accept-Language header still controls result FSN and PT language selection. (optional)
-     * @param semanticTag semanticTag (optional)
+     * @param semanticTags semanticTag (optional)
      * @param conceptActive conceptActive (optional)
      * @param conceptRefset conceptRefset (optional)
      * @param groupByConcept groupByConcept (optional, default to false)
@@ -210,7 +210,7 @@ public class DescriptionsApi {
      * @throws ApiException If fail to serialize the request body object
      */
     public com.squareup.okhttp.Call findBrowserDescriptionsUsingGETCall(String branch, String acceptLanguage, String term,
-                                                                        Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive,
+                                                                        Boolean active, String module, List<String> language, List<String> semanticTags, Boolean conceptActive,
                                                                         String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit,
                                                                         final ProgressResponseBody.ProgressListener progressListener,
                                                                         final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
@@ -230,8 +230,9 @@ public class DescriptionsApi {
         localVarQueryParams.addAll(apiClient.parameterToPair("module", module));
         if (language != null)
         localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "language", language));
-        if (semanticTag != null)
-        localVarQueryParams.addAll(apiClient.parameterToPair("semanticTag", semanticTag));
+        if (semanticTags != null)
+        //localVarQueryParams.addAll(apiClient.parameterToPair("semanticTag", semanticTag));
+            localVarCollectionQueryParams.addAll(apiClient.parameterToPairs("multi", "semanticTags", semanticTags));
         if (conceptActive != null)
         localVarQueryParams.addAll(apiClient.parameterToPair("conceptActive", conceptActive));
         if (conceptRefset != null)
@@ -280,7 +281,7 @@ public class DescriptionsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private com.squareup.okhttp.Call findBrowserDescriptionsUsingGETValidateBeforeCall(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    private com.squareup.okhttp.Call findBrowserDescriptionsUsingGETValidateBeforeCall(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, List<String> semanticTags, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         
         // verify the required parameter 'branch' is set
         if (branch == null) {
@@ -293,7 +294,7 @@ public class DescriptionsApi {
         }
         
 
-        com.squareup.okhttp.Call call = findBrowserDescriptionsUsingGETCall(branch, acceptLanguage, term, active, module, language, semanticTag, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = findBrowserDescriptionsUsingGETCall(branch, acceptLanguage, term, active, module, language, semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit, progressListener, progressRequestListener);
         return call;
 
     }
@@ -317,8 +318,8 @@ public class DescriptionsApi {
      * @return PageBrowserDescriptionSearchResult
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public PageBrowserDescriptionSearchResult findBrowserDescriptionsUsingGET(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit) throws ApiException {
-        ApiResponse<PageBrowserDescriptionSearchResult> resp = findBrowserDescriptionsUsingGETWithHttpInfo(branch, acceptLanguage, term, active, module, language, semanticTag, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
+    public PageBrowserDescriptionSearchResult findBrowserDescriptionsUsingGET(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, List<String> semanticTags, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit) throws ApiException {
+        ApiResponse<PageBrowserDescriptionSearchResult> resp = findBrowserDescriptionsUsingGETWithHttpInfo(branch, acceptLanguage, term, active, module, language, semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
         return resp.getData();
     }
 
@@ -341,8 +342,8 @@ public class DescriptionsApi {
      * @return ApiResponse&lt;PageBrowserDescriptionSearchResult&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      */
-    public ApiResponse<PageBrowserDescriptionSearchResult> findBrowserDescriptionsUsingGETWithHttpInfo(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit) throws ApiException {
-        com.squareup.okhttp.Call call = findBrowserDescriptionsUsingGETValidateBeforeCall(branch, acceptLanguage, term, active, module, language, semanticTag, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit, null, null);
+    public ApiResponse<PageBrowserDescriptionSearchResult> findBrowserDescriptionsUsingGETWithHttpInfo(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, List<String> semanticTags, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit) throws ApiException {
+        com.squareup.okhttp.Call call = findBrowserDescriptionsUsingGETValidateBeforeCall(branch, acceptLanguage, term, active, module, language, semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit, null, null);
         Type localVarReturnType = new TypeToken<PageBrowserDescriptionSearchResult>(){}.getType();
         return apiClient.execute(call, localVarReturnType);
     }
@@ -367,7 +368,7 @@ public class DescriptionsApi {
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
      */
-    public com.squareup.okhttp.Call findBrowserDescriptionsUsingGETAsync(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit, final ApiCallback<PageBrowserDescriptionSearchResult> callback) throws ApiException {
+    public com.squareup.okhttp.Call findBrowserDescriptionsUsingGETAsync(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, List<String> semanticTags, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit, final ApiCallback<PageBrowserDescriptionSearchResult> callback) throws ApiException {
 
         ProgressResponseBody.ProgressListener progressListener = null;
         ProgressRequestBody.ProgressRequestListener progressRequestListener = null;
@@ -388,7 +389,7 @@ public class DescriptionsApi {
             };
         }
 
-        com.squareup.okhttp.Call call = findBrowserDescriptionsUsingGETValidateBeforeCall(branch, acceptLanguage, term, active, module, language, semanticTag, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit, progressListener, progressRequestListener);
+        com.squareup.okhttp.Call call = findBrowserDescriptionsUsingGETValidateBeforeCall(branch, acceptLanguage, term, active, module, language, semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit, progressListener, progressRequestListener);
         Type localVarReturnType = new TypeToken<PageBrowserDescriptionSearchResult>(){}.getType();
         apiClient.executeAsync(call, localVarReturnType, callback);
         return call;
