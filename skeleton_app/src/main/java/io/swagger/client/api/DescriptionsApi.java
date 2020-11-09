@@ -209,7 +209,11 @@ public class DescriptionsApi {
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
      */
-    public com.squareup.okhttp.Call findBrowserDescriptionsUsingGETCall(String branch, String acceptLanguage, String term, Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive, String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit, final ProgressResponseBody.ProgressListener progressListener, final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
+    public com.squareup.okhttp.Call findBrowserDescriptionsUsingGETCall(String branch, String acceptLanguage, String term,
+                                                                        Boolean active, String module, List<String> language, String semanticTag, Boolean conceptActive,
+                                                                        String conceptRefset, Boolean groupByConcept, String searchMode, Integer offset, Integer limit,
+                                                                        final ProgressResponseBody.ProgressListener progressListener,
+                                                                        final ProgressRequestBody.ProgressRequestListener progressRequestListener) throws ApiException {
         Object localVarPostBody = null;
 
         // create path and map variables
