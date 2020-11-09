@@ -105,10 +105,6 @@ public class ViewController<SnomedAPPCMapping> {
             // sort resultList by property score
             Collections.sort(resultList);
 
-            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
-
-            List<EquivalenceImpl> mappings = new ArrayList<>();
-
             List<String> mappings = new ArrayList<>();
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             model.addAttribute("results",resultList);
@@ -116,7 +112,6 @@ public class ViewController<SnomedAPPCMapping> {
             model.addAttribute("appc", entry);
             Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
             model.addAttribute("mapps", mapps);
-            System.out.println(mapps.iterator().next().values().toArray()[0]);
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
             maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);

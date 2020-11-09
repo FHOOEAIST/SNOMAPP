@@ -155,7 +155,7 @@
 <script th:inline="javascript">
     function submitMapping(snomedCode, snomedDisplayName) {
         let mapElement = document.getElementById("selectMap");
-        let map = mapElement.options[mapElement.selectedIndex].value;
+        let map = mapElement.value;
         let appcCode = [[${appc.getCode()}]];
         let appcAxis = [[${appc.getAxis()}]];
 
@@ -167,6 +167,7 @@
                 data: JSON.stringify({appcCode, appcAxis, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
                         alert("Map successfully saved.");
+                        location.reload();
                 },
             }
         );
@@ -195,7 +196,7 @@
 
             <!-- Modal body -->
             <div class="modal-body">
-                <span th:text="#{snomed.display_name} + ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
+                <span th:text="#{snomed.display_name} +': '+ ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
                 <table class="table-hover table-bordered">
                     <thead >
                     <tr>

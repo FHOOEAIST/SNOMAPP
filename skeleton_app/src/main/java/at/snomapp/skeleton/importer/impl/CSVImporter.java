@@ -88,7 +88,7 @@ public class CSVImporter implements Importer {
                 }
 
                 //make new node and add it to tree
-                APPCEntry next = new APPCEntry(displayName, fullCode, null);
+                APPCEntry next = new APPCEntry(displayName, fullCode, current.getAxis());
                 assert current != null;
                 current.addChild(next);
                 current = next;

@@ -92,7 +92,7 @@ public class StringCSVImporter implements Importer {
             }
 
             //make new node and add it to tree
-            APPCEntry next = new APPCEntry(displayName, fullCode);
+            APPCEntry next = new APPCEntry(displayName, fullCode, null);
             assert current != null;
             current.addChild(next);
             current = next;

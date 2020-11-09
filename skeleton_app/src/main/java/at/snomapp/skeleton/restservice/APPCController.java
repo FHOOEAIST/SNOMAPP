@@ -120,7 +120,7 @@ public class APPCController {
 
                 // save version
                 if (tree.getVersion() != null){
-                    repo.save(new APPCEntry("Version", tree.getVersion()));
+                    repo.save(new APPCEntry("Version", tree.getVersion(), null));
                 }
 
                 Iterable<Entry> roots = tree.getRoots();
@@ -164,7 +164,7 @@ public class APPCController {
                     repo.deleteAll();
                     // save version
                     if (tree.getVersion() != null) {
-                        repo.save(new APPCEntry("Version", tree.getVersion()));
+                        repo.save(new APPCEntry("Version", tree.getVersion(), null));
                     }
 
                     Iterable<Entry> roots = tree.getRoots();
