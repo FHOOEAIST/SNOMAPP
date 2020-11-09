@@ -12,9 +12,9 @@ public class ScoringModelTest {
 
     public static void test (ScoringModel model, String str1, String str2){
         // calculate weightedScore
-        int weightedScore = model.calculateWeightedScore(str1, str2);
+        int weightedScore = model.calcWeightedScore(str1, str2);
         // calculate unweightedScore
-        int unweightedScore = model.calculateUnweightedScore(str1, str2);
+        int unweightedScore = model.calcUnweightedScore(str1, str2);
 
         System.out.println("Str1: " + str1 + " Str2: " + str2);
         System.out.println("Weighted Score: " + weightedScore);
