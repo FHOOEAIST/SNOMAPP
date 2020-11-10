@@ -70,13 +70,15 @@ public class DescriptionsApiTest {
         Boolean active = true;
         String module = null;
         List<String> language = null;
-        List<String> semanticTags = null;
+        List<String> semanticTags = new ArrayList<>();
         Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
         String searchMode = "STANDARD";
         Integer offset = 0;
         Integer limit = 50;
+
+        semanticTags.add("body structure");
         PageBrowserDescriptionSearchResult response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language, semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
 
         //US 4_6 Server response

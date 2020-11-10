@@ -38,7 +38,7 @@ public class SnomedController {
         String module = null;
         List<String> language = null;
         String semanticTag = null;
-        List<String> semanticTags = null;
+        List<String> semanticTags = new ArrayList<>();
         Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
@@ -63,7 +63,7 @@ public class SnomedController {
             case "procedure":
                 semanticTags.add("procedure");
                 semanticTags.add("physical object");
-                semanticTags.add("disorder");
+                semanticTags.add("finding");
                 semanticTags.add("qualifier value");
                 break;
         }
