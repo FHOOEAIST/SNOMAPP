@@ -144,9 +144,27 @@
         $("div.list-group-item").each(function () {
             // same hack as addMappingButtons
             // todo colored dot
-            let dot = $(`<span style="background-color: aqua; float: right" class="mapping-indicator" id="indicator-${jQuery("div", this).text()}">test</span>`);
+            let id = jQuery("div", this).text();
+            let dot = $(`<span style="background-color: aqua; float: right" class="mapping-indicator" id="indicator-${id}">test</span>`);
             $(this).append(dot);
-
+            $.ajax(
+                {
+                    method:"GET",
+                    url:`ConceptMap/count?id=${id}`,
+                    contentType: "application/json",
+                    success: function(result){
+                        if(result["EQUAL"] >= 1 || result["EQUIVALENT"] >= 1 ){
+                            dot.text("equal iz da");
+                        }else{
+                            for(let key in result){
+                                if(result.hasOwnProperty(key) && result[key] >= 1){
+                                    dot.text("wenigstens irgendein mapping");
+                                }
+                            }
+                        }
+                    }
+                }
+            );
         });
     }
 
