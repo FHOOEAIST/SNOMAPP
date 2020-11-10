@@ -11,9 +11,6 @@ public class SNOMEDElement extends AbstractElement{
     @GeneratedValue
     private Long id;
 
-    private final String displayName;
-    private final String code;
-
     public SNOMEDElement(String code, String displayName){
         this.displayName = displayName;
         this.code = code;
@@ -22,14 +19,5 @@ public class SNOMEDElement extends AbstractElement{
 
     public Long getId() {
         return id;
-    }
-
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    @Override
-    public String getCode() {
-        return code;
     }
 }

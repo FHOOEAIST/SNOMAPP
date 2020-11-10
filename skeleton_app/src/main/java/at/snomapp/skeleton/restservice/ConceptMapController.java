@@ -90,7 +90,7 @@ public class ConceptMapController {
     @PostMapping("/submit")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<HttpStatus> submitMapping(@RequestBody ConceptMapRequest object){
-        Iterator<ConceptMap> iterator = (Iterator<ConceptMap>) conceptMapRepo.findAll();
+        Iterator<ConceptMap> iterator = conceptMapRepo.findAll().iterator();
         ConceptMap conceptMap;
         if(!iterator.hasNext()){
             /*
@@ -104,7 +104,7 @@ public class ConceptMapController {
         }
         APPCElement appcElement = conceptMapRepo.findElementByCodeAndAxis(object.appcCode, object.appcAxis);
         if(appcElement == null){
-            appcElement = new APPCElement(object.appcCode, object.appcAxis);
+            appcElement = new APPCElement(object.appcCode, object.appcAxis, object.appcDisplayName);
         }
 
         // TODO: convert strings to enum more efficiently
@@ -141,7 +141,7 @@ public class ConceptMapController {
 
     @GetMapping("mappings/export")
     List<ConceptMap> exportConceptMaps(){
-        List<ConceptMap> conceptMaps = (List<ConceptMap>) conceptMapRepo.findAllMappings();
+        List<ConceptMap> conceptMaps = (List<ConceptMap>) conceptMapRepo.findAll(2);
         System.out.println(conceptMaps);
         return conceptMaps;
        /* {
@@ -204,11 +204,15 @@ public class ConceptMapController {
     private static class ConceptMapRequest {
 
         String snomedDisplayName;
+        String appcDisplayName;
         String appcCode;
         String snomedCode;
         String map;
         String appcAxis;
 
+        public String getAppcDisplayName(){
+            return appcDisplayName;
+        }
         public String getSnomedDisplayName() {
             return snomedDisplayName;
         }
@@ -227,6 +231,10 @@ public class ConceptMapController {
 
         public String getAppcAxis() {
             return appcAxis;
+        }
+
+        public void setAppcDisplayName(String appcDisplayName) {
+            this.appcDisplayName = appcDisplayName;
         }
 
         public void setSnomedDisplayName(String snomedDisplayName){

@@ -158,13 +158,14 @@
         let map = mapElement.value;
         let appcCode = [[${appc.getCode()}]];
         let appcAxis = [[${appc.getAxis()}]];
+        let appcDisplayName = [[${appc.getDisplayName()}]];
 
         $.ajax(
             {
                 method: "POST",
                 url: "ConceptMap/submit",
                 contentType: "application/json",
-                data: JSON.stringify({appcCode, appcAxis, snomedCode, snomedDisplayName, map }),
+                data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
                         alert("Map successfully saved.");
                         location.reload();

@@ -22,9 +22,10 @@ public class APPCElement extends AbstractElement {
 
     private String axis;
 
-    public APPCElement(String code, String axis){
+    public APPCElement(String code, String axis, String displayName){
         this.code = code;
         this.axis = axis;
+        this.displayName = displayName;
         switch (axis){
             case "anatomy":
                 this.codesystem = "1.2.40.0.34.5.38.4";

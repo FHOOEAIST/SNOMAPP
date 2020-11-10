@@ -35,7 +35,5 @@ public interface ConceptMapRepo extends Neo4jRepository<ConceptMap, Long> {
             "ORDER BY m.id")
     Iterable<Map<String, Object>> getSnomedCodeAndEquivalence(String code, String axis);
 
-    @Query("MATCH (m:ConceptMap) RETURN m")
-    Iterable<ConceptMap> findAllMappings();
 }
 
