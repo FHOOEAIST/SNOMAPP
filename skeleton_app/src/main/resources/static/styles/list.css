@@ -49,3 +49,12 @@
     margin-left: auto;
     align-self: center;
 }
+
+.mapping-indicator{
+    height: 25px;
+    width: 25px;
+    background-color: #f30d0d;
+    border-radius: 50%;
+    float: right;
+    display: inline-block;
+}

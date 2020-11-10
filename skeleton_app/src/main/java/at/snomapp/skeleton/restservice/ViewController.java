@@ -1,16 +1,12 @@
 package at.snomapp.skeleton.restservice;
 
 
-import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
-import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
 
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
 import at.snomapp.skeleton.domain.scoring.ScoringModel;
-import at.snomapp.skeleton.domain.scoring.impl.Cosine;
-import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
 import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
 import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
 
@@ -18,9 +14,6 @@ import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 
-import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
-import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
-import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
@@ -78,7 +71,7 @@ public class ViewController<SnomedAPPCMapping> {
 
     @GetMapping("/resultPage")
     public String resultPage(@RequestParam Long id, Model model){
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo);
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo, repo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);

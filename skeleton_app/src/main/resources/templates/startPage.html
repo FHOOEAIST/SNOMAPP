@@ -12,7 +12,7 @@
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="/css/bstreeview.css" rel="stylesheet">
-    <link href="/styles/list.css" rel="stylesheet">
+    <link href="../static/styles/list.css" th:href="@{/styles/list.css}" rel="stylesheet" />
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -140,6 +140,16 @@
         });
     }
 
+    function addMappingIndicator(){
+        $("div.list-group-item").each(function () {
+            // same hack as addMappingButtons
+            // todo colored dot
+            let dot = $(`<span style="background-color: aqua; float: right" class="mapping-indicator" id="indicator-${jQuery("div", this).text()}">test</span>`);
+            $(this).append(dot);
+
+        });
+    }
+
 
 </script>
 
@@ -170,6 +180,7 @@
         });
 
         addMappingButtons();
+        addMappingIndicator();
     });
 
 </script>
