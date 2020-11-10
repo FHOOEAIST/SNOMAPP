@@ -59,6 +59,7 @@ public class SnomedController {
                 break;
             case "modality":
                 semanticTags.add( "procedure");
+                semanticTags.add("qualifier value");
                 break;
             case "procedure":
                 semanticTags.add("procedure");
