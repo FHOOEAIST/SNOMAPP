@@ -11,12 +11,25 @@ public class SNOMEDElement extends AbstractElement{
     @GeneratedValue
     private Long id;
 
-    private String displayName;
+    private final String displayName;
+    private final String code;
 
     public SNOMEDElement(String code, String displayName){
         this.displayName = displayName;
         this.code = code;
-        this.codesystem = "GET URI FOR SNOMED";
+        this.codesystem = "2.16.840.1.113883.6.96";
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    @Override
+    public String getCode() {
+        return code;
+    }
 }

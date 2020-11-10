@@ -16,9 +16,9 @@ public class ConceptMapImpl implements ConceptMap {
     private Long id;
 
     @Property
-    private String source;
+    private final String source;
     @Property
-    private String destination;
+    private final String destination;
     @Property
     private StatusType status = StatusType.DRAFT;
 
