@@ -140,6 +140,16 @@
         });
     }
 
+    function addMappingIndicator(){
+        $("div.list-group-item").each(function () {
+            // same hack as addMappingButtons
+            // todo colored dot
+            let dot = $(`<span style="background-color: aqua; float: right" class="mapping-indicator" id="indicator-${jQuery("div", this).text()}">test</span>`);
+            $(this).append(dot);
+
+        });
+    }
+
 
 </script>
 
@@ -170,6 +180,7 @@
         });
 
         addMappingButtons();
+        addMappingIndicator();
     });
 
 </script>
