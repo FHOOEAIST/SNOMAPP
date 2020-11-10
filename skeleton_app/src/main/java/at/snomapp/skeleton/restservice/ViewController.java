@@ -77,6 +77,9 @@ public class ViewController<SnomedAPPCMapping> {
         Optional<Entry> byId = repo.findById(id);
         if(byId.isPresent()){
             Entry entry = byId.get();
+            System.out.println(entry.getLayerCode());
+            System.out.println(entry.getId());
+            System.out.println(entry.getDisplayName());
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
@@ -90,11 +93,11 @@ public class ViewController<SnomedAPPCMapping> {
             algorithms.add(new LongestCommonSubsequence(0.5));
 
             ScoringModel scoringModel = new ScoringModel(algorithms);
-            // calculates for each result his weighted score
+            // calculates for each result his score
+            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScore( entry.getDisplayName(), res.getTerm() )));
             //resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
 
             //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
-
             resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
 
             // sorts resultList by property score

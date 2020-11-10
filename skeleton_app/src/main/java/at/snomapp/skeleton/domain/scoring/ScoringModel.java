@@ -2,7 +2,6 @@ package at.snomapp.skeleton.domain.scoring;
 
 import io.swagger.client.model.Description;
 
-import java.io.Console;
 import java.util.List;
 import java.util.Map;
 
@@ -47,6 +46,9 @@ public class ScoringModel {
 
     public int calcWeightedScoreSynonym(String appcDisplayName,  Map<String, List<Description>> resMap, String snomedCode){
         List<Description> synonyms = resMap.get(snomedCode);
+        if (synonyms == null || synonyms.size() == 0){
+            return 0;
+        }
 
         // adds all weighted scores of existing synonyms
         double res = synonyms.stream().mapToDouble(synonym -> calcWeightedScore(appcDisplayName, synonym.getTerm())).sum();
@@ -59,6 +61,9 @@ public class ScoringModel {
 
     public int calcUnweightedScoreSynonym(String appcDisplayName,  Map<String, List<Description>> resMap, String snomedCode){
         List<Description> synonyms = resMap.get(snomedCode);
+        if (synonyms == null || synonyms.size() == 0){
+            return 0;
+        }
 
         // adds all unweighted scores of existing synonyms
         double res = synonyms.stream().mapToDouble(synonym -> calcUnweightedScore(appcDisplayName, synonym.getTerm())).sum();
