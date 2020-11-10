@@ -7,6 +7,7 @@ public class LongestCommonSubsequence implements ScoringAlgorithm {
 
     private LongestCommonSubsequenceDistance longestCommonSubsequenceDistance = new LongestCommonSubsequenceDistance();
     private double weight;
+    private String description = "Longest Common Subsequence Distance";
 
     public LongestCommonSubsequence(double weight) {
         this.weight = weight;
@@ -20,6 +21,11 @@ public class LongestCommonSubsequence implements ScoringAlgorithm {
     @Override
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 }
 

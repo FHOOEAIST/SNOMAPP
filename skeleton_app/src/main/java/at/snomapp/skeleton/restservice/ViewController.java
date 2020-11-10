@@ -77,9 +77,6 @@ public class ViewController<SnomedAPPCMapping> {
         Optional<Entry> byId = repo.findById(id);
         if(byId.isPresent()){
             Entry entry = byId.get();
-            System.out.println(entry.getLayerCode());
-            System.out.println(entry.getId());
-            System.out.println(entry.getDisplayName());
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 

@@ -11,4 +11,5 @@ public interface ScoringAlgorithm {
 
     double getScore(String sequenceA, String sequenceB);
     double getWeight();
+    String getDescription();
 }

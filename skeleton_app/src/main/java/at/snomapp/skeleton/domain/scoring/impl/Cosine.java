@@ -7,6 +7,7 @@ public class Cosine implements ScoringAlgorithm {
 
     private CosineDistance cosineDistance = new CosineDistance();
     private double weight;
+    private String description = "Cosine Distance";
 
     public Cosine(double weight) {
         this.weight = weight;
@@ -20,6 +21,11 @@ public class Cosine implements ScoringAlgorithm {
     @Override
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
 

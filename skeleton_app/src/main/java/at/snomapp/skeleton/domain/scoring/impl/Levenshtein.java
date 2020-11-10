@@ -7,6 +7,7 @@ public class Levenshtein implements ScoringAlgorithm {
 
     private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
     private double weight;
+    private String description = "Levenshtein Distance";
 
     public Levenshtein(double weight) {
         this.weight = weight;
@@ -20,6 +21,11 @@ public class Levenshtein implements ScoringAlgorithm {
     @Override
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
     }
 
 }
