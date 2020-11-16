@@ -49,7 +49,7 @@ public class SnomedController {
         // if this leads to performance problems consider replacing with smaller page size
         Integer limit = null;
         //set semantic tag to reduce searchresults
-        System.out.println(APPCAxis.toLowerCase());
+        System.out.println(APPCAxis);
         switch (APPCAxis.toLowerCase()) {
             case "anatomy":
                 semanticTags.add("body structure");
@@ -61,19 +61,21 @@ public class SnomedController {
                 semanticTags.add( "procedure");
                 semanticTags.add("qualifier value");
                 break;
-            case "procedure":
+            case "procedures":
                 semanticTags.add("procedure");
                 semanticTags.add("physical object");
-                semanticTags.add("finding");
+                semanticTags.add("disorder");
                 semanticTags.add("qualifier value");
+                semanticTags.add("morphologic abnormality");
                 break;
         }
 
-        System.out.println(semanticTag);
+        System.out.println(semanticTags);
         PageBrowserDescriptionSearchResult response = null;
         try {
             response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language,
                     semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
+            System.out.println(semanticTags);
 
         } catch (ApiException e) {
             e.printStackTrace();
