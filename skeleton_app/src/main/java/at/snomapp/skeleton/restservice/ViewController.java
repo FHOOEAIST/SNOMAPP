@@ -7,6 +7,8 @@ import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
 import at.snomapp.skeleton.domain.scoring.ScoringModel;
+import at.snomapp.skeleton.domain.scoring.impl.Cosine;
+import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
 import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
 import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
 
@@ -109,6 +111,7 @@ public class ViewController<SnomedAPPCMapping> {
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
             maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
+            model.addAttribute("scoringModel", scoringModel );
         }
 
         // TODO: 06.10.2020 maybe add a page for errors

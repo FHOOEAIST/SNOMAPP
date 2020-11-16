@@ -33,7 +33,7 @@
     </button>
 
     <!-- Button to Open Info Scoring -->
-    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#socringInfo" th:text="#{scoring.info}" >
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#socringInfo" style='margin-right:16px' th:text="#{scoring.info}" >
         Info Scoring
     </button>
 
@@ -236,27 +236,24 @@
 <div class="modal" id="socringInfo">
     <div class="modal-dialog">
         <div class="modal-content">
-
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title" th:text="${appc.getCode()}">Mappings for --APPC-- </h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
             <!-- Modal body -->
             <div class="modal-body">
+                <h4 th:text="#{scoring.header}">Scoring Model</h4>
+                <p th:text="#{scoring.text}">A lower score indicates a greater similarity between APPC sequence and SNOMED sequence.
+                    The score represents a weighted sum of all applied algorithms.
+                    If the scoring algorithms are also applied on all SNOMED synonyms, then the score represents the average score of all synonyms.</p>
                 <table class="table-hover table-bordered">
                     <thead >
                     <tr>
-                        <th scope="col">Scoring</th>
-                        <th scope="col" th:text="#{snomed.display_name}">Weight</th>
+                        <th scope="col" th:text="#{scoring.appliedAlgorithm}">Applied Algorithms</th>
+                        <th scope="col" th:text="#{scoring.Weight}">Weight</th>
                     </tr>
                     </thead>
-                    <!--iterate over alogrithms-->
-                    <tbody th:each="map : ${mapps}">
+                    <!--iterate over algorithms-->
+                    <tbody th:each="algorithm : ${scoringModel.getAlgorithms()}">
                     <tr >
-                        <td th:text="${map.values().toArray()[2]}">Description</td>
-                        <td th:text="${map.values().toArray()[0]}">Weight</td>
+                        <td th:text="${algorithm.getDescription()}">Description</td>
+                        <td th:text="${algorithm.getWeight()}">Weight</td>
                     </tr>
                     </tbody>
                 </table>

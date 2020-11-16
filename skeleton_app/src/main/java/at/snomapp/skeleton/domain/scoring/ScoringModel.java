@@ -7,6 +7,10 @@ import java.util.Map;
 
 public class ScoringModel {
 
+    public List<ScoringAlgorithm> getAlgorithms() {
+        return algorithms;
+    }
+
     // list of algorithms which are applied on given strings
     private List<ScoringAlgorithm> algorithms;
 
@@ -73,7 +77,6 @@ public class ScoringModel {
 
         return (int) Math.round(res);
     }
-
 
 
 }
