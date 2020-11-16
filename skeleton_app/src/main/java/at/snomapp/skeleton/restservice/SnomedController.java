@@ -76,7 +76,6 @@ public class SnomedController {
         try {
             response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language,
                     semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
-            System.out.println(semanticTags);
 
         } catch (ApiException e) {
             e.printStackTrace();
