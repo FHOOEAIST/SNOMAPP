@@ -143,9 +143,11 @@
     function addMappingIndicator(){
         $("div.list-group-item").each(function () {
             // same hack as addMappingButtons
-            // todo colored dot
             let id = jQuery("div", this).text();
-            let dot = $(`<span style="background-color: aqua; float: right" class="mapping-indicator" id="indicator-${id}">test</span>`);
+            let dot = $(`<span class="mapping-indicator unmapped" id="indicator-${id}" data-toggle="tooltip"></span>`);
+            let newTitle = $('#tooltip-template-no-mapping').text();
+            dot.attr('title', newTitle);
+            dot.attr('data-original-title', newTitle);
             $(this).append(dot);
             $.ajax(
                 {
@@ -154,11 +156,19 @@
                     contentType: "application/json",
                     success: function(result){
                         if(result["EQUAL"] >= 1 || result["EQUIVALENT"] >= 1 ){
-                            dot.text("equal iz da");
+                            dot.removeClass('unmapped');
+                            dot.addClass('has-equal');
+                            let newTitle = $('#tooltip-template-has-equivalent').text();
+                            dot.attr('title', newTitle);
+                            dot.attr('data-original-title', newTitle);
                         }else{
                             for(let key in result){
                                 if(result.hasOwnProperty(key) && result[key] >= 1){
-                                    dot.text("wenigstens irgendein mapping");
+                                    dot.removeClass('unmapped');
+                                    dot.addClass('has-mapping');
+                                    let newTitle = $('#tooltip-template-has-mapping').text();
+                                    dot.attr('title', newTitle);
+                                    dot.attr('data-original-title', newTitle);
                                 }
                             }
                         }
@@ -197,8 +207,8 @@
             data: anatomy
         });
 
-        addMappingButtons();
         addMappingIndicator();
+        addMappingButtons();
     });
 
 </script>
@@ -290,9 +300,17 @@
     </div>
 </div>
 
+<!-- hidden templates that are calculated on server side with correct language info to dynamically set tooltips -->
+<div style="visibility: hidden">
+    <h3 th:text="#{mapping.no_mapping}" id="tooltip-template-no-mapping"></h3>
+    <h3 th:text="#{mapping.has_mapping}" id="tooltip-template-has-mapping"></h3>
+    <h3 th:text="#{mapping.has_equivalent}" id="tooltip-template-has-equivalent"></h3>
+</div>
+
 <!-- file upload script -->
 <script>
     $(document).ready( function() {
+        $('[data-toggle="tooltip"]').tooltip();
         $('.custom-file :file').on('fileselect', function (event, numFiles, path) {
 
             if (numFiles === 1) {
