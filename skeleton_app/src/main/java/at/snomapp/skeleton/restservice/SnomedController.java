@@ -61,7 +61,7 @@ public class SnomedController {
                 semanticTags.add( "procedure");
                 semanticTags.add("qualifier value");
                 break;
-            case "procedure":
+            case "procedures":
                 semanticTags.add("procedure");
                 semanticTags.add("physical object");
                 semanticTags.add("finding");
