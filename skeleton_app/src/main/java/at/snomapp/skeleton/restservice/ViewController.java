@@ -18,8 +18,10 @@ import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -27,7 +29,7 @@ import java.util.*;
 
 
 @Controller
-public class ViewController<SnomedAPPCMapping> {
+public class ViewController<SnomedAPPCMapping>{
 
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
@@ -67,6 +69,24 @@ public class ViewController<SnomedAPPCMapping> {
         model.addAttribute("modality", appcController.getTree().getModalityJsonString());
         model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
         return "index";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String error(Model model){
+        try{
+            // check if server and API are responsive to report proper error
+            SnomedController snomedController = new SnomedController();
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye");
+            if(resultList == null || resultList.size() == 0){
+                model.addAttribute("reason", "server");
+            }else{
+                model.addAttribute("reason", "internal");
+            }
+        }catch(Exception e){
+            model.addAttribute("reason", "server");
+        }
+
+        return "errorPage";
     }
 
     @GetMapping("/resultPage")
