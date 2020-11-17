@@ -2,7 +2,7 @@ package at.snomapp.skeleton.domain.conceptMapping.fhir;
 
 import java.util.List;
 
-public class ConceptMapFHIRRessource {
+public class ConceptMapFHIRResource {
 
     private final String status;
     private final String source;
@@ -10,7 +10,7 @@ public class ConceptMapFHIRRessource {
 
     private final List<Group> group;
 
-    public ConceptMapFHIRRessource(String status, String source, String target, List<Group> group) {
+    public ConceptMapFHIRResource(String status, String source, String target, List<Group> group) {
         this.status = status;
         this.source = source;
         this.target = target;

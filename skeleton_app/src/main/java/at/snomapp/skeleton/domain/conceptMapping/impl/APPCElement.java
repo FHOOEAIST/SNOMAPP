@@ -26,7 +26,7 @@ public class APPCElement extends AbstractElement {
         this.code = code;
         this.axis = axis;
         this.displayName = displayName;
-        switch (axis){
+        switch (axis.toLowerCase()){
             case "anatomy":
                 this.codesystem = "1.2.40.0.34.5.38.4";
                 break;

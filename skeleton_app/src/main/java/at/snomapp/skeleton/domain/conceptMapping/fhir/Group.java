@@ -1,18 +1,19 @@
 package at.snomapp.skeleton.domain.conceptMapping.fhir;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Group {
 
     private final String source;
     private final String target;
+    private List<Element> element;
 
-    private final List<Element> element;
-
-    public Group(String source, String target, List<Element> element) {
+    public Group(String source, String target) {
         this.source = source;
         this.target = target;
-        this.element = element;
+        this.element = null;
     }
 
     public String getSource() {
@@ -25,5 +26,12 @@ public class Group {
 
     public List<Element> getElement() {
         return element;
+    }
+
+    public void addElement(Element element){
+        if(this.element==null){
+            this.element = new ArrayList<>();
+        }
+        this.element.add(element);
     }
 }
