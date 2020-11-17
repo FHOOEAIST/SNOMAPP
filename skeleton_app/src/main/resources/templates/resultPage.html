@@ -32,14 +32,24 @@
         Open Mappings
     </button>
     <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{scoring.choose_scoring}">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" th:text="#{scoring.choose_scoring}">
             Choose Scoring
         </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" th:text="#{scoring.cosine}">Cosine</a>
-            <a class="dropdown-item" th:text="#{scoring.levenshtein}">Levenshtein</a>
-            <a class="dropdown-item" th:text="#{scoring.jaccard}">Jaccard</a>
-            <a class="dropdown-item" th:text="#{scoring.subsequence}">Subsequence</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <ul>
+                <li><label>
+                    <input type="checkbox" name="selected" th:text="#{scoring.cosine}">
+                </label></li>
+                <li><label>
+                    <input type="checkbox" name="selected" th:text="#{scoring.levenshtein}">
+                </label></li>
+                <li><label>
+                    <input type="checkbox" name="selected" th:text="#{scoring.jaccard}">
+                </label></li>
+                <li><label>
+                    <input type="checkbox" name="selected" th:text="#{scoring.subsequence}">
+                </label></li>
+            </ul>
         </div>
     </div>
 
