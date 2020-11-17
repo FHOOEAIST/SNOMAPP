@@ -49,3 +49,8 @@
     margin-left: auto;
     align-self: center;
 }
+
+#tabsSearch {
+    padding-left: 45px;
+    padding-right: 45px;
+}
