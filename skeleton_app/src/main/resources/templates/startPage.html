@@ -123,6 +123,7 @@
                 $('#showTree').bstreeview({
                     data: JSON.stringify(data)
                 });
+                addMappingIndicator();
                 addMappingButtons();
             });
 
@@ -143,38 +144,40 @@
     function addMappingIndicator(){
         $("div.list-group-item").each(function () {
             // same hack as addMappingButtons
-            let id = jQuery("div", this).text();
-            let dot = $(`<span class="mapping-indicator unmapped" id="indicator-${id}" data-toggle="tooltip"></span>`);
-            let newTitle = $('#tooltip-template-no-mapping').text();
-            dot.attr('title', newTitle);
-            dot.attr('data-original-title', newTitle);
-            $(this).append(dot);
-            $.ajax(
-                {
-                    method:"GET",
-                    url:`ConceptMap/count?id=${id}`,
-                    contentType: "application/json",
-                    success: function(result){
-                        if(result["EQUAL"] >= 1 || result["EQUIVALENT"] >= 1 ){
-                            dot.removeClass('unmapped');
-                            dot.addClass('has-equal');
-                            let newTitle = $('#tooltip-template-has-equivalent').text();
-                            dot.attr('title', newTitle);
-                            dot.attr('data-original-title', newTitle);
-                        }else{
-                            for(let key in result){
-                                if(result.hasOwnProperty(key) && result[key] >= 1){
-                                    dot.removeClass('unmapped');
-                                    dot.addClass('has-mapping');
-                                    let newTitle = $('#tooltip-template-has-mapping').text();
-                                    dot.attr('title', newTitle);
-                                    dot.attr('data-original-title', newTitle);
+            if(! $(this).find('span.mapping-indicator').length > 0) {
+                let id = jQuery("div", this).text();
+                let dot = $(`<span class="mapping-indicator unmapped" id="indicator-${id}" data-toggle="tooltip"></span>`);
+                let newTitle = $('#tooltip-template-no-mapping').text();
+                dot.attr('title', newTitle);
+                dot.attr('data-original-title', newTitle);
+                $(this).append(dot);
+                $.ajax(
+                    {
+                        method: "GET",
+                        url: `ConceptMap/count?id=${id}`,
+                        contentType: "application/json",
+                        success: function (result) {
+                            if (result["EQUAL"] >= 1 || result["EQUIVALENT"] >= 1) {
+                                dot.removeClass('unmapped');
+                                dot.addClass('has-equal');
+                                let newTitle = $('#tooltip-template-has-equivalent').text();
+                                dot.attr('title', newTitle);
+                                dot.attr('data-original-title', newTitle);
+                            } else {
+                                for (let key in result) {
+                                    if (result.hasOwnProperty(key) && result[key] >= 1) {
+                                        dot.removeClass('unmapped');
+                                        dot.addClass('has-mapping');
+                                        let newTitle = $('#tooltip-template-has-mapping').text();
+                                        dot.attr('title', newTitle);
+                                        dot.attr('data-original-title', newTitle);
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            );
+                );
+            }
         });
     }
 
@@ -209,7 +212,6 @@
 
         addMappingIndicator();
         addMappingButtons();
-        addMappingIndicator();
     });
 
 </script>
