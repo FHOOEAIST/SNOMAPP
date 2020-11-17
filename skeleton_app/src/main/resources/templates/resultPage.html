@@ -31,6 +31,17 @@
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
         Open Mappings
     </button>
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{scoring.choose_scoring}">
+            Choose Scoring
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" th:text="#{scoring.cosine}">Cosine</a>
+            <a class="dropdown-item" th:text="#{scoring.levenshtein}">Levenshtein</a>
+            <a class="dropdown-item" th:text="#{scoring.jaccard}">Jaccard</a>
+            <a class="dropdown-item" th:text="#{scoring.subsequence}">Subsequence</a>
+        </div>
+    </div>
 
     <!-- Button to Open Info Scoring -->
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#socringInfo" style='margin-right:16px' th:text="#{scoring.info}" >
