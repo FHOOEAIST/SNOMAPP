@@ -98,8 +98,16 @@ public class ViewController<SnomedAPPCMapping> {
             ScoringModel scoringModel = new ScoringModel(algorithms);
 
             // calculate for each result his score
+            int maxScore = 0;
+            int minScore = Integer.MAX_VALUE;
             for (BrowserDescriptionSearchResult result : resultList){
                 int score = scoringModel.calculateWeightedScore(entry.getDisplayName(), result.getTerm());
+                if (score < minScore){
+                    minScore = score;
+                }
+                if(score > maxScore){
+                    maxScore = score;
+                }
                 result.setScore(score);
             }
             // sort resultList by property score
@@ -115,6 +123,9 @@ public class ViewController<SnomedAPPCMapping> {
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
             maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
+
+            // for scoring visibility
+            model.addAttribute("colorStep", (maxScore - minScore) / 3);
         }
 
         // TODO: 06.10.2020 maybe add a page for errors
