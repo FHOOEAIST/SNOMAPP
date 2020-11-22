@@ -252,7 +252,7 @@
                     <!--iterate over algorithms-->
                     <tbody th:each="algorithm : ${scoringModel.getAlgorithms()}">
                     <tr >
-                        <td th:text="${algorithm.getDescription()}">Description</td>
+                        <td onclick="location.href ='${algorithm.getURL()}'" th:text="${algorithm.getDescription()}">Description</td>
                         <td th:text="${algorithm.getWeight()}">Weight</td>
                     </tr>
                     </tbody>

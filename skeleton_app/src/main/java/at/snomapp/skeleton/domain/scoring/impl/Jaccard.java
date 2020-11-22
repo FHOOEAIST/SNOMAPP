@@ -8,6 +8,7 @@ public class Jaccard implements ScoringAlgorithm {
     private JaccardDistance jaccardDistance = new JaccardDistance();
     private double weight;
     private String description = "Jaccard Distance";
+    private String URL = "https://de.wikipedia.org/wiki/Jaccard-Koeffizient";
 
     public Jaccard(double weight) {
         this.weight = weight;
@@ -21,6 +22,11 @@ public class Jaccard implements ScoringAlgorithm {
     @Override
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public String getURL() {
+        return URL;
     }
 
     @Override
