@@ -1,16 +1,12 @@
 package at.snomapp.skeleton.restservice;
 
 
-import at.snomapp.skeleton.domain.appc.APPCEntry;
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
-import at.snomapp.skeleton.domain.conceptMapping.impl.EquivalenceImpl;
 
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
 import at.snomapp.skeleton.domain.scoring.ScoringModel;
-import at.snomapp.skeleton.domain.scoring.impl.Cosine;
-import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
 import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
 import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
 
@@ -18,9 +14,6 @@ import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 
-import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
-import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
-import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
@@ -78,7 +71,7 @@ public class ViewController<SnomedAPPCMapping> {
 
     @GetMapping("/resultPage")
     public String resultPage(@RequestParam Long id, Model model){
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo);
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo, repo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
@@ -98,8 +91,16 @@ public class ViewController<SnomedAPPCMapping> {
             ScoringModel scoringModel = new ScoringModel(algorithms);
 
             // calculate for each result his score
+            int maxScore = 0;
+            int minScore = Integer.MAX_VALUE;
             for (BrowserDescriptionSearchResult result : resultList){
                 int score = scoringModel.calculateWeightedScore(entry.getDisplayName(), result.getTerm());
+                if (score < minScore){
+                    minScore = score;
+                }
+                if(score > maxScore){
+                    maxScore = score;
+                }
                 result.setScore(score);
             }
             // sort resultList by property score
@@ -115,6 +116,9 @@ public class ViewController<SnomedAPPCMapping> {
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
             maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
+
+            // for scoring visibility
+            model.addAttribute("colorStep", (maxScore - minScore) / 3);
         }
 
         // TODO: 06.10.2020 maybe add a page for errors

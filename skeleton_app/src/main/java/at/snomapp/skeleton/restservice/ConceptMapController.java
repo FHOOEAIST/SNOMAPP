@@ -1,5 +1,6 @@
 package at.snomapp.skeleton.restservice;
 
+import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.ConceptMap;
 import at.snomapp.skeleton.domain.conceptMapping.Equivalence;
 import at.snomapp.skeleton.domain.conceptMapping.EquivalenceType;
@@ -10,6 +11,7 @@ import at.snomapp.skeleton.domain.conceptMapping.fhir.Target;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.skeleton.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
+import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +21,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/ConceptMap")
 public class ConceptMapController {
     private final ConceptMapRepo conceptMapRepo;
     private final MappingRepo mappingRepo;
+    private final APPCRepo appcRepo;
 
     @Autowired
-    public ConceptMapController(ConceptMapRepo readingrepo, MappingRepo mappingRepo) {
+    public ConceptMapController(ConceptMapRepo readingrepo, MappingRepo mappingRepo, APPCRepo appcRepo) {
         this.conceptMapRepo = readingrepo;
         this.mappingRepo = mappingRepo;
+        this.appcRepo = appcRepo;
     }
 
     @DeleteMapping
@@ -215,6 +223,23 @@ public class ConceptMapController {
                 .header("Content-Disposition", "attachment; filename=\"" +downloadFilename+ "\"")
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(exportFHIRResource());
+   
+    }
+  
+    @GetMapping("count")
+    public Map<String, Integer> readMappingCounts(@RequestParam Long id){
+        Optional<Entry> entryOptional = appcRepo.findById(id);
+        Map<String, Integer> result = new HashMap<>();
+        if(entryOptional.isPresent()){
+            Entry entry = entryOptional.get();
+            for (EquivalenceType equivalence : EquivalenceType.values()) {
+                int count = mappingRepo.countMappingsWithEquivalenceForAxisAndCode(entry.getAxis(),
+                        entry.getCode(),
+                        equivalence.toString());
+                result.put(equivalence.toString(), count);
+            }
+        }
+        return result;
     }
 
     private static class ConceptMapRequest {

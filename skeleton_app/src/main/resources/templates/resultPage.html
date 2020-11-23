@@ -5,7 +5,7 @@
     <title>SNOMAPP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="../static/styles/list.css" th:href="@{/styles/list.css}" rel="stylesheet" />
+    <link th:href="@{/styles/list.css}" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -36,26 +36,32 @@
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
             <!--mapping exists YES-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(result.getConcept().getConceptId())}">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{mapped}" th:if="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-check-circle"></i>
             </span>
             <!--mapping exists NO -->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{not_mapped}" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-times-circle"></i>
                 </span>
 
             <!-- Info-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="Description" th:if="true">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{description}" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description" th:attr="data-target='#description'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-info-circle" ></i></button>
                 </span>
              <!--Plus-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping" th:if="true">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{mapping_add}" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping" th:attr="data-target='#addMapping'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-plus-circle"></i></button>
                 </span>
             <!--Ranking-->
-            <span class="content float-right pr-3" ><span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints" th:if="true" th:text="${result.getScore()}"></span></span>
+            <!--good accordance-->
+            <span class="content float-right pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 100%"></span></span>
+            <!--medium accordance-->
+            <span class="content float-right pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue
+            ; opacity: 75%"></span></span>
+            <!--bad accordance-->
+            <span class="content float-right pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 50%"></span></span>
         </li>
 
         <!-- The Modal -->
