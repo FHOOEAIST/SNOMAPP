@@ -36,7 +36,7 @@ public class APPCElement extends AbstractElement {
             case "modality":
                 this.codesystem = "1.2.40.0.34.5.38.1";
                 break;
-            case "procedure":
+            case "procedures":
                 this.codesystem = "1.2.40.0.34.5.38.3";
                 break;
             default:
