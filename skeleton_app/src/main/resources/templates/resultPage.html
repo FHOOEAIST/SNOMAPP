@@ -36,7 +36,7 @@
             Choose Scoring
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
-            <ul class="nobullets">
+            <ul id="scoringInputs" class="nobullets">
                 <li><label>
                     <input class="scoring-options" type="checkbox" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
                 </label></li>
@@ -306,6 +306,24 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
+ <!-- script for submit button for scoring -->
+<script>
+    function getChosenScoringMethods(){
+        var checkedScores = new Array();
+        var scoringInputsList = document.getElementById("scoringInputs");
+        var checkboxes = scoringInputsList.getElementsByTagName("INPUT");
 
+        for (var i =0;i<checkboxes.length;i++){
+            if(checkboxes[i].checked){
+                checkedScores.push(checkboxes[i].value);
+            }
+        }
+        if(checkedScores.length>0){
+            for(var i = 0; i<checkedScores.length;i++){
+                console.log(checkedScores[i]+"\n");
+            }
+        }
+    }
+</script>
 </body>
 </html>
