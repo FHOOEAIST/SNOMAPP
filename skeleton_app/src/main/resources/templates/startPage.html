@@ -294,12 +294,20 @@
     <h4 th:text="#{appc.import_csv}">Import APPC</h4>
     <div class="input-group">
         <div class="input-group-prepend">
-            <input id="btnUpload" class="btn-primary" type="button" th:value="#{appc.import}"  />
+            <input id="btnUpload" class="btn btn-primary" type="button" th:value="#{appc.import}"  />
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="APPCFile">
             <label id= "lblImport" class="custom-file-label" for="APPCFile" th:text="#{appc.choose}">Choose file</label>
         </div>
+    </div>
+</div>
+<!--Export all Mappings and Export all Equivalent as new APPC resource -->
+<div class="container" id="export" style="margin-top: 20px">
+    <h4 th:text="#{export}">Export mappings</h4>
+    <div class="btn-group">
+        <button class="btn btn-primary" id="exportFHIR" th:text="#{export.fhir}">FHIR</button>
+        <button class="btn btn-primary" id="exportCSV" th:text="#{export.csv}">CSV</button>
     </div>
 </div>
 
@@ -367,6 +375,15 @@
         }
 
     });
+
+    $('#exportFHIR').on('click',function () {
+        window.open(location.origin + '/ConceptMap/mappings/fhir/download');
+    });
+
+    $('#exportCSV').on('click',function () {
+        window.open(location.origin + '/ConceptMap/mappings/csv/download');
+    });
+
 </script>
 
 <br>

@@ -79,4 +79,6 @@
     background-color: yellow;
 }
 
-
+.btn-group{
+    width: inherit;
+}
