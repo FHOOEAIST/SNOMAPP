@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.Console;
 import java.util.*;
 
 
@@ -77,8 +78,9 @@ public class ViewController<SnomedAPPCMapping> {
         Optional<Entry> byId = repo.findById(id);
         if(byId.isPresent()){
             Entry entry = byId.get();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
 
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
             // create a new scoring model
             // compare algorithms can be appended or removed randomly
@@ -88,13 +90,21 @@ public class ViewController<SnomedAPPCMapping> {
             //algorithms.add(new Jaccard(0.3));
             algorithms.add(new Levenshtein(0.5));
             algorithms.add(new LongestCommonSubsequence(0.5));
-            ScoringModel scoringModel = new ScoringModel(algorithms);
 
-            // calculate for each result his score
+            ScoringModel scoringModel = new ScoringModel(algorithms);
+            // calculates for each result his score
+            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScore( entry.getDisplayName(), res.getTerm() )));
+            //resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
+
+            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
+            resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
+
+
+            // for scoring visibility
             int maxScore = 0;
             int minScore = Integer.MAX_VALUE;
             for (BrowserDescriptionSearchResult result : resultList){
-                int score = scoringModel.calculateWeightedScore(entry.getDisplayName(), result.getTerm());
+                int score = scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, result.getConcept().getId());
                 if (score < minScore){
                     minScore = score;
                 }
@@ -103,11 +113,11 @@ public class ViewController<SnomedAPPCMapping> {
                 }
                 result.setScore(score);
             }
+          
             // sort resultList by property score
             Collections.sort(resultList);
 
             List<String> mappings = new ArrayList<>();
-            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             model.addAttribute("results",resultList);
             model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
@@ -116,6 +126,8 @@ public class ViewController<SnomedAPPCMapping> {
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
             maps.forEach(map-> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
+
+            model.addAttribute("scoringModel", scoringModel );
 
             // for scoring visibility
             model.addAttribute("colorStep", (maxScore - minScore) / 3);
