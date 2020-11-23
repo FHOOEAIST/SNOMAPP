@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.Console;
 import java.util.*;
 
 
@@ -78,9 +79,8 @@ public class ViewController<SnomedAPPCMapping> {
         if(byId.isPresent()){
             Entry entry = byId.get();
 
-            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
-
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
             // create a new scoring model
             // compare algorithms can be appended or removed randomly
@@ -100,11 +100,11 @@ public class ViewController<SnomedAPPCMapping> {
             resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
 
 
-            // calculate for each result his score
+            // for scoring visibility
             int maxScore = 0;
             int minScore = Integer.MAX_VALUE;
             for (BrowserDescriptionSearchResult result : resultList){
-                int score = scoringModel.calculateWeightedScore(entry.getDisplayName(), result.getTerm());
+                int score = scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, result.getConcept().getId());
                 if (score < minScore){
                     minScore = score;
                 }
