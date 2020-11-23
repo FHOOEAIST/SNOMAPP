@@ -376,7 +376,14 @@
 
     });
 
-    $('')
+    $('#exportFHIR').on('click',function () {
+        window.open(location.origin + '/ConceptMap/mappings/fhir/download');
+    });
+
+    $('#exportCSV').on('click',function () {
+        window.open(location.origin + '/ConceptMap/mappings/csv/download');
+    });
+
 </script>
 
 <br>

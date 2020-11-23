@@ -225,6 +225,19 @@ public class ConceptMapController {
                 .body(exportFHIRResource());
    
     }
+
+    @GetMapping("mappings/csv/export")
+    ResponseEntity exportCSVResource(@RequestParam(required = false) String filename){
+        // Later we can let the user set the filename with a textfield and pass it as request parameter
+        String downloadFilename = filename==null ? "conceptmap_" + UUID.randomUUID().toString() + ".json" : filename;
+
+        // ToDo create csv Resource
+        return ResponseEntity
+                .ok()
+                .header("Content-Disposition", "attachment; filename=\"" +downloadFilename+ "\"")
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(null);
+    }
   
     @GetMapping("count")
     public Map<String, Integer> readMappingCounts(@RequestParam Long id){

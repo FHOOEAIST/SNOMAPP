@@ -79,8 +79,6 @@
     background-color: yellow;
 }
 
-
-
-#export{
-    align-items: center;
+.btn-group{
+    width: inherit;
 }
