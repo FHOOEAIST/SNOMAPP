@@ -8,6 +8,7 @@ public abstract class AbstractElement implements Element {
 
     protected String codesystem;
     protected String code;
+    protected String displayName;
 
     @Override
     public String getCode(){
@@ -19,4 +20,8 @@ public abstract class AbstractElement implements Element {
         return codesystem;
     }
 
+    @Override
+    public String getDisplayName() {
+        return displayName;
+    }
 }

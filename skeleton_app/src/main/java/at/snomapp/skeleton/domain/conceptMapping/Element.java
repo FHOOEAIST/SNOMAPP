@@ -6,5 +6,5 @@ import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 public interface Element {
     String getCode();
     String getCodeSystem();
-
+    String getDisplayName();
 }
