@@ -1,7 +1,5 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.domain.filter.Filter;
-import at.snomapp.skeleton.domain.filter.impl.AxisFilter;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
 import io.swagger.client.model.*;
@@ -48,8 +46,7 @@ public class SnomedController {
         // unlimited page space
         // if this leads to performance problems consider replacing with smaller page size
         Integer limit = null;
-        //set semantic tag to reduce searchresults
-        //System.out.println(APPCAxis);
+        //set semantic tag to reduce searchresult
         switch (APPCAxis.toLowerCase()) {
             case "anatomy":
                 semanticTags.add("body structure");
@@ -71,7 +68,6 @@ public class SnomedController {
                 break;
         }
 
-        //System.out.println(semanticTags);
         PageBrowserDescriptionSearchResult response = null;
         try {
             response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language,
