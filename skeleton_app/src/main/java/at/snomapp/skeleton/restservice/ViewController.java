@@ -77,7 +77,7 @@ public class ViewController<SnomedAPPCMapping> {
         Optional<Entry> byId = repo.findById(id);
         if(byId.isPresent()){
             Entry entry = byId.get();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName());
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
 
 
             // create a new scoring model

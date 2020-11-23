@@ -61,6 +61,7 @@ public class DescriptionsApiTest {
      * @throws ApiException
      *          if the Api call fails
      */
+    @Ignore
     @Test
     public void findBrowserDescriptionsUsingGETTest() throws ApiException {
         String branch = "MAIN";
@@ -69,14 +70,16 @@ public class DescriptionsApiTest {
         Boolean active = true;
         String module = null;
         List<String> language = null;
-        String semanticTag = null;
+        List<String> semanticTags = new ArrayList<>();
         Boolean conceptActive = true;
         String conceptRefset = null;
         Boolean groupByConcept = false;
         String searchMode = "STANDARD";
         Integer offset = 0;
         Integer limit = 50;
-        PageBrowserDescriptionSearchResult response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language, semanticTag, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
+
+        semanticTags.add("body structure");
+        PageBrowserDescriptionSearchResult response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language, semanticTags, conceptActive, conceptRefset, groupByConcept, searchMode, offset, limit);
 
         //US 4_6 Server response
         System.out.println(response.toString());
