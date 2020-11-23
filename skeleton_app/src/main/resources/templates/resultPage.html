@@ -38,19 +38,19 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <ul class="nobullets">
                 <li><label>
-                    <input type="checkbox" name="selected" th:text="#{scoring.cosine}">
+                    <input class="scoring-options" type="checkbox" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
                 </label></li>
                 <li><label>
-                    <input type="checkbox" name="selected" th:text="#{scoring.levenshtein}">
+                    <input class="scoring-options" type="checkbox" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
                 </label></li>
                 <li><label>
-                    <input type="checkbox" name="selected" th:text="#{scoring.jaccard}">
+                    <input class="scoring-options" type="checkbox" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
                 </label></li>
                 <li><label>
-                    <input type="checkbox" name="selected" th:text="#{scoring.subsequence}">
+                    <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
                 </label></li>
             </ul>
-            <input type="submit" value="Submit">
+            <button class ="btn btn-primary" type="submit" value="submit" th:text="#{scoring.submit}" style="margin-left:25pt">
         </div>
     </div>
 
