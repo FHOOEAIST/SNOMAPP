@@ -303,11 +303,11 @@
     </div>
 </div>
 <!--Export all Mappings and Export all Equivalent as new APPC resource -->
-<div class="container" style="margin-top: 20px">
+<div class="container" id="export" style="margin-top: 20px">
     <h4 th:text="#{export}">Export mappings</h4>
     <div class="btn-group">
-        <button class="btn btn-primary" th:text="#{export.csv}">FHIR</button>
-        <button class="btn btn-primary" th:text="#{export.csv}">CSV</button>
+        <button class="btn btn-primary" id="exportFHIR" th:text="#{export.fhir}">FHIR</button>
+        <button class="btn btn-primary" id="exportCSV" th:text="#{export.csv}">CSV</button>
     </div>
 </div>
 
@@ -375,6 +375,8 @@
         }
 
     });
+
+    $('')
 </script>
 
 <br>
