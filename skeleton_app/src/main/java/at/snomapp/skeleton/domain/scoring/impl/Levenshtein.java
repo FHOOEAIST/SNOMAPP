@@ -8,7 +8,7 @@ public class Levenshtein implements ScoringAlgorithm {
     private LevenshteinDistance levenshteinDistance = new LevenshteinDistance();
     private double weight;
     private String description = "Levenshtein Distance";
-    private String URL = "https://de.wikipedia.org/wiki/Levenshtein-Distanz";
+    private String URL = "https://en.wikipedia.org/wiki/Levenshtein_distance";
 
     public Levenshtein(double weight) {
         this.weight = weight;

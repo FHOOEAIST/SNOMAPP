@@ -8,7 +8,7 @@ public class Cosine implements ScoringAlgorithm {
     private CosineDistance cosineDistance = new CosineDistance();
     private double weight;
     private String description = "Cosine Distance";
-    private String URL = "https://de.wikipedia.org/wiki/Kosinus-%C3%84hnlichkeit";
+    private String URL = "https://en.wikipedia.org/wiki/Cosine_similarity";
 
     public Cosine(double weight) {
         this.weight = weight;
