@@ -1,7 +1,5 @@
 package at.snomapp.skeleton.restservice;
 
-import at.snomapp.skeleton.domain.filter.Filter;
-import at.snomapp.skeleton.domain.filter.impl.AxisFilter;
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
 import io.swagger.client.model.*;
