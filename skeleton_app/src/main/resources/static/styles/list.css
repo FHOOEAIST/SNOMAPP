@@ -88,3 +88,7 @@
 .scoring-options{
     margin-right: 5pt;
 }
+
+.nobullets{
+    list-style: none;
+}
