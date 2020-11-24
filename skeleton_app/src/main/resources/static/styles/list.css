@@ -94,3 +94,13 @@
  #map-full{
      margin-left: 10%;
  }
+ .btn-select{
+     float: right;
+ }
+ #selected-snomed-display{
+     display: flex;
+ }
+ #btn-select-snomed{
+     float:right;
+     margin-left: auto;
+ }

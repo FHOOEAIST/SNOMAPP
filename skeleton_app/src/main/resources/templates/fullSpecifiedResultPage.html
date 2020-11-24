@@ -27,34 +27,22 @@
 
 <div class="container pt-3" id="header">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
-    <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{lang.change}">
-            Change Language
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" th:href="'?lang=de'" th:text="#{lang.de}">German</a>
-            <a class="dropdown-item" th:href="'?lang=en'" th:text="#{lang.en}">English</a>
-        </div>
-    </div>
-
 </div>
 
-<script>
-    function addSelectButtons(){
-        $("div.list-group-item").each(function () {
-            // get hidden div containing id (see APPCTree.java for where it is added) and use it to query the backend
-            // this is kind of hacky -> maybe change in the future when there is time.
-            //Todo add icon for this instead of text
-            if(! $(this).find('a').length > 0) {
-                let btn = $(`<button class="btn btn-primary" type="button" style="float:right">map</button>`);
-                $(this).append(btn);
-            }
-        });
+<script th:inline="javascript">
+    function selectCode(axis, code){
+        console.log('kek');
+        console.log(axis);
+        console.log(code);
+        $('#'+axis+'-out').text(code);
     }
+
+
 </script>
 
 <section id="tabs" class="project-tab">
     <div class="container pt-3">
+        <h4 th:text="#{mapped.snomeds}"></h4>
         <div class="row">
             <div class="col-md-12">
                 <nav>
@@ -72,7 +60,16 @@
                                 <div class="row">
                                     <div class="col pt-5">
                                         <!--show tree Modality-->
-                                        <div id="treeModality"></div>
+                                        <div id="treeModality">
+                                            <span th:text="#{not_mapped}" th:if="${modality.isEmpty()}">Result</span>
+                                            <ul class="list-group" th:each="result : ${modality}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:onclick="selectCode('modality', this.getAttribute('data-code'))" th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +81,16 @@
                                 <div class="row">
                                     <div class="col pt-5">
                                         <!--show tree Laterality-->
-                                        <div id="treeLaterality"></div>
+                                        <div id="treeLaterality">
+                                            <span th:text="#{not_mapped}" th:if="${laterality.isEmpty()}">Result</span>
+                                            <ul class="list-group" th:each="result : ${laterality}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:onclick="selectCode('laterality', this.getAttribute('data-code'))" th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +102,16 @@
                                 <div class="row">
                                     <div class="col pt-5">
                                         <!--show tree Anatomy-->
-                                        <div id="treeAnatomy"></div>
+                                        <div id="treeAnatomy">
+                                            <span th:text="#{not_mapped}" th:if="${anatomy.isEmpty()}">Result</span>
+                                            <ul class="list-group" th:each="result : ${anatomy}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:onclick="selectCode('anatomy', this.getAttribute('data-code'))"th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +123,16 @@
                                 <div class="row">
                                     <div class="col pt-5">
                                         <!--show tree Procedures-->
-                                        <div id="treeProcedures"></div>
+                                        <div id="treeProcedures">
+                                            <span th:text="#{not_mapped}" th:if="${procedures.isEmpty()}">Result</span>
+                                            <ul class="list-group" th:each="result : ${procedures}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:onclick="selectCode('procedure', this.getAttribute('data-code'))" th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -121,7 +145,23 @@
 </section>
 
 <!--transalted snomed code as compositional grammar-->
-<div class="container">
+<div class="container" id="selected-snomeds" style="margin-top: 20px">
+    <h4 th:text="#{selected.snomed}"></h4>
+    <div id="selected-snomed-display">
+        <p id="anatomy-out" th:text="#{appc.anatomy}"></p>
+        <label for="anatomy-out">.</label>
+        <p id="modality-out" th:text="#{appc.modality}"></p>
+        <label for="modality-out">.</label>
+        <p id="procedure-out" th:text="#{appc.procedures}"></p>
+        <label for="procedure-out">.</label>
+        <p id="laterality-out" th:text="#{appc.laterality}"></p>
+        <button class="btn btn-info" id="btn-select-snomed" th:text="#{create.compositional-grammar}"></button>
+    </div>
+</div>
+
+<!--transalted snomed code as compositional grammar-->
+<div class="container" style="margin-top: 20px; margin-bottom: 100px;">
+    <h4 th:text="#{compositional-grammar}"></h4>
 
 </div>
 
@@ -131,5 +171,11 @@
         <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
+
+<script>
+    $('#btn-select-snomed').click(function () {
+        console.log('kek');
+    });
+</script>
 </body>
 </html>
