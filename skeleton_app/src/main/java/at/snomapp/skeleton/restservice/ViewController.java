@@ -34,9 +34,10 @@ public class ViewController<SnomedAPPCMapping> {
     private MappingRepo mappingRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, MappingRepo mappingRepo) {
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo, MappingRepo mappingRepo) {
         this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
+        this.conceptRelationshipRepo = conceptRelationshipRepo;
         this.mappingRepo = mappingRepo;
     }
 
@@ -149,8 +150,7 @@ public class ViewController<SnomedAPPCMapping> {
         model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
         model.addAttribute("anatomy", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
 
-        // TODO add view name
-        return "";
+        return "fullSpecifiedResultPage";
     }
 
 }

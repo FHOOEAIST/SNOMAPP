@@ -398,14 +398,14 @@
     });
 
     $('#map-full').click(function () {
-        const regex = RegExp('(\\d-){0,3}(\\d){1}');
+        const regex = RegExp('(\\d+-){0,3}(\\d+){1}');
         let anatomy_code = $('#anatomy-in').val();
         let modality_code = $('#modality-in').val();
         let procedure_code = $('#procedure-in').val();
         let laterality_code = $('#laterality-in').val();
 
-        if(regex.test(anatomy) && regex.test(modality) && regex.test(procedure) && regex.test(laterality)){
-            $.get('/translate', { anatomy: anatomy_code, modality: modality_code, procedure: procedure_code, laterality: laterality_code });
+        if(regex.test(anatomy_code) && regex.test(modality_code) && regex.test(procedure_code) && regex.test(laterality_code)){
+            window.open(window.origin+'/translate?anatomyCode='+anatomy_code+'&modalityCode='+modality_code+'&proceduresCode='+procedure_code+'&lateralityCode='+laterality_code);
         } else {
             alert('Check input format (e.g. 2-3)');
         }
