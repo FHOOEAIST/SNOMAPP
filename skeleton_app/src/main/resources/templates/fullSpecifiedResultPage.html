@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SNOMAPP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="/css/bstreeview.css" rel="stylesheet">
+    <link th:href="@{/styles/list.css}" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/bstreeview.js"></script>
+
+</head>
+
+<body>
+
+<div class="container pt-3" id="header">
+    <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" th:text="#{lang.change}">
+            Change Language
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" th:href="'?lang=de'" th:text="#{lang.de}">German</a>
+            <a class="dropdown-item" th:href="'?lang=en'" th:text="#{lang.en}">English</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function addSelectButtons(){
+        $("div.list-group-item").each(function () {
+            // get hidden div containing id (see APPCTree.java for where it is added) and use it to query the backend
+            // this is kind of hacky -> maybe change in the future when there is time.
+            //Todo add icon for this instead of text
+            if(! $(this).find('a').length > 0) {
+                let btn = $(`<button class="btn btn-primary" type="button" style="float:right">map</button>`);
+                $(this).append(btn);
+            }
+        });
+    }
+</script>
+
+<section id="tabs" class="project-tab">
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true" th:text="#{appc.modality}">Modality</a>
+                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false" th:text="#{appc.laterality}">Laterality</a>
+                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false" th:text="#{appc.procedures}">Procedures</a>
+                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false" th:text="#{appc.anatomy}">Anatomy</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Modality-->
+                                        <div id="treeModality"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="lat" role="tabpanel" aria-labelledby="laterality">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Laterality-->
+                                        <div id="treeLaterality"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ana" role="tabpanel" aria-labelledby="anatomy">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Anatomy-->
+                                        <div id="treeAnatomy"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="procedures">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Procedures-->
+                                        <div id="treeProcedures"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--transalted snomed code as compositional grammar-->
+<div class="container">
+
+</div>
+
+<!-- Buttons bottom right -->
+<div class="container fixed-bottom p-3" style="background-color: white">
+    <div class="float-right" >
+        <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
+    </div>
+</div>
+</body>
+</html>

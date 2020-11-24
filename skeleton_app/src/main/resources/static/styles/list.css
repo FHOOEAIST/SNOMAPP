@@ -82,3 +82,15 @@
 .btn-group{
     width: inherit;
 }
+
+#map-full-input{
+    display: flex;
+}
+ #anatomy-in, #modality-in, #laterality-in, #procedure-in{
+     margin-right: 3px;
+     margin-left: 3px;
+ }
+
+ #map-full{
+     margin-left: 10%;
+ }
