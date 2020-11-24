@@ -137,4 +137,21 @@ public class ViewController<SnomedAPPCMapping> {
         return "resultPage";
     }
 
+    @GetMapping("translate")
+    public String translateToSnomed(
+            Model model,
+            @RequestParam String modalityCode,
+            @RequestParam String lateralityCode,
+            @RequestParam String proceduresCode,
+            @RequestParam String anatomyCode
+    ){
+        model.addAttribute("laterality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
+        model.addAttribute("modality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
+        model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
+        model.addAttribute("anatomy", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
+
+        // TODO add view name
+        return "";
+    }
+
 }
