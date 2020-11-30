@@ -91,6 +91,10 @@
      margin-left: 3px;
  }
 
+#map-full-appc{
+    margin-top: 20px
+}
+
  #map-full{
      margin-left: 10%;
  }
@@ -104,9 +108,19 @@
      float:right;
      margin-left: auto;
  }
+ #selected-snomeds{
+     margin-top: 20px
+ }
  #anatomy-id, #modality-id, #laterality-id, #procedure-id{
      display: none;
  }
 #compositional-grammar{
     white-space: pre-wrap;
+}
+#compositional-grammar-container{
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+#footer{
+    background-color: white;
 }
