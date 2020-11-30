@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.Console;
@@ -71,8 +72,8 @@ public class ViewController<SnomedAPPCMapping> {
     }
 
     @GetMapping("/resultPage")
-    public String resultPage(@RequestParam Long id, Model model){
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo, repo);
+    public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[]scores, Model model){
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
@@ -90,16 +91,16 @@ public class ViewController<SnomedAPPCMapping> {
                      ) {
                  switch(score){
                      case "cosinus":
-                         algorithms.add(new Cosine(0.3));
+                         algorithms.add(new Cosine(1.0/scoringMethods.size()));
                          break;
                      case "levenshtein":
-                         algorithms.add(new Levenshtein(0.5));
+                         algorithms.add(new Levenshtein(1.0/scoringMethods.size()));
                          break;
                      case "jaccard":
-                         algorithms.add(new Jaccard(0.3));
+                         algorithms.add(new Jaccard(1.0/scoringMethods.size()));
                          break;
                      case "subsequence":
-                         algorithms.add(new LongestCommonSubsequence(0.5));
+                         algorithms.add(new LongestCommonSubsequence(1.0/scoringMethods.size()));
                          break;
                  }
                 }
