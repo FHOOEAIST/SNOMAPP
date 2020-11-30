@@ -78,18 +78,41 @@ public class ViewController<SnomedAPPCMapping> {
         Optional<Entry> byId = repo.findById(id);
         if(byId.isPresent()){
             Entry entry = byId.get();
+            List<String> scoringMethods = new ArrayList<>();
+            List<ScoringAlgorithm> algorithms = new ArrayList<>();
 
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
+            //if user chose algorithm use this one instead
+            if(scoringMethods.size()>0){
+                for (String score:scoringMethods
+                     ) {
+                 switch(score){
+                     case "cosinus":
+                         algorithms.add(new Cosine(0.3));
+                         break;
+                     case "levenshtein":
+                         algorithms.add(new Levenshtein(0.5));
+                         break;
+                     case "jaccard":
+                         algorithms.add(new Jaccard(0.3));
+                         break;
+                     case "subsequence":
+                         algorithms.add(new LongestCommonSubsequence(0.5));
+                         break;
+                 }
+                }
+            }else{
             // create a new scoring model
             // compare algorithms can be appended or removed randomly
             // all algorithms which are included are applied on all strings
-            List<ScoringAlgorithm> algorithms = new ArrayList<>();
+
             //algorithms.add(new Cosine(0.3));
             //algorithms.add(new Jaccard(0.3));
             algorithms.add(new Levenshtein(0.5));
             algorithms.add(new LongestCommonSubsequence(0.5));
+            }
 
             ScoringModel scoringModel = new ScoringModel(algorithms);
             // calculates for each result his score

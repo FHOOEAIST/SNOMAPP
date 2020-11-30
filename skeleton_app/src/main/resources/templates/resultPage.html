@@ -50,7 +50,7 @@
                     <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
                 </label></li>
             </ul>
-            <button class ="btn btn-primary" type="submit" value="submit" th:text="#{submit}" style="margin-left:25pt"/>
+            <button class ="btn btn-primary" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}" style="margin-left:25pt"/>
         </div>
     </div>
 
@@ -323,6 +323,7 @@
                 console.log(checkedScores[i]+"\n");
             }
         }
+
     }
 </script>
 </body>
