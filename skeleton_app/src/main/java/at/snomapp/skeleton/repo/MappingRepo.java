@@ -24,6 +24,6 @@ public interface MappingRepo extends Neo4jRepository<APPCElement, Long> {
     List<SNOMEDElement> findEquivalentOrEqualSnomedElementsForAPPC(String code, String axis);
 
     // Consider moving this when cleaning up the repos
-    @Query("MATCH (n:SnomedElement) WHERE id(n)= 658 RETURN n ")
+    @Query("MATCH (n:SnomedElement) WHERE id(n)= $0 RETURN n ")
     SNOMEDElement findSnomedElementById(long id);
 }
