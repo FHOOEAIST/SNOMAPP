@@ -5,7 +5,7 @@
     <title>SNOMAPP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link href="../static/styles/list.css" th:href="@{/styles/list.css}" rel="stylesheet" />
+    <link th:href="@{/styles/list.css}" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -31,31 +31,43 @@
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
         Open Mappings
     </button>
+
+    <!-- Button to Open Info Scoring -->
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#socringInfo" style='margin-right:16px' th:text="#{scoring.info}" >
+        Info Scoring
+    </button>
+
     <div class="containerList" >
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
             <!--mapping exists YES-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:if="${mappings.contains(result.getConcept().getConceptId())}">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{mapped}" th:if="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-check-circle"></i>
             </span>
             <!--mapping exists NO -->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="already mapped" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{not_mapped}" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
                     <i class="fas fa-times-circle"></i>
                 </span>
 
             <!-- Info-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="Description" th:if="true">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{description}" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description" th:attr="data-target='#description'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-info-circle" ></i></button>
                 </span>
              <!--Plus-->
-            <span class="content float-right pr-3" data-toggle="tooltip" title="add Mapping" th:if="true">
+            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{mapping_add}" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping" th:attr="data-target='#addMapping'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-plus-circle"></i></button>
                 </span>
             <!--Ranking-->
-            <span class="content float-right pr-3" ><span class="badge badge-info p-2" data-toggle="tooltip" title="Scoringpoints" th:if="true" th:text="${result.getScore()}"></span></span>
+            <!--good accordance-->
+            <span class="content float-right pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 100%"></span></span>
+            <!--medium accordance-->
+            <span class="content float-right pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue
+            ; opacity: 75%"></span></span>
+            <!--bad accordance-->
+            <span class="content float-right pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 50%"></span></span>
         </li>
 
         <!-- The Modal -->
@@ -158,13 +170,14 @@
         let map = mapElement.value;
         let appcCode = [[${appc.getCode()}]];
         let appcAxis = [[${appc.getAxis()}]];
+        let appcDisplayName = [[${appc.getDisplayName()}]];
 
         $.ajax(
             {
                 method: "POST",
                 url: "ConceptMap/submit",
                 contentType: "application/json",
-                data: JSON.stringify({appcCode, appcAxis, snomedCode, snomedDisplayName, map }),
+                data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
                         alert("Map successfully saved.");
                         location.reload();
@@ -224,6 +237,46 @@
         </div>
     </div>
 </div>
+
+
+<!-- The scoring Info Modal -->
+<div class="modal" id="socringInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4 th:text="#{scoring.header}">Scoring Model</h4>
+                <p th:text="#{scoring.text}">A lower score indicates a greater similarity between APPC sequence and SNOMED sequence.
+                    The score represents a weighted sum of all applied algorithms.
+                    If the scoring algorithms are also applied on all SNOMED synonyms, then the score represents the average score of all synonyms.</p>
+                <table class="table-hover table-bordered">
+                    <thead >
+                    <tr>
+                        <th scope="col" th:text="#{scoring.appliedAlgorithm}">Applied Algorithms</th>
+                        <th scope="col" th:text="#{scoring.Weight}">Weight</th>
+                    </tr>
+                    </thead>
+                    <!--iterate over algorithms-->
+                    <tbody th:each="algorithm : ${scoringModel.getAlgorithms()}">
+                    <tr>
+                        <td><a th:href="${algorithm.getURL()}" th:text="${algorithm.getDescription()}"></a></td>
+                        <td th:text="${algorithm.getWeight()}">Weight</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 
 <script>
     //Datatoggle function

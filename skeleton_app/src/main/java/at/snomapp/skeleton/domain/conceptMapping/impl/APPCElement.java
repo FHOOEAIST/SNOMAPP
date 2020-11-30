@@ -22,10 +22,11 @@ public class APPCElement extends AbstractElement {
 
     private String axis;
 
-    public APPCElement(String code, String axis){
+    public APPCElement(String code, String axis, String displayName){
         this.code = code;
         this.axis = axis;
-        switch (axis){
+        this.displayName = displayName;
+        switch (axis.toLowerCase()){
             case "anatomy":
                 this.codesystem = "1.2.40.0.34.5.38.4";
                 break;
@@ -35,7 +36,7 @@ public class APPCElement extends AbstractElement {
             case "modality":
                 this.codesystem = "1.2.40.0.34.5.38.1";
                 break;
-            case "procedure":
+            case "procedures":
                 this.codesystem = "1.2.40.0.34.5.38.3";
                 break;
             default:

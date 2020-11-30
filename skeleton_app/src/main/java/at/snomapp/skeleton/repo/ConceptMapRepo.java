@@ -34,5 +34,6 @@ public interface ConceptMapRepo extends Neo4jRepository<ConceptMap, Long> {
             "return s.code,m.equivalence,s.displayName\n" +
             "ORDER BY m.id")
     Iterable<Map<String, Object>> getSnomedCodeAndEquivalence(String code, String axis);
+
 }
 

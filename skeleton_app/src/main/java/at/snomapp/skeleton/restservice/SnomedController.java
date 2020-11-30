@@ -46,7 +46,9 @@ public class SnomedController {
         // unlimited page space
         // if this leads to performance problems consider replacing with smaller page size
         Integer limit = null;
+
         //set semantic tag to reduce searchresult
+
         switch (APPCAxis.toLowerCase()) {
             case "anatomy":
                 semanticTags.add("body structure");

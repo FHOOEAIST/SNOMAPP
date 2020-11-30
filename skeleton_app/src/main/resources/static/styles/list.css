@@ -49,3 +49,36 @@
     margin-left: auto;
     align-self: center;
 }
+
+#tabsSearch {
+    padding-left: 45px;
+    padding-right: 45px;
+}
+
+
+.mapping-indicator{
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    float: right;
+    text-align: center;
+    display: inline-block;
+    margin: 5pt 0 5pt 13pt;
+    align-self: center;
+}
+
+.unmapped{
+    background-color: red;
+}
+
+.has-equal{
+    background-color: green;
+}
+
+.has-mapping{
+    background-color: yellow;
+}
+
+.btn-group{
+    width: inherit;
+}
