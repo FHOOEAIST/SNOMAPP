@@ -37,13 +37,14 @@ public class ViewController<SnomedAPPCMapping> {
     private ConceptRelationshipRepo conceptRelationshipRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo) {this.repo = readingrepo;
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo) {
+        this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
         this.conceptRelationshipRepo = conceptRelationshipRepo;
     }
 
     @GetMapping("/startPage")
-    public String startPage(Model model){
+    public String startPage(Model model) {
         APPCController appcController = new APPCController(repo);
 
         try {
@@ -53,14 +54,14 @@ public class ViewController<SnomedAPPCMapping> {
             model.addAttribute("modality", tree.getModalityJsonString());
             model.addAttribute("procedure", tree.getProcedureJsonString());
             model.addAttribute("version", tree.getVersion());
-        }catch (Exception e){
+        } catch (Exception e) {
             model.addAttribute("version", "not loaded");
         }
         return "startPage";
     }
 
     @GetMapping("/index")
-    public String index(Model model){
+    public String index(Model model) {
         APPCController appcController = new APPCController(repo);
 
         //store in model the json string of nodes for each axis
@@ -72,47 +73,58 @@ public class ViewController<SnomedAPPCMapping> {
     }
 
     @GetMapping("/resultPage")
-    public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[]scores, Model model){
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo,mappingRepo);
+    public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             Entry entry = byId.get();
             List<String> scoringMethods = new ArrayList<>();
+            if (scores != null) {
+                for (String score : scores
+                ) {
+                    String[] splittedScore = score.split(",");
+                    for (String splitted : splittedScore
+                    ) {
+                        scoringMethods.add(splitted);
+                    }
+
+                }
+            }
             List<ScoringAlgorithm> algorithms = new ArrayList<>();
 
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
             //if user chose algorithm use this one instead
-            if(scoringMethods.size()>0){
-                for (String score:scoringMethods
-                     ) {
-                 switch(score){
-                     case "cosinus":
-                         algorithms.add(new Cosine(1.0/scoringMethods.size()));
-                         break;
-                     case "levenshtein":
-                         algorithms.add(new Levenshtein(1.0/scoringMethods.size()));
-                         break;
-                     case "jaccard":
-                         algorithms.add(new Jaccard(1.0/scoringMethods.size()));
-                         break;
-                     case "subsequence":
-                         algorithms.add(new LongestCommonSubsequence(1.0/scoringMethods.size()));
-                         break;
-                 }
+            if (scoringMethods.size() > 0) {
+                for (String score : scoringMethods
+                ) {
+                    switch (score) {
+                        case "cosinus":
+                            algorithms.add(new Cosine(1.0 / scoringMethods.size()));
+                            break;
+                        case "levenshtein":
+                            algorithms.add(new Levenshtein(1.0 / scoringMethods.size()));
+                            break;
+                        case "jaccard":
+                            algorithms.add(new Jaccard(1.0 / scoringMethods.size()));
+                            break;
+                        case "subsequence":
+                            algorithms.add(new LongestCommonSubsequence(1.0 / scoringMethods.size()));
+                            break;
+                    }
                 }
-            }else{
-            // create a new scoring model
-            // compare algorithms can be appended or removed randomly
-            // all algorithms which are included are applied on all strings
+            } else {
+                // create a new scoring model
+                // compare algorithms can be appended or removed randomly
+                // all algorithms which are included are applied on all strings
 
-            //algorithms.add(new Cosine(0.3));
-            //algorithms.add(new Jaccard(0.3));
-            algorithms.add(new Levenshtein(0.5));
-            algorithms.add(new LongestCommonSubsequence(0.5));
+                //algorithms.add(new Cosine(0.3));
+                //algorithms.add(new Jaccard(0.3));
+                algorithms.add(new Levenshtein(0.5));
+                algorithms.add(new LongestCommonSubsequence(0.5));
             }
 
             ScoringModel scoringModel = new ScoringModel(algorithms);
@@ -148,7 +160,7 @@ public class ViewController<SnomedAPPCMapping> {
             Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
             model.addAttribute("mapps", mapps);
             Iterable<SNOMEDElement> maps = conceptMapRepo.findMappedElementsByCodeAndAxis(entry.getCode(), entry.getAxis());
-            maps.forEach(map-> mappings.add(map.getCode()));
+            maps.forEach(map -> mappings.add(map.getCode()));
             model.addAttribute("mappings", mappings);
 
             model.addAttribute("scoringModel", scoringModel );
