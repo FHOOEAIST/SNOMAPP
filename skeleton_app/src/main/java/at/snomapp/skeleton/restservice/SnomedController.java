@@ -46,7 +46,9 @@ public class SnomedController {
         // unlimited page space
         // if this leads to performance problems consider replacing with smaller page size
         Integer limit = null;
-        //set semantic tag to reduce searchresults
+
+        //set semantic tag to reduce searchresult
+
         switch (APPCAxis.toLowerCase()) {
             case "anatomy":
                 semanticTags.add("body structure");
@@ -61,10 +63,13 @@ public class SnomedController {
             case "procedures":
                 semanticTags.add("procedure");
                 semanticTags.add("physical object");
-                semanticTags.add("finding");
+                semanticTags.add("disorder");
                 semanticTags.add("qualifier value");
+                semanticTags.add("morphologic abnormality");
+                semanticTags.add("body structure");
                 break;
         }
+
         PageBrowserDescriptionSearchResult response = null;
         try {
             response = api.findBrowserDescriptionsUsingGET(branch, acceptLanguage, term, active, module, language,
