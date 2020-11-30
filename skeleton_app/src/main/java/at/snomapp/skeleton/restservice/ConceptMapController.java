@@ -15,6 +15,7 @@ import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptElementRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
+import io.swagger.client.model.Concept;
 import at.snomapp.skeleton.translate.CompositionalGrammarTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,15 +23,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.sql.SQLOutput;
 import java.util.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ConceptMap")
@@ -234,68 +234,88 @@ public class ConceptMapController {
     @GetMapping("mappings/csv/export")
     ResponseEntity exportCSVResource(@RequestParam(required = false) String filename) {
         // Later we can let the user set the filename with a textfield and pass it as request parameter
-        String downloadFilename = filename == null ? "conceptmap_" + UUID.randomUUID().toString() + ".json" : filename;
+        String downloadFilename = filename==null ? "conceptmap_" + UUID.randomUUID().toString() + ".csv" : filename;
 
-        // TODO---------------------
-        // ToDo create csv Resource
-
+        // get all existing mappings
         List<ConceptMap> mappings = (List<ConceptMap>) conceptMapRepo.findAll(2);
-        String source = null;
-        String destination = null;
-        String status = null;
+        String currentAxis = "";
+        StringBuilder result = new StringBuilder("");
 
-        Group anatomy = new Group("1.2.40.0.34.5.38.4", "2.16.840.1.113883.6.96");
-        Group modality = new Group("1.2.40.0.34.5.38.1", "2.16.840.1.113883.6.96");
-        Group laterality = new Group("1.2.40.0.34.5.38.2", "2.16.840.1.113883.6.96");
-        Group procedure = new Group("1.2.40.0.34.5.38.3", "2.16.840.1.113883.6.96");
-        List<Group> groups = new LinkedList<>(Arrays.asList(anatomy,modality,laterality,procedure));
+        // read appc csv file
+        try{
+            // TODO: Change input file
+            BufferedReader csvReader = new BufferedReader(new FileReader("src/main/resources/APPCCodes/APPC_machinereadable_1.1.csv"));
+            String row = "";
+            while ((row = csvReader.readLine()) != null) {
 
-        for (ConceptMap mapping : mappings) {
-            source = mapping.getSource(); // OID for APPC
-            destination = mapping.getDestination(); // OID for SNOMED
-            status = mapping.getStatus().toString();
-            for (APPCElement appcElement : mapping.getElements()) {
-                for (Group group : groups) {
-                    if(group.getSource().equals(appcElement.getCodeSystem())){
-                        Element element = new Element(appcElement.getCode(), appcElement.getDisplayName());
-                        // Get SNOMED equivalences
-                        for (Equivalence equivalence : appcElement.getEquivalences()) {
-                            Target target = new Target(
-                                    equivalence.getDestination().getCode(),
-                                    equivalence.getDestination().getDisplayName(),
-                                    equivalence.getEquivalence().toString());
-                            element.addTarget(target);
+                if(!row.contains(";")){
+                    result.append(row + "\n");
+                    continue;
+                }
+
+                List<String> fields = new ArrayList<>(Arrays.asList(row.split(";")));
+                // current appc
+                String fullCode = fields.get(1).replaceAll("[\uFEFF-\uFFFF]", "");
+
+                switch (fields.get(0)){
+                    case "Modality":
+                        currentAxis = "1.2.40.0.34.5.38.1";
+                        break;
+                    case "Laterality":
+                        currentAxis = "1.2.40.0.34.5.38.2";
+                        break;
+                    case "Procedures":
+                        currentAxis = "1.2.40.0.34.5.38.3";
+                        break;
+                    case "Anatomy":
+                        currentAxis = "1.2.40.0.34.5.38.4";
+                        break;
+                }
+
+                Equivalence equivalent = null;
+                Equivalence equal = null;
+                // find all existing mappings for current appc code
+                for (ConceptMap conceptMap : mappings){
+                    for (APPCElement element : conceptMap.getElements()){
+                        if (element.getCodeSystem().equals(currentAxis)){
+                            for (Equivalence equivalence : element.getEquivalences()){
+                                if (equivalence.getSource().getCode().equals(fullCode)){
+                                    if (equivalence.getEquivalence().toString().equals("EQUIVALENT")){
+                                        equivalent = equivalence;
+                                    } else if (equivalence.getEquivalence().toString().equals("EQUAL")){
+                                        equal = equivalence;
+                                    }
+                                }
+                            }
                         }
-                        group.addElement(element);
+
                     }
                 }
-            }
-        }
 
+                if (equivalent != null){
+                    // EQUIVALENT mapping exists
+                    result.append(row + ";" + equivalent.getDestination().getDisplayName() + ";" + equivalent.getEquivalence().toString() + "\n");
+                }
+                else if (equal != null){
+                    // EQUAL mapping exists
+                    result.append(row + ";" + equal.getDestination().getDisplayName() + ";" + equal.getEquivalence().toString() + "\n");
+                }
+                else{
+                    // no EQUIVALENT or EQUAL mapping exists
+                    result.append(row + "\n");
+                }
 
-        try{
-            String row = "";
-            BufferedReader csvReader = new BufferedReader(new FileReader(""));
-            while ((row = csvReader.readLine()) != null) {
-                String[] data = row.split(";");
-                // do something with the data
             }
             csvReader.close();
         }
         catch(Exception e){
-
         }
 
-
-
-
-
-    // ENDTODO---------------------------------
         return ResponseEntity
                 .ok()
-                .header("Content-Disposition", "attachment; filename=\"" + downloadFilename + "\"")
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(null);
+                .header("Content-Disposition", "attachment; filename=\"" +downloadFilename+ "\"")
+                .contentType(MediaType.TEXT_PLAIN)
+                .body(result.toString());
     }
 
     @GetMapping("count")
