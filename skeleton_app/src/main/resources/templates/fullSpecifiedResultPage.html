@@ -59,7 +59,8 @@
                                     <div class="col pt-5">
                                         <!--show tree Modality-->
                                         <div id="treeModality">
-                                            <span th:text="#{not_mapped}" th:if="${modality.isEmpty()}">Result</span>
+                                            <p th:text="#{mappings.for}+': '+ ${modality_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${modality.isEmpty()}">Result</p>
                                             <ul class="list-group" th:each="result : ${modality}">
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
@@ -80,7 +81,8 @@
                                     <div class="col pt-5">
                                         <!--show tree Laterality-->
                                         <div id="treeLaterality">
-                                            <span th:text="#{not_mapped}" th:if="${laterality.isEmpty()}">Result</span>
+                                            <p th:text="#{mappings.for}+': '+ ${laterality_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${laterality.isEmpty()}">Result</p>
                                             <ul class="list-group" th:each="result : ${laterality}">
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
@@ -101,7 +103,8 @@
                                     <div class="col pt-5">
                                         <!--show tree Anatomy-->
                                         <div id="treeAnatomy">
-                                            <span th:text="#{not_mapped}" th:if="${anatomy.isEmpty()}">Result</span>
+                                            <p th:text="#{mappings.for}+': '+ ${anatomy_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${anatomy.isEmpty()}">Result</p>
                                             <ul class="list-group" th:each="result : ${anatomy}">
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
@@ -122,7 +125,8 @@
                                     <div class="col pt-5">
                                         <!--show tree Procedures-->
                                         <div id="treeProcedures">
-                                            <span th:text="#{not_mapped}" th:if="${procedures.isEmpty()}">Result</span>
+                                            <p th:text="#{mappings.for}+': '+ ${procedures_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${procedures.isEmpty()}">Result</p>
                                             <ul class="list-group" th:each="result : ${procedures}">
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
