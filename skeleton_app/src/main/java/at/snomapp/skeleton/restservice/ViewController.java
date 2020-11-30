@@ -34,10 +34,9 @@ public class ViewController<SnomedAPPCMapping> {
     private MappingRepo mappingRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo, MappingRepo mappingRepo) {
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, MappingRepo mappingRepo) {
         this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
-        this.conceptRelationshipRepo = conceptRelationshipRepo;
         this.mappingRepo = mappingRepo;
     }
 

@@ -312,14 +312,13 @@
 <div class="container" id="map-full-appc" style="margin-top: 20px">
     <h4 th:text="#{mapping.full}">Fully specified APPC</h4>
     <form id="map-full-input">
-        <input type="text" id="anatomy-in" class="form-control" th:placeholder="#{appc.anatomy}">
-        <label for="anatomy-in">.</label>
         <input type="text" id="modality-in" class="form-control" th:placeholder="#{appc.modality}">
         <label for="modality-in">.</label>
+        <input type="text" id="laterality-in" class="form-control" th:placeholder="#{appc.laterality}">
+        <label for="laterality-in">.</label>
         <input type="text" id="procedure-in" class="form-control" th:placeholder="#{appc.procedures}">
         <label for="procedure-in">.</label>
-        <input type="text" id="laterality-in" class="form-control" th:placeholder="#{appc.laterality}">
-
+        <input type="text" id="anatomy-in" class="form-control" th:placeholder="#{appc.anatomy}">
         <button class="btn btn-primary" id="map-full" th:text="#{appc.map}">map</button>
     </form>
 </div>

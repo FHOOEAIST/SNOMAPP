@@ -104,3 +104,9 @@
      float:right;
      margin-left: auto;
  }
+ #anatomy-id, #modality-id, #laterality-id, #procedure-id{
+     display: none;
+ }
+#compositional-grammar{
+    white-space: pre-wrap;
+}

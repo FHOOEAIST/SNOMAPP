@@ -35,7 +35,7 @@
         console.log(axis);
         console.log(code);
         $('#'+axis+'-out').text(code);
-        $('#'+axis+'-out').val(id);
+        $('#'+axis+'-id').text(id);
     }
 
 
@@ -88,7 +88,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('laterality', this.getAttribute('data-code'), this.getAttribute('data-id')))" th:text="#{select}"></button>
+                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('laterality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -109,7 +109,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('anatomy', this.getAttribute('data-code'), this.getAttribute('data-id')))"th:text="#{select}"></button>
+                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('anatomy', this.getAttribute('data-code'), this.getAttribute('data-id'))"th:text="#{select}"></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -130,7 +130,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('procedure', this.getAttribute('data-code'), this.getAttribute('data-id')))" th:text="#{select}"></button>
+                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('procedure', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -149,13 +149,20 @@
 <div class="container" id="selected-snomeds" style="margin-top: 20px">
     <h4 th:text="#{selected.snomed}"></h4>
     <div id="selected-snomed-display">
-        <p id="anatomy-out" th:text="#{appc.anatomy}"></p>
-        <label for="anatomy-out">.</label>
         <p id="modality-out" th:text="#{appc.modality}"></p>
+        <p id="modality-id" th:text="-1"></p>
         <label for="modality-out">.</label>
-        <p id="procedure-out" th:text="#{appc.procedures}"></p>
-        <label for="procedure-out">.</label>
+
         <p id="laterality-out" th:text="#{appc.laterality}"></p>
+        <p id="laterality-id" th:text="-1"></p>
+        <label for="laterality-out">.</label>
+
+        <p id="procedure-out" th:text="#{appc.procedures}"></p>
+        <p id="procedure-id" th:text="-1"></p>
+        <label for="procedure-out">.</label>
+
+        <p id="anatomy-out" th:text="#{appc.anatomy}"></p>
+        <p id="anatomy-id" th:text="-1"></p>
         <button class="btn btn-info" id="btn-select-snomed" th:text="#{create.compositional-grammar}"></button>
     </div>
 </div>
@@ -176,10 +183,10 @@
 <script>
     $('#btn-select-snomed').click(function () {
         console.log('kek');
-        const anatomy = $('#anatomy-out').val();
-        const modality = $('#modality-out').val();
-        const procedures = $('#procedure-out').val();
-        const laterality = $('#laterality-out').val();
+        const anatomy = $('#anatomy-id').text();
+        const modality = $('#modality-id').text();
+        const procedures = $('#procedure-id').text();
+        const laterality = $('#laterality-id').text();
 
         $.ajax(
             {
