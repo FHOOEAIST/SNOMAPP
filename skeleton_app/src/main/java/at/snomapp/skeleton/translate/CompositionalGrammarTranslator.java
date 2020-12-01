@@ -9,9 +9,9 @@ public class CompositionalGrammarTranslator {
     private SNOMEDElement anatomy;
 
     private static final String ROOT = "302199004 |Examination|";
-    private static final String MODALITY_KEY = "360037004 |Imaging modality|";
+    private static final String MODALITY_KEY = "260686004 |Method (attribute)|";
     private static final String LATERALITY_KEY = "272741003 |Laterality|";
-    private static final String PROCEDURES_KEY = "71388002 |Procedure|";
+    private static final String PROCEDURES_KEY = "260686004 |Method (attribute)|";
     private static final String ANATOMY_KEY = "123037004 |Body structure|";
 
     public String getCompositionalRepresentation(){
