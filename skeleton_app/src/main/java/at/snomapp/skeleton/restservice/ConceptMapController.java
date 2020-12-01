@@ -231,8 +231,8 @@ public class ConceptMapController {
 
     }
 
-    @GetMapping("mappings/csv/export")
-    ResponseEntity exportCSVResource(@RequestParam(required = false) String filename) {
+    @GetMapping("mappings/csv/download")
+    ResponseEntity exportCSVResource(@RequestParam(required = false) String filename){
         // Later we can let the user set the filename with a textfield and pass it as request parameter
         String downloadFilename = filename==null ? "conceptmap_" + UUID.randomUUID().toString() + ".csv" : filename;
 
