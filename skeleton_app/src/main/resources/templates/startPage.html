@@ -294,12 +294,20 @@
     <h4 th:text="#{appc.import_csv}">Import APPC</h4>
     <div class="input-group">
         <div class="input-group-prepend">
-            <input id="btnUpload" class="btn-primary" type="button" th:value="#{appc.import}"  />
+            <input id="btnUpload" class="btn btn-primary" type="button" th:value="#{appc.import}"  />
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="APPCFile">
             <label id= "lblImport" class="custom-file-label" for="APPCFile" th:text="#{appc.choose}">Choose file</label>
         </div>
+    </div>
+</div>
+<!--Export all Mappings and Export all Equivalent as new APPC resource -->
+<div class="container" id="export" style="margin-top: 20px">
+    <h4 th:text="#{export}">Export mappings</h4>
+    <div class="btn-group">
+        <button class="btn btn-primary" id="exportFHIR" th:text="#{export.fhir}">FHIR</button>
+        <button class="btn btn-primary" id="exportCSV" th:text="#{export.csv}">CSV</button>
     </div>
 </div>
 
@@ -311,7 +319,7 @@
 </div>
 
 <!-- file upload script -->
-<script>
+<script th:inline="javascript">
     $(document).ready( function() {
         $('[data-toggle="tooltip"]').tooltip();
         $('.custom-file :file').on('fileselect', function (event, numFiles, path) {
@@ -327,7 +335,9 @@
                     display.text(log);
                 }
             } else {
-                alert("only one file may be specified as an import source");
+                /*<![CDATA[*/
+                alert( /*[[#{appc.import.multifilewarning}]]*/ );
+                /*]]>*/
             }
 
         });
@@ -346,7 +356,9 @@
         let file = this.files[0];
 
         if (file.size > 30720) {
-            alert('max upload size is 30kb');
+            /*<![CDATA[*/
+            alert( /*[[#{appc.import.sizewarning}]]*/ );
+            /*]]>*/
         }
 
         //TODO: maybe check for csv ending
@@ -367,6 +379,18 @@
         }
 
     });
+
+    $('#exportFHIR').on('click',function () {
+        window.open(location.origin + '/ConceptMap/mappings/fhir/download');
+    });
+
+    $('#exportCSV').on('click',function () {
+        window.open(location.origin + '/ConceptMap/mappings/csv/download');
+        /*<![CDATA[*/
+        alert( /*[[#{export.csv.alert}]]*/ );
+        /*]]>*/
+    });
+
 </script>
 
 <br>
