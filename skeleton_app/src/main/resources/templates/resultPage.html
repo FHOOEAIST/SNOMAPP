@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 </head>
-<body onload="startInterval()">
+<body>
 
 <!-- HeaderImage -->
 <div class="container fixed-top pt-3" style="background-color: white">
@@ -153,7 +153,10 @@
                             <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
                             <!--ToDo save mapping-->
                             <!-- IntellJ shows error, but it works -->
-                            <button type="button" th:attr="onclick=|submitMapping('${result.getConcept().getConceptId()}','${result.getConcept().getFsn().getTerm()}')|" class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
+                            <button type="button" id="submitMapping" th:data-snomed="${result.getConcept().getFsn().getTerm()}"
+                                    th:data-concept="${result.getConcept().getConceptId()}"
+                                    th:onclick="submitMapping(this.getAttribute('data-concept'),this.getAttribute('data-snomed'))"
+                                     class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -165,9 +168,9 @@
 </div>
 
 <script th:inline="javascript">
+
     function submitMapping(snomedCode, snomedDisplayName) {
-        let mapElement = document.getElementById("selectMap");
-        let map = mapElement.value;
+        let map = $('#addMapping'+snomedCode + ' #selectMap').val();
         let appcCode = [[${appc.getCode()}]];
         let appcAxis = [[${appc.getAxis()}]];
         let appcDisplayName = [[${appc.getDisplayName()}]];
@@ -185,6 +188,7 @@
             }
         );
     }
+
 </script>
 
 
