@@ -2,8 +2,10 @@ package at.snomapp.skeleton;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,7 +32,7 @@ import java.util.Locale;
 //import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {ErrorMvcAutoConfiguration.class})
 // ! conflicts with neo4j
 // ! removed until bug is fixed (see trello board)
 //@EnableSwagger2WebMvc

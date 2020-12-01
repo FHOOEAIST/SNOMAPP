@@ -82,6 +82,46 @@
     width: inherit;
 }
 
+#map-full-input{
+    display: flex;
+}
+ #anatomy-in, #modality-in, #laterality-in, #procedure-in{
+     margin-right: 3px;
+     margin-left: 3px;
+ }
+
+#map-full-appc{
+    margin-top: 20px
+}
+
+ #map-full{
+     margin-left: 10%;
+ }
+ .btn-select{
+     float: right;
+ }
+ #selected-snomed-display{
+     display: flex;
+ }
+ #btn-select-snomed{
+     float:right;
+     margin-left: auto;
+ }
+ #selected-snomeds{
+     margin-top: 20px
+ }
+ #anatomy-id, #modality-id, #laterality-id, #procedure-id{
+     display: none;
+ }
+#compositional-grammar{
+    white-space: pre-wrap;
+}
+#compositional-grammar-container{
+    margin-top: 20px;
+    margin-bottom: 100px;
+}
+#footer{
+    background-color: white;
 .nobullets{
     list-style: none;
 }

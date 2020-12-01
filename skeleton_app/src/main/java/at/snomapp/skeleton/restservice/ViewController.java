@@ -20,29 +20,29 @@ import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.Console;
 import java.util.*;
 
 
 @Controller
-public class ViewController<SnomedAPPCMapping> {
+public class ViewController<SnomedAPPCMapping>{
 
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
     private MappingRepo mappingRepo;
-    private ConceptRelationshipRepo conceptRelationshipRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo) {
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, MappingRepo mappingRepo) {
         this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
-        this.conceptRelationshipRepo = conceptRelationshipRepo;
+        this.mappingRepo = mappingRepo;
     }
 
     @GetMapping("/startPage")
@@ -72,6 +72,24 @@ public class ViewController<SnomedAPPCMapping> {
         model.addAttribute("modality", appcController.getTree().getModalityJsonString());
         model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
         return "index";
+    }
+
+    @ExceptionHandler(Exception.class)
+    public String error(Model model){
+        try{
+            // check if server and API are responsive to report proper error
+            SnomedController snomedController = new SnomedController();
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye","Anatomy");
+            if(resultList == null || resultList.size() == 0){
+                model.addAttribute("reason", "server");
+            }else{
+                model.addAttribute("reason", "internal");
+            }
+        }catch(Exception e){
+            model.addAttribute("reason", "server");
+        }
+
+        return "errorPage";
     }
 
     @GetMapping("/resultPage")
@@ -173,6 +191,26 @@ public class ViewController<SnomedAPPCMapping> {
 
         // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
+    }
+
+    @GetMapping("translate")
+    public String translateToSnomed(
+            Model model,
+            @RequestParam String modalityCode,
+            @RequestParam String lateralityCode,
+            @RequestParam String proceduresCode,
+            @RequestParam String anatomyCode
+    ){
+        model.addAttribute("laterality_appc", repo.findByCodeAndAxis(lateralityCode,"Laterality").getDisplayName());
+        model.addAttribute("modality_appc", repo.findByCodeAndAxis(modalityCode,"Modality").getDisplayName());
+        model.addAttribute("procedures_appc", repo.findByCodeAndAxis(proceduresCode,"Procedures").getDisplayName());
+        model.addAttribute("anatomy_appc", repo.findByCodeAndAxis(anatomyCode,"Anatomy").getDisplayName());
+        model.addAttribute("laterality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
+        model.addAttribute("modality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
+        model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
+        model.addAttribute("anatomy", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
+
+        return "fullSpecifiedResultPage";
     }
 
 }
