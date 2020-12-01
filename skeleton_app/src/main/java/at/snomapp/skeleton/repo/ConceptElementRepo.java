@@ -2,7 +2,6 @@ package at.snomapp.skeleton.repo;
 
 import at.snomapp.skeleton.domain.conceptMapping.Element;
 import at.snomapp.skeleton.domain.conceptMapping.impl.APPCElement;
-import at.snomapp.skeleton.domain.conceptMapping.impl.AbstractElement;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 
