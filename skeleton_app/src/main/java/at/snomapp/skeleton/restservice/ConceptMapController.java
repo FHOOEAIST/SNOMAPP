@@ -294,11 +294,11 @@ public class ConceptMapController {
 
                 if (equivalent != null){
                     // EQUIVALENT mapping exists
-                    result.append(row + ";" + equivalent.getDestination().getDisplayName() + ";" + equivalent.getEquivalence().toString() + "\n");
+                    result.append(row + ";" + equivalent.getDestination().getCode() + ";" + equivalent.getDestination().getDisplayName() + ";" + equivalent.getEquivalence().toString() + "\n");
                 }
                 else if (equal != null){
                     // EQUAL mapping exists
-                    result.append(row + ";" + equal.getDestination().getDisplayName() + ";" + equal.getEquivalence().toString() + "\n");
+                    result.append(row + ";" +  equal.getDestination().getCode() + ";" + equal.getDestination().getDisplayName() + ";" + equal.getEquivalence().toString() + "\n");
                 }
                 else{
                     // no EQUIVALENT or EQUAL mapping exists
