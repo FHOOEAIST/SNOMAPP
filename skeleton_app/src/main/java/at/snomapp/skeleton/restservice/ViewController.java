@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.io.Console;
 import java.util.*;
 
 
@@ -35,12 +34,12 @@ public class ViewController<SnomedAPPCMapping>{
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
     private MappingRepo mappingRepo;
-    private ConceptRelationshipRepo conceptRelationshipRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, ConceptRelationshipRepo conceptRelationshipRepo) {this.repo = readingrepo;
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, MappingRepo mappingRepo) {
+        this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
-        this.conceptRelationshipRepo = conceptRelationshipRepo;
+        this.mappingRepo = mappingRepo;
     }
 
     @GetMapping("/startPage")
@@ -155,6 +154,23 @@ public class ViewController<SnomedAPPCMapping>{
 
         // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
+    }
+
+    @GetMapping("translate")
+    public String translateToSnomed(
+            Model model,
+            @RequestParam String modalityCode,
+            @RequestParam String lateralityCode,
+            @RequestParam String proceduresCode,
+            @RequestParam String anatomyCode
+    ){
+        model.addAttribute("laterality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
+        model.addAttribute("modality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
+        model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
+        model.addAttribute("anatomy", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
+
+        // TODO add view name
+        return "";
     }
 
 }
