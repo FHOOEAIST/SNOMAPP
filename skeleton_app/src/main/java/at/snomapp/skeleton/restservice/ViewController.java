@@ -7,6 +7,8 @@ import at.snomapp.skeleton.domain.appc.Entry;
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
 import at.snomapp.skeleton.domain.scoring.ScoringModel;
+import at.snomapp.skeleton.domain.scoring.impl.Cosine;
+import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
 import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
 import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
 
@@ -74,7 +76,7 @@ public class ViewController<SnomedAPPCMapping> {
 
     @GetMapping("/resultPage")
     public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo);
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo,repo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
