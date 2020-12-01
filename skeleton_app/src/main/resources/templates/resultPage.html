@@ -31,6 +31,28 @@
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
         Open Mappings
     </button>
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" th:text="#{scoring.choose_scoring}">
+            Choose Scoring
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <ul class="nobullets">
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
+                </label></li>
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
+                </label></li>
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
+                </label></li>
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
+                </label></li>
+            </ul>
+            <button class ="btn btn-primary" type="submit" value="submit" th:text="#{submit}" style="margin-left:25pt"/>
+        </div>
+    </div>
 
     <!-- Button to Open Info Scoring -->
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#socringInfo" style='margin-right:16px' th:text="#{scoring.info}" >
