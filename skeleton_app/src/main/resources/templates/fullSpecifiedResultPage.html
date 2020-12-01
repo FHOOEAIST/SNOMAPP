@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>SNOMAPP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="/css/bstreeview.css" rel="stylesheet">
+    <link th:href="@{/styles/list.css}" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/js/bstreeview.js"></script>
+
+</head>
+
+<body>
+
+<div class="container pt-3" id="header">
+    <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
+</div>
+
+<script th:inline="javascript">
+    function selectCode(axis, code, id){
+        $('#'+axis+'-out').text(code);
+        $('#'+axis+'-id').text(id);
+    }
+
+
+</script>
+
+<section id="tabs" class="project-tab">
+    <div class="container pt-3">
+        <h4 th:text="#{mapped.snomeds}"></h4>
+        <div class="row">
+            <div class="col-md-12">
+                <nav>
+                    <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="modality" data-toggle="tab" href="#mod" role="tab" aria-controls="modality" aria-selected="true" th:text="#{appc.modality}">Modality</a>
+                        <a class="nav-item nav-link" id="laterality" data-toggle="tab" href="#lat" role="tab" aria-controls="laterality" aria-selected="false" th:text="#{appc.laterality}">Laterality</a>
+                        <a class="nav-item nav-link" id="procedures" data-toggle="tab" href="#pro" role="tab" aria-controls="procedures" aria-selected="false" th:text="#{appc.procedures}">Procedures</a>
+                        <a class="nav-item nav-link" id="anatomy" data-toggle="tab" href="#ana" role="tab" aria-controls="anatomy" aria-selected="false" th:text="#{appc.anatomy}">Anatomy</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="mod" role="tabpanel" aria-labelledby="modality">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Modality-->
+                                        <div id="treeModality">
+                                            <p th:text="#{mappings.for}+': '+ ${modality_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${modality.isEmpty()}">Result</p>
+                                            <ul class="list-group" th:each="result : ${modality}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('modality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="lat" role="tabpanel" aria-labelledby="laterality">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Laterality-->
+                                        <div id="treeLaterality">
+                                            <p th:text="#{mappings.for}+': '+ ${laterality_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${laterality.isEmpty()}">Result</p>
+                                            <ul class="list-group" th:each="result : ${laterality}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('laterality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="ana" role="tabpanel" aria-labelledby="anatomy">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Anatomy-->
+                                        <div id="treeAnatomy">
+                                            <p th:text="#{mappings.for}+': '+ ${anatomy_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${anatomy.isEmpty()}">Result</p>
+                                            <ul class="list-group" th:each="result : ${anatomy}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('anatomy', this.getAttribute('data-code'), this.getAttribute('data-id'))"th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pro" role="tabpanel" aria-labelledby="procedures">
+                        <div class="container">
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col pt-5">
+                                        <!--show tree Procedures-->
+                                        <div id="treeProcedures">
+                                            <p th:text="#{mappings.for}+': '+ ${procedures_appc}">APPC</p>
+                                            <p th:text="#{not_mapped}" th:if="${procedures.isEmpty()}">Result</p>
+                                            <ul class="list-group" th:each="result : ${procedures}">
+                                                <li class="list-group-item">
+                                                    <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
+                                                    <!--mapping exists YES-->
+                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('procedure', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--translated snomed code as compositional grammar-->
+<div class="container" id="selected-snomeds">
+    <h4 th:text="#{selected.snomed}"></h4>
+    <div id="selected-snomed-display">
+        <p id="modality-out" th:text="#{appc.modality}"></p>
+        <p id="modality-id" th:text="-1"></p>
+        <label for="modality-out">.</label>
+
+        <p id="laterality-out" th:text="#{appc.laterality}"></p>
+        <p id="laterality-id" th:text="-1"></p>
+        <label for="laterality-out">.</label>
+
+        <p id="procedure-out" th:text="#{appc.procedures}"></p>
+        <p id="procedure-id" th:text="-1"></p>
+        <label for="procedure-out">.</label>
+
+        <p id="anatomy-out" th:text="#{appc.anatomy}"></p>
+        <p id="anatomy-id" th:text="-1"></p>
+        <button class="btn btn-info" id="btn-select-snomed" th:text="#{create.compositional-grammar}"></button>
+    </div>
+</div>
+
+<!--translated snomed code as compositional grammar-->
+<div class="container" id="compositional-grammar-container">
+    <h4 th:text="#{compositional-grammar}"></h4>
+    <p id="compositional-grammar"></p>
+</div>
+
+<!-- Buttons bottom right -->
+<div class="container fixed-bottom p-3" id="footer">
+    <div class="float-right" >
+        <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
+    </div>
+</div>
+
+<script>
+    $('#btn-select-snomed').click(function () {
+        console.log('kek');
+        const anatomy = $('#anatomy-id').text();
+        const modality = $('#modality-id').text();
+        const procedures = $('#procedure-id').text();
+        const laterality = $('#laterality-id').text();
+
+        $.ajax(
+            {
+                method: "GET",
+                url: `ConceptMap/compositionalGrammar?anatomyId=${anatomy}&modalityId=${modality}&proceduresId=${procedures}&lateralityId=${laterality}`,
+                contentType: "application/json",
+                success: function (result) {
+                    $('#compositional-grammar').text(result);
+                }
+            }
+        );
+    });
+
+</script>
+</body>
+</html>

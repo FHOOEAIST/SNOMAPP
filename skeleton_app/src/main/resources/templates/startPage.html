@@ -39,7 +39,6 @@
     
 </div>
 
-<body onload="startInterval()">
 <div class="container" style="margin-top: 10px">
     <h4 th:text="#{startpage}"></h4>
 </div>
@@ -80,7 +79,6 @@
             tree = false;
             console.log("search full");
         } else {
-            console.log("search empty");
             clearInterval(timer);
             $("#tabs").show();
             $('#tabsSearch').hide();
@@ -310,7 +308,20 @@
         <button class="btn btn-primary" id="exportCSV" th:text="#{export.csv}">CSV</button>
     </div>
 </div>
-
+<!--Map fully specified APPC -->
+<div class="container" id="map-full-appc">
+    <h4 th:text="#{mapping.full}">Fully specified APPC</h4>
+    <form id="map-full-input">
+        <input type="text" id="modality-in" class="form-control" th:placeholder="#{appc.modality}">
+        <label for="modality-in">.</label>
+        <input type="text" id="laterality-in" class="form-control" th:placeholder="#{appc.laterality}">
+        <label for="laterality-in">.</label>
+        <input type="text" id="procedure-in" class="form-control" th:placeholder="#{appc.procedures}">
+        <label for="procedure-in">.</label>
+        <input type="text" id="anatomy-in" class="form-control" th:placeholder="#{appc.anatomy}">
+        <button class="btn btn-primary" id="map-full" th:text="#{appc.map}">map</button>
+    </form>
+</div>
 <!-- hidden templates that are calculated on server side with correct language info to dynamically set tooltips -->
 <div style="visibility: hidden">
     <h3 th:text="#{mapping.no_mapping}" id="tooltip-template-no-mapping"></h3>
@@ -389,6 +400,22 @@
         /*<![CDATA[*/
         alert( /*[[#{export.csv.alert}]]*/ );
         /*]]>*/
+    });
+
+    $('#map-full').click(function () {
+        const regex = RegExp('(\\d+-){0,3}(\\d+){1}');
+        let anatomy_code = $('#anatomy-in').val();
+        let modality_code = $('#modality-in').val();
+        let procedure_code = $('#procedure-in').val();
+        let laterality_code = $('#laterality-in').val();
+
+        if(regex.test(anatomy_code) && regex.test(modality_code) && regex.test(procedure_code) && regex.test(laterality_code)){
+            window.open(window.origin+'/translate?anatomyCode='+anatomy_code+'&modalityCode='+modality_code+'&proceduresCode='+procedure_code+'&lateralityCode='+laterality_code);
+        } else {
+            /*<![CDATA[*/
+            alert( /*[[#{input.format}]]*/ );
+            /*]]>*/
+        }
     });
 
 </script>

@@ -76,7 +76,7 @@ public class ViewController<SnomedAPPCMapping>{
         try{
             // check if server and API are responsive to report proper error
             SnomedController snomedController = new SnomedController();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye");
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye","Anatomy");
             if(resultList == null || resultList.size() == 0){
                 model.addAttribute("reason", "server");
             }else{
@@ -164,13 +164,16 @@ public class ViewController<SnomedAPPCMapping>{
             @RequestParam String proceduresCode,
             @RequestParam String anatomyCode
     ){
+        model.addAttribute("laterality_appc", repo.findByCodeAndAxis(lateralityCode,"Laterality").getDisplayName());
+        model.addAttribute("modality_appc", repo.findByCodeAndAxis(modalityCode,"Modality").getDisplayName());
+        model.addAttribute("procedures_appc", repo.findByCodeAndAxis(proceduresCode,"Procedures").getDisplayName());
+        model.addAttribute("anatomy_appc", repo.findByCodeAndAxis(anatomyCode,"Anatomy").getDisplayName());
         model.addAttribute("laterality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
         model.addAttribute("modality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
         model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
         model.addAttribute("anatomy", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
 
-        // TODO add view name
-        return "";
+        return "fullSpecifiedResultPage";
     }
 
 }
