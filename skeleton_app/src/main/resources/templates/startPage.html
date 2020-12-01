@@ -412,7 +412,9 @@
         if(regex.test(anatomy_code) && regex.test(modality_code) && regex.test(procedure_code) && regex.test(laterality_code)){
             window.open(window.origin+'/translate?anatomyCode='+anatomy_code+'&modalityCode='+modality_code+'&proceduresCode='+procedure_code+'&lateralityCode='+laterality_code);
         } else {
-            alert('Check input format (e.g. 2-3)');
+            /*<![CDATA[*/
+            alert( /*[[#{input.format}]]*/ );
+            /*]]>*/
         }
     });
 

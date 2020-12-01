@@ -76,7 +76,7 @@ public class ViewController<SnomedAPPCMapping>{
         try{
             // check if server and API are responsive to report proper error
             SnomedController snomedController = new SnomedController();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye");
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye","Anatomy");
             if(resultList == null || resultList.size() == 0){
                 model.addAttribute("reason", "server");
             }else{
