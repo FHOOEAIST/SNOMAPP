@@ -133,7 +133,7 @@
             // this is kind of hacky -> maybe change in the future when there is time.
             //Todo add icon for this instead of text
             if(! $(this).find('a').length > 0) {
-                let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-info" type="button" style="float:right">map</a>`);
+                let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button">map</a>`);
                 $(this).append(btn);
             }
         });
@@ -207,9 +207,8 @@
         $('#treeAnatomy').bstreeview({
             data: anatomy
         });
-
-        addMappingIndicator();
         addMappingButtons();
+        addMappingIndicator();
     });
 
 </script>

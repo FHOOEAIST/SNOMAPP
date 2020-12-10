@@ -39,6 +39,8 @@
 .btn-primary{
     background-color: #70a8e3;
     border-color: #70a8e3;
+    float: right;
+    margin-inline-start: auto;
 }
 
 .badge-info{
@@ -106,9 +108,6 @@
 
  #map-full{
      margin-left: 10%;
- }
- .btn-select{
-     float: right;
  }
  #selected-snomed-display{
      display: flex;
