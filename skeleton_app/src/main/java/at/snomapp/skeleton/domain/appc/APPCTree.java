@@ -4,6 +4,7 @@ import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class APPCTree  {
     private final String language;
@@ -108,7 +109,7 @@ public class APPCTree  {
         // array which contains all children of a node
         JSONArray array = new JSONArray();
         if (entry.getChildren() != null) {
-            for (Entry children : entry.getChildren()) {
+            for (Entry children : sortEntries(entry.getChildren())) {
                 JSONObject subChildren = entryToJsonString(children);
                 if (subChildren != null) {
                     array.add(subChildren);
@@ -132,10 +133,17 @@ public class APPCTree  {
     private JSONArray axisToJsonString(Set<Entry> axis){
         JSONArray jsonArray = new JSONArray();
         // iterate over all axis and build json tree for all axis
-        for (Entry entry : axis){
+        for (Entry entry : sortEntries(axis)){
             jsonArray.add(entryToJsonString(entry));
         }
         return jsonArray;
+    }
+
+    // to sort a set of APPC entries by id
+    private List<Entry> sortEntries(Set<Entry> entries){
+        List<Entry> sortedEntries = entries.stream().collect(Collectors.toList());
+        Collections.sort(sortedEntries, Comparator.comparingInt(Entry::getLayerCode));
+        return sortedEntries;
     }
 
 
