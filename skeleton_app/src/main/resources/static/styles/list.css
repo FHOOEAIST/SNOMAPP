@@ -126,7 +126,13 @@
 
 .nobullets{
     list-style: none;
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
 }
 .scoring-options{
     margin-right: 5pt;
+}
+
+#submit-scoring-options{
+    margin-left:10pt;
 }
