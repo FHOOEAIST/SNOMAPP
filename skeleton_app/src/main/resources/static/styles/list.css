@@ -4,24 +4,30 @@
     padding-right: 0;
     padding-left: 0;
 }
-
+.list-group-item{
+    display: flex;
+}
+.res-info-buttons{
+    margin-left: auto;
+    float: right;
+    display: flex;
+}
 .contentContainer{
-    margin-top: 10%;
+    margin-top: 110px;
 }
 
 .table-hover{
     width: 100%;
 }
-
 .fa-times-circle{
     margin-top: 8px;
-    margin-left: 5px;
+    margin-left: 3px;
     color: red;
 }
 
 .fa-check-circle{
     margin-top: 8px;
-    margin-left: 5px;
+    margin-left: 3px;
     color: green;
 }
 
@@ -80,6 +86,10 @@
 
 .btn-group{
     width: inherit;
+}
+
+.btn-mapping{
+    width: 16px;
 }
 
 #map-full-input{
