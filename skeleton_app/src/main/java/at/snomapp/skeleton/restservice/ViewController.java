@@ -102,18 +102,16 @@ public class ViewController<SnomedAPPCMapping>{
             Entry entry = byId.get();
             List<String> scoringMethods = new ArrayList<>();
             if (scores != null) {
-                for (String score : scores
-                ) {
+                for (String score : scores) {
                     String[] splittedScore = score.split(",");
-                    for (String splitted : splittedScore
-                    ) {
+                    for (String splitted : splittedScore) {
                         scoringMethods.add(splitted);
                     }
 
                 }
             }
-            List<ScoringAlgorithm> algorithms = new ArrayList<>();
 
+            List<ScoringAlgorithm> algorithms = new ArrayList<>();
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
@@ -141,8 +139,6 @@ public class ViewController<SnomedAPPCMapping>{
                 // compare algorithms can be appended or removed randomly
                 // all algorithms which are included are applied on all strings
 
-                //algorithms.add(new Cosine(0.3));
-                //algorithms.add(new Jaccard(0.3));
                 algorithms.add(new Levenshtein(0.5));
                 algorithms.add(new LongestCommonSubsequence(0.5));
             }
