@@ -60,6 +60,7 @@
     </button>
 
     <div class="containerList" >
+        <p th:text="'APPC: '+${appc.getCode()}+' '+${appc.getDisplayName()}"></p>
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
