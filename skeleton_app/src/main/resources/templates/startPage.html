@@ -46,7 +46,7 @@
 <div class="container">
     <div class="input-group pt-3">
         <input class="form-control" type="text" th:placeholder="#{appc.search}" aria-label="Search" id="searchbar" value="">
-        <button class="btn btn-primary" onclick="search()" value="search" th:text="#{appc.search}">Suchen</button>
+        <button class="btn btn-info" onclick="search()" value="search" th:text="#{appc.search}">Suchen</button>
     </div>
 </div>
 
@@ -121,8 +121,8 @@
                 $('#showTree').bstreeview({
                     data: JSON.stringify(data)
                 });
-                addMappingIndicator();
                 addMappingButtons();
+                addMappingIndicator();
             });
 
     }
@@ -133,7 +133,7 @@
             // this is kind of hacky -> maybe change in the future when there is time.
             //Todo add icon for this instead of text
             if(! $(this).find('a').length > 0) {
-                let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button" style="float:right">map</a>`);
+                let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button">map</a>`);
                 $(this).append(btn);
             }
         });
@@ -207,9 +207,8 @@
         $('#treeAnatomy').bstreeview({
             data: anatomy
         });
-
-        addMappingIndicator();
         addMappingButtons();
+        addMappingIndicator();
     });
 
 </script>
@@ -292,7 +291,7 @@
     <h4 th:text="#{appc.import_csv}">Import APPC</h4>
     <div class="input-group">
         <div class="input-group-prepend">
-            <input id="btnUpload" class="btn btn-primary" type="button" th:value="#{appc.import}"  />
+            <input id="btnUpload" class="btn btn-info" type="button" th:value="#{appc.import}"  />
         </div>
         <div class="custom-file">
             <input type="file" class="custom-file-input" id="APPCFile">
@@ -304,8 +303,8 @@
 <div class="container" id="export" style="margin-top: 20px">
     <h4 th:text="#{export}">Export mappings</h4>
     <div class="btn-group">
-        <button class="btn btn-primary" id="exportFHIR" th:text="#{export.fhir}">FHIR</button>
-        <button class="btn btn-primary" id="exportCSV" th:text="#{export.csv}">CSV</button>
+        <button class="btn btn-info" id="exportFHIR" th:text="#{export.fhir}">FHIR</button>
+        <button class="btn btn-info" id="exportCSV" th:text="#{export.csv}">CSV</button>
     </div>
 </div>
 <!--Map fully specified APPC -->
@@ -319,7 +318,7 @@
         <input type="text" id="procedure-in" class="form-control" th:placeholder="#{appc.procedures}">
         <label for="procedure-in">.</label>
         <input type="text" id="anatomy-in" class="form-control" th:placeholder="#{appc.anatomy}">
-        <button class="btn btn-primary" id="map-full" th:text="#{appc.map}">map</button>
+        <button class="btn btn-info" id="map-full" th:text="#{appc.map}">map</button>
     </form>
 </div>
 <!-- hidden templates that are calculated on server side with correct language info to dynamically set tooltips -->

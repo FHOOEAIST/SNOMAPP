@@ -24,8 +24,7 @@
 
 <!-- Content including Result List -->
 <div class="container p-3">
-
-<div class="contentContainer" style="margin-top: 110px" >
+<div class="contentContainer">
     <span th:text="#{snomed.no_results} + ': ' + ${results.size()}">Number of results</span>
     <!-- Button to Open the Modal -->
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
@@ -50,7 +49,7 @@
                     <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
                 </label></li>
             </ul>
-            <button class ="btn btn-primary" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}" style="margin-left:25pt"/>
+            <button id="submit-scoring-options" class ="btn btn-info" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}"></button>
         </div>
     </div>
 
@@ -60,36 +59,39 @@
     </button>
 
     <div class="containerList" >
+        <p th:text="'APPC: '+${appc.getCode()}+' '+${appc.getDisplayName()}"></p>
     <ul class="list-group" th:each="result : ${results}">
         <li class="list-group-item" th:if="${result.isActive()}">
             <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
-            <!--mapping exists YES-->
-            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{mapped}" th:if="${mappings.contains(result.getConcept().getConceptId())}">
-                    <i class="fas fa-check-circle"></i>
-            </span>
-            <!--mapping exists NO -->
-            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{not_mapped}" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
-                    <i class="fas fa-times-circle"></i>
-                </span>
+            <div class="res-info-buttons">
+                <!--Ranking-->
+                <!--good accordance-->
+                <span class="content pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 100%"></span></span>
+                <!--medium accordance-->
+                <span class="content pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue
+            ; opacity: 75%"></span></span>
+                <!--bad accordance-->
+                <span class="content pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 50%"></span></span>
 
-            <!-- Info-->
-            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{description}" th:if="true">
+                <!-- Info-->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{description}" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description" th:attr="data-target='#description'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-info-circle" ></i></button>
                 </span>
-             <!--Plus-->
-            <span class="content float-right pr-3" data-toggle="tooltip" th:title="#{mapping_add}" th:if="true">
+                <!--Plus-->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{mapping_add}" th:if="true">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping" th:attr="data-target='#addMapping'+${result.getConcept().getConceptId()}">
                     <i class="fas fa-plus-circle"></i></button>
                 </span>
-            <!--Ranking-->
-            <!--good accordance-->
-            <span class="content float-right pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 100%"></span></span>
-            <!--medium accordance-->
-            <span class="content float-right pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue
-            ; opacity: 75%"></span></span>
-            <!--bad accordance-->
-            <span class="content float-right pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 50%"></span></span>
+                <!--mapping exists YES-->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{mapped}" th:if="${mappings.contains(result.getConcept().getConceptId())}">
+                    <i class="fas fa-check-circle"></i>
+            </span>
+                <!--mapping exists NO -->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{not_mapped}" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+            </div>
         </li>
 
         <!-- The Modal -->
@@ -217,7 +219,7 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
     <div class="float-right" >
-        <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
+        <a href="startPage"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
 
@@ -313,22 +315,16 @@
  <!-- script for submit button for scoring -->
 <script>
     function getChosenScoringMethods(){
-        var checkedScores = new Array();
+        var checkedScores = [];
         var scoringInputsList = document.getElementById("scoringInputs");
         var checkboxes = scoringInputsList.getElementsByTagName("INPUT");
 
-        for (var i =0;i<checkboxes.length;i++){
+        for (var i = 0; i < checkboxes.length; i++){
             if(checkboxes[i].checked){
                 checkedScores.push(checkboxes[i].value);
             }
         }
-        if(checkedScores.length>0){
-            for(var i = 0; i<checkedScores.length;i++){
-                console.log(checkedScores[i]+"\n");
-            }
-        }
-        window.location.replace(window.location.href+"&scores="+encodeURIComponent(checkedScores));
-
+        window.location.replace(window.origin + "/resultPage?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
     }
 </script>
 </body>

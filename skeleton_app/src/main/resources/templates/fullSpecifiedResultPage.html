@@ -65,7 +65,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('modality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
+                                                    <button class="btn btn-primary" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('modality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -87,7 +87,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('laterality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
+                                                    <button class="btn btn-primary"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('laterality', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -109,7 +109,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('anatomy', this.getAttribute('data-code'), this.getAttribute('data-id'))"th:text="#{select}"></button>
+                                                    <button class="btn btn-primary"  th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('anatomy', this.getAttribute('data-code'), this.getAttribute('data-id'))"th:text="#{select}"></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -131,7 +131,7 @@
                                                 <li class="list-group-item">
                                                     <span th:text="'Display Name: ' + ${result.getDisplayName()} + ' Code: ' + ${result.getCode()}">Result</span>
                                                     <!--mapping exists YES-->
-                                                    <button class="btn btn-info btn-select" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('procedure', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}"></button>
+                                                    <button class="btn btn-primary" th:data-code="${result.getCode()}" th:data-id="${result.getId()}" th:onclick="selectCode('procedure', this.getAttribute('data-code'), this.getAttribute('data-id'))" th:text="#{select}" ></button>
                                                 </li>
                                             </ul>
                                         </div>
@@ -177,7 +177,7 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" id="footer">
     <div class="float-right" >
-        <a href="startPage"><button type="button" class="btn btn-primary" th:text="#{back}">Back to Startpage</button></a>
+        <a href="startPage"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
 
