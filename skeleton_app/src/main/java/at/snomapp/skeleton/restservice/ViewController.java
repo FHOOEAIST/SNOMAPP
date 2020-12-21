@@ -115,55 +115,60 @@ public class ViewController<SnomedAPPCMapping>{
             List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
+            // create a new scoring model
+            // all algorithms which are included are applied on all strings
+            ScoringModel scoringModel;
+
             //if user chose algorithm use this one instead
             if (scoringMethods.size() > 0) {
-                for (String score : scoringMethods
-                ) {
+                int countMethods = scoringMethods.size();
+                if (scoringMethods.contains("synonyms")){
+                    countMethods = countMethods - 1;
+                }
+                for (String score : scoringMethods) {
                     switch (score) {
                         case "cosinus":
-                            algorithms.add(new Cosine(1.0 / scoringMethods.size()));
+                            algorithms.add(new Cosine(Math.round(1.0 / countMethods * 100) / 100d));
                             break;
                         case "levenshtein":
-                            algorithms.add(new Levenshtein(1.0 / scoringMethods.size()));
+                            algorithms.add(new Levenshtein(Math.round(1.0 / countMethods * 100) / 100d));
                             break;
                         case "jaccard":
-                            algorithms.add(new Jaccard(1.0 / scoringMethods.size()));
+                            algorithms.add(new Jaccard(Math.round(1.0 / countMethods * 100) / 100d));
                             break;
                         case "subsequence":
-                            algorithms.add(new LongestCommonSubsequence(1.0 / scoringMethods.size()));
+                            algorithms.add(new LongestCommonSubsequence(Math.round(1.0 / countMethods * 100) / 100d));
                             break;
                     }
                 }
-            } else {
-                // create a new scoring model
-                // compare algorithms can be appended or removed randomly
-                // all algorithms which are included are applied on all strings
 
+                scoringModel = new ScoringModel(algorithms);
+                if (scoringMethods.contains("synonyms")){
+                    resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
+                } else {
+                    resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
+                }
+
+            } else {
+                // default
+                scoringModel = new ScoringModel(algorithms);
                 algorithms.add(new Levenshtein(0.5));
                 algorithms.add(new LongestCommonSubsequence(0.5));
+                resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             }
-
-            ScoringModel scoringModel = new ScoringModel(algorithms);
-            // calculates for each result his score
-            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScore( entry.getDisplayName(), res.getTerm() )));
-            //resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
-
-            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
-            resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
 
 
             // for scoring visibility
             int maxScore = 0;
             int minScore = Integer.MAX_VALUE;
             for (BrowserDescriptionSearchResult result : resultList){
-                int score = scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, result.getConcept().getId());
+                int score =  result.getScore();
                 if (score < minScore){
                     minScore = score;
                 }
                 if(score > maxScore){
                     maxScore = score;
                 }
-                result.setScore(score);
             }
           
             // sort resultList by property score
