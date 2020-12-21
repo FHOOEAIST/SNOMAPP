@@ -24,6 +24,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.sql.SQLOutput;
 import java.util.*;
 import java.util.HashMap;
@@ -244,7 +246,8 @@ public class ConceptMapController {
         // read appc csv file
         try{
             // TODO: Change input file
-            BufferedReader csvReader = new BufferedReader(new FileReader("src/main/resources/APPCCodes/APPC_machinereadable_1.1.csv"));
+            URL resource = this.getClass().getResource("/APPCCodes/APPC_machinereadable_1.1.csv");
+            BufferedReader csvReader = new BufferedReader(new FileReader(resource.getFile()));
             String row = "";
             while ((row = csvReader.readLine()) != null) {
 
