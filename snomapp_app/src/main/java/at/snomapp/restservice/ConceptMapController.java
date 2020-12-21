@@ -398,6 +398,11 @@ public class ConceptMapController {
 
         return translator.getCompositionalRepresentation();
     }
+
+    @DeleteMapping("delete")
+    void deleteMapping(@RequestBody ConceptMapRequest object) {
+        conceptMapRepo.deleteSnomedCodeByAppcCodeAxisAndEquivalenceAndSnomedCodeAndDisplayName(object.appcCode, object.appcAxis, object.map, object.snomedCode, object.snomedDisplayName);
+    }
 }
 
 

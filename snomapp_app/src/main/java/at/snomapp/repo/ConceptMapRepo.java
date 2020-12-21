@@ -35,5 +35,8 @@ public interface ConceptMapRepo extends Neo4jRepository<ConceptMap, Long> {
             "ORDER BY m.id")
     Iterable<Map<String, Object>> getSnomedCodeAndEquivalence(String code, String axis);
 
+    @Query("MATCH (:APPCElement {code: $0, axis: $1})-[m:maps {equivalence: $2}]->(s:SnomedElement{code: $3, displayName: $4})\n" +
+            "DETACH DELETE s")
+    void deleteSnomedCodeByAppcCodeAxisAndEquivalenceAndSnomedCodeAndDisplayName(String appcCode, String appcAxis, String map, String snomedCode, String snomedDisplayName);
 }
 
