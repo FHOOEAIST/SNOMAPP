@@ -48,7 +48,7 @@ public class ViewController<SnomedAPPCMapping> {
         this.mappingRepo = mappingRepo;
     }
 
-    @GetMapping("/startPage")
+    @GetMapping("/index")
     public String startPage(Model model) {
         APPCController appcController = new APPCController(repo);
 
@@ -63,18 +63,6 @@ public class ViewController<SnomedAPPCMapping> {
             model.addAttribute("version", "not loaded");
         }
         return "startPage";
-    }
-
-    @GetMapping("/index")
-    public String index(Model model) {
-        APPCController appcController = new APPCController(repo);
-
-        //store in model the json string of nodes for each axis
-        model.addAttribute("anatomy", appcController.getTree().getAnatomyJsonString());
-        model.addAttribute("laterality", appcController.getTree().getLateralityJsonString());
-        model.addAttribute("modality", appcController.getTree().getModalityJsonString());
-        model.addAttribute("procedure", appcController.getTree().getProcedureJsonString());
-        return "index";
     }
 
     @ExceptionHandler(Exception.class)
@@ -95,7 +83,7 @@ public class ViewController<SnomedAPPCMapping> {
         return "errorPage";
     }
 
-    @GetMapping("/resultPage")
+    @GetMapping("/result")
     public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
         ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo, repo);
         SnomedController snomedController = new SnomedController();
@@ -268,5 +256,4 @@ public class ViewController<SnomedAPPCMapping> {
 
         return "fullSpecifiedResultPage";
     }
-
 }
