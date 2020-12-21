@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Console;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @RequestMapping("snomed")
@@ -81,7 +78,16 @@ public class SnomedController {
 
         // might want to replace with wrapped PageBrowserDescriptionSearchResult depending on if we need the
         // meta information (e.g. size of returned array) aor not
-        return response != null ? response.getItems() : null;
+        if(response!=null){
+            List<BrowserDescriptionSearchResult> searchResults = new ArrayList<>();
+            for (BrowserDescriptionSearchResult item : response.getItems()) {
+                if(searchResults.stream().noneMatch(i -> i.getConcept().getId().equals(item.getConcept().getId()))){
+                    searchResults.add(item);
+                }
+            }
+            return searchResults;
+        }
+        return null;
     }
 
     Map<String, List<Description>> findSynonyms(List<BrowserDescriptionSearchResult> concepts) {
