@@ -26,7 +26,7 @@ public class SnomedController {
         api.getApiClient().setBasePath("http://193.170.192.200:8080");
     }
 
-    @GetMapping
+    @GetMapping("find-by-displayname")
         // displayName passed in as query parameter
     List<BrowserDescriptionSearchResult> findByDisplayName(@RequestParam String displayName, @RequestParam String APPCAxis) {
         String branch = "MAIN";

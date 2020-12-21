@@ -202,7 +202,7 @@
         $.ajax(
             {
                 method: "POST",
-                url: "ConceptMap/submit",
+                url: "concept-map/submit",
                 contentType: "application/json",
                 data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
@@ -219,7 +219,7 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
     <div class="float-right" >
-        <a href="startPage"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
+        <a href="index"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
 
@@ -312,8 +312,9 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
- <!-- script for submit button for scoring -->
+
 <script>
+    //submit button for scoring
     function getChosenScoringMethods(){
         var checkedScores = [];
         var scoringInputsList = document.getElementById("scoringInputs");
@@ -324,7 +325,7 @@
                 checkedScores.push(checkboxes[i].value);
             }
         }
-        window.location.replace(window.origin + "/resultPage?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
+        window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
     }
 </script>
 </body>

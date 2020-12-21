@@ -29,15 +29,6 @@
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
 </div>
 
-<script th:inline="javascript">
-    function selectCode(axis, code, id){
-        $('#'+axis+'-out').text(code);
-        $('#'+axis+'-id').text(id);
-    }
-
-
-</script>
-
 <section id="tabs" class="project-tab">
     <div class="container pt-3">
         <h4 th:text="#{mapped.snomeds}"></h4>
@@ -177,11 +168,16 @@
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" id="footer">
     <div class="float-right" >
-        <a href="startPage"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
+        <a href="index"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
     </div>
 </div>
 
 <script>
+    function selectCode(axis, code, id){
+        $('#'+axis+'-out').text(code);
+        $('#'+axis+'-id').text(id);
+    }
+
     $('#btn-select-snomed').click(function () {
         console.log('kek');
         const anatomy = $('#anatomy-id').text();
@@ -192,7 +188,7 @@
         $.ajax(
             {
                 method: "GET",
-                url: `ConceptMap/compositionalGrammar?anatomyId=${anatomy}&modalityId=${modality}&proceduresId=${procedures}&lateralityId=${laterality}`,
+                url: `concept-map/compositional-grammar?anatomyId=${anatomy}&modalityId=${modality}&proceduresId=${procedures}&lateralityId=${laterality}`,
                 contentType: "application/json",
                 success: function (result) {
                     $('#compositional-grammar').text(result);

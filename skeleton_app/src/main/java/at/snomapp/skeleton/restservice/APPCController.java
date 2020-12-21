@@ -29,7 +29,7 @@ import java.util.Set;
 
 
 @RestController
-@RequestMapping("/APPC")
+@RequestMapping("/appc")
 // controller providing endpoints for importing and retrieving APPCData
 public class APPCController {
 
@@ -66,7 +66,7 @@ public class APPCController {
         }
     }
 
-    @GetMapping("/getEntriesByName")
+    @GetMapping("/get-entries-by-name")
     public String entryToJsonString (@RequestParam(required = false) String displayName){
         Iterable<Entry> entries = readByDisplayName(displayName);
         APPCTree tree = new APPCTree(null);
@@ -141,7 +141,7 @@ public class APPCController {
         }
     }
 
-    @PostMapping("/importString")
+    @PostMapping("/import-string")
     @ResponseStatus(HttpStatus.CREATED)
     // imports an APPCTree from given string containing the entire code
     // clears database if contents are not empty
@@ -200,7 +200,7 @@ public class APPCController {
     }
 
     // needs tweaking if multiple languages are supported
-    @GetMapping
+    @GetMapping("get-tree")
     // returns whole tree saved in Data bank
     public APPCTree getTree(){
         APPCTree tree = new APPCTree("en");
