@@ -110,7 +110,7 @@
     function searchForEntries (searchText){
         console.log("Started");
 
-        fetch("/APPC/getEntriesByName?displayName=" + searchText)
+        fetch("/appc/get-entries-by-name?displayName=" + searchText)
             //.then(json => json.json())
             .then(response => response.json())
             .then(data => {
@@ -133,7 +133,7 @@
             // this is kind of hacky -> maybe change in the future when there is time.
             //Todo add icon for this instead of text
             if(! $(this).find('a').length > 0) {
-                let btn = $(`<a href="/resultPage?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button">map</a>`);
+                let btn = $(`<a href="/result?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button">map</a>`);
                 $(this).append(btn);
             }
         });
@@ -152,7 +152,7 @@
                 $.ajax(
                     {
                         method: "GET",
-                        url: `ConceptMap/count?id=${id}`,
+                        url: `concept-map/count?id=${id}`,
                         contentType: "application/json",
                         success: function (result) {
                             if (result["EQUAL"] >= 1 || result["EQUIVALENT"] >= 1) {
@@ -379,7 +379,7 @@
         if(fileInput.length){
             let reader = new FileReader();
             reader.onload = function(e){
-                $.post('/APPC/importString', e.target.result, function (data, status, xhr){
+                $.post('/appc/import-string', e.target.result, function (data, status, xhr){
                     location.reload();
                 });
             }
@@ -391,11 +391,11 @@
     });
 
     $('#exportFHIR').on('click',function () {
-        window.open(location.origin + '/ConceptMap/mappings/fhir/download');
+        window.open(location.origin + '/concept-map/mappings/fhir/download');
     });
 
     $('#exportCSV').on('click',function () {
-        window.open(location.origin + '/ConceptMap/mappings/csv/download');
+        window.open(location.origin + '/concept-map/mappings/csv/download');
         /*<![CDATA[*/
         alert( /*[[#{export.csv.alert}]]*/ );
         /*]]>*/

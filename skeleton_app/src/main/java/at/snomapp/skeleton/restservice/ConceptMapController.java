@@ -35,7 +35,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/ConceptMap")
+@RequestMapping("/concept-map")
 public class ConceptMapController {
     private final ConceptMapRepo conceptMapRepo;
     private final MappingRepo mappingRepo;
@@ -108,7 +108,7 @@ public class ConceptMapController {
         }
     }
 
-    @PostMapping("/submit")
+    @PostMapping("submit")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<HttpStatus> submitMapping(@RequestBody ConceptMapRequest object) {
         Iterator<ConceptMap> iterator = conceptMapRepo.findAll().iterator();
@@ -391,7 +391,7 @@ public class ConceptMapController {
         }
     }
 
-    @GetMapping("compositionalGrammar")
+    @GetMapping("compositional-grammar")
     public String toCompositionalGrammar(
             @RequestParam long modalityId,
             @RequestParam long lateralityId,
