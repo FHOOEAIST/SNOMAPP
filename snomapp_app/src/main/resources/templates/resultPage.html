@@ -32,25 +32,25 @@
     </button>
     <!-- Choose Scoring -->
     <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" th:text="#{scoring.choose_scoring}">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true"  th:text="#{scoring.choose_scoring}">
             Choose Scoring
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <ul id="scoringInputs" class="nobullets">
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
+                    <input class="scoring-options" type="checkbox" id="cosinus" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
+                    <input class="scoring-options" type="checkbox" id="levenshtein" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
+                    <input class="scoring-options" type="checkbox" id="jaccard" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
+                    <input class="scoring-options" type="checkbox" id="subsequence" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
+                    <input class="scoring-options" type="checkbox" id="synonyms" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
                 </label></li>
             </ul>
             <button id="submit-scoring-options" class ="btn btn-info" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}"></button>
@@ -313,9 +313,34 @@
 <script>
     //Datatoggle function
     $(document).ready(function(){
+
         $('[data-toggle="tooltip"]').tooltip();
+
+        console.log("hier")
+
+
+        // scoring
+        for (var i in  [[${scoringModel.getAlgorithms()}]]){
+            switch(i.getDescription()){
+                case "Cosine Distance":
+                    document.getElementById("cosinus").checked = true;
+                    break;
+                case "Levenshtein Distance":
+                    document.getElementById("levenshtein").checked = true;
+                case "Jaccard Distance":
+                    document.getElementById("jaccard").checked = true;
+                    break;
+                case "Longest Common Subsequence Distance":
+                    document.getElementById("subsequence").checked = true;
+                    break;
+            }
+        }
+
+
     });
 </script>
+
+
 
 <script>
     //submit button for scoring
@@ -332,5 +357,6 @@
         window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
     }
 </script>
+
 </body>
 </html>
