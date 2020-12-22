@@ -79,11 +79,16 @@
 }
 
 .has-equal{
-    background-color: green;
+    background-color: forestgreen;
 }
 
 .has-mapping{
-    background-color: yellow;
+    background-color: darkorange;
+}
+
+.fas{
+    color: white;
+    padding-top: 5px;
 }
 
 .btn-group{

@@ -13,6 +13,8 @@
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="/css/bstreeview.css" rel="stylesheet">
     <link th:href="@{/styles/list.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -148,16 +150,23 @@
                 let newTitle = $('#tooltip-template-no-mapping').text();
                 dot.attr('title', newTitle);
                 dot.attr('data-original-title', newTitle);
+
                 $(this).append(dot);
+
                 $.ajax(
                     {
                         method: "GET",
                         url: `ConceptMap/count?id=${id}`,
                         contentType: "application/json",
                         success: function (result) {
+                            if(result["EQUAL"] === 0 && result["EQUIVALENT"] === 0 && result["WIDER"] === 0 && result["SUBSUMES"] === 0
+                            && result["NARROWER"] === 0 && result["SPECIALIZES"] === 0 && result["INEXACT"] === 0 && result["UNMATCH"] === 0 && result["DISJOINT"] === 0){
+                                dot.append($('<i class="fas fa-times"></i>'));
+                            }
                             if (result["EQUAL"] >= 1 || result["EQUIVALENT"] >= 1) {
                                 dot.removeClass('unmapped');
                                 dot.addClass('has-equal');
+                                dot.append($('<i class="fas fa-check"></i>'));
                                 let newTitle = $('#tooltip-template-has-equivalent').text();
                                 dot.attr('title', newTitle);
                                 dot.attr('data-original-title', newTitle);
@@ -165,6 +174,7 @@
                                 for (let key in result) {
                                     if (result.hasOwnProperty(key) && result[key] >= 1) {
                                         dot.removeClass('unmapped');
+                                        dot.append($('<i class="fas fa-check"></i>'));
                                         dot.addClass('has-mapping');
                                         let newTitle = $('#tooltip-template-has-mapping').text();
                                         dot.attr('title', newTitle);
