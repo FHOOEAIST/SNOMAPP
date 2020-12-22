@@ -119,8 +119,16 @@ public class ViewController<SnomedAPPCMapping>{
             // all algorithms which are included are applied on all strings
             ScoringModel scoringModel;
 
+            if (scoringMethods.size() == 0 || (scoringMethods.size() == 1 && scoringMethods.contains("synonyms"))) {
+                // default
+                algorithms.add(new Levenshtein(0.5));
+                algorithms.add(new LongestCommonSubsequence(0.5));
+                scoringModel = new ScoringModel(algorithms);
+                resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
+            }
+
             //if user chose algorithm use this one instead
-            if (scoringMethods.size() > 0) {
+            else {
                 int countMethods = scoringMethods.size();
                 if (scoringMethods.contains("synonyms")){
                     countMethods = countMethods - 1;
@@ -148,13 +156,6 @@ public class ViewController<SnomedAPPCMapping>{
                 } else {
                     resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
                 }
-
-            } else {
-                // default
-                scoringModel = new ScoringModel(algorithms);
-                algorithms.add(new Levenshtein(0.5));
-                algorithms.add(new LongestCommonSubsequence(0.5));
-                resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             }
 
 
