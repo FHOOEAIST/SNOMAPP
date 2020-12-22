@@ -48,7 +48,7 @@ public class ViewController<SnomedAPPCMapping> {
         this.mappingRepo = mappingRepo;
     }
 
-    @GetMapping("/index")
+    @GetMapping({"/index", "/"})
     public String startPage(Model model) {
         APPCController appcController = new APPCController(repo);
 
