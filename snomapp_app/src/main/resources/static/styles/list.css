@@ -45,6 +45,18 @@
 
 .badge-info{
     background-color: #70a8e3;
+
+}
+.badge-info.dark{
+    opacity: 100%;
+}
+
+.badge-info.middle{
+    opacity: 75%;
+}
+
+.badge-info.light{
+    opacity: 50%;
 }
 
 #header{
