@@ -32,7 +32,7 @@
     </button>
     <!-- Choose Scoring -->
     <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true"  th:text="#{scoring.choose_scoring}">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" onclick="checkChosenScoringMethods()" th:text="#{scoring.choose_scoring}">
             Choose Scoring
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
@@ -315,28 +315,6 @@
     $(document).ready(function(){
 
         $('[data-toggle="tooltip"]').tooltip();
-
-        console.log("hier")
-
-
-        // scoring
-        for (var i in  [[${scoringModel.getAlgorithms()}]]){
-            switch(i.getDescription()){
-                case "Cosine Distance":
-                    document.getElementById("cosinus").checked = true;
-                    break;
-                case "Levenshtein Distance":
-                    document.getElementById("levenshtein").checked = true;
-                case "Jaccard Distance":
-                    document.getElementById("jaccard").checked = true;
-                    break;
-                case "Longest Common Subsequence Distance":
-                    document.getElementById("subsequence").checked = true;
-                    break;
-            }
-        }
-
-
     });
 </script>
 
@@ -356,6 +334,37 @@
         }
         window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
     }
+
+    function checkChosenScoringMethods() {
+        console.log("[[${scoringModel.getAlgorithms().get(0).getDescription()}]]");
+
+        for (var i = 0; i < [[${scoringModel.getAlgorithms().size()}]]; i++) {
+
+
+            // TODO: delete this, just for testing purpose
+            var value = "[[${scoringModel.getAlgorithms()}]]";
+            console.log(value.toString());
+
+            // TODO: find solution to make index i dynamically, know always 0, but everything else works
+
+            switch("[[${scoringModel.getAlgorithms().get(0).getDescription()}]]") {
+                case "Cosine Distance":
+                document.getElementById("cosinus").checked = true;
+                break;
+            case "Levenshtein Distance":
+                document.getElementById("levenshtein").checked = true;
+                break;
+            case "Jaccard Distance":
+                document.getElementById("jaccard").checked = true;
+                break;
+            case "Longest Common Subsequence Distance":
+                document.getElementById("subsequence").checked = true;
+                break;
+            }
+
+        }
+    }
+
 </script>
 
 </body>
