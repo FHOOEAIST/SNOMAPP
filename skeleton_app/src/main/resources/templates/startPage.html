@@ -115,7 +115,7 @@
             .then(response => response.json())
             .then(data => {
                 $("#tabs").hide();
-                console.log(JSON.stringify(data));
+                //console.log(JSON.stringify(data));
                 $('#tabsSearch').append(' <div id="showTree"></div>')
                 $("#tabsSearch").show();
                 $('#showTree').bstreeview({
@@ -123,8 +123,61 @@
                 });
                 addMappingButtons();
                 addMappingIndicator();
+                addAppcAxis();
             });
 
+    }
+
+    function addAppcAxis() {
+        $("div.list-group-item").each(function () {
+            // same hack as addMappingButtons and indicators
+            if(! $(this).find('span.axis-indicator').length > 0) {
+                let id = jQuery("div", this).text();
+                let dot = $(`<span class="axis-indicator" id="axis-indicator-${id}" data-toggle="tooltip"></span>`);
+                $(this).append(dot);
+                $.ajax(
+                    {
+                        method: "GET",
+                        url: 'appc/entry/' + id,
+                        contentType: "application/json",
+                        success: function (result) {
+                            if (result!=null) {
+                                console.log(result['axis']);
+                                switch (result['axis']) {
+                                    case 'Modality':
+                                        dot.append('<p class="axis-info">M</p>');
+                                        newTitle = $('#tooltip-template-modality').text();
+                                        dot.attr('title', newTitle);
+                                        dot.attr('data-original-title', newTitle);
+                                        break;
+                                    case 'Anatomy':
+                                        dot.append('<p class="axis-info">A</p>');
+                                        newTitle = $('#tooltip-template-anatomy').text();
+                                        dot.attr('title', newTitle);
+                                        dot.attr('data-original-title', newTitle);
+                                        break;
+
+                                    case 'Laterality':
+                                        dot.append('<p class="axis-info">L</p>');
+                                        newTitle = $('#tooltip-template-laterality').text();
+                                        dot.attr('title', newTitle);
+                                        dot.attr('data-original-title', newTitle);
+                                        break;
+                                    case 'Procedures':
+                                        dot.append('<p class="axis-info">P</p>');
+                                        newTitle = $('#tooltip-template-procedures').text();
+                                        dot.attr('title', newTitle);
+                                        dot.attr('data-original-title', newTitle);
+                                        break;
+
+                                }
+
+                            }
+                        }
+                    }
+                );
+            }
+        });
     }
 
     function addMappingButtons(){
@@ -326,6 +379,12 @@
     <h3 th:text="#{mapping.no_mapping}" id="tooltip-template-no-mapping"></h3>
     <h3 th:text="#{mapping.has_mapping}" id="tooltip-template-has-mapping"></h3>
     <h3 th:text="#{mapping.has_equivalent}" id="tooltip-template-has-equivalent"></h3>
+
+    <h3 th:text="#{appc.modality}" id="tooltip-template-modality"></h3>
+    <h3 th:text="#{appc.anatomy}" id="tooltip-template-anatomy"></h3>
+    <h3 th:text="#{appc.procedures}" id="tooltip-template-procedures"></h3>
+    <h3 th:text="#{appc.laterality}" id="tooltip-template-laterality"></h3>
+
 </div>
 
 <!-- file upload script -->
