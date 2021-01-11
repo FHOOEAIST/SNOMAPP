@@ -16,7 +16,7 @@ Modality;0;0;;;;;undefined
 Laterality;0;0;;;;;undefined
 ;1;1;;;;;right
 ;2;2;;;;;left
-;3;3;;;;;biliteral
+;3;3;;;;;bilateral
 ;4;4;;;;;unpaired organ
 ;5;5;;;;;atypical situation (e.g. transplant )
 Procedures;0;0;;;;;undefined
@@ -29,11 +29,11 @@ Procedures;0;0;;;;;undefined
 ;1-2-1;1;2;1;;;imaging of arteries
 ;1-2-1-1;1;2;1;1;;without contrast (color coded Doppler, phase contrast MRI etc)
 ;1-2-1-2;1;2;1;2;;with contrast material (i.v. MR angio, iv. DSA etc.)
-;1-2-1-3;1;2;1;3;;catheter (invasiv, selective etc.)
+;1-2-1-3;1;2;1;3;;catheter (invasive, selective etc.)
 ;1-2-2;1;2;2;;;imaging of veins
 ;1-2-2-1;1;2;2;1;;without contrast (color coded Doppler, phase contrast MRI etc.) 
 ;1-2-2-2;1;2;2;2;;with contrast material (phlebography etc.)
-;1-2-2-3;1;2;2;3;;Catheter (invasiv, selective etc.)
+;1-2-2-3;1;2;2;3;;Catheter (invasive, selective etc.)
 ;1-2-3;1;2;3;;;imaging of lymphatic vessels
 ;1-2-3-1;1;2;3;1;;without contrast
 ;1-2-3-2;1;2;3;2;;with contrast material
