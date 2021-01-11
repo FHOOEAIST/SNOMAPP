@@ -32,25 +32,25 @@
     </button>
     <!-- Choose Scoring -->
     <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" onclick="checkChosenScoringMethods()" th:text="#{scoring.choose_scoring}">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true"  th:text="#{scoring.choose_scoring}">
             Choose Scoring
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <ul id="scoringInputs" class="nobullets">
                 <li><label>
-                    <input class="scoring-options" type="checkbox" id="cosinus" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(0).booleanValue()}" id="cosinus" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" id="levenshtein" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(1).booleanValue()}" id="levenshtein" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" id="jaccard" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(2).booleanValue()}" id="jaccard" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" id="subsequence" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(3).booleanValue()}" id="subsequence" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" id="synonyms" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(4).booleanValue()}" id="synonyms" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
                 </label></li>
             </ul>
             <button id="submit-scoring-options" class ="btn btn-info" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}"></button>
@@ -334,38 +334,6 @@
         }
         window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
     }
-
-    function checkChosenScoringMethods() {
-        console.log("[[${scoringModel.getAlgorithms().get(0).getDescription()}]]");
-
-        for (var i = 0; i < [[${scoringModel.getAlgorithms().size()}]]; i++) {
-
-
-            // TODO: delete this, just for testing purpose
-            var value = "[[${scoringModel.getAlgorithms()}]]";
-            console.log(value.toString());
-
-            // TODO: find solution to make index i dynamically, know always 0, but everything else works
-            // Idea: Make new switch for i and call description separately for each index
-
-            switch("[[${scoringModel.getAlgorithms().get(0).getDescription()}]]") {
-                case "Cosine Distance":
-                document.getElementById("cosinus").checked = true;
-                break;
-            case "Levenshtein Distance":
-                document.getElementById("levenshtein").checked = true;
-                break;
-            case "Jaccard Distance":
-                document.getElementById("jaccard").checked = true;
-                break;
-            case "Longest Common Subsequence Distance":
-                document.getElementById("subsequence").checked = true;
-                break;
-            }
-
-        }
-    }
-
 </script>
 
 </body>

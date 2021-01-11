@@ -74,6 +74,7 @@ public class ViewController<SnomedAPPCMapping>{
         return "errorPage";
     }
 
+
     @GetMapping("/result")
     public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
         ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo,repo);
@@ -100,11 +101,15 @@ public class ViewController<SnomedAPPCMapping>{
             // create a new scoring model
             // all algorithms which are included are applied on all strings
             ScoringModel scoringModel;
+            List<Boolean> algorithmChecked = List.of(false, false, false, false, false);
 
             if (scoringMethods.size() == 0 || (scoringMethods.size() == 1 && scoringMethods.contains("synonyms"))) {
                 // default
                 algorithms.add(new Levenshtein(0.5));
                 algorithms.add(new LongestCommonSubsequence(0.5));
+                algorithmChecked.set(1, true);
+                algorithmChecked.set(3, true);
+                algorithmChecked.set(4, true);
                 scoringModel = new ScoringModel(algorithms);
                 resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             }
@@ -119,15 +124,19 @@ public class ViewController<SnomedAPPCMapping>{
                     switch (score) {
                         case "cosinus":
                             algorithms.add(new Cosine(Math.round(1.0 / countMethods * 100) / 100d));
+                            algorithmChecked.set(0, true);
                             break;
                         case "levenshtein":
                             algorithms.add(new Levenshtein(Math.round(1.0 / countMethods * 100) / 100d));
+                            algorithmChecked.set(1, true);
                             break;
                         case "jaccard":
                             algorithms.add(new Jaccard(Math.round(1.0 / countMethods * 100) / 100d));
+                            algorithmChecked.set(2, true);
                             break;
                         case "subsequence":
                             algorithms.add(new LongestCommonSubsequence(Math.round(1.0 / countMethods * 100) / 100d));
+                            algorithmChecked.set(3, true);
                             break;
                     }
                 }
@@ -135,6 +144,7 @@ public class ViewController<SnomedAPPCMapping>{
                 scoringModel = new ScoringModel(algorithms);
                 if (scoringMethods.contains("synonyms")){
                     resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
+                    algorithmChecked.set(4, true);
                 } else {
                     resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
                 }
@@ -168,6 +178,7 @@ public class ViewController<SnomedAPPCMapping>{
             model.addAttribute("mappings", mappings);
 
             model.addAttribute("scoringModel", scoringModel );
+            model.addAttribute("algorithmChecked", algorithmChecked);
 
             // for scoring visibility
             model.addAttribute("colorStep", (maxScore - minScore) / 3);
