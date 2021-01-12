@@ -101,7 +101,7 @@ public class ViewController<SnomedAPPCMapping>{
             // create a new scoring model
             // all algorithms which are included are applied on all strings
             ScoringModel scoringModel;
-            List<Boolean> algorithmChecked = List.of(false, false, false, false, false);
+            ArrayList<Boolean> algorithmChecked = new ArrayList<>(Arrays.asList(false, false, false, false, false));
 
             if (scoringMethods.size() == 0 || (scoringMethods.size() == 1 && scoringMethods.contains("synonyms"))) {
                 // default
