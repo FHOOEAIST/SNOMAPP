@@ -1,4 +1,4 @@
-package at.snomapp.restservice;
+package at.snomapp.skeleton.restservice;
 
 
 import at.snomapp.domain.appc.APPCTree;
@@ -40,13 +40,11 @@ public class ViewController<SnomedAPPCMapping> {
 
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
-    private MappingRepo mappingRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, MappingRepo mappingRepo) {
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo) {
         this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
-        this.mappingRepo = mappingRepo;
     }
 
     @GetMapping({"/index", "/"})
@@ -198,6 +196,10 @@ public class ViewController<SnomedAPPCMapping> {
                             break;
                     }
                 }
+            } else {
+                // create a new scoring model
+                // compare algorithms can be appended or removed randomly
+                // all algorithms which are included are applied on all strings
 
                 scoringModel = new ScoringModel(algorithms);
                 if (scoringMethods.contains("synonyms")){
