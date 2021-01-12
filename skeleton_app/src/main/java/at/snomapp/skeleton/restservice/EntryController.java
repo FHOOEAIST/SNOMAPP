@@ -1,18 +1,15 @@
 package at.snomapp.skeleton.restservice;
 
-
-import java.util.List;
+import at.snomapp.skeleton.repo.EntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 //@RestController
 public class EntryController {
 
-    //reference to EntryRepository
+    // Reference to EntryRepository.
     private EntryRepository entryRepository;
 
     @Autowired
@@ -20,7 +17,10 @@ public class EntryController {
         this.entryRepository = entryRepository;
     }
 
-
+    /**
+     * Get a list of all APPC entries.
+     * @return {@link List<Entry>}
+     */
     @GetMapping( "/entries" )
     List<Entry> all() {
         return (List<Entry>) this.entryRepository.findAll();

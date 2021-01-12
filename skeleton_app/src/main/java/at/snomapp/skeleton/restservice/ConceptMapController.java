@@ -48,37 +48,20 @@ public class ConceptMapController {
         this.appcRepo = appcRepo;
     }
 
+    /**
+     * Flushes database.
+     */
     @DeleteMapping
-        // flushes databank
-        // to be used for debugging only
-        // remove from release version
     void clearDB() {
         conceptMapRepo.deleteAll();
     }
 
-    /*
-    @PostMapping("/test")
-    void importAPPC(){
-        conceptMapRepo.deleteAll();
-        String appc = "1-2-1-2"; //APPC for eye
-        String snomed = "81745001"; //SNOMED: Structure of eye proper
-        String snomed2 = "371398005"; //SNOMED for the eye "region"
-        String snomed3 = "314859006"; //SNOMED for the eyeball axis
-
-        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
-        APPCElement appcElement = new APPCElement(appc,"anatomy");
-        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed, displayName);
-        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2, displayName);
-        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3, displayName);
-        map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
-        map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
-        map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);
-        conceptMapRepo.save(map);
-    }
-
+    /**
+     * Get mapped Elements by APPC.
+     * @param code
+     * @param axis
+     * @return {@link Iterable}
      */
-
-    // for searching for map-elements
     @GetMapping
     Iterable<ConceptMap> readByAPPC(@RequestParam(required = false) String code,
                                     @RequestParam(required = false) String axis) {
@@ -93,7 +76,12 @@ public class ConceptMapController {
         }
     }
 
-    // for searching for mapping information (elements + equivalence)
+    /**
+     * Get mapping information for APPC.
+     * @param code of APPC Element.
+     * @param axis of APPC Element.
+     * @return APPC Element with equivalence.
+     */
     @GetMapping("mapping")
     APPCElement readMappingByAPPC(@RequestParam(required = false) String code,
                                   @RequestParam(required = false) String axis) {
@@ -108,6 +96,11 @@ public class ConceptMapController {
         }
     }
 
+    /**
+     * Store a mapping to database.
+     * @param object {@link ConceptMapRequest}
+     * @return {@link ResponseEntity}
+     */
     @PostMapping("submit")
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<HttpStatus> submitMapping(@RequestBody ConceptMapRequest object) {
@@ -127,7 +120,6 @@ public class ConceptMapController {
             appcElement = new APPCElement(object.appcCode, object.appcAxis, object.appcDisplayName);
         }
 
-        // TODO: convert strings to enum more efficiently
         SNOMEDElement snomedElement = new SNOMEDElement(object.snomedCode, object.snomedDisplayName);
         switch (object.map) {
             case "equivalent":
@@ -159,11 +151,20 @@ public class ConceptMapController {
         return ResponseEntity.ok(HttpStatus.OK);
     }
 
+    /**
+     * Get mappings as {@link List}.
+     * @return List of concept-maps.
+     */
     @GetMapping("mappings/export")
     List<ConceptMap> exportConceptMaps() {
         return (List<ConceptMap>) conceptMapRepo.findAll(2);
     }
 
+    /**
+     * Download concept maps as JSON resource.
+     * @param filename of downloaded file.
+     * @return {@link ResponseEntity<List<ConceptMap>>}
+     */
     @GetMapping("mappings/download")
     ResponseEntity<List<ConceptMap>> downloadConceptMaps(@RequestParam(required = false) String filename) {
         // Later we can let the user set the filename with a textfield and pass it as request parameter
@@ -176,6 +177,10 @@ public class ConceptMapController {
                 .body(exportConceptMaps());
     }
 
+    /**
+     * Export all mappings as FHIR resource.
+     * @return {@link ConceptMapFHIRResource}
+     */
     @GetMapping("mappings/fhir/export")
     ConceptMapFHIRResource exportFHIRResource() {
         List<ConceptMap> mappings = (List<ConceptMap>) conceptMapRepo.findAll(2);
@@ -220,6 +225,11 @@ public class ConceptMapController {
         return new ConceptMapFHIRResource(status, source, destination, groups);
     }
 
+    /**
+     * Download all existing mappings as FHIR concept map ans JSON document.
+     * @param filename of downloaded file.
+     * @return {@link ResponseEntity<ConceptMapFHIRResource>}
+     */
     @GetMapping("mappings/fhir/download")
     ResponseEntity<ConceptMapFHIRResource> downloadFHIRResource(@RequestParam(required = false) String filename) {
         // Later we can let the user set the filename with a textfield and pass it as request parameter
@@ -233,6 +243,11 @@ public class ConceptMapController {
 
     }
 
+    /**
+     * Download EQUIVALENT and EQUAL mappings as .csv resource.
+     * @param filename of downloaded file.
+     * @return {@link ResponseEntity}
+     */
     @GetMapping("mappings/csv/download")
     ResponseEntity exportCSVResource(@RequestParam(required = false) String filename){
         // Later we can let the user set the filename with a textfield and pass it as request parameter
@@ -241,11 +256,10 @@ public class ConceptMapController {
         // get all existing mappings
         List<ConceptMap> mappings = (List<ConceptMap>) conceptMapRepo.findAll(2);
         String currentAxis = "";
-        StringBuilder result = new StringBuilder("");
+        StringBuilder result = new StringBuilder();
 
         // read appc csv file
         try{
-            // TODO: Change input file
             URL resource = this.getClass().getResource("/APPCCodes/APPC_machinereadable_1.1.csv");
             BufferedReader csvReader = new BufferedReader(new FileReader(resource.getFile()));
             String row = "";
@@ -321,6 +335,11 @@ public class ConceptMapController {
                 .body(result.toString());
     }
 
+    /**
+     * Get number of existing mappings for an APPC Element ID.
+     * @param id APPC Element ID
+     * @return number of mappings.
+     */
     @GetMapping("count")
     public Map<String, Integer> readMappingCounts(@RequestParam Long id) {
         Optional<Entry> entryOptional = appcRepo.findById(id);
@@ -391,6 +410,14 @@ public class ConceptMapController {
         }
     }
 
+    /**
+     * Translate Snomed equivalents for APPC into Snomeds compositional grammar.
+     * @param modalityId Snomed element Id.
+     * @param lateralityId Snomed element Id.
+     * @param proceduresId Snomed element Id.
+     * @param anatomyId Snomed element Id.
+     * @return compositional grammar as string.
+     */
     @GetMapping("compositional-grammar")
     public String toCompositionalGrammar(
             @RequestParam long modalityId,

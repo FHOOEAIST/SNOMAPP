@@ -23,7 +23,6 @@ public interface MappingRepo extends Neo4jRepository<APPCElement, Long> {
     @Query("MATCH (a:APPCElement{axis: $1, code: $0})-[m:maps]->(s:SnomedElement) WHERE m.equivalence = 'EQUIVALENT' OR m.equivalence = 'EQUAL' RETURN s")
     List<SNOMEDElement> findEquivalentOrEqualSnomedElementsForAPPC(String code, String axis);
 
-    // Consider moving this when cleaning up the repos
     @Query("MATCH (n:SnomedElement) WHERE id(n)= $0 RETURN n ")
     SNOMEDElement findSnomedElementById(long id);
 }

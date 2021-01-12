@@ -2,20 +2,26 @@ package at.snomapp.skeleton.restservice;
 
 import io.swagger.client.ApiException;
 import io.swagger.client.api.DescriptionsApi;
-import io.swagger.client.model.*;
+import io.swagger.client.model.BrowserDescriptionSearchResult;
+import io.swagger.client.model.Description;
+import io.swagger.client.model.ItemsPageDescription;
+import io.swagger.client.model.PageBrowserDescriptionSearchResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.Console;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+/**
+ * provides endpoints for searching for snomed codes
+ */
 @RestController
 @RequestMapping("snomed")
-// provides endpoints for searching for snomed codes
 public class SnomedController {
-
 
     private final DescriptionsApi api = new DescriptionsApi();
 
@@ -23,8 +29,13 @@ public class SnomedController {
         api.getApiClient().setBasePath("http://193.170.192.200:8080");
     }
 
+    /**
+     * Find Snomed Codes by APPC displayname and axis.
+     * @param displayName of APPC.
+     * @param APPCAxis
+     * @return
+     */
     @GetMapping("find-by-displayname")
-        // displayName passed in as query parameter
     List<BrowserDescriptionSearchResult> findByDisplayName(@RequestParam String displayName, @RequestParam String APPCAxis) {
         String branch = "MAIN";
         String acceptLanguage = "en-X-900000000000509007,en-X-900000000000508004,en";
@@ -45,7 +56,6 @@ public class SnomedController {
         Integer limit = null;
 
         //set semantic tag to reduce searchresult
-
         switch (APPCAxis.toLowerCase()) {
             case "anatomy":
                 semanticTags.add("body structure");

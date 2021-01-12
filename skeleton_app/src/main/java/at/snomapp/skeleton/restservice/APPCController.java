@@ -8,13 +8,9 @@ import at.snomapp.skeleton.importer.Importer;
 import at.snomapp.skeleton.importer.impl.CSVImporter;
 import at.snomapp.skeleton.importer.impl.StringCSVImporter;
 import at.snomapp.skeleton.repo.APPCRepo;
-import io.swagger.client.JSON;
 import net.minidev.json.JSONArray;
-import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,38 +19,47 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.Set;
 
-
+/**
+ * controller providing endpoints for importing and retrieving APPC Data
+ */
 @RestController
 @RequestMapping("/appc")
-// controller providing endpoints for importing and retrieving APPCData
 public class APPCController {
 
     private final APPCRepo repo;
-
 
     @Autowired
     public APPCController(APPCRepo repo) {
         this.repo = repo;
     }
 
+    /**
+     * Flushes database.
+     */
     @DeleteMapping
-    // flushes data bank
-    // to be used for debugging only
-    // remove from release version
     void clearDB(){
         repo.deleteAll();
     }
 
+    /**
+     * Get an entry by id.
+     * @param id Id of APPC Element.
+     * @return APPC Entry.
+     */
     @GetMapping("entry/{id}")
     Entry readByIdentity(@PathVariable Long id){
         Optional<Entry> byId = repo.findById(id);
         return byId.orElse(null);
     }
 
+    /**
+     * Get an APPC entry by display name.
+     * @param displayName of APPC.
+     * @return Iterable of APPC Entries.
+     */
     @GetMapping("entry")
     Iterable<Entry> readByDisplayName(@RequestParam(required = false) String displayName) {
         if (displayName == null) {
@@ -66,6 +71,11 @@ public class APPCController {
         }
     }
 
+    /**
+     * Get APPC entries by display-name
+     * @param displayName of APPC.
+     * @return APPC Entry as JSON string.
+     */
     @GetMapping("/get-entries-by-name")
     public String entryToJsonString (@RequestParam(required = false) String displayName){
         Iterable<Entry> entries = readByDisplayName(displayName);
@@ -103,11 +113,15 @@ public class APPCController {
         }
     }
 
-    // obsolete because of new import mechanism, but left in because it makes manual imports via e.g. postman simpler
+    /**
+     * Imports an APPC tree from a given filename into the neo4j database.
+     * Clears database if valid file is given.
+     * Obsolete because of new import mechanism, but left in because it makes manual imports via e.g. postman simpler.
+     * @param filename
+     * @return
+     */
     @PostMapping("/import")
     @ResponseStatus(HttpStatus.CREATED)
-    // imports an APPCtree from a given filename into the neo4j database.
-    // clears data bank if valid file given
     ImportResults importAPPC(@RequestBody String filename){
         try {
             String decodedPath = URLDecoder.decode(filename, StandardCharsets.UTF_8.name());
@@ -141,10 +155,14 @@ public class APPCController {
         }
     }
 
+    /**
+     * Imports an APPCTree from given string containing the entire code
+     * Clears database if contents are not empty.
+     * @param contents
+     * @return
+     */
     @PostMapping("/import-string")
     @ResponseStatus(HttpStatus.CREATED)
-    // imports an APPCTree from given string containing the entire code
-    // clears database if contents are not empty
     ModelAndView importAPPCString(@RequestBody String contents){
         ModelAndView mv = new ModelAndView("startPage");
         try {
@@ -188,8 +206,10 @@ public class APPCController {
         return mv;
     }
 
+    /**
+     * @return the 4 root nodes.
+     */
     @GetMapping("roots")
-    // return just the tree roots
     Iterable<Entry> readRoots(){
         Entry anatomy = repo.findByDisplayName("Anatomy");
         Entry laterality = repo.findByDisplayName("Laterality");
@@ -199,9 +219,12 @@ public class APPCController {
         return Arrays.asList(anatomy, laterality, modality, procedure);
     }
 
-    // needs tweaking if multiple languages are supported
+    /**
+     * Needs tweaking if multiple languages are supported.
+     *
+     * @return whole tree saved in database.
+     */
     @GetMapping("get-tree")
-    // returns whole tree saved in Data bank
     public APPCTree getTree(){
         APPCTree tree = new APPCTree("en");
 
@@ -226,8 +249,10 @@ public class APPCController {
         return tree;
     }
 
-    // workaround to get the entire tree
-    // if can be replaced by cypher query, definitely replace
+    /**
+     * Workaround to get the entire tree.
+     * @param entry
+     */
     void reconstructTree(Entry entry){
         Set<Entry> children = entry.getChildren();
         if(children != null) {

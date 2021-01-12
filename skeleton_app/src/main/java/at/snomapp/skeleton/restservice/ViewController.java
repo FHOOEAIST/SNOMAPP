@@ -1,9 +1,7 @@
 package at.snomapp.skeleton.restservice;
 
-
 import at.snomapp.skeleton.domain.appc.APPCTree;
 import at.snomapp.skeleton.domain.appc.Entry;
-
 import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
 import at.snomapp.skeleton.domain.scoring.ScoringModel;
@@ -11,25 +9,19 @@ import at.snomapp.skeleton.domain.scoring.impl.Cosine;
 import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
 import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
 import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
-
 import at.snomapp.skeleton.repo.APPCRepo;
 import at.snomapp.skeleton.repo.ConceptMapRepo;
 import at.snomapp.skeleton.repo.MappingRepo;
-
-import at.snomapp.skeleton.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
-
 
 @Controller
 public class ViewController<SnomedAPPCMapping>{
@@ -45,6 +37,11 @@ public class ViewController<SnomedAPPCMapping>{
         this.mappingRepo = mappingRepo;
     }
 
+    /**
+     * Redirects to start-page.
+     * @param model
+     * @return
+     */
     @GetMapping({"/index", "/"})
     public String startPage(Model model) {
         APPCController appcController = new APPCController(repo);
@@ -62,6 +59,11 @@ public class ViewController<SnomedAPPCMapping>{
         return "startPage";
     }
 
+    /**
+     * Redirects to error-page with errorinformation.
+     * @param model
+     * @return
+     */
     @ExceptionHandler(Exception.class)
     public String error(Model model){
         try{
@@ -80,6 +82,13 @@ public class ViewController<SnomedAPPCMapping>{
         return "errorPage";
     }
 
+    /**
+     * Redirects to result page and calculates score.
+     * @param id
+     * @param scores
+     * @param model
+     * @return
+     */
     @GetMapping("/result")
     public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
         ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo,repo);
@@ -123,19 +132,19 @@ public class ViewController<SnomedAPPCMapping>{
                     }
                 }
             } else {
-                // create a new scoring model
-                // compare algorithms can be appended or removed randomly
-                // all algorithms which are included are applied on all strings
+                /**
+                 * create a new scoring model
+                 * compare algorithms can be appended or removed randomly
+                 * all algorithms which are included are applied on all strings
+                 */
 
                 algorithms.add(new Levenshtein(0.5));
                 algorithms.add(new LongestCommonSubsequence(0.5));
             }
 
             ScoringModel scoringModel = new ScoringModel(algorithms);
-            // calculates for each result his score
-            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScore( entry.getDisplayName(), res.getTerm() )));
-            //resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
 
+            // calculates for each result his score
             //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
 
@@ -173,10 +182,18 @@ public class ViewController<SnomedAPPCMapping>{
             model.addAttribute("colorStep", (maxScore - minScore) / 3);
         }
 
-        // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
     }
 
+    /**
+     * Redirects to translaation page for fully specified APPC.
+     * @param model
+     * @param modalityCode
+     * @param lateralityCode
+     * @param proceduresCode
+     * @param anatomyCode
+     * @return
+     */
     @GetMapping("translate")
     public String translateToSnomed(
             Model model,
