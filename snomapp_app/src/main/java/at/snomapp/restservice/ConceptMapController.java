@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.restservice;
+package at.snomapp.restservice;
 
 import at.snomapp.domain.appc.Entry;
 import at.snomapp.domain.conceptMapping.ConceptMap;
@@ -12,10 +12,7 @@ import at.snomapp.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.repo.APPCRepo;
-import at.snomapp.repo.ConceptElementRepo;
 import at.snomapp.repo.ConceptMapRepo;
-import at.snomapp.repo.MappingRepo;
-import io.swagger.client.model.Concept;
 import at.snomapp.translate.CompositionalGrammarTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

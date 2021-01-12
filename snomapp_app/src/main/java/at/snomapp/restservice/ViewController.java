@@ -1,4 +1,4 @@
-package at.snomapp.skeleton.restservice;
+package at.snomapp.restservice;
 
 
 import at.snomapp.domain.appc.APPCTree;
@@ -14,7 +14,6 @@ import at.snomapp.domain.scoring.impl.LongestCommonSubsequence;
 
 import at.snomapp.repo.APPCRepo;
 import at.snomapp.repo.ConceptMapRepo;
-import at.snomapp.repo.MappingRepo;
 
 import at.snomapp.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
