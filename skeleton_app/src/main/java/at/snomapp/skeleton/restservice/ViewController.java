@@ -32,6 +32,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @Controller
@@ -70,7 +71,7 @@ public class ViewController<SnomedAPPCMapping> {
         try {
             // check if server and API are responsive to report proper error
             SnomedController snomedController = new SnomedController();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye", "Anatomy");
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye", "Anatomy", 10, 0).getSearchResults();
             if (resultList == null || resultList.size() == 0) {
                 model.addAttribute("reason", "server");
             } else {
@@ -84,7 +85,11 @@ public class ViewController<SnomedAPPCMapping> {
     }
 
     @GetMapping("/result")
-    public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
+    public String resultPage(@RequestParam Long id,
+                             @RequestParam(required = false) String[] scores,
+                             @RequestParam int page,
+                             @RequestParam int limit,
+                             Model model) {
         ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo, repo);
         SnomedController snomedController = new SnomedController();
 
@@ -102,11 +107,23 @@ public class ViewController<SnomedAPPCMapping> {
                 }
             }
 
+            int numPages = 0;
+
             // Split display name into multiple possible search terms and search for each one
             List<String> searchTerms = extractSearchTerms(entry.getDisplayName());
+            if(limit == -1){
+                // Switch of paging entirely
+                limit = Integer.MAX_VALUE;
+            }
+            int resultsPerTerm = limit / searchTerms.size();
+            int offset = resultsPerTerm * (page - 1);
             List<BrowserDescriptionSearchResult> resultList = new ArrayList<>();
             for (String searchTerm : searchTerms) {
-                resultList.addAll(snomedController.findByDisplayName(searchTerm, entry.getAxis()));
+                SnomedController.BrowserDescriptionResultWrapper results = snomedController.findByDisplayName(searchTerm, entry.getAxis(), resultsPerTerm, offset);
+                if(numPages < results.getNumPages()){
+                    numPages = results.getNumPages();
+                }
+                resultList.addAll(results.getSearchResults());
             }
 
             // If search yielded no result -> sequentially remove the first element from each search term until there are results or options are exhausted
@@ -125,8 +142,14 @@ public class ViewController<SnomedAPPCMapping> {
                             .sorted(Comparator.comparingInt(t -> - t.split("\\s").length))
                             .collect(Collectors.toList());
 
+                    resultsPerTerm = searchTerms.size() > 0 ? limit / searchTerms.size() : 0;
+                    offset = resultsPerTerm * page;
                     for (String searchTerm : searchTerms) {
-                        resultList.addAll(snomedController.findByDisplayName(searchTerm, entry.getAxis()));
+                        SnomedController.BrowserDescriptionResultWrapper results = snomedController.findByDisplayName(searchTerm, entry.getAxis(), resultsPerTerm, offset);
+                        if(numPages < results.getNumPages()){
+                            numPages = results.getNumPages();
+                        }
+                        resultList.addAll(results.getSearchResults());
                     }
                 }
             }
@@ -164,10 +187,6 @@ public class ViewController<SnomedAPPCMapping> {
 
             ScoringModel scoringModel = new ScoringModel(algorithms);
             // calculates for each result his score
-            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScore( entry.getDisplayName(), res.getTerm() )));
-            //resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
-
-            //resultList.forEach(res -> res.setScore(scoringModel.calcUnweightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId())));
 
 
@@ -200,11 +219,14 @@ public class ViewController<SnomedAPPCMapping> {
 
             model.addAttribute("scoringModel", scoringModel);
 
+            model.addAttribute("pageLimit", limit);
+            model.addAttribute("page", page);
+            model.addAttribute("pages", IntStream.range(1, numPages + 1).toArray());
+
             // for scoring visibility
             model.addAttribute("colorStep", (maxScore - minScore) / 3);
         }
 
-        // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
     }
 
