@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>SNOMAPP</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link th:href="@{/styles/list.css}" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+</head>
+<body>
+
+<!-- HeaderImage -->
+<div class="container fixed-top pt-3" style="background-color: white">
+    <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}"  height="100px" width="300px" >
+    <h4 th:text="#{resultpage}"></h4>
+</div>
+
+
+<!-- Content including Result List -->
+<div class="container p-3">
+<div class="contentContainer">
+    <span th:text="#{snomed.no_results} + ': ' + ${results.size()}">Number of results</span>
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings" th:text="#{mappings.open}" >
+        Open Mappings
+    </button>
+    <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" th:text="#{scoring.choose_scoring}">
+            Choose Scoring
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu">
+            <ul id="scoringInputs" class="nobullets">
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
+                </label></li>
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
+                </label></li>
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
+                </label></li>
+                <li><label>
+                    <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
+                </label></li>
+            </ul>
+            <button id="submit-scoring-options" class ="btn btn-info" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}"></button>
+        </div>
+    </div>
+
+    <!-- Button to Open Info Scoring -->
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#socringInfo" style='margin-right:16px' th:text="#{scoring.info}" >
+        Info Scoring
+    </button>
+
+    <div class="containerList" >
+        <p th:text="'APPC: '+${appc.getCode()}+' '+${appc.getDisplayName()}"></p>
+    <ul class="list-group" th:each="result : ${results}">
+        <li class="list-group-item" th:if="${result.isActive()}">
+            <span th:text="'Display Name: ' + ${result.getConcept().getFsn().getTerm()} + ' Code: ' + ${result.getConcept().getId()}">Result</span>
+            <div class="res-info-buttons">
+                <!--Ranking-->
+                <!--good accordance-->
+                <span class="content pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 100%"></span></span>
+                <!--medium accordance-->
+                <span class="content pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue
+            ; opacity: 75%"></span></span>
+                <!--bad accordance-->
+                <span class="content pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 50%"></span></span>
+
+                <!-- Info-->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{description}" th:if="true">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#description" th:attr="data-target='#description'+${result.getConcept().getConceptId()}">
+                    <i class="fas fa-info-circle" ></i></button>
+                </span>
+                <!--Plus-->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{mapping_add}" th:if="true">
+                <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addMapping" th:attr="data-target='#addMapping'+${result.getConcept().getConceptId()}">
+                    <i class="fas fa-plus-circle"></i></button>
+                </span>
+                <!--mapping exists YES-->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{mapped}" th:if="${mappings.contains(result.getConcept().getConceptId())}">
+                    <i class="fas fa-check-circle"></i>
+            </span>
+                <!--mapping exists NO -->
+                <span class="content pr-3" data-toggle="tooltip" th:title="#{not_mapped}" th:unless="${mappings.contains(result.getConcept().getConceptId())}">
+                    <i class="fas fa-times-circle"></i>
+                </span>
+            </div>
+        </li>
+
+        <!-- The Modal -->
+        <div class="modal" id="description" th:id="'description'+${result.getConcept().getConceptId()}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title" th:text="#{description}">Description</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <h5>Code: </h5>
+                        <span th:text="${result.getConcept().getConceptId()}">Code</span>
+                        </br>
+                        <h5 th:text="#{prefered_term}">Prefered Term: </h5>
+                        <span th:text="${result.getConcept().getFsn().getTerm()}">Code</span>
+                        </br>
+                        <h5>Alias: </h5>
+                        <ul class="list" th:each="alias : ${resMap.get(result.getConcept().getConceptId())}">
+                        <li th:text="${alias.getTerm()}"></li>
+                        </ul>
+                        </br>
+
+                        <h5>Description:</h5>
+                        <h5 th:text="#{description}">Description:</h5>
+                        <p th:text="'Definition status: ' + ${result.getConcept().getDefinitionStatus()}">Definition status</p>
+                        <p th:text="'Module ID: ' + ${result.getConcept().getModuleId()}">Module ID</p>
+                        <p th:text="#{lang} +': ' + ${result.getLanguageCode()}">Language code</p>
+                        <a th:href="'https://browser.ihtsdotools.org/?perspective=full&conceptId1=' + ${result.getConcept().getConceptId()} + '&edition=MAIN/2020-07-31&release=&languages=en'" th:text="#{link}">Link to Code</a>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal" id="addMapping" th:id="'addMapping'+${result.getConcept().getConceptId()}">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Mapping</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <span id="appc" th:text="'APPC: ' + ${appc.getCode()} + ' - ' + ${appc.getDisplayName()}">APPC Element</span>
+                        </br>
+                        <span id="snomed" th:text="'SNOMED: ' + ${result.getConcept().getConceptId()} + ' - ' + ${result.getConcept().getFsn().getTerm()}">SNOMED Element</span>
+
+                        <!--Dropdown-->
+                        <div class="dropdown">
+                            <div>
+                                <select id="selectMap">
+                                    <option value="equivalent">EQUIVALENT</option>
+                                    <option value="equal">EQUAL</option>
+                                    <option value="wider">WIDER</option>
+                                    <option value="subsumes">SUBSUMES</option>
+                                    <option value="narrower">NARROWER</option>
+                                    <option value="specializes">SPECIALIZES</option>
+                                    <option value="inexact">INEXACT</option>
+                                    <option value="unmatch">UNMATCH</option>
+                                    <option value="disjoint">DISJOINT</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
+                            <!--ToDo save mapping-->
+                            <!-- IntellJ shows error, but it works -->
+                            <button type="button" id="submitMapping" th:data-snomed="${result.getConcept().getFsn().getTerm()}"
+                                    th:data-concept="${result.getConcept().getConceptId()}"
+                                    th:onclick="submitMapping(this.getAttribute('data-concept'),this.getAttribute('data-snomed'))"
+                                     class="btn btn-success" data-dismiss="modal" th:text="#{submit}">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ul>
+    </div>
+</div>
+</div>
+
+<script th:inline="javascript">
+
+    function submitMapping(snomedCode, snomedDisplayName) {
+        let map = $('#addMapping'+snomedCode + ' #selectMap').val();
+        let appcCode = [[${appc.getCode()}]];
+        let appcAxis = [[${appc.getAxis()}]];
+        let appcDisplayName = [[${appc.getDisplayName()}]];
+
+        $.ajax(
+            {
+                method: "POST",
+                url: "ConceptMap/submit",
+                contentType: "application/json",
+                data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
+                success: function(response, textStatus, xhr){
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.saved}]]*/ );
+                    /*]]>*/
+                        location.reload();
+                },
+            }
+        );
+    }
+
+</script>
+
+
+<!-- Buttons bottom right -->
+<div class="container fixed-bottom p-3" style="background-color: white">
+    <div class="float-right" >
+        <a href="startPage"><button type="button" class="btn btn-info" th:text="#{back}">Back to Startpage</button></a>
+    </div>
+</div>
+
+
+<!-- The existing mappings Modal -->
+<div class="modal" id="mappings">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title" th:text="${appc.getCode()}">Mappings for --APPC-- </h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <span th:text="#{snomed.display_name} +': '+ ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
+                <table class="table-hover table-bordered">
+                    <thead >
+                    <tr>
+                        <th scope="col">SNOMED Code</th>
+                        <th scope="col" th:text="#{snomed.display_name}">Displayname</th>
+                        <th scope="col" th:text="#{mapping}">Mapping</th>
+                        <th scope="col" ></th>
+                    </tr>
+                    </thead>
+                    <tbody th:each="map : ${mapps}">
+                    <tr >
+                        <td th:text="${map.values().toArray()[2]}">Code</td>
+                        <td th:text="${map.values().toArray()[0]}"></td>
+                        <td th:text="${map.values().toArray()[1]}">equivalence</td>
+                        <td><button type="button" class="btn btn-info"
+                                    th:snomedcode="${map.values().toArray()[2]}"
+                                    th:displayName="${map.values().toArray()[0]}"
+                                    th:map="${map.values().toArray()[1]}"
+                                    th:appcCode="${appc.getCode()}"
+                                    th:appcAxis="${appc.getAxis()}"
+                                    th:onclick="deleteMapping(this.getAttribute('appcCode'),
+                                                                this.getAttribute('appcAxis'),
+                                                                this.getAttribute('map'),
+                                                                this.getAttribute('snomedcode'),
+                                                                this.getAttribute('displayName'))">Delete</button></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+               <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- The scoring Info Modal -->
+<div class="modal" id="socringInfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal body -->
+            <div class="modal-body">
+                <h4 th:text="#{scoring.header}">Scoring Model</h4>
+                <p th:text="#{scoring.text}">A lower score indicates a greater similarity between APPC sequence and SNOMED sequence.
+                    The score represents a weighted sum of all applied algorithms.
+                    If the scoring algorithms are also applied on all SNOMED synonyms, then the score represents the average score of all synonyms.</p>
+                <table class="table-hover table-bordered">
+                    <thead >
+                    <tr>
+                        <th scope="col" th:text="#{scoring.appliedAlgorithm}">Applied Algorithms</th>
+                        <th scope="col" th:text="#{scoring.Weight}">Weight</th>
+                    </tr>
+                    </thead>
+                    <!--iterate over algorithms-->
+                    <tbody th:each="algorithm : ${scoringModel.getAlgorithms()}">
+                    <tr>
+                        <td><a th:href="${algorithm.getURL()}" th:text="${algorithm.getDescription()}"></a></td>
+                        <td th:text="${algorithm.getWeight()}">Weight</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" th:text="#{close}">Close</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    //Datatoggle function
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+ <!-- script for submit button for scoring -->
+<script th:inline="javascript">
+    function getChosenScoringMethods(){
+        var checkedScores = [];
+        var scoringInputsList = document.getElementById("scoringInputs");
+        var checkboxes = scoringInputsList.getElementsByTagName("INPUT");
+
+        for (var i = 0; i < checkboxes.length; i++){
+            if(checkboxes[i].checked){
+                checkedScores.push(checkboxes[i].value);
+            }
+        }
+        window.location.replace(window.origin + "/resultPage?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
+    }
+
+    //delete Mapping function
+    function deleteMapping(appcCode, appcAxis, map, snomedCode, snomedDisplayName){
+        $.ajax(
+            {
+                method: "DELETE",
+                url: "ConceptMap/mappings/delete",
+                contentType: "application/json",
+                data: JSON.stringify({appcCode, appcAxis, map, snomedCode, snomedDisplayName}),
+                success: function (response, textStatus, xhr) {
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.delete}]]*/ );
+                    /*]]>*/
+                    location.reload();
+                },
+            }
+            );
+        }
+
+</script>
+</body>
+</html>
