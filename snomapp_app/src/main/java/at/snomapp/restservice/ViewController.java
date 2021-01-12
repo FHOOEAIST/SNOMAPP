@@ -1,19 +1,19 @@
-package at.snomapp.skeleton.restservice;
+package at.snomapp.restservice;
 
 
-import at.snomapp.skeleton.domain.appc.APPCTree;
-import at.snomapp.skeleton.domain.appc.Entry;
+import at.snomapp.domain.appc.APPCTree;
+import at.snomapp.domain.appc.Entry;
 
-import at.snomapp.skeleton.domain.conceptMapping.impl.SNOMEDElement;
-import at.snomapp.skeleton.domain.scoring.ScoringAlgorithm;
-import at.snomapp.skeleton.domain.scoring.ScoringModel;
-import at.snomapp.skeleton.domain.scoring.impl.Cosine;
-import at.snomapp.skeleton.domain.scoring.impl.Jaccard;
-import at.snomapp.skeleton.domain.scoring.impl.Levenshtein;
-import at.snomapp.skeleton.domain.scoring.impl.LongestCommonSubsequence;
+import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
+import at.snomapp.domain.scoring.ScoringAlgorithm;
+import at.snomapp.domain.scoring.ScoringModel;
+import at.snomapp.domain.scoring.impl.Cosine;
+import at.snomapp.domain.scoring.impl.Jaccard;
+import at.snomapp.domain.scoring.impl.Levenshtein;
+import at.snomapp.domain.scoring.impl.LongestCommonSubsequence;
 
-import at.snomapp.skeleton.repo.APPCRepo;
-import at.snomapp.skeleton.repo.ConceptMapRepo;
+import at.snomapp.repo.APPCRepo;
+import at.snomapp.repo.ConceptMapRepo;
 
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
