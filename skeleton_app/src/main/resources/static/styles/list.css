@@ -90,6 +90,9 @@
     color: white;
     padding-top: 5px;
 }
+.fa-circle{
+    color: white;
+}
 
 .btn-group{
     width: inherit;
