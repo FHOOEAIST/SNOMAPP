@@ -209,7 +209,9 @@
                 contentType: "application/json",
                 data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
-                        alert("Map successfully saved.");
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.saved}]]*/ );
+                    /*]]>*/
                         location.reload();
                 },
             }
@@ -329,7 +331,7 @@
     });
 </script>
 
-<script>
+<script th:inline="javascript">
     //submit button for scoring
     function getChosenScoringMethods(){
         var checkedScores = [];
@@ -353,7 +355,9 @@
                 contentType: "application/json",
                 data: JSON.stringify({appcCode, appcAxis, map, snomedCode, snomedDisplayName}),
                 success: function (response, textStatus, xhr) {
-                    alert("Map successfully deleted.");
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.delete}]]*/ );
+                    /*]]>*/
                     location.reload();
                 },
             }
