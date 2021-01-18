@@ -70,12 +70,11 @@
             <div class="res-info-buttons">
                 <!--Ranking-->
                 <!--good accordance-->
-                <span class="content pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 100%"></span></span>
+                <span class="content pr-3" th:if="${result.getScore() < colorStep}"><span class="badge badge-info p-2 dark" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" ></span></span>
                 <!--medium accordance-->
-                <span class="content pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue
-            ; opacity: 75%"></span></span>
+                <span class="content pr-3" th:if="${result.getScore() >= colorStep && result.getScore() < 2 * colorStep}"><span class="badge badge-info p-2 middle" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}"></span></span>
                 <!--bad accordance-->
-                <span class="content pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}" style="background-color: cornflowerblue; opacity: 50%"></span></span>
+                <span class="content pr-3" th:if="${result.getScore() >= 2 * colorStep}"><span class="badge badge-info p-2 light" data-toggle="tooltip" th:title="#{scoringpoints}" th:if="true" th:text="${result.getScore()}"></span></span>
 
                 <!-- Info-->
                 <span class="content pr-3" data-toggle="tooltip" th:title="#{description}" th:if="true">
