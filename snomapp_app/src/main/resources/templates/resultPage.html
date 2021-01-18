@@ -351,7 +351,7 @@
         $.ajax(
             {
                 method: "DELETE",
-                url: "ConceptMap/delete",
+                url: "ConceptMap/mappings/delete",
                 contentType: "application/json",
                 data: JSON.stringify({appcCode, appcAxis, map, snomedCode, snomedDisplayName}),
                 success: function (response, textStatus, xhr) {
