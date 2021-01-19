@@ -19,6 +19,9 @@ import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import okio.BufferedSink;
 import okio.Okio;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Component;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.OffsetDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
@@ -50,8 +53,10 @@ import io.swagger.client.auth.HttpBasicAuth;
 import io.swagger.client.auth.ApiKeyAuth;
 import io.swagger.client.auth.OAuth;
 
+@Component
 public class ApiClient {
-    private String basePath = "http://193.170.192.200:8080";
+
+    private String basePath;
     private boolean debugging = false;
     private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
     private String tempFolderPath = null;
@@ -78,6 +83,8 @@ public class ApiClient {
     public ApiClient() {
         httpClient = new OkHttpClient();
 
+        String ip = System.getenv("SNOWSTORM_ADDRESS");
+        basePath = ip != null ? ip : "http://193.170.192.200:8080";
 
         verifyingSsl = true;
 
