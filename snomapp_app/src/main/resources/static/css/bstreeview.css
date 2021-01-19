@@ -25,6 +25,7 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     cursor: pointer;
+    align-items: center;
 }
 
 .bstreeview .list-group-item:hover {
@@ -37,6 +38,7 @@
 
 .bstreeview .state-icon {
     margin-right: 8px;
+    align-self: center;
 }
 .bstreeview .item-icon {
     margin-right: 5px;

@@ -103,6 +103,11 @@
     padding-top: 5px;
 }
 
+.mapping-indicator .fa-circle{
+    color: white;
+    padding-left: 1px;
+}
+
 .axis-indicator{
     height: 25px;
     width: 25px;
@@ -202,4 +207,9 @@
     color: #fff;
     background-color: #70a8e3;
     border-color: #70a8e3;
+}
+
+#paging-search{
+    height: fit-content;
+    align-self: center;
 }

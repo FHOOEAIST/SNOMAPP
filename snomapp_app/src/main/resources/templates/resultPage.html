@@ -26,11 +26,7 @@
 <!-- Content including Result List -->
 <div class="container p-3">
     <div class="contentContainer">
-        <!-- Button to Open the Modal -->
-        <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings"
-                th:text="#{mappings.open}">
-            Open Mappings
-        </button>
+
         <div class="dropdown show">
             <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false" aria-multiselectable="true"
@@ -70,9 +66,8 @@
                                style="margin-top: auto; margin-bottom: auto"></label>
                         <input type="number" id="pagelimit" class="form-control" th:value="${pageLimit}"
                                style="width: 70pt; margin: 6px 6px 6px 6px" th:max="${(pageLimit * #lists.size(pages))/2}"/>
-                    </div>
-                    <div class="col-sm">
-                        <button class="btn-info btn" onclick="search(1);" th:text="#{mapping.page.search}"></button>
+                        <button id="paging-search" class="btn-info btn" onclick="search(1);" th:text="#{mapping.page.search}"></button>
+
                     </div>
                 </div>
             </div>
@@ -88,6 +83,11 @@
     </button>
     <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal"
             data-target="#pagingInfo" th:text="#{mapping.page.info}" style="margin-right: 6px">
+    </button>
+    <!-- Button to Open the Modal -->
+    <button type="button" class="btn btn-info btn-sm float-right" data-toggle="modal" data-target="#mappings"
+            th:text="#{mappings.open}" style="margin-right: 6px">
+        Open Mappings
     </button>
 
     <div class="containerList">
@@ -161,7 +161,7 @@
                             <p th:text="'Module ID: ' + ${result.getConcept().getModuleId()}">Module ID</p>
                             <p th:text="#{lang} +': ' + ${result.getLanguageCode()}">Language code</p>
                             <a th:href="'https://browser.ihtsdotools.org/?perspective=full&conceptId1=' + ${result.getConcept().getConceptId()} + '&edition=MAIN/2020-07-31&release=&languages=en'"
-                               th:text="#{link}">Link to Code</a>
+                               th:text="#{link}" target="_blank">Link to Code</a>
                         </div>
 
                         <!-- Modal footer -->
@@ -249,49 +249,6 @@
 </div>
 </div>
 
-<script th:inline="javascript">
-
-    function submitMapping(snomedCode, snomedDisplayName) {
-        let map = $('#addMapping' + snomedCode + ' #selectMap').val();
-        let appcCode = [[${appc.getCode()}]];
-        let appcAxis = [[${appc.getAxis()}]];
-        let appcDisplayName = [[${appc.getDisplayName()}]];
-
-        $.ajax(
-            {
-                method: "POST",
-                url: "concept-map/submit",
-                contentType: "application/json",
-                data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
-                success: function(response, textStatus, xhr){
-                    /*<![CDATA[*/
-                    alert( /*[[#{mappings.saved}]]*/ );
-                    /*]]>*/
-                        location.reload();
-                },
-            }
-        );
-    }
-
-    function search(page) {
-        var checkedScores = [];
-        var scoringInputsList = document.getElementById("scoringInputs");
-        var checkboxes = scoringInputsList.getElementsByTagName("INPUT");
-
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                checkedScores.push(checkboxes[i].value);
-            }
-        }
-
-        window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]]
-            + "&scores=" + encodeURIComponent(checkedScores)
-            + "&page=" + page
-            + `&limit=${$('#pagelimit').val()}`);
-    }
-
-</script>
-
 <!-- Buttons bottom right -->
 <div class="container fixed-bottom p-3" style="background-color: white">
     <div class="float-right">
@@ -300,7 +257,6 @@
         </a>
     </div>
 </div>
-
 
 <!-- The existing mappings Modal -->
 <div class="modal" id="mappings">
@@ -317,7 +273,7 @@
             <div class="modal-body">
                 <span th:text="#{snomed.display_name} +': '+ ${appc.getDisplayName()}">Displayname: XXXXXXXX</span>
                 <table class="table-hover table-bordered">
-                    <thead>
+                    <thead >
                     <tr>
                         <th scope="col">SNOMED Code</th>
                         <th scope="col" th:text="#{snomed.display_name}">Displayname</th>
@@ -326,7 +282,7 @@
                     </tr>
                     </thead>
                     <tbody th:each="map : ${mapps}">
-                    <tr>
+                    <tr >
                         <td th:text="${map.values().toArray()[2]}">Code</td>
                         <td th:text="${map.values().toArray()[0]}"></td>
                         <td th:text="${map.values().toArray()[1]}">equivalence</td>
@@ -357,7 +313,6 @@
     </div>
 </div>
 
-
 <!-- The scoring Info Modal -->
 <div class="modal" id="socringInfo">
     <div class="modal-dialog">
@@ -380,7 +335,7 @@
                     <!--iterate over algorithms-->
                     <tbody th:each="algorithm : ${scoringModel.getAlgorithms()}">
                     <tr>
-                        <td><a th:href="${algorithm.getURL()}" th:text="${algorithm.getDescription()}"></a></td>
+                        <td><a th:href="${algorithm.getURL()}" target="_blank" th:text="${algorithm.getDescription()}"></a></td>
                         <td th:text="${algorithm.getWeight()}">Weight</td>
                     </tr>
                     </tbody>
@@ -457,6 +412,49 @@
             }
             );
         }
+
+</script>
+
+<script th:inline="javascript">
+
+    function submitMapping(snomedCode, snomedDisplayName) {
+        let map = $('#addMapping' + snomedCode + ' #selectMap').val();
+        let appcCode = [[${appc.getCode()}]];
+        let appcAxis = [[${appc.getAxis()}]];
+        let appcDisplayName = [[${appc.getDisplayName()}]];
+
+        $.ajax(
+            {
+                method: "POST",
+                url: "concept-map/submit",
+                contentType: "application/json",
+                data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
+                success: function(response, textStatus, xhr){
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.saved}]]*/ );
+                    /*]]>*/
+                    location.reload();
+                },
+            }
+        );
+    }
+
+    function search(page) {
+        var checkedScores = [];
+        var scoringInputsList = document.getElementById("scoringInputs");
+        var checkboxes = scoringInputsList.getElementsByTagName("INPUT");
+
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                checkedScores.push(checkboxes[i].value);
+            }
+        }
+
+        window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]]
+            + "&scores=" + encodeURIComponent(checkedScores)
+            + "&page=" + page
+            + `&limit=${$('#pagelimit').val()}`);
+    }
 
 </script>
 
