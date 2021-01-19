@@ -2,6 +2,8 @@
 ## Einleitung
 Die SNOMAPP Anwendung verfolgt das Ziel, die Zuordnung von APPC zu Snomed möglichst einfach zu gestalten und den Anwender dabei zu Unterstützen möglichst schnell, gute Zuordnungen zu finden. Mithilfe der FHIR “Concept Maps” können Zuordnungen einheitlich abgespeichert werden.
 
+### Architektur
+![RDM Master Screenshot 1 - Architekture](./Architekturdiagramm.jpg)
 ## Installation und Starten der Anwendung
 ### Entwicklungs Setup
 Snomapp ist ein auf Maven basierende Spring Boot Applikation. IDE spezifische Mechanismen müssen genutzt werden um die entsprechende Konfiguration aus dem top-level pom.xml File zu laden.  Danach kann die Applikation über die entsprechenden Maven-Lifecycle Schritte gebaut und deployed werden.
