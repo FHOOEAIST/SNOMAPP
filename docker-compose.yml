@@ -1,0 +1,28 @@
+version: '3'
+services:
+  snomapp:
+    build: ./snomapp_app/
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+    environment:
+      - spring.data.neo4j.uri=bolt://neo4jdb:7687
+      - SNOWSTORM_ADDRESS=http://193.170.192.0:8080
+  db:
+    image: library/neo4j:4.2.2
+    container_name: neo4jdb
+    ports:
+      - 7474:7474
+    environment:
+      -  NEO4J_AUTH=neo4j/1234
+    volumes:
+      - ./data:/var/lib/neo4j/data
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
