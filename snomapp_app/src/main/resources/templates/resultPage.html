@@ -32,25 +32,25 @@
     </button>
     <!-- Choose Scoring -->
     <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true" th:text="#{scoring.choose_scoring}">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-multiselectable="true"  th:text="#{scoring.choose_scoring}">
             Choose Scoring
         </a>
         <div class="dropdown-menu" aria-labelledby="dropdownMenu">
             <ul id="scoringInputs" class="nobullets">
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(0).booleanValue()}" id="cosinus" name="selected" value = "cosinus" th:text="#{scoring.cosine}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(1).booleanValue()}" id="levenshtein" name="selected" value= "levenshtein" th:text="#{scoring.levenshtein}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(2).booleanValue()}" id="jaccard" name="selected" value = "jaccard" th:text="#{scoring.jaccard}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(3).booleanValue()}" id="subsequence" name="selected" value ="subsequence" th:text="#{scoring.subsequence}">
                 </label></li>
                 <li><label>
-                    <input class="scoring-options" type="checkbox" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
+                    <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(4).booleanValue()}" id="synonyms" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
                 </label></li>
             </ul>
             <button id="submit-scoring-options" class ="btn btn-info" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}"></button>
@@ -327,6 +327,7 @@
 <script>
     //Datatoggle function
     $(document).ready(function(){
+
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
@@ -365,5 +366,6 @@
         }
 
 </script>
+
 </body>
 </html>
