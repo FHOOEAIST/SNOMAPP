@@ -51,8 +51,8 @@ public interface ConceptMapRepo extends Neo4jRepository<ConceptMap, Long>{
     // Consider moving this when cleaning up the repos
     @Query("MATCH (n:SnomedElement) WHERE id(n)= $0 RETURN n ")
     SNOMEDElement findSnomedElementById(long id);
+
     @Query("MATCH (:APPCElement {code: $0, axis: $1})-[m:maps {equivalence: $2}]->(s:SnomedElement{code: $3, displayName: $4})\n" +
             "DETACH DELETE s")
     void deleteSnomedCodeByAppcCodeAxisAndEquivalenceAndSnomedCodeAndDisplayName(String appcCode, String appcAxis, String map, String snomedCode, String snomedDisplayName);
 }
-
