@@ -25,7 +25,7 @@
 
 </head>
 
-<body onload="startInterval()">
+<body>
 
 <div class="container pt-3" id="header">
     <img alt="SNOMAPP" class="img-fluid" th:src="@{images/logo.png}" height="100px" width="300px">
@@ -47,7 +47,7 @@
 
 <div class="container">
     <div class="input-group pt-3">
-        <input class="form-control" type="text" th:placeholder="#{appc.search}" aria-label="Search" id="searchbar" value="">
+        <input class="form-control" oninput="search()" type="text" th:placeholder="#{appc.search}" aria-label="Search" id="searchbar" value="">
         <button class="btn btn-info" onclick="search()" value="search" th:text="#{appc.search}">Suchen</button>
     </div>
 </div>
@@ -60,53 +60,22 @@
 
 
 <script>
-    var timer;
-    var tree = true;
-    //var tabsHtml = document.getElementById("tabs").innerHTML;
+    function search() {
+        var searchText = document.getElementById("searchbar").value;
 
-    $("#searchbar").keyup(function(event){
-        if(event.keyCode === 13){
-            search();
-        }
-    });
-
-    function startInterval() {
-        tabsHtml = document.getElementById("tabs").innerHTML;
-        timer = setInterval(checkSearchbar, 100);
-    }
-
-    function checkSearchbar() {
-        if(document.getElementById("searchbar").value !== ""){
-            //search();
+        if(searchText !== ""){
             tree = false;
             console.log("search full");
-        } else {
-            clearInterval(timer);
+            searchForEntries(searchText);
+        }
+        else {
             $("#tabs").show();
             $('#tabsSearch').hide();
             if($('#showTree').length) {
                 $("#showTree").remove();
             }
-            timer = setInterval(checkSearchbar, 100);
         }
-    }
 
-    function showTree() {
-        document.getElementById("tabs").innerHTML = tabsHtml;
-    }
-
-    function search() {
-        //clearInterval(timer);
-
-        var searchText = document.getElementById("searchbar").value;
-
-        searchForEntries(searchText);
-        sleepFunc();
-
-    }
-
-    async function sleepFunc() {
-        //await sleep(1000*10);
     }
 
     function searchForEntries (searchText){
@@ -118,6 +87,7 @@
             .then(data => {
                 $("#tabs").hide();
                 //console.log(JSON.stringify(data));
+                $('#showTree').remove();
                 $('#tabsSearch').append(' <div id="showTree"></div>')
                 $("#tabsSearch").show();
                 $('#showTree').bstreeview({
