@@ -12,10 +12,7 @@ import at.snomapp.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.repo.APPCRepo;
-import at.snomapp.repo.ConceptElementRepo;
 import at.snomapp.repo.ConceptMapRepo;
-import at.snomapp.repo.MappingRepo;
-import io.swagger.client.model.Concept;
 import at.snomapp.translate.CompositionalGrammarTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,13 +35,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/concept-map")
 public class ConceptMapController {
     private final ConceptMapRepo conceptMapRepo;
-    private final MappingRepo mappingRepo;
     private final APPCRepo appcRepo;
 
     @Autowired
-    public ConceptMapController(ConceptMapRepo readingrepo, MappingRepo mappingRepo, APPCRepo appcRepo) {
+    public ConceptMapController(ConceptMapRepo readingrepo, APPCRepo appcRepo) {
         this.conceptMapRepo = readingrepo;
-        this.mappingRepo = mappingRepo;
         this.appcRepo = appcRepo;
     }
 
@@ -55,28 +50,6 @@ public class ConceptMapController {
     void clearDB() {
         conceptMapRepo.deleteAll();
     }
-
-    /*
-    @PostMapping("/test")
-    void importAPPC(){
-        conceptMapRepo.deleteAll();
-        String appc = "1-2-1-2"; //APPC for eye
-        String snomed = "81745001"; //SNOMED: Structure of eye proper
-        String snomed2 = "371398005"; //SNOMED for the eye "region"
-        String snomed3 = "314859006"; //SNOMED for the eyeball axis
-
-        ConceptMap map = new ConceptMapImpl("APPC", "SNOMED CT");
-        APPCElement appcElement = new APPCElement(appc,"anatomy");
-        SNOMEDElement snomedElementMatch = new SNOMEDElement(snomed, displayName);
-        SNOMEDElement snomedElementWider = new SNOMEDElement(snomed2, displayName);
-        SNOMEDElement snomedElementPartOf = new SNOMEDElement(snomed3, displayName);
-        map.addMapping(appcElement,snomedElementWider,EquivalenceType.WIDER);
-        map.addMapping(appcElement, snomedElementMatch, EquivalenceType.EQUAL );
-        map.addMapping(appcElement,snomedElementPartOf,EquivalenceType.SUBSUMES);
-        conceptMapRepo.save(map);
-    }
-
-     */
 
     // for searching for map-elements
     @GetMapping
@@ -100,11 +73,11 @@ public class ConceptMapController {
         if (code == null && axis == null) {
             return null;
         } else if (code != null && axis == null) {
-            return mappingRepo.findByCode(code);
+            return conceptMapRepo.findElementByCode(code);
         } else if (code == null) {
-            return mappingRepo.findByAxis(axis);
+            return conceptMapRepo.findElementByAxis(axis);
         } else {
-            return mappingRepo.findByAxisAndCode(axis, code);
+            return conceptMapRepo.findElementByCodeAndAxis(axis, code);
         }
     }
 
@@ -328,7 +301,7 @@ public class ConceptMapController {
         if (entryOptional.isPresent()) {
             Entry entry = entryOptional.get();
             for (EquivalenceType equivalence : EquivalenceType.values()) {
-                int count = mappingRepo.countMappingsWithEquivalenceForAxisAndCode(entry.getAxis(),
+                int count = conceptMapRepo.countMappingsWithEquivalenceForAxisAndCode(entry.getAxis(),
                         entry.getCode(),
                         equivalence.toString());
                 result.put(equivalence.toString(), count);
@@ -399,10 +372,10 @@ public class ConceptMapController {
             @RequestParam long anatomyId
     ) {
         CompositionalGrammarTranslator translator = new CompositionalGrammarTranslator();
-        translator.setModality(mappingRepo.findSnomedElementById(modalityId));
-        translator.setLaterality(mappingRepo.findSnomedElementById(lateralityId));
-        translator.setProcedures(mappingRepo.findSnomedElementById(proceduresId));
-        translator.setAnatomy(mappingRepo.findSnomedElementById(anatomyId));
+        translator.setModality(conceptMapRepo.findSnomedElementById(modalityId));
+        translator.setLaterality(conceptMapRepo.findSnomedElementById(lateralityId));
+        translator.setProcedures(conceptMapRepo.findSnomedElementById(proceduresId));
+        translator.setAnatomy(conceptMapRepo.findSnomedElementById(anatomyId));
 
         return translator.getCompositionalRepresentation();
     }

@@ -3,7 +3,6 @@ package at.snomapp.restservice;
 
 import at.snomapp.domain.appc.APPCTree;
 import at.snomapp.domain.appc.Entry;
-
 import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.domain.scoring.ScoringAlgorithm;
 import at.snomapp.domain.scoring.ScoringModel;
@@ -11,21 +10,15 @@ import at.snomapp.domain.scoring.impl.Cosine;
 import at.snomapp.domain.scoring.impl.Jaccard;
 import at.snomapp.domain.scoring.impl.Levenshtein;
 import at.snomapp.domain.scoring.impl.LongestCommonSubsequence;
-
 import at.snomapp.repo.APPCRepo;
 import at.snomapp.repo.ConceptMapRepo;
-import at.snomapp.repo.MappingRepo;
-
-import at.snomapp.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
@@ -40,13 +33,11 @@ public class ViewController<SnomedAPPCMapping> {
 
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
-    private MappingRepo mappingRepo;
 
     @Autowired
-    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo, MappingRepo mappingRepo) {
+    public ViewController(APPCRepo readingrepo, ConceptMapRepo conceptMapRepo) {
         this.repo = readingrepo;
         this.conceptMapRepo = conceptMapRepo;
-        this.mappingRepo = mappingRepo;
     }
 
     @GetMapping({"/index", "/"})
@@ -91,7 +82,7 @@ public class ViewController<SnomedAPPCMapping> {
                              @RequestParam int page,
                              @RequestParam int limit,
                              Model model) {
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo, repo);
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, repo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
@@ -290,10 +281,10 @@ public class ViewController<SnomedAPPCMapping> {
         model.addAttribute("modality_appc", repo.findByCodeAndAxis(modalityCode, "Modality").getDisplayName());
         model.addAttribute("procedures_appc", repo.findByCodeAndAxis(proceduresCode, "Procedures").getDisplayName());
         model.addAttribute("anatomy_appc", repo.findByCodeAndAxis(anatomyCode, "Anatomy").getDisplayName());
-        model.addAttribute("laterality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
-        model.addAttribute("modality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
-        model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
-        model.addAttribute("anatomy", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
+        model.addAttribute("laterality", conceptMapRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
+        model.addAttribute("modality", conceptMapRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
+        model.addAttribute("procedures", conceptMapRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));
+        model.addAttribute("anatomy", conceptMapRepo.findEquivalentOrEqualSnomedElementsForAPPC(anatomyCode, "Anatomy"));
 
         return "fullSpecifiedResultPage";
     }
