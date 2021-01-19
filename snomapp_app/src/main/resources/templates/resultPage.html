@@ -55,7 +55,7 @@
                     <input class="scoring-options" type="checkbox" th:checked="${algorithmChecked.get(4).booleanValue()}" id="synonyms" name="selected" value ="synonyms" th:text="#{scoring.synonyms}">
                 </label></li>
             </ul>
-            <button id="submit-scoring-options" class ="btn btn-info" onclick="getChosenScoringMethods()" type="submit" value="submit" th:text="#{submit}"></button>
+            <button id="submit-scoring-options" class ="btn btn-info" onclick="search(1);" type="submit" value="submit" th:text="#{submit}"></button>
         </div>
 
         <!-- Paging settings -->

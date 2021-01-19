@@ -126,6 +126,10 @@ public class ViewController<SnomedAPPCMapping> {
                 }
                 resultList.addAll(results.getSearchResults());
             }
+
+            List<ScoringAlgorithm> algorithms = new ArrayList<>();
+            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
+
             // create a new scoring model
             // all algorithms which are included are applied on all strings
             ScoringModel scoringModel;
@@ -144,19 +148,21 @@ public class ViewController<SnomedAPPCMapping> {
                                 }
                             })
                             .filter(Objects::nonNull)
-                            .sorted(Comparator.comparingInt(t -> - t.split("\\s").length))
+                            .sorted(Comparator.comparingInt(t -> -t.split("\\s").length))
                             .collect(Collectors.toList());
 
                     resultsPerTerm = searchTerms.size() > 0 ? limit / searchTerms.size() : 0;
                     offset = resultsPerTerm * page;
                     for (String searchTerm : searchTerms) {
                         SnomedController.BrowserDescriptionResultWrapper results = snomedController.findByDisplayName(searchTerm, entry.getAxis(), resultsPerTerm, offset);
-                        if(numPages < results.getNumPages()){
+                        if (numPages < results.getNumPages()) {
                             numPages = results.getNumPages();
                         }
                         resultList.addAll(results.getSearchResults());
                     }
                 }
+            }
+
             if (scoringMethods.size() == 0 || (scoringMethods.size() == 1 && scoringMethods.contains("synonyms"))) {
                 // default
                 algorithms.add(new Levenshtein(0.5));
@@ -167,14 +173,12 @@ public class ViewController<SnomedAPPCMapping> {
                 scoringModel = new ScoringModel(algorithms);
                 resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             }
-
-            Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
-
-            List<ScoringAlgorithm> algorithms = new ArrayList<>();
-            //if user chose algorithm use this one instead
-            if (scoringMethods.size() > 0) {
-                for (String score : scoringMethods
-                ) {
+            else {
+                int countMethods = scoringMethods.size();
+                if (scoringMethods.contains("synonyms")) {
+                    countMethods = countMethods - 1;
+                }
+                for (String score : scoringMethods) {
                     switch (score) {
                         case "cosinus":
                             algorithms.add(new Cosine(Math.round(1.0 / countMethods * 100) / 100d));
@@ -194,10 +198,6 @@ public class ViewController<SnomedAPPCMapping> {
                             break;
                     }
                 }
-            } else {
-                // create a new scoring model
-                // compare algorithms can be appended or removed randomly
-                // all algorithms which are included are applied on all strings
 
                 scoringModel = new ScoringModel(algorithms);
                 if (scoringMethods.contains("synonyms")){
@@ -207,11 +207,6 @@ public class ViewController<SnomedAPPCMapping> {
                     resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScore( entry.getDisplayName(), res.getTerm() )));
                 }
             }
-
-            ScoringModel scoringModel = new ScoringModel(algorithms);
-            // calculates for each result his score
-            resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId())));
-
 
             // for scoring visibility
             int maxScore = 0;
