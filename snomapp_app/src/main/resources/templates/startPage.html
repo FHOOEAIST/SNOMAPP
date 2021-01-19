@@ -197,7 +197,7 @@
                                 for (let key in result) {
                                     if (result.hasOwnProperty(key) && result[key] >= 1) {
                                         dot.removeClass('unmapped');
-                                        dot.append($('<i class="fas fa-check"></i>'));
+                                        dot.append($('<i class="far fa-circle"></i>'));
                                         dot.addClass('has-mapping');
                                         let newTitle = $('#tooltip-template-has-mapping').text();
                                         dot.attr('title', newTitle);
