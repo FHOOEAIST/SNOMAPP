@@ -66,9 +66,8 @@
                                style="margin-top: auto; margin-bottom: auto"></label>
                         <input type="number" id="pagelimit" class="form-control" th:value="${pageLimit}"
                                style="width: 70pt; margin: 6px 6px 6px 6px" th:max="${(pageLimit * #lists.size(pages))/2}"/>
-                    </div>
-                    <div class="col-sm">
-                        <button class="btn-info btn" onclick="search(1);" th:text="#{mapping.page.search}"></button>
+                        <button id="paging-search" class="btn-info btn" onclick="search(1);" th:text="#{mapping.page.search}"></button>
+
                     </div>
                 </div>
             </div>
