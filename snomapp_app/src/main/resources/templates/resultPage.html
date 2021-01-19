@@ -209,7 +209,9 @@
                 contentType: "application/json",
                 data: JSON.stringify({appcCode, appcAxis, appcDisplayName, snomedCode, snomedDisplayName, map }),
                 success: function(response, textStatus, xhr){
-                        alert("Map successfully saved.");
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.saved}]]*/ );
+                    /*]]>*/
                         location.reload();
                 },
             }
@@ -247,6 +249,7 @@
                         <th scope="col">SNOMED Code</th>
                         <th scope="col" th:text="#{snomed.display_name}">Displayname</th>
                         <th scope="col" th:text="#{mapping}">Mapping</th>
+                        <th scope="col" ></th>
                     </tr>
                     </thead>
                     <tbody th:each="map : ${mapps}">
@@ -254,6 +257,18 @@
                         <td th:text="${map.values().toArray()[2]}">Code</td>
                         <td th:text="${map.values().toArray()[0]}"></td>
                         <td th:text="${map.values().toArray()[1]}">equivalence</td>
+                        <td><button type="button" class="btn btn-info"
+                                    th:snomedcode="${map.values().toArray()[2]}"
+                                    th:displayName="${map.values().toArray()[0]}"
+                                    th:map="${map.values().toArray()[1]}"
+                                    th:appcCode="${appc.getCode()}"
+                                    th:appcAxis="${appc.getAxis()}"
+                                    th:onclick="deleteMapping(this.getAttribute('appcCode'),
+                                                                this.getAttribute('appcAxis'),
+                                                                this.getAttribute('map'),
+                                                                this.getAttribute('snomedcode'),
+                                                                this.getAttribute('displayName'))">Delete</button></td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -317,9 +332,7 @@
     });
 </script>
 
-
-
-<script>
+<script th:inline="javascript">
     //submit button for scoring
     function getChosenScoringMethods(){
         var checkedScores = [];
@@ -333,6 +346,25 @@
         }
         window.location.replace(window.origin + "/result?id=" + [[${appc.getId()}]] + "&scores="+encodeURIComponent(checkedScores));
     }
+
+    //delete Mapping function
+    function deleteMapping(appcCode, appcAxis, map, snomedCode, snomedDisplayName){
+        $.ajax(
+            {
+                method: "DELETE",
+                url: "concept-map/mappings/delete",
+                contentType: "application/json",
+                data: JSON.stringify({appcCode, appcAxis, map, snomedCode, snomedDisplayName}),
+                success: function (response, textStatus, xhr) {
+                    /*<![CDATA[*/
+                    alert( /*[[#{mappings.delete}]]*/ );
+                    /*]]>*/
+                    location.reload();
+                },
+            }
+            );
+        }
+
 </script>
 
 </body>
