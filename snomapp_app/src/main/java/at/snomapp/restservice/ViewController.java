@@ -3,6 +3,7 @@ package at.snomapp.restservice;
 
 import at.snomapp.domain.appc.APPCTree;
 import at.snomapp.domain.appc.Entry;
+
 import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.domain.scoring.ScoringAlgorithm;
 import at.snomapp.domain.scoring.ScoringModel;
@@ -10,23 +11,32 @@ import at.snomapp.domain.scoring.impl.Cosine;
 import at.snomapp.domain.scoring.impl.Jaccard;
 import at.snomapp.domain.scoring.impl.Levenshtein;
 import at.snomapp.domain.scoring.impl.LongestCommonSubsequence;
+
 import at.snomapp.repo.APPCRepo;
 import at.snomapp.repo.ConceptMapRepo;
 import at.snomapp.repo.MappingRepo;
+
+import at.snomapp.repo.*;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
 import io.swagger.client.model.Description;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 @Controller
-public class ViewController<SnomedAPPCMapping>{
+public class ViewController<SnomedAPPCMapping> {
 
     private final APPCRepo repo;
     private ConceptMapRepo conceptMapRepo;
@@ -57,17 +67,17 @@ public class ViewController<SnomedAPPCMapping>{
     }
 
     @ExceptionHandler(Exception.class)
-    public String error(Model model){
-        try{
+    public String error(Model model) {
+        try {
             // check if server and API are responsive to report proper error
             SnomedController snomedController = new SnomedController();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye","Anatomy");
-            if(resultList == null || resultList.size() == 0){
+            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("eye", "Anatomy", 10, 0).getSearchResults();
+            if (resultList == null || resultList.size() == 0) {
                 model.addAttribute("reason", "server");
-            }else{
+            } else {
                 model.addAttribute("reason", "internal");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             model.addAttribute("reason", "server");
         }
 
@@ -76,8 +86,12 @@ public class ViewController<SnomedAPPCMapping>{
 
 
     @GetMapping("/result")
-    public String resultPage(@RequestParam Long id, @RequestParam(required = false) String[] scores, Model model) {
-        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo,repo);
+    public String resultPage(@RequestParam Long id,
+                             @RequestParam(required = false) String[] scores,
+                             @RequestParam int page,
+                             @RequestParam int limit,
+                             Model model) {
+        ConceptMapController conceptMapController = new ConceptMapController(conceptMapRepo, mappingRepo, repo);
         SnomedController snomedController = new SnomedController();
 
         Optional<Entry> byId = repo.findById(id);
@@ -94,14 +108,60 @@ public class ViewController<SnomedAPPCMapping>{
                 }
             }
 
+            int numPages = 0;
+
+            // Split display name into multiple possible search terms and search for each one
+            List<String> searchTerms = extractSearchTerms(entry.getDisplayName());
+            if(limit == -1){
+                // Switch of paging entirely
+                limit = Integer.MAX_VALUE;
+            }
+            int resultsPerTerm = limit / searchTerms.size();
+            int offset = resultsPerTerm * (page - 1);
+            List<BrowserDescriptionSearchResult> resultList = new ArrayList<>();
+            for (String searchTerm : searchTerms) {
+                SnomedController.BrowserDescriptionResultWrapper results = snomedController.findByDisplayName(searchTerm, entry.getAxis(), resultsPerTerm, offset);
+                if(numPages < results.getNumPages()){
+                    numPages = results.getNumPages();
+                }
+                resultList.addAll(results.getSearchResults());
+            }
+
             List<ScoringAlgorithm> algorithms = new ArrayList<>();
-            List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName(entry.getDisplayName(),entry.getAxis());
             Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
             // create a new scoring model
             // all algorithms which are included are applied on all strings
             ScoringModel scoringModel;
             ArrayList<Boolean> algorithmChecked = new ArrayList<>(Arrays.asList(false, false, false, false, false));
+
+            // If search yielded no result -> sequentially remove the first element from each search term until there are results or options are exhausted
+            if (resultList.isEmpty()) {
+                while (!(searchTerms.isEmpty() || !resultList.isEmpty())) {
+                    searchTerms = searchTerms.stream()
+                            .map(t -> {
+                                if (t.contains(" ")) {
+                                    // Remove first word in term
+                                    return t.replaceFirst("^\\w+(\\s|$)+", "");
+                                } else {
+                                    return null;
+                                }
+                            })
+                            .filter(Objects::nonNull)
+                            .sorted(Comparator.comparingInt(t -> -t.split("\\s").length))
+                            .collect(Collectors.toList());
+
+                    resultsPerTerm = searchTerms.size() > 0 ? limit / searchTerms.size() : 0;
+                    offset = resultsPerTerm * page;
+                    for (String searchTerm : searchTerms) {
+                        SnomedController.BrowserDescriptionResultWrapper results = snomedController.findByDisplayName(searchTerm, entry.getAxis(), resultsPerTerm, offset);
+                        if (numPages < results.getNumPages()) {
+                            numPages = results.getNumPages();
+                        }
+                        resultList.addAll(results.getSearchResults());
+                    }
+                }
+            }
 
             if (scoringMethods.size() == 0 || (scoringMethods.size() == 1 && scoringMethods.contains("synonyms"))) {
                 // default
@@ -113,11 +173,9 @@ public class ViewController<SnomedAPPCMapping>{
                 scoringModel = new ScoringModel(algorithms);
                 resultList.forEach(res -> res.setScore(scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, res.getConcept().getId()) ));
             }
-
-            //if user chose algorithm use this one instead
             else {
                 int countMethods = scoringMethods.size();
-                if (scoringMethods.contains("synonyms")){
+                if (scoringMethods.contains("synonyms")) {
                     countMethods = countMethods - 1;
                 }
                 for (String score : scoringMethods) {
@@ -150,25 +208,25 @@ public class ViewController<SnomedAPPCMapping>{
                 }
             }
 
-
             // for scoring visibility
             int maxScore = 0;
             int minScore = Integer.MAX_VALUE;
-            for (BrowserDescriptionSearchResult result : resultList){
-                int score =  result.getScore();
-                if (score < minScore){
+            for (BrowserDescriptionSearchResult result : resultList) {
+                int score = scoringModel.calcWeightedScoreSynonym(entry.getDisplayName(), resultMap, result.getConcept().getId());
+                if (score < minScore) {
                     minScore = score;
                 }
-                if(score > maxScore){
+                if (score > maxScore) {
                     maxScore = score;
                 }
+                result.setScore(score);
             }
-          
+
             // sort resultList by property score
             Collections.sort(resultList);
 
             List<String> mappings = new ArrayList<>();
-            model.addAttribute("results",resultList);
+            model.addAttribute("results", resultList);
             model.addAttribute("resMap", resultMap);
             model.addAttribute("appc", entry);
             Iterable<Map<String, Object>> mapps = conceptMapRepo.getSnomedCodeAndEquivalence(entry.getCode(), entry.getAxis());
@@ -180,12 +238,44 @@ public class ViewController<SnomedAPPCMapping>{
             model.addAttribute("scoringModel", scoringModel );
             model.addAttribute("algorithmChecked", algorithmChecked);
 
+            model.addAttribute("pageLimit", limit);
+            model.addAttribute("page", page);
+            model.addAttribute("pages", IntStream.range(1, numPages + 1).toArray());
+
             // for scoring visibility
             model.addAttribute("colorStep", (maxScore - minScore) / 3);
         }
 
-        // TODO: 06.10.2020 maybe add a page for errors
         return "resultPage";
+    }
+
+    private List<String> extractSearchTerms(String displayName) {
+        // Remove filler characters
+        displayName = displayName.replaceAll("etc\\.?", "");
+        displayName = displayName.replaceAll("e\\.?g\\.?", "");
+
+        // Find text within parenthesis
+        List<String> tempParList = new LinkedList<>();
+        Pattern parenthesesPattern = Pattern.compile("([^(]*)\\((.*)\\)([^)]*)");
+        Matcher parenthesesMatcher = parenthesesPattern.matcher(displayName);
+        if (parenthesesMatcher.find()) {
+            // Recursive call to process inner text
+            String innerParenthesesText = parenthesesMatcher.group(2);
+            tempParList.addAll(extractSearchTerms(innerParenthesesText));
+
+            // Remove inner text from current search terms
+            displayName = displayName.replace(innerParenthesesText, "");
+            displayName = displayName.replaceAll("[()]", "");
+        }
+
+        // Split according to delimiters
+        String[] split = displayName.split("[/,;]");
+        List<String> result = new LinkedList<>(Arrays.asList(split));
+        // trim leading and trailing whitespaces
+        result = result.stream().map(String::trim).collect(Collectors.toList());
+        // Add text from parentheses last as they are likely to have the lowest relevance
+        result.addAll(tempParList);
+        return result;
     }
 
     @GetMapping("translate")
@@ -195,11 +285,11 @@ public class ViewController<SnomedAPPCMapping>{
             @RequestParam String lateralityCode,
             @RequestParam String proceduresCode,
             @RequestParam String anatomyCode
-    ){
-        model.addAttribute("laterality_appc", repo.findByCodeAndAxis(lateralityCode,"Laterality").getDisplayName());
-        model.addAttribute("modality_appc", repo.findByCodeAndAxis(modalityCode,"Modality").getDisplayName());
-        model.addAttribute("procedures_appc", repo.findByCodeAndAxis(proceduresCode,"Procedures").getDisplayName());
-        model.addAttribute("anatomy_appc", repo.findByCodeAndAxis(anatomyCode,"Anatomy").getDisplayName());
+    ) {
+        model.addAttribute("laterality_appc", repo.findByCodeAndAxis(lateralityCode, "Laterality").getDisplayName());
+        model.addAttribute("modality_appc", repo.findByCodeAndAxis(modalityCode, "Modality").getDisplayName());
+        model.addAttribute("procedures_appc", repo.findByCodeAndAxis(proceduresCode, "Procedures").getDisplayName());
+        model.addAttribute("anatomy_appc", repo.findByCodeAndAxis(anatomyCode, "Anatomy").getDisplayName());
         model.addAttribute("laterality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(lateralityCode, "Laterality"));
         model.addAttribute("modality", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(modalityCode, "Modality"));
         model.addAttribute("procedures", mappingRepo.findEquivalentOrEqualSnomedElementsForAPPC(proceduresCode, "Procedures"));

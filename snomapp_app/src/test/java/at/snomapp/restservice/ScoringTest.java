@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ScoringTest {
 
     SnomedController snomedController = new SnomedController();
-    List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("neck", "Anatomy");
+    List<BrowserDescriptionSearchResult> resultList = snomedController.findByDisplayName("neck", "Anatomy", 50, 0).getSearchResults();
     Map<String, List<Description>> resultMap = snomedController.findSynonyms(resultList);
 
 

@@ -12,8 +12,10 @@ import at.snomapp.domain.conceptMapping.impl.APPCElement;
 import at.snomapp.domain.conceptMapping.impl.ConceptMapImpl;
 import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.repo.APPCRepo;
+import at.snomapp.repo.ConceptElementRepo;
 import at.snomapp.repo.ConceptMapRepo;
 import at.snomapp.repo.MappingRepo;
+import io.swagger.client.model.Concept;
 import at.snomapp.translate.CompositionalGrammarTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 import java.net.URL;
+import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/concept-map")

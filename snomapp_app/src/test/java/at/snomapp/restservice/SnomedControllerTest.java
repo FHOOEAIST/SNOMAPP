@@ -13,7 +13,7 @@ class SnomedControllerTest {
         // should print results for tongue
     void SearchForTongue() {
         SnomedController controller = new SnomedController();
-        List<BrowserDescriptionSearchResult> res = controller.findByDisplayName("tongue", "Anatomy");
+        List<BrowserDescriptionSearchResult> res = controller.findByDisplayName("tongue", "Anatomy", 50, 0).getSearchResults();
         assertNotNull(res);
         System.out.println(res);
     }

@@ -196,3 +196,10 @@
 #submit-scoring-options{
     margin-left:10pt;
 }
+
+.page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #70a8e3;
+    border-color: #70a8e3;
+}

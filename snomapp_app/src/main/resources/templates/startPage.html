@@ -158,7 +158,7 @@
             // this is kind of hacky -> maybe change in the future when there is time.
             //Todo add icon for this instead of text
             if(! $(this).find('a').length > 0) {
-                let btn = $(`<a href="/result?id=${jQuery("div", this).text()}" class="btn btn-primary" type="button">map</a>`);
+                let btn = $(`<a href="/result?id=${jQuery("div", this).text()}&limit=50&page=1" class="btn btn-primary" type="button">map</a>`);
                 $(this).append(btn);
             }
         });
