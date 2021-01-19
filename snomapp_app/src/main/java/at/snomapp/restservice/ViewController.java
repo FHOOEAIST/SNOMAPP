@@ -1,8 +1,8 @@
 package at.snomapp.restservice;
 
+
 import at.snomapp.domain.appc.APPCTree;
 import at.snomapp.domain.appc.Entry;
-
 import at.snomapp.domain.conceptMapping.impl.SNOMEDElement;
 import at.snomapp.domain.scoring.ScoringAlgorithm;
 import at.snomapp.domain.scoring.ScoringModel;
@@ -10,7 +10,6 @@ import at.snomapp.domain.scoring.impl.Cosine;
 import at.snomapp.domain.scoring.impl.Jaccard;
 import at.snomapp.domain.scoring.impl.Levenshtein;
 import at.snomapp.domain.scoring.impl.LongestCommonSubsequence;
-
 import at.snomapp.repo.APPCRepo;
 import at.snomapp.repo.ConceptMapRepo;
 import io.swagger.client.model.BrowserDescriptionSearchResult;
@@ -190,10 +189,6 @@ public class ViewController<SnomedAPPCMapping> {
                             break;
                     }
                 }
-            } else {
-                // create a new scoring model
-                // compare algorithms can be appended or removed randomly
-                // all algorithms which are included are applied on all strings
 
                 scoringModel = new ScoringModel(algorithms);
                 if (scoringMethods.contains("synonyms")){
