@@ -1,20 +1,22 @@
 # SNOMAPP
-## Einleitung
-Die SNOMAPP Anwendung verfolgt das Ziel, die Zuordnung von APPC zu Snomed möglichst einfach zu gestalten und den Anwender dabei zu Unterstützen möglichst schnell, gute Zuordnungen zu finden. Mithilfe der FHIR “Concept Maps” können Zuordnungen einheitlich abgespeichert werden.
+## Introduction
+The SNOMAPP application allosws users to define codemappings between APPC and SNOMED CT in a simple, fast  and intuitive way. Mappings can be persisted in the form of standardized FHIR concept maps.
 
-### Architektur
+### Architecture
 ![RDM Master Screenshot 1 - Architekture](./Architekturdiagramm.jpg)
-## Installation und Starten der Anwendung
-### Entwicklungs Setup
-Snomapp ist ein auf Maven basierende Spring Boot Applikation. IDE spezifische Mechanismen müssen genutzt werden um die entsprechende Konfiguration aus dem top-level pom.xml File zu laden.  Danach kann die Applikation über die entsprechenden Maven-Lifecycle Schritte gebaut und deployed werden.
-Die Applikation bindet sich an Port 8080. Dieser muss daher frei sein.
-### Anwendung über Docker
-Für die Installation und das Starten der Anwendung muss zuvor Docker installiert werden. 
-Mit dem Befehl “docker-compose up” ausgehend aus dem SNOMAPP Verzeichnis kann die Anwendung gestartet werden. Docker führt im anschluss ein komplettes Maven Build der Anwendung durch, was beim ersten Mal durchaus etwas länger dauern könnte. Sobald der Container läuft ist die Applikation wiederum unter port 8080 zu erreichen. Alle persistieren Daten werden im Verzeichnis “./data” abgelegt.
+## Application Installation and Startup
+### Development Setup
+SNOMAPP is a Maven-based Spring Boot application. IDE specific mechanisms must be used to load the given configuration from the top level pom.xml. Afterwards the application can be built and deployed through the standard Maven lifecycle steps.
+The application binds to port 8080 per default which has to be free at startup time.
+
+### Using Docker
+Prior to the installation, Docker needs to be installed.
+
+The application can be started with the command `docker-compose up` from the root directory of the repository. Docker subsequently resolves database dependencies and executes a full Maven build which can take several minutes the first time. As soon as the container is up and running, the application can be reached under port 8080. All persisted Data will be allocated to `./data`.
+
 ### Snowstorm Server
-Die IP - Adresse des Snowstorm Servers, der verwendet werden soll, kann über eine Umgebungsvariable (SNOWSTORM_ADDRESS) gesetzt werden. Anpassung des Servers kann im docker-compose.yml durchgeführt werden.
-### Importieren der Datenbank
-Die Neo4J Datenbankanbindung kann über die Environment Variable spring.data.neo4j.uri konfiguriert werden. Standardmäßig wird port 7678 verwendet. Sollte Über Docker deployed werden, dann sind alle entsprechenden Datenbankkonfigurationen bereits abgeschlossen.
+The IP address of the Snowstorm Server that the application should communicate with can be set with the environment variable `SNOWSTORM_ADDRESS`. To change the Server used for the Docker-Container build, the same variable needs to be set in the `docker-compose.yaml` file.
+### Importing the Database
+The Neo4J Database can be configured with the environment variable `spring.data.neo4j.uri`. Per default port 7678 is used. When deploying with Docker the necessary DB connections are already configured.
 
-Wird die Anwendung zum allerersten Mal gestartet so muss das csv-File zuerst in die Datenbank geladen werden. Dies erfolgt auf der Startseite. Anschließend wird der APPC-Baum angezeigt.
-
+When starting the application for the first time, the APPC Data needs to be loaded from a CSV File inside the application. This can be done via the startpage. Afterwards the APPC tree should be displayed, and the application is ready to be used.
