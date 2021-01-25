@@ -1,6 +1,6 @@
 # SNOMAPP
 ## Introduction
-The SNOMAPP application allosws users to define codemappings between APPC and SNOMED CT in a simple, fast  and intuitive way. Mappings can be persisted in the form of standardized FHIR concept maps.
+The SNOMAPP application allows users to define codemappings between APPC and SNOMED CT in a simple, fast  and intuitive way. Mappings can be persisted in the form of standardized FHIR concept maps.
 
 ### Architecture
 ![RDM Master Screenshot 1 - Architekture](./Architekturdiagramm.jpg)
